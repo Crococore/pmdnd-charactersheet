@@ -511,6 +511,7 @@
             this.lbl_move_type = new System.Windows.Forms.Label();
             this.lbl_move_name = new System.Windows.Forms.Label();
             this.lbl_combat_move_prev_effect = new System.Windows.Forms.Label();
+            this.lbl_move_attr = new System.Windows.Forms.Label();
             this.lbl_move_selected = new System.Windows.Forms.Label();
             this.lbl_move_pp = new System.Windows.Forms.Label();
             this.lbl_move_lv = new System.Windows.Forms.Label();
@@ -550,7 +551,6 @@
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label12 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.lbl_move_attr = new System.Windows.Forms.Label();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ctr_stat_hp_stage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ctr_stat_atk_stage)).BeginInit();
@@ -3433,7 +3433,7 @@
             // 
             // pic_combat_move_3_atr
             // 
-            this.pic_combat_move_3_atr.Image = global::PMD_Tabletop_Sheet.Properties.Resources.icon_Status_Attack;
+            this.pic_combat_move_3_atr.Image = ((System.Drawing.Image)(resources.GetObject("pic_combat_move_3_atr.Image")));
             this.pic_combat_move_3_atr.Location = new System.Drawing.Point(8, 304);
             this.pic_combat_move_3_atr.Name = "pic_combat_move_3_atr";
             this.pic_combat_move_3_atr.Size = new System.Drawing.Size(26, 26);
@@ -3443,7 +3443,7 @@
             // 
             // pic_combat_move_2_atr
             // 
-            this.pic_combat_move_2_atr.Image = global::PMD_Tabletop_Sheet.Properties.Resources.icon_Special_Attack;
+            this.pic_combat_move_2_atr.Image = ((System.Drawing.Image)(resources.GetObject("pic_combat_move_2_atr.Image")));
             this.pic_combat_move_2_atr.Location = new System.Drawing.Point(9, 195);
             this.pic_combat_move_2_atr.Name = "pic_combat_move_2_atr";
             this.pic_combat_move_2_atr.Size = new System.Drawing.Size(26, 26);
@@ -3453,7 +3453,7 @@
             // 
             // pic_combat_move_1_atr
             // 
-            this.pic_combat_move_1_atr.Image = global::PMD_Tabletop_Sheet.Properties.Resources.icon_Physical_Attack;
+            this.pic_combat_move_1_atr.Image = ((System.Drawing.Image)(resources.GetObject("pic_combat_move_1_atr.Image")));
             this.pic_combat_move_1_atr.Location = new System.Drawing.Point(8, 91);
             this.pic_combat_move_1_atr.Name = "pic_combat_move_1_atr";
             this.pic_combat_move_1_atr.Size = new System.Drawing.Size(26, 26);
@@ -4003,40 +4003,45 @@
             this.txt_combat_move_4_pp.Location = new System.Drawing.Point(113, 352);
             this.txt_combat_move_4_pp.MaxLength = 3;
             this.txt_combat_move_4_pp.Name = "txt_combat_move_4_pp";
-            this.txt_combat_move_4_pp.ReadOnly = true;
             this.txt_combat_move_4_pp.Size = new System.Drawing.Size(25, 20);
             this.txt_combat_move_4_pp.TabIndex = 47;
             this.txt_combat_move_4_pp.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txt_combat_move_4_pp.TextChanged += new System.EventHandler(this.txt_combat_move_4_pp_TextChanged);
+            this.txt_combat_move_4_pp.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_qty_KeyPress);
             // 
             // txt_combat_move_3_pp
             // 
             this.txt_combat_move_3_pp.Location = new System.Drawing.Point(115, 245);
             this.txt_combat_move_3_pp.MaxLength = 3;
             this.txt_combat_move_3_pp.Name = "txt_combat_move_3_pp";
-            this.txt_combat_move_3_pp.ReadOnly = true;
             this.txt_combat_move_3_pp.Size = new System.Drawing.Size(25, 20);
             this.txt_combat_move_3_pp.TabIndex = 47;
             this.txt_combat_move_3_pp.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txt_combat_move_3_pp.TextChanged += new System.EventHandler(this.txt_combat_move_3_pp_TextChanged);
+            this.txt_combat_move_3_pp.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_qty_KeyPress);
             // 
             // txt_combat_move_2_pp
             // 
             this.txt_combat_move_2_pp.Location = new System.Drawing.Point(115, 136);
             this.txt_combat_move_2_pp.MaxLength = 3;
             this.txt_combat_move_2_pp.Name = "txt_combat_move_2_pp";
-            this.txt_combat_move_2_pp.ReadOnly = true;
             this.txt_combat_move_2_pp.Size = new System.Drawing.Size(25, 20);
             this.txt_combat_move_2_pp.TabIndex = 47;
             this.txt_combat_move_2_pp.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txt_combat_move_2_pp.TextChanged += new System.EventHandler(this.txt_combat_move_2_pp_TextChanged);
+            this.txt_combat_move_2_pp.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_qty_KeyPress);
             // 
             // txt_combat_move_1_pp
             // 
+            this.txt_combat_move_1_pp.BackColor = System.Drawing.SystemColors.Window;
             this.txt_combat_move_1_pp.Location = new System.Drawing.Point(115, 32);
             this.txt_combat_move_1_pp.MaxLength = 3;
             this.txt_combat_move_1_pp.Name = "txt_combat_move_1_pp";
-            this.txt_combat_move_1_pp.ReadOnly = true;
             this.txt_combat_move_1_pp.Size = new System.Drawing.Size(25, 20);
             this.txt_combat_move_1_pp.TabIndex = 47;
             this.txt_combat_move_1_pp.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txt_combat_move_1_pp.TextChanged += new System.EventHandler(this.txt_combat_move_1_pp_TextChanged);
+            this.txt_combat_move_1_pp.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_qty_KeyPress);
             // 
             // txt_combat_move_5_name
             // 
@@ -4057,6 +4062,7 @@
             this.txt_combat_move_4_name.ReadOnly = true;
             this.txt_combat_move_4_name.Size = new System.Drawing.Size(103, 20);
             this.txt_combat_move_4_name.TabIndex = 46;
+            this.txt_combat_move_4_name.TextChanged += new System.EventHandler(this.txt_combat_move_4_name_TextChanged);
             // 
             // txt_combat_move_3_name
             // 
@@ -4065,6 +4071,7 @@
             this.txt_combat_move_3_name.ReadOnly = true;
             this.txt_combat_move_3_name.Size = new System.Drawing.Size(103, 20);
             this.txt_combat_move_3_name.TabIndex = 46;
+            this.txt_combat_move_3_name.TextChanged += new System.EventHandler(this.txt_combat_move_3_name_TextChanged);
             // 
             // txt_combat_move_2_name
             // 
@@ -4073,6 +4080,7 @@
             this.txt_combat_move_2_name.ReadOnly = true;
             this.txt_combat_move_2_name.Size = new System.Drawing.Size(103, 20);
             this.txt_combat_move_2_name.TabIndex = 46;
+            this.txt_combat_move_2_name.TextChanged += new System.EventHandler(this.txt_combat_move_2_name_TextChanged);
             // 
             // txt_combat_move_1_name
             // 
@@ -4081,6 +4089,7 @@
             this.txt_combat_move_1_name.ReadOnly = true;
             this.txt_combat_move_1_name.Size = new System.Drawing.Size(103, 20);
             this.txt_combat_move_1_name.TabIndex = 46;
+            this.txt_combat_move_1_name.TextChanged += new System.EventHandler(this.txt_combat_move_1_name_TextChanged);
             // 
             // pic_sht_badge
             // 
@@ -5992,6 +6001,15 @@
             this.lbl_combat_move_prev_effect.TabIndex = 70;
             this.lbl_combat_move_prev_effect.Text = "Effect";
             // 
+            // lbl_move_attr
+            // 
+            this.lbl_move_attr.AutoSize = true;
+            this.lbl_move_attr.Location = new System.Drawing.Point(13, 42);
+            this.lbl_move_attr.Name = "lbl_move_attr";
+            this.lbl_move_attr.Size = new System.Drawing.Size(26, 13);
+            this.lbl_move_attr.TabIndex = 2;
+            this.lbl_move_attr.Text = "Attr.";
+            // 
             // lbl_move_selected
             // 
             this.lbl_move_selected.AutoSize = true;
@@ -6360,15 +6378,6 @@
             this.textBox1.Text = "\"I follow my own path, nothing can change my mind once I\'m settled on something!\"" +
     "";
             // 
-            // lbl_move_attr
-            // 
-            this.lbl_move_attr.AutoSize = true;
-            this.lbl_move_attr.Location = new System.Drawing.Point(13, 42);
-            this.lbl_move_attr.Name = "lbl_move_attr";
-            this.lbl_move_attr.Size = new System.Drawing.Size(26, 13);
-            this.lbl_move_attr.TabIndex = 2;
-            this.lbl_move_attr.Text = "Attr.";
-            // 
             // Form_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -6376,10 +6385,10 @@
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(794, 738);
             this.Controls.Add(this.toolStrip1);
+            this.Controls.Add(this.pnl_pg_1_stats);
             this.Controls.Add(this.pnl_pg_2_moves);
             this.Controls.Add(this.pnl_pg_3_inv);
             this.Controls.Add(this.pnl_pg_4_journal);
-            this.Controls.Add(this.pnl_pg_1_stats);
             this.Name = "Form_Main";
             this.Text = "Form_Main";
             this.Load += new System.EventHandler(this.Form_Main_Load);

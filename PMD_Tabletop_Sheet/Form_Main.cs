@@ -21,7 +21,12 @@ namespace PMD_Tabletop_Sheet
         private string pkmn_EXP_Growth = "Slow";
         private double exp_to_lv;
         private string pkmn_gmax_move = "";
-        public List<string> pkmn_moveset_selected = new List<string>();
+        private string pkmn_gmax_type = "";
+        public List<string> pkmn_battleset_list = new List<string>();
+        public List<string> pkmn_battleset_types_list = new List<string>();
+        public List<string> pkmn_battleset_atr_list = new List<string>();
+        public List<string> pkmn_dynamax_list = new List<string>();
+        public List<string> pkmn_moveset_list = new List<string>();
         public List<CheckBox> pkmn_moveset_chk_move_selected = new List<CheckBox>();
         public List<TextBox> pkmn_moveset_txt_move_lv = new List<TextBox>();
         public List<TextBox> pkmn_moveset_txt_move_name = new List<TextBox>();
@@ -34,6 +39,19 @@ namespace PMD_Tabletop_Sheet
         public ComboBox cmb_move_type_template;
         public TextBox txt_move_pp_template;
         public PictureBox pbox_move_attr_template;
+
+        private System.Drawing.Bitmap rimgs_badge_expedition = Properties.Resources.badge_expedition;
+        private System.Drawing.Bitmap rimgs_badge_shimmering_outline = Properties.Resources.badge_shimmering_outline;
+        private System.Drawing.Bitmap rimgs_mega_stone_dormant = Properties.Resources.mega_stone_dormant;
+        private System.Drawing.Bitmap rimgs_mega_stone_glow = Properties.Resources.mega_stone_glow;
+        private System.Drawing.Bitmap rimgs_gmax_glow = Properties.Resources.gmax_glow;
+        private System.Drawing.Bitmap rimgs_gmax_plain_dormant = Properties.Resources.gmax_plain_dormant;
+        private System.Drawing.Bitmap rimgs_clock_notch_empty = Properties.Resources.clock_notch_empty;
+        private System.Drawing.Bitmap rimgs_clock_notch_filled = Properties.Resources.clock_notch_filled;
+        private System.Drawing.Bitmap rimgs_icon_Physical_Attack = Properties.Resources.icon_Physical_Attack;
+        private System.Drawing.Bitmap rimgs_icon_Special_Attack = Properties.Resources.icon_Special_Attack;
+        private System.Drawing.Bitmap rimgs_icon_Status_Attack = Properties.Resources.icon_Status_Attack;
+        private System.Drawing.Bitmap rimgs_token = Properties.Resources.token;
 
         public static Control FindControlAtPoint(Control container, System.Drawing.Point pos)
         {
@@ -56,6 +74,15 @@ namespace PMD_Tabletop_Sheet
             if (form.Bounds.Contains(pos))
                 return FindControlAtPoint(form, form.PointToClient(pos));
             return null;
+        }
+
+        public int imageIsEqual(long size, long[] a, long[] b)
+        {
+            long start = size / 2;
+            long i;
+            for (i = start; i != size; i++) { if (a[i] != b[i]) return 0; }
+            for (i = 0; i != start; i++) { if (a[i] != b[i]) return 0; }
+            return 1;
         }
 
         public Form_Main()
@@ -127,19 +154,13 @@ namespace PMD_Tabletop_Sheet
             }
             cmb_move_type_template.SelectedIndex = 0;
 
-            //pnl_move_list.Controls.Add(chk_move_selected_template);
-            //pnl_move_list.Controls.Add(txt_move_lv_template);
-            //pnl_move_list.Controls.Add(txt_move_name_template);
-            //pnl_move_list.Controls.Add(cmb_move_type_template);
-            //pnl_move_list.Controls.Add(txt_move_pp_template);
-
         }
 
         private void ts_campaign_se_btn_Click(object sender, EventArgs e)
         {
             ts_campaign_dnde_btn.Checked = false;
             ts_campaign_se_btn.Checked = true;
-            pic_sht_badge.Image = Properties.Resources.badge_expedition;
+            pic_sht_badge.Image = rimgs_badge_expedition;
             if (PageSelected == 1)
             {
                 grp_clocks.Visible = false;
@@ -169,7 +190,7 @@ namespace PMD_Tabletop_Sheet
         {
             ts_campaign_se_btn.Checked = false;
             ts_campaign_dnde_btn.Checked = true;
-            pic_sht_badge.Image = Properties.Resources.badge_shimmering_outline;
+            pic_sht_badge.Image = rimgs_badge_shimmering_outline;
             if (PageSelected == 1)
             {
                 grp_clocks.Visible = true;
@@ -200,7 +221,7 @@ namespace PMD_Tabletop_Sheet
             if (MegaEnabled)
             {
                 MegaEnabled = false;
-                btn_megaevolve.Image = Properties.Resources.mega_stone_dormant;
+                btn_megaevolve.Image = rimgs_mega_stone_dormant;
                 if (txt_sht_species.Text.Length > 5 && txt_sht_species.Text.Substring(0, 5) == "Mega ")
                 {
                     txt_sht_species.Text = txt_sht_species.Text.Substring(5, txt_sht_species.Text.Length - 5);
@@ -211,7 +232,7 @@ namespace PMD_Tabletop_Sheet
                 if (DynamaxEnabled)
                 {
                     DynamaxEnabled = false;
-                    btn_dynamax.Image = Properties.Resources.gmax_plain_dormant;
+                    btn_dynamax.Image = rimgs_gmax_plain_dormant;
                 }
                 if (String.IsNullOrWhiteSpace(txt_sht_ability_effect.Text))
                 {
@@ -221,7 +242,7 @@ namespace PMD_Tabletop_Sheet
                 else
                 {
                     MegaEnabled = true;
-                    btn_megaevolve.Image = Properties.Resources.mega_stone_glow;
+                    btn_megaevolve.Image = rimgs_mega_stone_glow;
                 }
             }
         }
@@ -231,7 +252,11 @@ namespace PMD_Tabletop_Sheet
             if (DynamaxEnabled)
             {
                 DynamaxEnabled = false;
-                btn_dynamax.Image = Properties.Resources.gmax_plain_dormant;
+                btn_dynamax.Image = rimgs_gmax_plain_dormant;
+                if (pkmn_battleset_list.Count > 0) { txt_combat_move_1_name.Text = pkmn_battleset_list[0]; }
+                if (pkmn_battleset_list.Count > 1) { txt_combat_move_2_name.Text = pkmn_battleset_list[1]; }
+                if (pkmn_battleset_list.Count > 2) { txt_combat_move_3_name.Text = pkmn_battleset_list[2]; }
+                if (pkmn_battleset_list.Count > 3) { txt_combat_move_4_name.Text = pkmn_battleset_list[3]; }
             }
             else
             {
@@ -240,7 +265,11 @@ namespace PMD_Tabletop_Sheet
                     toggleMega();
                 }
                 DynamaxEnabled = true;
-                btn_dynamax.Image = Properties.Resources.gmax_glow;
+                btn_dynamax.Image = rimgs_gmax_glow;
+                if (pkmn_dynamax_list.Count > 0) { txt_combat_move_1_name.Text = pkmn_dynamax_list[0]; }
+                if (pkmn_dynamax_list.Count > 1) { txt_combat_move_2_name.Text = pkmn_dynamax_list[1]; }
+                if (pkmn_dynamax_list.Count > 2) { txt_combat_move_3_name.Text = pkmn_dynamax_list[2]; }
+                if (pkmn_dynamax_list.Count > 3) { txt_combat_move_4_name.Text = pkmn_dynamax_list[3]; }
             }
         }
 
@@ -480,152 +509,152 @@ namespace PMD_Tabletop_Sheet
 
         private void clkChange()
         {
-            if (ClkInfliction > 9) { btn_clocks_infliction_9.Image = Properties.Resources.clock_notch_filled; }
-            else { btn_clocks_infliction_9.Image = Properties.Resources.clock_notch_empty; }
-            if (ClkInfliction > 8) { btn_clocks_infliction_8.Image = Properties.Resources.clock_notch_filled; }
-            else { btn_clocks_infliction_8.Image = Properties.Resources.clock_notch_empty; }
-            if (ClkInfliction > 7) { btn_clocks_infliction_7.Image = Properties.Resources.clock_notch_filled; }
-            else { btn_clocks_infliction_7.Image = Properties.Resources.clock_notch_empty; }
-            if (ClkInfliction > 6) { btn_clocks_infliction_6.Image = Properties.Resources.clock_notch_filled; }
-            else { btn_clocks_infliction_6.Image = Properties.Resources.clock_notch_empty; }
-            if (ClkInfliction > 5) { btn_clocks_infliction_5.Image = Properties.Resources.clock_notch_filled; }
-            else { btn_clocks_infliction_5.Image = Properties.Resources.clock_notch_empty; }
-            if (ClkInfliction > 4) { btn_clocks_infliction_4.Image = Properties.Resources.clock_notch_filled; }
-            else { btn_clocks_infliction_4.Image = Properties.Resources.clock_notch_empty; }
-            if (ClkInfliction > 3) { btn_clocks_infliction_3.Image = Properties.Resources.clock_notch_filled; }
-            else { btn_clocks_infliction_3.Image = Properties.Resources.clock_notch_empty; }
-            if (ClkInfliction > 2) { btn_clocks_infliction_2.Image = Properties.Resources.clock_notch_filled; }
-            else { btn_clocks_infliction_2.Image = Properties.Resources.clock_notch_empty; }
-            if (ClkInfliction > 1) { btn_clocks_infliction_1.Image = Properties.Resources.clock_notch_filled; }
-            else { btn_clocks_infliction_1.Image = Properties.Resources.clock_notch_empty; }
-            if (ClkInfliction > 0) { btn_clocks_infliction_0.Image = Properties.Resources.clock_notch_filled; }
-            else { btn_clocks_infliction_0.Image = Properties.Resources.clock_notch_empty; }
+            if (ClkInfliction > 9) { btn_clocks_infliction_9.Image = rimgs_clock_notch_filled; }
+            else { btn_clocks_infliction_9.Image = rimgs_clock_notch_empty; }
+            if (ClkInfliction > 8) { btn_clocks_infliction_8.Image = rimgs_clock_notch_filled; }
+            else { btn_clocks_infliction_8.Image = rimgs_clock_notch_empty; }
+            if (ClkInfliction > 7) { btn_clocks_infliction_7.Image = rimgs_clock_notch_filled; }
+            else { btn_clocks_infliction_7.Image = rimgs_clock_notch_empty; }
+            if (ClkInfliction > 6) { btn_clocks_infliction_6.Image = rimgs_clock_notch_filled; }
+            else { btn_clocks_infliction_6.Image = rimgs_clock_notch_empty; }
+            if (ClkInfliction > 5) { btn_clocks_infliction_5.Image = rimgs_clock_notch_filled; }
+            else { btn_clocks_infliction_5.Image = rimgs_clock_notch_empty; }
+            if (ClkInfliction > 4) { btn_clocks_infliction_4.Image = rimgs_clock_notch_filled; }
+            else { btn_clocks_infliction_4.Image = rimgs_clock_notch_empty; }
+            if (ClkInfliction > 3) { btn_clocks_infliction_3.Image = rimgs_clock_notch_filled; }
+            else { btn_clocks_infliction_3.Image = rimgs_clock_notch_empty; }
+            if (ClkInfliction > 2) { btn_clocks_infliction_2.Image = rimgs_clock_notch_filled; }
+            else { btn_clocks_infliction_2.Image = rimgs_clock_notch_empty; }
+            if (ClkInfliction > 1) { btn_clocks_infliction_1.Image = rimgs_clock_notch_filled; }
+            else { btn_clocks_infliction_1.Image = rimgs_clock_notch_empty; }
+            if (ClkInfliction > 0) { btn_clocks_infliction_0.Image = rimgs_clock_notch_filled; }
+            else { btn_clocks_infliction_0.Image = rimgs_clock_notch_empty; }
 
-            if (Clkstun > 9) { btn_clocks_stun_9.Image = Properties.Resources.clock_notch_filled; }
-            else { btn_clocks_stun_9.Image = Properties.Resources.clock_notch_empty; }
-            if (Clkstun > 8) { btn_clocks_stun_8.Image = Properties.Resources.clock_notch_filled; }
-            else { btn_clocks_stun_8.Image = Properties.Resources.clock_notch_empty; }
-            if (Clkstun > 7) { btn_clocks_stun_7.Image = Properties.Resources.clock_notch_filled; }
-            else { btn_clocks_stun_7.Image = Properties.Resources.clock_notch_empty; }
-            if (Clkstun > 6) { btn_clocks_stun_6.Image = Properties.Resources.clock_notch_filled; }
-            else { btn_clocks_stun_6.Image = Properties.Resources.clock_notch_empty; }
-            if (Clkstun > 5) { btn_clocks_stun_5.Image = Properties.Resources.clock_notch_filled; }
-            else { btn_clocks_stun_5.Image = Properties.Resources.clock_notch_empty; }
-            if (Clkstun > 4) { btn_clocks_stun_4.Image = Properties.Resources.clock_notch_filled; }
-            else { btn_clocks_stun_4.Image = Properties.Resources.clock_notch_empty; }
-            if (Clkstun > 3) { btn_clocks_stun_3.Image = Properties.Resources.clock_notch_filled; }
-            else { btn_clocks_stun_3.Image = Properties.Resources.clock_notch_empty; }
-            if (Clkstun > 2) { btn_clocks_stun_2.Image = Properties.Resources.clock_notch_filled; }
-            else { btn_clocks_stun_2.Image = Properties.Resources.clock_notch_empty; }
-            if (Clkstun > 1) { btn_clocks_stun_1.Image = Properties.Resources.clock_notch_filled; }
-            else { btn_clocks_stun_1.Image = Properties.Resources.clock_notch_empty; }
-            if (Clkstun > 0) { btn_clocks_stun_0.Image = Properties.Resources.clock_notch_filled; }
-            else { btn_clocks_stun_0.Image = Properties.Resources.clock_notch_empty; }
+            if (Clkstun > 9) { btn_clocks_stun_9.Image = rimgs_clock_notch_filled; }
+            else { btn_clocks_stun_9.Image = rimgs_clock_notch_empty; }
+            if (Clkstun > 8) { btn_clocks_stun_8.Image = rimgs_clock_notch_filled; }
+            else { btn_clocks_stun_8.Image = rimgs_clock_notch_empty; }
+            if (Clkstun > 7) { btn_clocks_stun_7.Image = rimgs_clock_notch_filled; }
+            else { btn_clocks_stun_7.Image = rimgs_clock_notch_empty; }
+            if (Clkstun > 6) { btn_clocks_stun_6.Image = rimgs_clock_notch_filled; }
+            else { btn_clocks_stun_6.Image = rimgs_clock_notch_empty; }
+            if (Clkstun > 5) { btn_clocks_stun_5.Image = rimgs_clock_notch_filled; }
+            else { btn_clocks_stun_5.Image = rimgs_clock_notch_empty; }
+            if (Clkstun > 4) { btn_clocks_stun_4.Image = rimgs_clock_notch_filled; }
+            else { btn_clocks_stun_4.Image = rimgs_clock_notch_empty; }
+            if (Clkstun > 3) { btn_clocks_stun_3.Image = rimgs_clock_notch_filled; }
+            else { btn_clocks_stun_3.Image = rimgs_clock_notch_empty; }
+            if (Clkstun > 2) { btn_clocks_stun_2.Image = rimgs_clock_notch_filled; }
+            else { btn_clocks_stun_2.Image = rimgs_clock_notch_empty; }
+            if (Clkstun > 1) { btn_clocks_stun_1.Image = rimgs_clock_notch_filled; }
+            else { btn_clocks_stun_1.Image = rimgs_clock_notch_empty; }
+            if (Clkstun > 0) { btn_clocks_stun_0.Image = rimgs_clock_notch_filled; }
+            else { btn_clocks_stun_0.Image = rimgs_clock_notch_empty; }
 
-            if (Clkmez > 9) { btn_clocks_mez_9.Image = Properties.Resources.clock_notch_filled; }
-            else { btn_clocks_mez_9.Image = Properties.Resources.clock_notch_empty; }
-            if (Clkmez > 8) { btn_clocks_mez_8.Image = Properties.Resources.clock_notch_filled; }
-            else { btn_clocks_mez_8.Image = Properties.Resources.clock_notch_empty; }
-            if (Clkmez > 7) { btn_clocks_mez_7.Image = Properties.Resources.clock_notch_filled; }
-            else { btn_clocks_mez_7.Image = Properties.Resources.clock_notch_empty; }
-            if (Clkmez > 6) { btn_clocks_mez_6.Image = Properties.Resources.clock_notch_filled; }
-            else { btn_clocks_mez_6.Image = Properties.Resources.clock_notch_empty; }
-            if (Clkmez > 5) { btn_clocks_mez_5.Image = Properties.Resources.clock_notch_filled; }
-            else { btn_clocks_mez_5.Image = Properties.Resources.clock_notch_empty; }
-            if (Clkmez > 4) { btn_clocks_mez_4.Image = Properties.Resources.clock_notch_filled; }
-            else { btn_clocks_mez_4.Image = Properties.Resources.clock_notch_empty; }
-            if (Clkmez > 3) { btn_clocks_mez_3.Image = Properties.Resources.clock_notch_filled; }
-            else { btn_clocks_mez_3.Image = Properties.Resources.clock_notch_empty; }
-            if (Clkmez > 2) { btn_clocks_mez_2.Image = Properties.Resources.clock_notch_filled; }
-            else { btn_clocks_mez_2.Image = Properties.Resources.clock_notch_empty; }
-            if (Clkmez > 1) { btn_clocks_mez_1.Image = Properties.Resources.clock_notch_filled; }
-            else { btn_clocks_mez_1.Image = Properties.Resources.clock_notch_empty; }
-            if (Clkmez > 0) { btn_clocks_mez_0.Image = Properties.Resources.clock_notch_filled; }
-            else { btn_clocks_mez_0.Image = Properties.Resources.clock_notch_empty; }
+            if (Clkmez > 9) { btn_clocks_mez_9.Image = rimgs_clock_notch_filled; }
+            else { btn_clocks_mez_9.Image = rimgs_clock_notch_empty; }
+            if (Clkmez > 8) { btn_clocks_mez_8.Image = rimgs_clock_notch_filled; }
+            else { btn_clocks_mez_8.Image = rimgs_clock_notch_empty; }
+            if (Clkmez > 7) { btn_clocks_mez_7.Image = rimgs_clock_notch_filled; }
+            else { btn_clocks_mez_7.Image = rimgs_clock_notch_empty; }
+            if (Clkmez > 6) { btn_clocks_mez_6.Image = rimgs_clock_notch_filled; }
+            else { btn_clocks_mez_6.Image = rimgs_clock_notch_empty; }
+            if (Clkmez > 5) { btn_clocks_mez_5.Image = rimgs_clock_notch_filled; }
+            else { btn_clocks_mez_5.Image = rimgs_clock_notch_empty; }
+            if (Clkmez > 4) { btn_clocks_mez_4.Image = rimgs_clock_notch_filled; }
+            else { btn_clocks_mez_4.Image = rimgs_clock_notch_empty; }
+            if (Clkmez > 3) { btn_clocks_mez_3.Image = rimgs_clock_notch_filled; }
+            else { btn_clocks_mez_3.Image = rimgs_clock_notch_empty; }
+            if (Clkmez > 2) { btn_clocks_mez_2.Image = rimgs_clock_notch_filled; }
+            else { btn_clocks_mez_2.Image = rimgs_clock_notch_empty; }
+            if (Clkmez > 1) { btn_clocks_mez_1.Image = rimgs_clock_notch_filled; }
+            else { btn_clocks_mez_1.Image = rimgs_clock_notch_empty; }
+            if (Clkmez > 0) { btn_clocks_mez_0.Image = rimgs_clock_notch_filled; }
+            else { btn_clocks_mez_0.Image = rimgs_clock_notch_empty; }
 
-            if (Clkdoom > 9) { btn_clocks_doom_9.Image = Properties.Resources.clock_notch_filled; }
-            else { btn_clocks_doom_9.Image = Properties.Resources.clock_notch_empty; }
-            if (Clkdoom > 8) { btn_clocks_doom_8.Image = Properties.Resources.clock_notch_filled; }
-            else { btn_clocks_doom_8.Image = Properties.Resources.clock_notch_empty; }
-            if (Clkdoom > 7) { btn_clocks_doom_7.Image = Properties.Resources.clock_notch_filled; }
-            else { btn_clocks_doom_7.Image = Properties.Resources.clock_notch_empty; }
-            if (Clkdoom > 6) { btn_clocks_doom_6.Image = Properties.Resources.clock_notch_filled; }
-            else { btn_clocks_doom_6.Image = Properties.Resources.clock_notch_empty; }
-            if (Clkdoom > 5) { btn_clocks_doom_5.Image = Properties.Resources.clock_notch_filled; }
-            else { btn_clocks_doom_5.Image = Properties.Resources.clock_notch_empty; }
-            if (Clkdoom > 4) { btn_clocks_doom_4.Image = Properties.Resources.clock_notch_filled; }
-            else { btn_clocks_doom_4.Image = Properties.Resources.clock_notch_empty; }
-            if (Clkdoom > 3) { btn_clocks_doom_3.Image = Properties.Resources.clock_notch_filled; }
-            else { btn_clocks_doom_3.Image = Properties.Resources.clock_notch_empty; }
-            if (Clkdoom > 2) { btn_clocks_doom_2.Image = Properties.Resources.clock_notch_filled; }
-            else { btn_clocks_doom_2.Image = Properties.Resources.clock_notch_empty; }
-            if (Clkdoom > 1) { btn_clocks_doom_1.Image = Properties.Resources.clock_notch_filled; }
-            else { btn_clocks_doom_1.Image = Properties.Resources.clock_notch_empty; }
-            if (Clkdoom > 0) { btn_clocks_doom_0.Image = Properties.Resources.clock_notch_filled; }
-            else { btn_clocks_doom_0.Image = Properties.Resources.clock_notch_empty; }
+            if (Clkdoom > 9) { btn_clocks_doom_9.Image = rimgs_clock_notch_filled; }
+            else { btn_clocks_doom_9.Image = rimgs_clock_notch_empty; }
+            if (Clkdoom > 8) { btn_clocks_doom_8.Image = rimgs_clock_notch_filled; }
+            else { btn_clocks_doom_8.Image = rimgs_clock_notch_empty; }
+            if (Clkdoom > 7) { btn_clocks_doom_7.Image = rimgs_clock_notch_filled; }
+            else { btn_clocks_doom_7.Image = rimgs_clock_notch_empty; }
+            if (Clkdoom > 6) { btn_clocks_doom_6.Image = rimgs_clock_notch_filled; }
+            else { btn_clocks_doom_6.Image = rimgs_clock_notch_empty; }
+            if (Clkdoom > 5) { btn_clocks_doom_5.Image = rimgs_clock_notch_filled; }
+            else { btn_clocks_doom_5.Image = rimgs_clock_notch_empty; }
+            if (Clkdoom > 4) { btn_clocks_doom_4.Image = rimgs_clock_notch_filled; }
+            else { btn_clocks_doom_4.Image = rimgs_clock_notch_empty; }
+            if (Clkdoom > 3) { btn_clocks_doom_3.Image = rimgs_clock_notch_filled; }
+            else { btn_clocks_doom_3.Image = rimgs_clock_notch_empty; }
+            if (Clkdoom > 2) { btn_clocks_doom_2.Image = rimgs_clock_notch_filled; }
+            else { btn_clocks_doom_2.Image = rimgs_clock_notch_empty; }
+            if (Clkdoom > 1) { btn_clocks_doom_1.Image = rimgs_clock_notch_filled; }
+            else { btn_clocks_doom_1.Image = rimgs_clock_notch_empty; }
+            if (Clkdoom > 0) { btn_clocks_doom_0.Image = rimgs_clock_notch_filled; }
+            else { btn_clocks_doom_0.Image = rimgs_clock_notch_empty; }
 
-            if (Clkmisc1 > 9) { btn_clocks_misc1_9.Image = Properties.Resources.clock_notch_filled; }
-            else { btn_clocks_misc1_9.Image = Properties.Resources.clock_notch_empty; }
-            if (Clkmisc1 > 8) { btn_clocks_misc1_8.Image = Properties.Resources.clock_notch_filled; }
-            else { btn_clocks_misc1_8.Image = Properties.Resources.clock_notch_empty; }
-            if (Clkmisc1 > 7) { btn_clocks_misc1_7.Image = Properties.Resources.clock_notch_filled; }
-            else { btn_clocks_misc1_7.Image = Properties.Resources.clock_notch_empty; }
-            if (Clkmisc1 > 6) { btn_clocks_misc1_6.Image = Properties.Resources.clock_notch_filled; }
-            else { btn_clocks_misc1_6.Image = Properties.Resources.clock_notch_empty; }
-            if (Clkmisc1 > 5) { btn_clocks_misc1_5.Image = Properties.Resources.clock_notch_filled; }
-            else { btn_clocks_misc1_5.Image = Properties.Resources.clock_notch_empty; }
-            if (Clkmisc1 > 4) { btn_clocks_misc1_4.Image = Properties.Resources.clock_notch_filled; }
-            else { btn_clocks_misc1_4.Image = Properties.Resources.clock_notch_empty; }
-            if (Clkmisc1 > 3) { btn_clocks_misc1_3.Image = Properties.Resources.clock_notch_filled; }
-            else { btn_clocks_misc1_3.Image = Properties.Resources.clock_notch_empty; }
-            if (Clkmisc1 > 2) { btn_clocks_misc1_2.Image = Properties.Resources.clock_notch_filled; }
-            else { btn_clocks_misc1_2.Image = Properties.Resources.clock_notch_empty; }
-            if (Clkmisc1 > 1) { btn_clocks_misc1_1.Image = Properties.Resources.clock_notch_filled; }
-            else { btn_clocks_misc1_1.Image = Properties.Resources.clock_notch_empty; }
-            if (Clkmisc1 > 0) { btn_clocks_misc1_0.Image = Properties.Resources.clock_notch_filled; }
-            else { btn_clocks_misc1_0.Image = Properties.Resources.clock_notch_empty; }
+            if (Clkmisc1 > 9) { btn_clocks_misc1_9.Image = rimgs_clock_notch_filled; }
+            else { btn_clocks_misc1_9.Image = rimgs_clock_notch_empty; }
+            if (Clkmisc1 > 8) { btn_clocks_misc1_8.Image = rimgs_clock_notch_filled; }
+            else { btn_clocks_misc1_8.Image = rimgs_clock_notch_empty; }
+            if (Clkmisc1 > 7) { btn_clocks_misc1_7.Image = rimgs_clock_notch_filled; }
+            else { btn_clocks_misc1_7.Image = rimgs_clock_notch_empty; }
+            if (Clkmisc1 > 6) { btn_clocks_misc1_6.Image = rimgs_clock_notch_filled; }
+            else { btn_clocks_misc1_6.Image = rimgs_clock_notch_empty; }
+            if (Clkmisc1 > 5) { btn_clocks_misc1_5.Image = rimgs_clock_notch_filled; }
+            else { btn_clocks_misc1_5.Image = rimgs_clock_notch_empty; }
+            if (Clkmisc1 > 4) { btn_clocks_misc1_4.Image = rimgs_clock_notch_filled; }
+            else { btn_clocks_misc1_4.Image = rimgs_clock_notch_empty; }
+            if (Clkmisc1 > 3) { btn_clocks_misc1_3.Image = rimgs_clock_notch_filled; }
+            else { btn_clocks_misc1_3.Image = rimgs_clock_notch_empty; }
+            if (Clkmisc1 > 2) { btn_clocks_misc1_2.Image = rimgs_clock_notch_filled; }
+            else { btn_clocks_misc1_2.Image = rimgs_clock_notch_empty; }
+            if (Clkmisc1 > 1) { btn_clocks_misc1_1.Image = rimgs_clock_notch_filled; }
+            else { btn_clocks_misc1_1.Image = rimgs_clock_notch_empty; }
+            if (Clkmisc1 > 0) { btn_clocks_misc1_0.Image = rimgs_clock_notch_filled; }
+            else { btn_clocks_misc1_0.Image = rimgs_clock_notch_empty; }
 
-            if (Clkmisc2 > 9) { btn_clocks_misc2_9.Image = Properties.Resources.clock_notch_filled; }
-            else { btn_clocks_misc2_9.Image = Properties.Resources.clock_notch_empty; }
-            if (Clkmisc2 > 8) { btn_clocks_misc2_8.Image = Properties.Resources.clock_notch_filled; }
-            else { btn_clocks_misc2_8.Image = Properties.Resources.clock_notch_empty; }
-            if (Clkmisc2 > 7) { btn_clocks_misc2_7.Image = Properties.Resources.clock_notch_filled; }
-            else { btn_clocks_misc2_7.Image = Properties.Resources.clock_notch_empty; }
-            if (Clkmisc2 > 6) { btn_clocks_misc2_6.Image = Properties.Resources.clock_notch_filled; }
-            else { btn_clocks_misc2_6.Image = Properties.Resources.clock_notch_empty; }
-            if (Clkmisc2 > 5) { btn_clocks_misc2_5.Image = Properties.Resources.clock_notch_filled; }
-            else { btn_clocks_misc2_5.Image = Properties.Resources.clock_notch_empty; }
-            if (Clkmisc2 > 4) { btn_clocks_misc2_4.Image = Properties.Resources.clock_notch_filled; }
-            else { btn_clocks_misc2_4.Image = Properties.Resources.clock_notch_empty; }
-            if (Clkmisc2 > 3) { btn_clocks_misc2_3.Image = Properties.Resources.clock_notch_filled; }
-            else { btn_clocks_misc2_3.Image = Properties.Resources.clock_notch_empty; }
-            if (Clkmisc2 > 2) { btn_clocks_misc2_2.Image = Properties.Resources.clock_notch_filled; }
-            else { btn_clocks_misc2_2.Image = Properties.Resources.clock_notch_empty; }
-            if (Clkmisc2 > 1) { btn_clocks_misc2_1.Image = Properties.Resources.clock_notch_filled; }
-            else { btn_clocks_misc2_1.Image = Properties.Resources.clock_notch_empty; }
-            if (Clkmisc2 > 0) { btn_clocks_misc2_0.Image = Properties.Resources.clock_notch_filled; }
-            else { btn_clocks_misc2_0.Image = Properties.Resources.clock_notch_empty; }
+            if (Clkmisc2 > 9) { btn_clocks_misc2_9.Image = rimgs_clock_notch_filled; }
+            else { btn_clocks_misc2_9.Image = rimgs_clock_notch_empty; }
+            if (Clkmisc2 > 8) { btn_clocks_misc2_8.Image = rimgs_clock_notch_filled; }
+            else { btn_clocks_misc2_8.Image = rimgs_clock_notch_empty; }
+            if (Clkmisc2 > 7) { btn_clocks_misc2_7.Image = rimgs_clock_notch_filled; }
+            else { btn_clocks_misc2_7.Image = rimgs_clock_notch_empty; }
+            if (Clkmisc2 > 6) { btn_clocks_misc2_6.Image = rimgs_clock_notch_filled; }
+            else { btn_clocks_misc2_6.Image = rimgs_clock_notch_empty; }
+            if (Clkmisc2 > 5) { btn_clocks_misc2_5.Image = rimgs_clock_notch_filled; }
+            else { btn_clocks_misc2_5.Image = rimgs_clock_notch_empty; }
+            if (Clkmisc2 > 4) { btn_clocks_misc2_4.Image = rimgs_clock_notch_filled; }
+            else { btn_clocks_misc2_4.Image = rimgs_clock_notch_empty; }
+            if (Clkmisc2 > 3) { btn_clocks_misc2_3.Image = rimgs_clock_notch_filled; }
+            else { btn_clocks_misc2_3.Image = rimgs_clock_notch_empty; }
+            if (Clkmisc2 > 2) { btn_clocks_misc2_2.Image = rimgs_clock_notch_filled; }
+            else { btn_clocks_misc2_2.Image = rimgs_clock_notch_empty; }
+            if (Clkmisc2 > 1) { btn_clocks_misc2_1.Image = rimgs_clock_notch_filled; }
+            else { btn_clocks_misc2_1.Image = rimgs_clock_notch_empty; }
+            if (Clkmisc2 > 0) { btn_clocks_misc2_0.Image = rimgs_clock_notch_filled; }
+            else { btn_clocks_misc2_0.Image = rimgs_clock_notch_empty; }
 
-            if (Clkmisc3 > 9) { btn_clocks_misc3_9.Image = Properties.Resources.clock_notch_filled; }
-            else { btn_clocks_misc3_9.Image = Properties.Resources.clock_notch_empty; }
-            if (Clkmisc3 > 8) { btn_clocks_misc3_8.Image = Properties.Resources.clock_notch_filled; }
-            else { btn_clocks_misc3_8.Image = Properties.Resources.clock_notch_empty; }
-            if (Clkmisc3 > 7) { btn_clocks_misc3_7.Image = Properties.Resources.clock_notch_filled; }
-            else { btn_clocks_misc3_7.Image = Properties.Resources.clock_notch_empty; }
-            if (Clkmisc3 > 6) { btn_clocks_misc3_6.Image = Properties.Resources.clock_notch_filled; }
-            else { btn_clocks_misc3_6.Image = Properties.Resources.clock_notch_empty; }
-            if (Clkmisc3 > 5) { btn_clocks_misc3_5.Image = Properties.Resources.clock_notch_filled; }
-            else { btn_clocks_misc3_5.Image = Properties.Resources.clock_notch_empty; }
-            if (Clkmisc3 > 4) { btn_clocks_misc3_4.Image = Properties.Resources.clock_notch_filled; }
-            else { btn_clocks_misc3_4.Image = Properties.Resources.clock_notch_empty; }
-            if (Clkmisc3 > 3) { btn_clocks_misc3_3.Image = Properties.Resources.clock_notch_filled; }
-            else { btn_clocks_misc3_3.Image = Properties.Resources.clock_notch_empty; }
-            if (Clkmisc3 > 2) { btn_clocks_misc3_2.Image = Properties.Resources.clock_notch_filled; }
-            else { btn_clocks_misc3_2.Image = Properties.Resources.clock_notch_empty; }
-            if (Clkmisc3 > 1) { btn_clocks_misc3_1.Image = Properties.Resources.clock_notch_filled; }
-            else { btn_clocks_misc3_1.Image = Properties.Resources.clock_notch_empty; }
-            if (Clkmisc3 > 0) { btn_clocks_misc3_0.Image = Properties.Resources.clock_notch_filled; }
-            else { btn_clocks_misc3_0.Image = Properties.Resources.clock_notch_empty; }
+            if (Clkmisc3 > 9) { btn_clocks_misc3_9.Image = rimgs_clock_notch_filled; }
+            else { btn_clocks_misc3_9.Image = rimgs_clock_notch_empty; }
+            if (Clkmisc3 > 8) { btn_clocks_misc3_8.Image = rimgs_clock_notch_filled; }
+            else { btn_clocks_misc3_8.Image = rimgs_clock_notch_empty; }
+            if (Clkmisc3 > 7) { btn_clocks_misc3_7.Image = rimgs_clock_notch_filled; }
+            else { btn_clocks_misc3_7.Image = rimgs_clock_notch_empty; }
+            if (Clkmisc3 > 6) { btn_clocks_misc3_6.Image = rimgs_clock_notch_filled; }
+            else { btn_clocks_misc3_6.Image = rimgs_clock_notch_empty; }
+            if (Clkmisc3 > 5) { btn_clocks_misc3_5.Image = rimgs_clock_notch_filled; }
+            else { btn_clocks_misc3_5.Image = rimgs_clock_notch_empty; }
+            if (Clkmisc3 > 4) { btn_clocks_misc3_4.Image = rimgs_clock_notch_filled; }
+            else { btn_clocks_misc3_4.Image = rimgs_clock_notch_empty; }
+            if (Clkmisc3 > 3) { btn_clocks_misc3_3.Image = rimgs_clock_notch_filled; }
+            else { btn_clocks_misc3_3.Image = rimgs_clock_notch_empty; }
+            if (Clkmisc3 > 2) { btn_clocks_misc3_2.Image = rimgs_clock_notch_filled; }
+            else { btn_clocks_misc3_2.Image = rimgs_clock_notch_empty; }
+            if (Clkmisc3 > 1) { btn_clocks_misc3_1.Image = rimgs_clock_notch_filled; }
+            else { btn_clocks_misc3_1.Image = rimgs_clock_notch_empty; }
+            if (Clkmisc3 > 0) { btn_clocks_misc3_0.Image = rimgs_clock_notch_filled; }
+            else { btn_clocks_misc3_0.Image = rimgs_clock_notch_empty; }
         }
 
         private void btn_clocks_infliction_0_Click(object sender, EventArgs e)
@@ -1317,9 +1346,13 @@ namespace PMD_Tabletop_Sheet
             pkmn_moveset_cmb_move_type.Clear();
             pkmn_moveset_txt_move_pp.Clear();
             pkmn_moveset_pbox_move_attr.Clear();
+            txt_combat_move_1_name.Text = "";
+            txt_combat_move_2_name.Text = "";
+            txt_combat_move_3_name.Text = "";
+            txt_combat_move_4_name.Text = "";
         }
 
-        private void ShowMessage(object sender, EventArgs e)
+        private void loadMoveParams(object sender, EventArgs e)
         {
             Control ActiveControl = FindControlAtCursor(this);
             if (!String.IsNullOrWhiteSpace(ActiveControl.Text))
@@ -1348,9 +1381,140 @@ namespace PMD_Tabletop_Sheet
             }
         }
 
+        private void movesetLvCompatible()
+        {
+            for (int i = 0; i < pkmn_moveset_chk_move_selected.Count; i++)
+            {
+                if (Int32.TryParse(txt_sht_lv.Text, out int j) && Int32.TryParse(pkmn_moveset_txt_move_lv[i].Text, out int k))
+                {
+                    if (Int32.Parse(txt_sht_lv.Text) >= Int32.Parse(pkmn_moveset_txt_move_lv[i].Text)) { pkmn_moveset_chk_move_selected[i].Enabled = true; }
+                    else { pkmn_moveset_chk_move_selected[i].Enabled = false; }
+                }
+                else { pkmn_moveset_chk_move_selected[i].Enabled = true; }
+            }
+        }
+
+        private void moveCheckBoxClick(object sender, EventArgs e)
+        {
+            int box_id = -1;
+            TextBox[] combatMoveText = { txt_combat_move_1_name, txt_combat_move_2_name, txt_combat_move_3_name, txt_combat_move_4_name };
+            CheckBox clicked_box = (sender as CheckBox);
+            // Iterate through all checkboxes in learnset and get the id of this one
+            for (int i = 0; i < pkmn_moveset_chk_move_selected.Count; i++)
+            {
+                if (pkmn_moveset_chk_move_selected[i].Name == clicked_box.Name)
+                {
+                    box_id = i;
+                    break;
+                }
+            }
+            // Make sure the checkbox actually belongs to the moveset checkboxes
+            if (box_id > -1)
+            {
+                // If we are adding a move, make sure we only have four moves
+                if (clicked_box.Checked && pkmn_battleset_list.Count < 4)
+                {
+                    // Before starting, search for the move's dynamax equilvalent
+                    // If the move is a Status move, make it Max Guard
+                    if (pkmn_moveset_pbox_move_attr[box_id].Image == rimgs_icon_Status_Attack) { pkmn_dynamax_list.Add("Max Guard"); }
+                    else { 
+                        if (!String.IsNullOrWhiteSpace(pkmn_moveset_txt_move_name[box_id].Text))
+                        {
+                            using (SQLiteConnection cn = new SQLiteConnection("Data Source=" + dbpath + ";Version=3;New=True;Compress=True;"))
+                            {
+                                cn.Open();
+                                SQLiteCommand sqlite_cmd;
+                                SQLiteDataReader sqlite_datareader;
+                                sqlite_cmd = cn.CreateCommand();
+                                
+                                if (String.IsNullOrWhiteSpace(pkmn_gmax_move) || pkmn_gmax_type != pkmn_moveset_cmb_move_type[box_id].Text)
+                                {
+                                    sqlite_cmd.CommandText = "SELECT Dynamax.Name FROM Moves Join Dynamax on Dynamax.Type = Moves.Type Where Moves.Name = '" + pkmn_moveset_txt_move_name[box_id].Text + "'";
+                                }
+                                // If it has a G-Max move and the typing matches, use that instead
+                                else
+                                {
+                                    sqlite_cmd.CommandText = "SELECT Gigantamax.Name FROM Gigantamax Where Gigantamax.Name = '" + pkmn_gmax_move + "'";
+                                }
+                                sqlite_datareader = sqlite_cmd.ExecuteReader();
+                                // If somehow no dynamax equilvalent is found, add to list regardless in order to keep indices matching with pkmn_battleset_list
+                                if (!sqlite_datareader.HasRows) { pkmn_dynamax_list.Add(""); }
+                                while (sqlite_datareader.Read())
+                                {
+                                    if (sqlite_datareader.IsDBNull(0)) { pkmn_dynamax_list.Add(""); }
+                                    else { pkmn_dynamax_list.Add(sqlite_datareader.GetString(0)); }
+                                    break; // Fail safe in case there's somehow more than one record
+                                }
+                                cn.Close();
+                            }
+                        }
+                        // If we somehow found nothing, add to list regardless in order to keep indices matching with pkmn_battleset_list
+                        else { pkmn_dynamax_list.Add(""); }
+                    }
+                    // Add respective move to battleset list
+                    pkmn_battleset_list.Add(pkmn_moveset_txt_move_name[box_id].Text);
+                    pkmn_battleset_types_list.Add(pkmn_moveset_cmb_move_type[box_id].Text);
+                    if (pkmn_moveset_pbox_move_attr[box_id].Image == rimgs_icon_Physical_Attack) { pkmn_battleset_atr_list.Add("Physical"); }
+                    else if (pkmn_moveset_pbox_move_attr[box_id].Image == rimgs_icon_Special_Attack) { pkmn_battleset_atr_list.Add("Special"); }
+                    else if (pkmn_moveset_pbox_move_attr[box_id].Image == rimgs_icon_Status_Attack) { pkmn_battleset_atr_list.Add("Status"); }
+                    else { pkmn_battleset_atr_list.Add("");  }
+                    // Are we currently dynamaxed?
+                    if (DynamaxEnabled)
+                    {
+                        // If so, set the text of the combat textbox to the dynamax move we just added 
+                        combatMoveText[pkmn_battleset_list.Count - 1].Text = pkmn_dynamax_list[pkmn_battleset_list.Count - 1];
+                    }
+                    else
+                    {
+                        // If not, set the text of the combat textbox to regular move we just added
+                        combatMoveText[pkmn_battleset_list.Count - 1].Text = pkmn_battleset_list[pkmn_battleset_list.Count - 1];
+                    }
+                }
+                // If we are removing a move, look for it in the battleset
+                else if (!clicked_box.Checked)
+                {
+                    for (int i = 0; i < pkmn_battleset_list.Count; i++)
+                    {
+                        if (pkmn_moveset_txt_move_name[box_id].Text == pkmn_battleset_list[i])
+                        {
+                            pkmn_battleset_list.RemoveAt(i);
+                            pkmn_battleset_types_list.RemoveAt(i);
+                            pkmn_battleset_atr_list.RemoveAt(i);
+                            pkmn_dynamax_list.RemoveAt(i);
+                            combatMoveText[i].Text = "";
+                            // Since we just removed an entry, we need to shift all entries down the line (unless it was the final entry)
+                            for (int j = i; j < 3; j++)
+                            {
+                                combatMoveText[j].Text = combatMoveText[j+1].Text;
+                            }
+                            // Last entry will always be blank when we're unchecking a move
+                            combatMoveText[3].Text = "";
+                            break;
+                        }
+                    }
+                }
+            }
+            else { MessageBox.Show("CheckBox ID for " + clicked_box.Name + " was not found in list. Contact a developer!"); }
+
+            // If we have 4 or more moves in the set, blockout the checkboxes that aren't checked
+            if (pkmn_battleset_list.Count >= 4)
+            {
+                foreach (CheckBox c in pkmn_moveset_chk_move_selected) { c.Enabled = c.Checked; }
+            }
+            // Otherwise, enable the checkboxes if the pokemon meets the level requirement
+            else
+            {
+                movesetLvCompatible();
+            }
+        }
+
         private void loadLearnsetFromSpecies(string species)
         {
-            pkmn_moveset_selected.Clear();
+            pkmn_moveset_list.Clear();
+            pkmn_battleset_list.Clear();
+            pkmn_battleset_types_list.Clear();
+            pkmn_battleset_atr_list.Clear();
+            pkmn_dynamax_list.Clear();
             disposeLearnsetElements();
             CheckBox chk_move_selected;
             TextBox txt_move_lv;
@@ -1370,13 +1534,14 @@ namespace PMD_Tabletop_Sheet
                 {
                     // Read in each move from learnset
                     if (!sqlite_datareader.IsDBNull(0)) {
-                        pkmn_moveset_selected.Add(sqlite_datareader.GetString(0));
+                        pkmn_moveset_list.Add(sqlite_datareader.GetString(0));
 
                         chk_move_selected = new CheckBox();
                         pkmn_moveset_chk_move_selected.Add(chk_move_selected);
                         chk_move_selected.Name = chk_move_selected_template.Name + pkmn_moveset_chk_move_selected.Count();
                         chk_move_selected.Size = chk_move_selected_template.Size;
                         chk_move_selected.Location = new System.Drawing.Point(chk_move_selected_template.Location.X, chk_move_selected_template.Location.Y + (24 * (pkmn_moveset_chk_move_selected.Count() - 1)));
+                        chk_move_selected.CheckedChanged += new EventHandler(moveCheckBoxClick);
                         pnl_move_list.Controls.Add(chk_move_selected);
 
                         txt_move_name = new TextBox();
@@ -1386,7 +1551,7 @@ namespace PMD_Tabletop_Sheet
                         txt_move_name.Location = new System.Drawing.Point(txt_move_name_template.Location.X, txt_move_name_template.Location.Y + (24 * (pkmn_moveset_txt_move_name.Count() - 1)));
                         txt_move_name.ReadOnly = txt_move_name_template.ReadOnly;
                         txt_move_name.Text = sqlite_datareader.GetString(0);
-                        txt_move_name.MouseHover += new EventHandler(ShowMessage);
+                        txt_move_name.MouseHover += new EventHandler(loadMoveParams);
                         pnl_move_list.Controls.Add(txt_move_name);
 
                         txt_move_lv = new TextBox();
@@ -1435,10 +1600,36 @@ namespace PMD_Tabletop_Sheet
                 }
                 cn.Close();
             }
+            movesetLvCompatible();
+        }
+
+        private void getGmaxMoveType()
+        {
+            if (!String.IsNullOrWhiteSpace(pkmn_gmax_move))
+            {
+                using (SQLiteConnection cn = new SQLiteConnection("Data Source=" + dbpath + ";Version=3;New=True;Compress=True;"))
+                {
+                    cn.Open();
+                    SQLiteCommand sqlite_cmd;
+                    SQLiteDataReader sqlite_datareader;
+                    sqlite_cmd = cn.CreateCommand();
+                    sqlite_cmd.CommandText = "SELECT Type FROM Gigantamax Where Name = '" + pkmn_gmax_move + "'";
+                    sqlite_datareader = sqlite_cmd.ExecuteReader();
+                    if (!sqlite_datareader.HasRows) { pkmn_gmax_type = ""; }
+                    while (sqlite_datareader.Read())
+                    {
+                        if (sqlite_datareader.IsDBNull(0)) { pkmn_gmax_type = ""; }
+                        else { pkmn_gmax_type = sqlite_datareader.GetString(0); }
+                    }
+                    cn.Close();
+                }
+            }
+            else { pkmn_gmax_type = ""; }
         }
 
         private void txt_sht_species_TextChanged(object sender, EventArgs e)
         {
+            pkmn_gmax_move = ""; pkmn_gmax_type = "";
             txt_moves_char_species.Text = txt_sht_species.Text;
             cmb_sht_ability.Text = "";
             cmb_sht_ability.Items.Clear();
@@ -1498,7 +1689,10 @@ namespace PMD_Tabletop_Sheet
                 // We are ready, now lets cleanup and close our connection:
                 cn.Close();
             }
-            
+
+            // Get the G-Max move and store it for later
+            getGmaxMoveType();
+
             // If this is not a mega, but mega is enabled, disable it
             if ((txt_sht_species.Text.Length <= 5 || txt_sht_species.Text.Substring(0, 5) != "Mega " || DynamaxEnabled) && MegaEnabled)
             {
@@ -1519,7 +1713,7 @@ namespace PMD_Tabletop_Sheet
             }
             else
             {
-                pkmn_moveset_selected.Clear();
+                pkmn_moveset_list.Clear();
                 disposeLearnsetElements();
             }
         }
@@ -1552,6 +1746,7 @@ namespace PMD_Tabletop_Sheet
         {
             handleEXP(true);
             calculateAllMaxStats();
+            movesetLvCompatible();
         }
 
         private void txt_sht_exp_TextChanged(object sender, EventArgs e)
@@ -1632,16 +1827,131 @@ namespace PMD_Tabletop_Sheet
 
         private System.Drawing.Bitmap determineMoveAttributeImage(string attribute)
         {
-            System.Drawing.Bitmap attrimage = Properties.Resources.token;
-            if (attribute.ToLowerInvariant() == "physical") { attrimage = Properties.Resources.icon_Physical_Attack; }
-            else if (attribute.ToLowerInvariant() == "special") { attrimage = Properties.Resources.icon_Special_Attack; }
-            else if (attribute.ToLowerInvariant() == "status") { attrimage = Properties.Resources.icon_Status_Attack; }
+            System.Drawing.Bitmap attrimage = rimgs_token;
+            if (attribute.ToLowerInvariant() == "physical") { attrimage = rimgs_icon_Physical_Attack; }
+            else if (attribute.ToLowerInvariant() == "special") { attrimage = rimgs_icon_Special_Attack; }
+            else if (attribute.ToLowerInvariant() == "status") { attrimage = rimgs_icon_Status_Attack; }
             return attrimage;
         }
 
         private void txt_combat_move_prev_atr_TextChanged(object sender, EventArgs e)
         {
             pic_combat_move_prev_atr.Image = determineMoveAttributeImage(txt_combat_move_prev_atr.Text);
+        }
+
+        private void loadMoveCombatParams(int combat_move_slot)
+        {
+            TextBox[] txt_combat_move_name = { txt_combat_move_1_name, txt_combat_move_2_name, txt_combat_move_3_name, txt_combat_move_4_name };
+            TextBox[] txt_combat_move_pp = { txt_combat_move_1_pp, txt_combat_move_2_pp, txt_combat_move_3_pp, txt_combat_move_4_pp };
+            TextBox[] txt_combat_move_pp_max = { txt_combat_move_1_pp_max, txt_combat_move_2_pp_max, txt_combat_move_3_pp_max, txt_combat_move_4_pp_max };
+            TextBox[] txt_combat_move_acc = { txt_combat_move_1_acc, txt_combat_move_2_acc, txt_combat_move_3_acc, txt_combat_move_4_acc };
+            ComboBox[] cmb_combat_move_type = { cmb_combat_move_1_type, cmb_combat_move_2_type, cmb_combat_move_3_type, cmb_combat_move_4_type };
+            TextBox[] txt_combat_move_pow = { txt_combat_move_1_pow, txt_combat_move_2_pow, txt_combat_move_3_pow, txt_combat_move_4_pow };
+            TextBox[] txt_combat_move_atr = { txt_combat_move_1_atr, txt_combat_move_2_atr, txt_combat_move_3_atr, txt_combat_move_4_atr };
+            TextBox[] txt_combat_move_effect = { txt_combat_move_1_effect, txt_combat_move_2_effect, txt_combat_move_3_effect, txt_combat_move_4_effect };
+            PictureBox[] pic_combat_move_atr = { pic_combat_move_1_atr, pic_combat_move_2_atr, pic_combat_move_3_atr, pic_combat_move_4_atr };
+
+            txt_combat_move_pp[combat_move_slot].Text = "";
+            txt_combat_move_pp_max[combat_move_slot].Text = "";
+            txt_combat_move_acc[combat_move_slot].Text = "";
+            txt_combat_move_pow[combat_move_slot].Text = "";
+            if (pkmn_battleset_atr_list.Count > combat_move_slot) { txt_combat_move_atr[combat_move_slot].Text = pkmn_battleset_atr_list[combat_move_slot]; }
+            else { txt_combat_move_atr[combat_move_slot].Text = ""; }
+            txt_combat_move_effect[combat_move_slot].Text = "";
+            cmb_combat_move_type[combat_move_slot].SelectedIndex = 0;
+            pic_combat_move_atr[combat_move_slot].Image = rimgs_token;
+
+            if (!String.IsNullOrWhiteSpace(txt_combat_move_name[combat_move_slot].Text))
+            {
+                using (SQLiteConnection cn = new SQLiteConnection("Data Source=" + dbpath + ";Version=3;New=True;Compress=True;"))
+                {
+                    cn.Open();
+                    SQLiteCommand sqlite_cmd;
+                    SQLiteDataReader sqlite_datareader;
+                    sqlite_cmd = cn.CreateCommand();
+                    sqlite_cmd.CommandText = "Select * from (SELECT * FROM Moves union all SELECT * FROM Dynamax union all SELECT * FROM Gigantamax) Where Name = '" + txt_combat_move_name[combat_move_slot].Text + "'";
+                    sqlite_datareader = sqlite_cmd.ExecuteReader();
+                    while (sqlite_datareader.Read())
+                    {
+                        if (!sqlite_datareader.IsDBNull(5)) { txt_combat_move_pp_max[combat_move_slot].Text = sqlite_datareader.GetInt32(5).ToString(); }
+                        if (!sqlite_datareader.IsDBNull(7)) { txt_combat_move_acc[combat_move_slot].Text = sqlite_datareader.GetString(7); }
+                        if (!sqlite_datareader.IsDBNull(4)) { txt_combat_move_pow[combat_move_slot].Text = sqlite_datareader.GetInt32(4).ToString(); }
+                        if (!sqlite_datareader.IsDBNull(6) && !sqlite_datareader.IsDBNull(8)) { txt_combat_move_effect[combat_move_slot].Text = sqlite_datareader.GetString(8) + "; " + sqlite_datareader.GetString(6); }
+                        else if (sqlite_datareader.IsDBNull(6) && !sqlite_datareader.IsDBNull(8)) { txt_combat_move_effect[combat_move_slot].Text = sqlite_datareader.GetString(8) + "; Deals damage."; }
+                        else { txt_combat_move_effect[combat_move_slot].Text = ""; }
+                        if (txt_combat_move_atr[combat_move_slot].Text == "" && !sqlite_datareader.IsDBNull(3)) { txt_combat_move_atr[combat_move_slot].Text = sqlite_datareader.GetString(3); }
+                        if (!sqlite_datareader.IsDBNull(2)) { cmb_combat_move_type[combat_move_slot].SelectedIndex = cmb_combat_move_type[combat_move_slot].FindStringExact(sqlite_datareader.GetString(2)); }
+                    }
+                    cn.Close();
+                }
+            }
+
+            txt_combat_move_pp[combat_move_slot].Text = txt_combat_move_pp_max[combat_move_slot].Text;
+            pic_combat_move_atr[combat_move_slot].Image = determineMoveAttributeImage(txt_combat_move_atr[combat_move_slot].Text);
+        }
+
+        private void txt_combat_move_1_name_TextChanged(object sender, EventArgs e)
+        {
+            loadMoveCombatParams(0);
+        }
+
+        private void txt_combat_move_2_name_TextChanged(object sender, EventArgs e)
+        {
+            loadMoveCombatParams(1);
+        }
+
+        private void txt_combat_move_3_name_TextChanged(object sender, EventArgs e)
+        {
+            loadMoveCombatParams(2);
+        }
+
+        private void txt_combat_move_4_name_TextChanged(object sender, EventArgs e)
+        {
+            loadMoveCombatParams(3);
+        }
+
+        private void txt_combat_move_1_pp_TextChanged(object sender, EventArgs e)
+        {
+            if (Int32.TryParse(txt_combat_move_1_pp.Text, out int i) && Int32.TryParse(txt_combat_move_1_pp_max.Text, out int j))
+            {
+                if (Int32.Parse(txt_combat_move_1_pp.Text) > Int32.Parse(txt_combat_move_1_pp_max.Text)) { txt_combat_move_1_pp.BackColor = System.Drawing.Color.FromKnownColor(System.Drawing.KnownColor.Crimson); }
+                else if (Int32.Parse(txt_combat_move_1_pp.Text) == 0) { txt_combat_move_1_pp.BackColor = System.Drawing.SystemColors.Info; }
+                else { txt_combat_move_1_pp.BackColor = System.Drawing.SystemColors.Window; }
+            }
+            else { txt_combat_move_1_pp.BackColor = System.Drawing.SystemColors.Window; }
+        }
+
+        private void txt_combat_move_2_pp_TextChanged(object sender, EventArgs e)
+        {
+            if (Int32.TryParse(txt_combat_move_2_pp.Text, out int i) && Int32.TryParse(txt_combat_move_2_pp_max.Text, out int j))
+            {
+                if (Int32.Parse(txt_combat_move_2_pp.Text) > Int32.Parse(txt_combat_move_2_pp_max.Text)) { txt_combat_move_2_pp.BackColor = System.Drawing.Color.FromKnownColor(System.Drawing.KnownColor.Crimson); }
+                else if (Int32.Parse(txt_combat_move_2_pp.Text) == 0) { txt_combat_move_2_pp.BackColor = System.Drawing.SystemColors.Info; }
+                else { txt_combat_move_2_pp.BackColor = System.Drawing.SystemColors.Window; }
+            }
+            else { txt_combat_move_2_pp.BackColor = System.Drawing.SystemColors.Window; }
+        }
+
+        private void txt_combat_move_3_pp_TextChanged(object sender, EventArgs e)
+        {
+            if (Int32.TryParse(txt_combat_move_3_pp.Text, out int i) && Int32.TryParse(txt_combat_move_3_pp_max.Text, out int j))
+            {
+                if (Int32.Parse(txt_combat_move_3_pp.Text) > Int32.Parse(txt_combat_move_3_pp_max.Text)) { txt_combat_move_3_pp.BackColor = System.Drawing.Color.FromKnownColor(System.Drawing.KnownColor.Crimson); }
+                else if (Int32.Parse(txt_combat_move_3_pp.Text) == 0) { txt_combat_move_3_pp.BackColor = System.Drawing.SystemColors.Info; }
+                else { txt_combat_move_3_pp.BackColor = System.Drawing.SystemColors.Window; }
+            }
+            else { txt_combat_move_3_pp.BackColor = System.Drawing.SystemColors.Window; }
+        }
+
+        private void txt_combat_move_4_pp_TextChanged(object sender, EventArgs e)
+        {
+            if (Int32.TryParse(txt_combat_move_4_pp.Text, out int i) && Int32.TryParse(txt_combat_move_4_pp_max.Text, out int j))
+            {
+                if (Int32.Parse(txt_combat_move_4_pp.Text) > Int32.Parse(txt_combat_move_4_pp_max.Text)) { txt_combat_move_4_pp.BackColor = System.Drawing.Color.FromKnownColor(System.Drawing.KnownColor.Crimson); }
+                else if (Int32.Parse(txt_combat_move_4_pp.Text) == 0) { txt_combat_move_4_pp.BackColor = System.Drawing.SystemColors.Info; }
+                else { txt_combat_move_4_pp.BackColor = System.Drawing.SystemColors.Window; }
+            }
+            else { txt_combat_move_4_pp.BackColor = System.Drawing.SystemColors.Window; }
         }
     }
 }
