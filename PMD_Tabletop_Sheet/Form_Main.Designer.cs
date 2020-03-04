@@ -3413,9 +3413,9 @@
             // pic_combat_move_5_atr
             // 
             this.pic_combat_move_5_atr.Image = global::PMD_Tabletop_Sheet.Properties.Resources.token;
-            this.pic_combat_move_5_atr.Location = new System.Drawing.Point(2, 524);
+            this.pic_combat_move_5_atr.Location = new System.Drawing.Point(5, 518);
             this.pic_combat_move_5_atr.Name = "pic_combat_move_5_atr";
-            this.pic_combat_move_5_atr.Size = new System.Drawing.Size(26, 19);
+            this.pic_combat_move_5_atr.Size = new System.Drawing.Size(26, 26);
             this.pic_combat_move_5_atr.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pic_combat_move_5_atr.TabIndex = 45;
             this.pic_combat_move_5_atr.TabStop = false;
