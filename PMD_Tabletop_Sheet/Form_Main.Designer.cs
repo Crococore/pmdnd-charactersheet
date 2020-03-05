@@ -37,6 +37,7 @@
             this.ts_file_save_btn = new System.Windows.Forms.ToolStripMenuItem();
             this.ts_file_saveas_btn = new System.Windows.Forms.ToolStripMenuItem();
             this.ts_file_about_btn = new System.Windows.Forms.ToolStripMenuItem();
+            this.ts_file_recentfiles_btn = new System.Windows.Forms.ToolStripMenuItem();
             this.ts_file_exit_btn = new System.Windows.Forms.ToolStripMenuItem();
             this.ts_ddb_campaign = new System.Windows.Forms.ToolStripDropDownButton();
             this.ts_campaign_se_btn = new System.Windows.Forms.ToolStripMenuItem();
@@ -358,9 +359,9 @@
             this.lbl_stat_atk_max = new System.Windows.Forms.Label();
             this.pnl_pg_3_inv = new System.Windows.Forms.Panel();
             this.grp_inv = new System.Windows.Forms.GroupBox();
-            this.label6 = new System.Windows.Forms.Label();
+            this.lbl_inv_max_qty = new System.Windows.Forms.Label();
             this.txt_inv_max_qty = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
+            this.lbl_inv_curr_qty = new System.Windows.Forms.Label();
             this.txt_inv_curr_qty = new System.Windows.Forms.TextBox();
             this.cmb_inv_bag = new System.Windows.Forms.ComboBox();
             this.txt_inv_preview_title = new System.Windows.Forms.TextBox();
@@ -427,8 +428,8 @@
             this.chk_inv_held_11 = new System.Windows.Forms.CheckBox();
             this.chk_inv_held_22 = new System.Windows.Forms.CheckBox();
             this.chk_inv_held_4 = new System.Windows.Forms.CheckBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
+            this.lbl_inv_bag = new System.Windows.Forms.Label();
+            this.lbl_inv_name_3 = new System.Windows.Forms.Label();
             this.chk_inv_held_26 = new System.Windows.Forms.CheckBox();
             this.chk_inv_held_7 = new System.Windows.Forms.CheckBox();
             this.chk_inv_held_25 = new System.Windows.Forms.CheckBox();
@@ -437,7 +438,7 @@
             this.chk_inv_held_10 = new System.Windows.Forms.CheckBox();
             this.chk_inv_held_21 = new System.Windows.Forms.CheckBox();
             this.chk_inv_held_3 = new System.Windows.Forms.CheckBox();
-            this.label2 = new System.Windows.Forms.Label();
+            this.lbl_inv_qty_2 = new System.Windows.Forms.Label();
             this.chk_inv_held_6 = new System.Windows.Forms.CheckBox();
             this.chk_inv_held_24 = new System.Windows.Forms.CheckBox();
             this.lbl_inv_qty_1 = new System.Windows.Forms.Label();
@@ -536,21 +537,21 @@
             this.txt_combat_move_prev_name = new System.Windows.Forms.TextBox();
             this.pnl_move_list = new System.Windows.Forms.Panel();
             this.pnl_pg_4_journal = new System.Windows.Forms.Panel();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.textBox6 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox7 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.label12 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.pic_flavor_appearance = new System.Windows.Forms.PictureBox();
+            this.txt_flavor_flaws = new System.Windows.Forms.TextBox();
+            this.txt_flavor_ideals = new System.Windows.Forms.TextBox();
+            this.txt_flavor_personality = new System.Windows.Forms.TextBox();
+            this.txt_flavor_relationships = new System.Windows.Forms.TextBox();
+            this.lbl_flavor_flaws = new System.Windows.Forms.Label();
+            this.lbl_flavor_ideals = new System.Windows.Forms.Label();
+            this.lbl_flavor_personality = new System.Windows.Forms.Label();
+            this.lbl_flavor_relationships = new System.Windows.Forms.Label();
+            this.txt_flavor_journal = new System.Windows.Forms.TextBox();
+            this.lbl_flavor_appearance = new System.Windows.Forms.Label();
+            this.lbl_flavor_journal = new System.Windows.Forms.Label();
+            this.cmb_nature_name = new System.Windows.Forms.ComboBox();
+            this.lbl_nature_name = new System.Windows.Forms.Label();
+            this.txt_nature_desc = new System.Windows.Forms.TextBox();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ctr_stat_hp_stage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ctr_stat_atk_stage)).BeginInit();
@@ -665,7 +666,7 @@
             this.pnl_pg_2_moves.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pic_combat_move_prev_atr)).BeginInit();
             this.pnl_pg_4_journal.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pic_flavor_appearance)).BeginInit();
             this.SuspendLayout();
             // 
             // toolStrip1
@@ -688,6 +689,7 @@
             this.ts_file_open_btn,
             this.ts_file_save_btn,
             this.ts_file_saveas_btn,
+            this.ts_file_recentfiles_btn,
             this.ts_file_about_btn,
             this.ts_file_exit_btn});
             this.ts_ddb_file.Image = ((System.Drawing.Image)(resources.GetObject("ts_ddb_file.Image")));
@@ -699,38 +701,48 @@
             // ts_file_new_btn
             // 
             this.ts_file_new_btn.Name = "ts_file_new_btn";
-            this.ts_file_new_btn.Size = new System.Drawing.Size(142, 22);
-            this.ts_file_new_btn.Text = "New";
+            this.ts_file_new_btn.Size = new System.Drawing.Size(232, 22);
+            this.ts_file_new_btn.Text = "New                        (Ctrl+N)";
+            this.ts_file_new_btn.Click += new System.EventHandler(this.ts_file_new_btn_Click);
             // 
             // ts_file_open_btn
             // 
             this.ts_file_open_btn.Name = "ts_file_open_btn";
-            this.ts_file_open_btn.Size = new System.Drawing.Size(142, 22);
-            this.ts_file_open_btn.Text = "Open...";
+            this.ts_file_open_btn.Size = new System.Drawing.Size(232, 22);
+            this.ts_file_open_btn.Text = "Open...                   (Ctrl+O)";
+            this.ts_file_open_btn.Click += new System.EventHandler(this.ts_file_open_btn_Click);
             // 
             // ts_file_save_btn
             // 
             this.ts_file_save_btn.Name = "ts_file_save_btn";
-            this.ts_file_save_btn.Size = new System.Drawing.Size(142, 22);
-            this.ts_file_save_btn.Text = "Save (Ctrl+S)";
+            this.ts_file_save_btn.Size = new System.Drawing.Size(232, 22);
+            this.ts_file_save_btn.Text = "Save                        (Ctrl+S)";
+            this.ts_file_save_btn.Click += new System.EventHandler(this.ts_file_save_btn_Click);
             // 
             // ts_file_saveas_btn
             // 
             this.ts_file_saveas_btn.Name = "ts_file_saveas_btn";
-            this.ts_file_saveas_btn.Size = new System.Drawing.Size(142, 22);
-            this.ts_file_saveas_btn.Text = "Save As...";
+            this.ts_file_saveas_btn.Size = new System.Drawing.Size(232, 22);
+            this.ts_file_saveas_btn.Text = "Save As...               (Ctrl+Alt+S)";
+            this.ts_file_saveas_btn.Click += new System.EventHandler(this.ts_file_saveas_btn_Click);
             // 
             // ts_file_about_btn
             // 
             this.ts_file_about_btn.Name = "ts_file_about_btn";
-            this.ts_file_about_btn.Size = new System.Drawing.Size(142, 22);
+            this.ts_file_about_btn.Size = new System.Drawing.Size(232, 22);
             this.ts_file_about_btn.Text = "About";
+            // 
+            // ts_file_recentfiles_btn
+            // 
+            this.ts_file_recentfiles_btn.Name = "ts_file_recentfiles_btn";
+            this.ts_file_recentfiles_btn.Size = new System.Drawing.Size(232, 22);
+            this.ts_file_recentfiles_btn.Text = "Recent Files...";
             // 
             // ts_file_exit_btn
             // 
             this.ts_file_exit_btn.Name = "ts_file_exit_btn";
-            this.ts_file_exit_btn.Size = new System.Drawing.Size(142, 22);
-            this.ts_file_exit_btn.Text = "Exit";
+            this.ts_file_exit_btn.Size = new System.Drawing.Size(232, 22);
+            this.ts_file_exit_btn.Text = "Exit                          (Alt+F4)";
             // 
             // ts_ddb_campaign
             // 
@@ -988,6 +1000,7 @@
             this.txt_stat_hp_eff.Size = new System.Drawing.Size(40, 20);
             this.txt_stat_hp_eff.TabIndex = 24;
             this.txt_stat_hp_eff.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txt_stat_hp_eff.TextChanged += new System.EventHandler(this.txt_stat_hp_eff_TextChanged);
             // 
             // txt_stat_hp_half
             // 
@@ -3320,13 +3333,15 @@
             // 
             // txt_combat_move_5_atr
             // 
+            this.txt_combat_move_5_atr.BackColor = System.Drawing.Color.DarkSlateBlue;
+            this.txt_combat_move_5_atr.ForeColor = System.Drawing.SystemColors.Window;
             this.txt_combat_move_5_atr.Location = new System.Drawing.Point(34, 524);
             this.txt_combat_move_5_atr.Name = "txt_combat_move_5_atr";
-            this.txt_combat_move_5_atr.ReadOnly = true;
             this.txt_combat_move_5_atr.Size = new System.Drawing.Size(73, 20);
             this.txt_combat_move_5_atr.TabIndex = 60;
             this.txt_combat_move_5_atr.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txt_combat_move_5_atr.Visible = false;
+            this.txt_combat_move_5_atr.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textbox_nouserinput);
             // 
             // txt_combat_move_4_atr
             // 
@@ -3463,17 +3478,18 @@
             // 
             // txt_combat_move_5_effect
             // 
+            this.txt_combat_move_5_effect.BackColor = System.Drawing.Color.DarkSlateBlue;
             this.txt_combat_move_5_effect.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_combat_move_5_effect.ForeColor = System.Drawing.Color.DarkViolet;
+            this.txt_combat_move_5_effect.ForeColor = System.Drawing.SystemColors.Window;
             this.txt_combat_move_5_effect.Location = new System.Drawing.Point(113, 498);
             this.txt_combat_move_5_effect.Multiline = true;
             this.txt_combat_move_5_effect.Name = "txt_combat_move_5_effect";
-            this.txt_combat_move_5_effect.ReadOnly = true;
             this.txt_combat_move_5_effect.Size = new System.Drawing.Size(242, 46);
             this.txt_combat_move_5_effect.TabIndex = 58;
             this.txt_combat_move_5_effect.Text = "MOVE SPAWNED FROM DESPAIR";
             this.txt_combat_move_5_effect.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txt_combat_move_5_effect.Visible = false;
+            this.txt_combat_move_5_effect.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textbox_nouserinput);
             // 
             // txt_combat_move_4_effect
             // 
@@ -3563,13 +3579,15 @@
             // 
             // txt_combat_move_5_pow
             // 
+            this.txt_combat_move_5_pow.BackColor = System.Drawing.Color.DarkSlateBlue;
+            this.txt_combat_move_5_pow.ForeColor = System.Drawing.SystemColors.Window;
             this.txt_combat_move_5_pow.Location = new System.Drawing.Point(73, 498);
             this.txt_combat_move_5_pow.Name = "txt_combat_move_5_pow";
-            this.txt_combat_move_5_pow.ReadOnly = true;
             this.txt_combat_move_5_pow.Size = new System.Drawing.Size(35, 20);
             this.txt_combat_move_5_pow.TabIndex = 56;
             this.txt_combat_move_5_pow.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txt_combat_move_5_pow.Visible = false;
+            this.txt_combat_move_5_pow.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textbox_nouserinput);
             // 
             // txt_combat_move_4_pow
             // 
@@ -3839,7 +3857,9 @@
             // 
             // cmb_combat_move_5_type
             // 
+            this.cmb_combat_move_5_type.BackColor = System.Drawing.Color.DarkSlateBlue;
             this.cmb_combat_move_5_type.Enabled = false;
+            this.cmb_combat_move_5_type.ForeColor = System.Drawing.SystemColors.Window;
             this.cmb_combat_move_5_type.FormattingEnabled = true;
             this.cmb_combat_move_5_type.Location = new System.Drawing.Point(5, 497);
             this.cmb_combat_move_5_type.MaxDropDownItems = 19;
@@ -3895,12 +3915,14 @@
             // 
             // txt_combat_move_5_acc
             // 
+            this.txt_combat_move_5_acc.BackColor = System.Drawing.Color.DarkSlateBlue;
+            this.txt_combat_move_5_acc.ForeColor = System.Drawing.SystemColors.Window;
             this.txt_combat_move_5_acc.Location = new System.Drawing.Point(174, 459);
             this.txt_combat_move_5_acc.Name = "txt_combat_move_5_acc";
-            this.txt_combat_move_5_acc.ReadOnly = true;
             this.txt_combat_move_5_acc.Size = new System.Drawing.Size(181, 20);
             this.txt_combat_move_5_acc.TabIndex = 49;
             this.txt_combat_move_5_acc.Visible = false;
+            this.txt_combat_move_5_acc.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textbox_nouserinput);
             // 
             // txt_combat_move_4_acc
             // 
@@ -3936,15 +3958,16 @@
             // 
             // txt_combat_move_5_pp_max
             // 
+            this.txt_combat_move_5_pp_max.BackColor = System.Drawing.Color.DarkSlateBlue;
+            this.txt_combat_move_5_pp_max.ForeColor = System.Drawing.SystemColors.Window;
             this.txt_combat_move_5_pp_max.Location = new System.Drawing.Point(143, 459);
             this.txt_combat_move_5_pp_max.MaxLength = 3;
             this.txt_combat_move_5_pp_max.Name = "txt_combat_move_5_pp_max";
-            this.txt_combat_move_5_pp_max.ReadOnly = true;
             this.txt_combat_move_5_pp_max.Size = new System.Drawing.Size(25, 20);
             this.txt_combat_move_5_pp_max.TabIndex = 48;
-            this.txt_combat_move_5_pp_max.Text = "??";
             this.txt_combat_move_5_pp_max.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txt_combat_move_5_pp_max.Visible = false;
+            this.txt_combat_move_5_pp_max.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textbox_nouserinput);
             // 
             // txt_combat_move_4_pp_max
             // 
@@ -3988,15 +4011,18 @@
             // 
             // txt_combat_move_5_pp
             // 
+            this.txt_combat_move_5_pp.BackColor = System.Drawing.Color.DarkSlateBlue;
+            this.txt_combat_move_5_pp.ForeColor = System.Drawing.SystemColors.Window;
             this.txt_combat_move_5_pp.Location = new System.Drawing.Point(112, 459);
             this.txt_combat_move_5_pp.MaxLength = 3;
             this.txt_combat_move_5_pp.Name = "txt_combat_move_5_pp";
-            this.txt_combat_move_5_pp.ReadOnly = true;
             this.txt_combat_move_5_pp.Size = new System.Drawing.Size(25, 20);
             this.txt_combat_move_5_pp.TabIndex = 47;
-            this.txt_combat_move_5_pp.Text = "??";
+            this.txt_combat_move_5_pp.Text = "5";
             this.txt_combat_move_5_pp.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txt_combat_move_5_pp.Visible = false;
+            this.txt_combat_move_5_pp.TextChanged += new System.EventHandler(this.txt_combat_move_5_pp_TextChanged);
+            this.txt_combat_move_5_pp.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_qty_KeyPress);
             // 
             // txt_combat_move_4_pp
             // 
@@ -4045,15 +4071,15 @@
             // 
             // txt_combat_move_5_name
             // 
+            this.txt_combat_move_5_name.BackColor = System.Drawing.Color.DarkSlateBlue;
             this.txt_combat_move_5_name.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_combat_move_5_name.ForeColor = System.Drawing.Color.DarkViolet;
+            this.txt_combat_move_5_name.ForeColor = System.Drawing.SystemColors.Window;
             this.txt_combat_move_5_name.Location = new System.Drawing.Point(6, 459);
             this.txt_combat_move_5_name.Name = "txt_combat_move_5_name";
-            this.txt_combat_move_5_name.ReadOnly = true;
             this.txt_combat_move_5_name.Size = new System.Drawing.Size(103, 20);
             this.txt_combat_move_5_name.TabIndex = 46;
-            this.txt_combat_move_5_name.Text = "Nightmare Punisher";
             this.txt_combat_move_5_name.Visible = false;
+            this.txt_combat_move_5_name.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textbox_nouserinput);
             // 
             // txt_combat_move_4_name
             // 
@@ -4362,9 +4388,9 @@
             // 
             // grp_inv
             // 
-            this.grp_inv.Controls.Add(this.label6);
+            this.grp_inv.Controls.Add(this.lbl_inv_max_qty);
             this.grp_inv.Controls.Add(this.txt_inv_max_qty);
-            this.grp_inv.Controls.Add(this.label5);
+            this.grp_inv.Controls.Add(this.lbl_inv_curr_qty);
             this.grp_inv.Controls.Add(this.txt_inv_curr_qty);
             this.grp_inv.Controls.Add(this.cmb_inv_bag);
             this.grp_inv.Controls.Add(this.txt_inv_preview_title);
@@ -4431,8 +4457,8 @@
             this.grp_inv.Controls.Add(this.chk_inv_held_11);
             this.grp_inv.Controls.Add(this.chk_inv_held_22);
             this.grp_inv.Controls.Add(this.chk_inv_held_4);
-            this.grp_inv.Controls.Add(this.label4);
-            this.grp_inv.Controls.Add(this.label3);
+            this.grp_inv.Controls.Add(this.lbl_inv_bag);
+            this.grp_inv.Controls.Add(this.lbl_inv_name_3);
             this.grp_inv.Controls.Add(this.chk_inv_held_26);
             this.grp_inv.Controls.Add(this.chk_inv_held_7);
             this.grp_inv.Controls.Add(this.chk_inv_held_25);
@@ -4441,7 +4467,7 @@
             this.grp_inv.Controls.Add(this.chk_inv_held_10);
             this.grp_inv.Controls.Add(this.chk_inv_held_21);
             this.grp_inv.Controls.Add(this.chk_inv_held_3);
-            this.grp_inv.Controls.Add(this.label2);
+            this.grp_inv.Controls.Add(this.lbl_inv_qty_2);
             this.grp_inv.Controls.Add(this.chk_inv_held_6);
             this.grp_inv.Controls.Add(this.chk_inv_held_24);
             this.grp_inv.Controls.Add(this.lbl_inv_qty_1);
@@ -4461,31 +4487,32 @@
             this.grp_inv.TabStop = false;
             this.grp_inv.Text = "Inventory";
             // 
-            // label6
+            // lbl_inv_max_qty
             // 
-            this.label6.Location = new System.Drawing.Point(503, 109);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(82, 14);
-            this.label6.TabIndex = 14;
-            this.label6.Text = "Max QTY";
+            this.lbl_inv_max_qty.Location = new System.Drawing.Point(503, 109);
+            this.lbl_inv_max_qty.Name = "lbl_inv_max_qty";
+            this.lbl_inv_max_qty.Size = new System.Drawing.Size(82, 14);
+            this.lbl_inv_max_qty.TabIndex = 14;
+            this.lbl_inv_max_qty.Text = "Max QTY";
             // 
             // txt_inv_max_qty
             // 
             this.txt_inv_max_qty.Location = new System.Drawing.Point(503, 126);
             this.txt_inv_max_qty.Name = "txt_inv_max_qty";
+            this.txt_inv_max_qty.ReadOnly = true;
             this.txt_inv_max_qty.Size = new System.Drawing.Size(82, 20);
             this.txt_inv_max_qty.TabIndex = 13;
             this.txt_inv_max_qty.Text = "1";
             this.txt_inv_max_qty.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txt_inv_max_qty.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_qty_KeyPress);
             // 
-            // label5
+            // lbl_inv_curr_qty
             // 
-            this.label5.Location = new System.Drawing.Point(503, 64);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(82, 14);
-            this.label5.TabIndex = 12;
-            this.label5.Text = "Current QTY";
+            this.lbl_inv_curr_qty.Location = new System.Drawing.Point(503, 64);
+            this.lbl_inv_curr_qty.Name = "lbl_inv_curr_qty";
+            this.lbl_inv_curr_qty.Size = new System.Drawing.Size(82, 14);
+            this.lbl_inv_curr_qty.TabIndex = 12;
+            this.lbl_inv_curr_qty.Text = "Current QTY";
             // 
             // txt_inv_curr_qty
             // 
@@ -4504,6 +4531,7 @@
             this.cmb_inv_bag.Name = "cmb_inv_bag";
             this.cmb_inv_bag.Size = new System.Drawing.Size(82, 21);
             this.cmb_inv_bag.TabIndex = 10;
+            this.cmb_inv_bag.SelectedIndexChanged += new System.EventHandler(this.cmb_inv_bag_SelectedIndexChanged);
             // 
             // txt_inv_preview_title
             // 
@@ -4533,6 +4561,7 @@
             this.txt_inv_name_15.Name = "txt_inv_name_15";
             this.txt_inv_name_15.Size = new System.Drawing.Size(139, 20);
             this.txt_inv_name_15.TabIndex = 5;
+            this.txt_inv_name_15.MouseHover += new System.EventHandler(this.loadItemParams);
             // 
             // txt_inv_name_14
             // 
@@ -4540,6 +4569,7 @@
             this.txt_inv_name_14.Name = "txt_inv_name_14";
             this.txt_inv_name_14.Size = new System.Drawing.Size(139, 20);
             this.txt_inv_name_14.TabIndex = 5;
+            this.txt_inv_name_14.MouseHover += new System.EventHandler(this.loadItemParams);
             // 
             // txt_inv_name_12
             // 
@@ -4547,6 +4577,7 @@
             this.txt_inv_name_12.Name = "txt_inv_name_12";
             this.txt_inv_name_12.Size = new System.Drawing.Size(139, 20);
             this.txt_inv_name_12.TabIndex = 5;
+            this.txt_inv_name_12.MouseHover += new System.EventHandler(this.loadItemParams);
             // 
             // txt_inv_name_23
             // 
@@ -4554,6 +4585,7 @@
             this.txt_inv_name_23.Name = "txt_inv_name_23";
             this.txt_inv_name_23.Size = new System.Drawing.Size(139, 20);
             this.txt_inv_name_23.TabIndex = 5;
+            this.txt_inv_name_23.MouseHover += new System.EventHandler(this.loadItemParams);
             // 
             // txt_inv_name_8
             // 
@@ -4561,6 +4593,7 @@
             this.txt_inv_name_8.Name = "txt_inv_name_8";
             this.txt_inv_name_8.Size = new System.Drawing.Size(139, 20);
             this.txt_inv_name_8.TabIndex = 5;
+            this.txt_inv_name_8.MouseHover += new System.EventHandler(this.loadItemParams);
             // 
             // txt_inv_qty_15
             // 
@@ -4579,6 +4612,7 @@
             this.txt_inv_name_19.Name = "txt_inv_name_19";
             this.txt_inv_name_19.Size = new System.Drawing.Size(139, 20);
             this.txt_inv_name_19.TabIndex = 5;
+            this.txt_inv_name_19.MouseHover += new System.EventHandler(this.loadItemParams);
             // 
             // txt_inv_name_4
             // 
@@ -4586,6 +4620,7 @@
             this.txt_inv_name_4.Name = "txt_inv_name_4";
             this.txt_inv_name_4.Size = new System.Drawing.Size(139, 20);
             this.txt_inv_name_4.TabIndex = 5;
+            this.txt_inv_name_4.MouseHover += new System.EventHandler(this.loadItemParams);
             // 
             // txt_inv_qty_14
             // 
@@ -4659,6 +4694,7 @@
             this.txt_inv_name_13.Name = "txt_inv_name_13";
             this.txt_inv_name_13.Size = new System.Drawing.Size(139, 20);
             this.txt_inv_name_13.TabIndex = 5;
+            this.txt_inv_name_13.MouseHover += new System.EventHandler(this.loadItemParams);
             // 
             // txt_inv_name_11
             // 
@@ -4666,6 +4702,7 @@
             this.txt_inv_name_11.Name = "txt_inv_name_11";
             this.txt_inv_name_11.Size = new System.Drawing.Size(139, 20);
             this.txt_inv_name_11.TabIndex = 5;
+            this.txt_inv_name_11.MouseHover += new System.EventHandler(this.loadItemParams);
             // 
             // txt_inv_name_22
             // 
@@ -4673,6 +4710,7 @@
             this.txt_inv_name_22.Name = "txt_inv_name_22";
             this.txt_inv_name_22.Size = new System.Drawing.Size(139, 20);
             this.txt_inv_name_22.TabIndex = 5;
+            this.txt_inv_name_22.MouseHover += new System.EventHandler(this.loadItemParams);
             // 
             // txt_inv_name_7
             // 
@@ -4680,6 +4718,7 @@
             this.txt_inv_name_7.Name = "txt_inv_name_7";
             this.txt_inv_name_7.Size = new System.Drawing.Size(139, 20);
             this.txt_inv_name_7.TabIndex = 5;
+            this.txt_inv_name_7.MouseHover += new System.EventHandler(this.loadItemParams);
             // 
             // txt_inv_qty_13
             // 
@@ -4698,6 +4737,7 @@
             this.txt_inv_name_18.Name = "txt_inv_name_18";
             this.txt_inv_name_18.Size = new System.Drawing.Size(139, 20);
             this.txt_inv_name_18.TabIndex = 5;
+            this.txt_inv_name_18.MouseHover += new System.EventHandler(this.loadItemParams);
             // 
             // txt_inv_name_3
             // 
@@ -4705,6 +4745,7 @@
             this.txt_inv_name_3.Name = "txt_inv_name_3";
             this.txt_inv_name_3.Size = new System.Drawing.Size(139, 20);
             this.txt_inv_name_3.TabIndex = 5;
+            this.txt_inv_name_3.MouseHover += new System.EventHandler(this.loadItemParams);
             // 
             // txt_inv_qty_11
             // 
@@ -4767,6 +4808,7 @@
             this.txt_inv_name_26.Name = "txt_inv_name_26";
             this.txt_inv_name_26.Size = new System.Drawing.Size(139, 20);
             this.txt_inv_name_26.TabIndex = 5;
+            this.txt_inv_name_26.MouseHover += new System.EventHandler(this.loadItemParams);
             // 
             // txt_inv_name_25
             // 
@@ -4774,6 +4816,7 @@
             this.txt_inv_name_25.Name = "txt_inv_name_25";
             this.txt_inv_name_25.Size = new System.Drawing.Size(139, 20);
             this.txt_inv_name_25.TabIndex = 5;
+            this.txt_inv_name_25.MouseHover += new System.EventHandler(this.loadItemParams);
             // 
             // txt_inv_name_10
             // 
@@ -4781,6 +4824,7 @@
             this.txt_inv_name_10.Name = "txt_inv_name_10";
             this.txt_inv_name_10.Size = new System.Drawing.Size(139, 20);
             this.txt_inv_name_10.TabIndex = 5;
+            this.txt_inv_name_10.MouseHover += new System.EventHandler(this.loadItemParams);
             // 
             // txt_inv_name_21
             // 
@@ -4788,6 +4832,7 @@
             this.txt_inv_name_21.Name = "txt_inv_name_21";
             this.txt_inv_name_21.Size = new System.Drawing.Size(139, 20);
             this.txt_inv_name_21.TabIndex = 5;
+            this.txt_inv_name_21.MouseHover += new System.EventHandler(this.loadItemParams);
             // 
             // txt_inv_name_6
             // 
@@ -4795,6 +4840,7 @@
             this.txt_inv_name_6.Name = "txt_inv_name_6";
             this.txt_inv_name_6.Size = new System.Drawing.Size(139, 20);
             this.txt_inv_name_6.TabIndex = 5;
+            this.txt_inv_name_6.MouseHover += new System.EventHandler(this.loadItemParams);
             // 
             // txt_inv_name_17
             // 
@@ -4802,6 +4848,7 @@
             this.txt_inv_name_17.Name = "txt_inv_name_17";
             this.txt_inv_name_17.Size = new System.Drawing.Size(139, 20);
             this.txt_inv_name_17.TabIndex = 5;
+            this.txt_inv_name_17.MouseHover += new System.EventHandler(this.loadItemParams);
             // 
             // txt_inv_qty_26
             // 
@@ -4820,6 +4867,7 @@
             this.txt_inv_name_2.Name = "txt_inv_name_2";
             this.txt_inv_name_2.Size = new System.Drawing.Size(139, 20);
             this.txt_inv_name_2.TabIndex = 5;
+            this.txt_inv_name_2.MouseHover += new System.EventHandler(this.loadItemParams);
             // 
             // txt_inv_qty_25
             // 
@@ -4893,6 +4941,7 @@
             this.txt_inv_name_24.Name = "txt_inv_name_24";
             this.txt_inv_name_24.Size = new System.Drawing.Size(139, 20);
             this.txt_inv_name_24.TabIndex = 5;
+            this.txt_inv_name_24.MouseHover += new System.EventHandler(this.loadItemParams);
             // 
             // txt_inv_name_9
             // 
@@ -4900,6 +4949,7 @@
             this.txt_inv_name_9.Name = "txt_inv_name_9";
             this.txt_inv_name_9.Size = new System.Drawing.Size(139, 20);
             this.txt_inv_name_9.TabIndex = 5;
+            this.txt_inv_name_9.MouseHover += new System.EventHandler(this.loadItemParams);
             // 
             // txt_inv_qty_24
             // 
@@ -4939,6 +4989,7 @@
             this.txt_inv_name_20.Name = "txt_inv_name_20";
             this.txt_inv_name_20.Size = new System.Drawing.Size(139, 20);
             this.txt_inv_name_20.TabIndex = 5;
+            this.txt_inv_name_20.MouseHover += new System.EventHandler(this.loadItemParams);
             // 
             // txt_inv_name_5
             // 
@@ -4946,6 +4997,7 @@
             this.txt_inv_name_5.Name = "txt_inv_name_5";
             this.txt_inv_name_5.Size = new System.Drawing.Size(139, 20);
             this.txt_inv_name_5.TabIndex = 5;
+            this.txt_inv_name_5.MouseHover += new System.EventHandler(this.loadItemParams);
             // 
             // chk_inv_held_14
             // 
@@ -4995,6 +5047,7 @@
             this.txt_inv_name_16.Name = "txt_inv_name_16";
             this.txt_inv_name_16.Size = new System.Drawing.Size(139, 20);
             this.txt_inv_name_16.TabIndex = 5;
+            this.txt_inv_name_16.MouseHover += new System.EventHandler(this.loadItemParams);
             // 
             // txt_inv_name_1
             // 
@@ -5005,6 +5058,7 @@
             this.txt_inv_name_1.Size = new System.Drawing.Size(139, 20);
             this.txt_inv_name_1.TabIndex = 5;
             this.txt_inv_name_1.Text = "Poké";
+            this.txt_inv_name_1.MouseHover += new System.EventHandler(this.loadItemParams);
             // 
             // chk_inv_held_23
             // 
@@ -5098,21 +5152,21 @@
             this.chk_inv_held_4.UseVisualStyleBackColor = true;
             this.chk_inv_held_4.CheckedChanged += new System.EventHandler(this.txt_inv_qty_TextChanged);
             // 
-            // label4
+            // lbl_inv_bag
             // 
-            this.label4.Location = new System.Drawing.Point(503, 19);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(82, 14);
-            this.label4.TabIndex = 3;
-            this.label4.Text = "Bag";
+            this.lbl_inv_bag.Location = new System.Drawing.Point(503, 19);
+            this.lbl_inv_bag.Name = "lbl_inv_bag";
+            this.lbl_inv_bag.Size = new System.Drawing.Size(82, 14);
+            this.lbl_inv_bag.TabIndex = 3;
+            this.lbl_inv_bag.Text = "Bag";
             // 
-            // label3
+            // lbl_inv_name_3
             // 
-            this.label3.Location = new System.Drawing.Point(358, 19);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(139, 14);
-            this.label3.TabIndex = 3;
-            this.label3.Text = "Item Name";
+            this.lbl_inv_name_3.Location = new System.Drawing.Point(358, 19);
+            this.lbl_inv_name_3.Name = "lbl_inv_name_3";
+            this.lbl_inv_name_3.Size = new System.Drawing.Size(139, 14);
+            this.lbl_inv_name_3.TabIndex = 3;
+            this.lbl_inv_name_3.Text = "Item Name";
             // 
             // chk_inv_held_26
             // 
@@ -5192,13 +5246,13 @@
             this.chk_inv_held_3.UseVisualStyleBackColor = true;
             this.chk_inv_held_3.CheckedChanged += new System.EventHandler(this.txt_inv_qty_TextChanged);
             // 
-            // label2
+            // lbl_inv_qty_2
             // 
-            this.label2.Location = new System.Drawing.Point(289, 19);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(63, 14);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "QTY";
+            this.lbl_inv_qty_2.Location = new System.Drawing.Point(289, 19);
+            this.lbl_inv_qty_2.Name = "lbl_inv_qty_2";
+            this.lbl_inv_qty_2.Size = new System.Drawing.Size(63, 14);
+            this.lbl_inv_qty_2.TabIndex = 3;
+            this.lbl_inv_qty_2.Text = "QTY";
             // 
             // chk_inv_held_6
             // 
@@ -5364,111 +5418,135 @@
             // 
             // cmb_trait_11
             // 
+            this.cmb_trait_11.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_trait_11.FormattingEnabled = true;
             this.cmb_trait_11.Location = new System.Drawing.Point(124, 100);
             this.cmb_trait_11.Name = "cmb_trait_11";
             this.cmb_trait_11.Size = new System.Drawing.Size(111, 21);
             this.cmb_trait_11.TabIndex = 5;
-            this.cmb_trait_11.Text = "---";
+            this.cmb_trait_11.SelectedIndexChanged += new System.EventHandler(this.cmb_trait_SelectedIndexChanged);
+            this.cmb_trait_11.MouseHover += new System.EventHandler(this.loadTraitParams);
             // 
             // cmb_trait_10
             // 
+            this.cmb_trait_10.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_trait_10.FormattingEnabled = true;
             this.cmb_trait_10.Location = new System.Drawing.Point(7, 100);
             this.cmb_trait_10.Name = "cmb_trait_10";
             this.cmb_trait_10.Size = new System.Drawing.Size(111, 21);
             this.cmb_trait_10.TabIndex = 5;
-            this.cmb_trait_10.Text = "---";
+            this.cmb_trait_10.SelectedIndexChanged += new System.EventHandler(this.cmb_trait_SelectedIndexChanged);
+            this.cmb_trait_10.MouseHover += new System.EventHandler(this.loadTraitParams);
             // 
             // cmb_trait_8
             // 
+            this.cmb_trait_8.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_trait_8.FormattingEnabled = true;
             this.cmb_trait_8.Location = new System.Drawing.Point(124, 73);
             this.cmb_trait_8.Name = "cmb_trait_8";
             this.cmb_trait_8.Size = new System.Drawing.Size(111, 21);
             this.cmb_trait_8.TabIndex = 4;
-            this.cmb_trait_8.Text = "---";
+            this.cmb_trait_8.SelectedIndexChanged += new System.EventHandler(this.cmb_trait_SelectedIndexChanged);
+            this.cmb_trait_8.MouseHover += new System.EventHandler(this.loadTraitParams);
             // 
             // cmb_trait_7
             // 
+            this.cmb_trait_7.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_trait_7.FormattingEnabled = true;
             this.cmb_trait_7.Location = new System.Drawing.Point(7, 73);
             this.cmb_trait_7.Name = "cmb_trait_7";
             this.cmb_trait_7.Size = new System.Drawing.Size(111, 21);
             this.cmb_trait_7.TabIndex = 4;
-            this.cmb_trait_7.Text = "---";
+            this.cmb_trait_7.SelectedIndexChanged += new System.EventHandler(this.cmb_trait_SelectedIndexChanged);
+            this.cmb_trait_7.MouseHover += new System.EventHandler(this.loadTraitParams);
             // 
             // cmb_trait_5
             // 
+            this.cmb_trait_5.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_trait_5.FormattingEnabled = true;
             this.cmb_trait_5.Location = new System.Drawing.Point(124, 46);
             this.cmb_trait_5.Name = "cmb_trait_5";
             this.cmb_trait_5.Size = new System.Drawing.Size(111, 21);
             this.cmb_trait_5.TabIndex = 3;
-            this.cmb_trait_5.Text = "---";
+            this.cmb_trait_5.SelectedIndexChanged += new System.EventHandler(this.cmb_trait_SelectedIndexChanged);
+            this.cmb_trait_5.MouseHover += new System.EventHandler(this.loadTraitParams);
             // 
             // cmb_trait_4
             // 
+            this.cmb_trait_4.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_trait_4.FormattingEnabled = true;
             this.cmb_trait_4.Location = new System.Drawing.Point(7, 46);
             this.cmb_trait_4.Name = "cmb_trait_4";
             this.cmb_trait_4.Size = new System.Drawing.Size(111, 21);
             this.cmb_trait_4.TabIndex = 3;
-            this.cmb_trait_4.Text = "---";
+            this.cmb_trait_4.SelectedIndexChanged += new System.EventHandler(this.cmb_trait_SelectedIndexChanged);
+            this.cmb_trait_4.MouseHover += new System.EventHandler(this.loadTraitParams);
             // 
             // cmb_trait_12
             // 
+            this.cmb_trait_12.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_trait_12.FormattingEnabled = true;
             this.cmb_trait_12.Location = new System.Drawing.Point(241, 100);
             this.cmb_trait_12.Name = "cmb_trait_12";
             this.cmb_trait_12.Size = new System.Drawing.Size(111, 21);
             this.cmb_trait_12.TabIndex = 2;
-            this.cmb_trait_12.Text = "---";
+            this.cmb_trait_12.SelectedIndexChanged += new System.EventHandler(this.cmb_trait_SelectedIndexChanged);
+            this.cmb_trait_12.MouseHover += new System.EventHandler(this.loadTraitParams);
             // 
             // cmb_trait_9
             // 
+            this.cmb_trait_9.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_trait_9.FormattingEnabled = true;
             this.cmb_trait_9.Location = new System.Drawing.Point(241, 73);
             this.cmb_trait_9.Name = "cmb_trait_9";
             this.cmb_trait_9.Size = new System.Drawing.Size(111, 21);
             this.cmb_trait_9.TabIndex = 2;
-            this.cmb_trait_9.Text = "---";
+            this.cmb_trait_9.SelectedIndexChanged += new System.EventHandler(this.cmb_trait_SelectedIndexChanged);
+            this.cmb_trait_9.MouseHover += new System.EventHandler(this.loadTraitParams);
             // 
             // cmb_trait_6
             // 
+            this.cmb_trait_6.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_trait_6.FormattingEnabled = true;
             this.cmb_trait_6.Location = new System.Drawing.Point(241, 46);
             this.cmb_trait_6.Name = "cmb_trait_6";
             this.cmb_trait_6.Size = new System.Drawing.Size(111, 21);
             this.cmb_trait_6.TabIndex = 2;
-            this.cmb_trait_6.Text = "---";
+            this.cmb_trait_6.SelectedIndexChanged += new System.EventHandler(this.cmb_trait_SelectedIndexChanged);
+            this.cmb_trait_6.MouseHover += new System.EventHandler(this.loadTraitParams);
             // 
             // cmb_trait_3
             // 
+            this.cmb_trait_3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_trait_3.FormattingEnabled = true;
             this.cmb_trait_3.Location = new System.Drawing.Point(241, 19);
             this.cmb_trait_3.Name = "cmb_trait_3";
             this.cmb_trait_3.Size = new System.Drawing.Size(111, 21);
             this.cmb_trait_3.TabIndex = 2;
-            this.cmb_trait_3.Text = "---";
+            this.cmb_trait_3.SelectedIndexChanged += new System.EventHandler(this.cmb_trait_SelectedIndexChanged);
+            this.cmb_trait_3.MouseHover += new System.EventHandler(this.loadTraitParams);
             // 
             // cmb_trait_2
             // 
+            this.cmb_trait_2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_trait_2.FormattingEnabled = true;
             this.cmb_trait_2.Location = new System.Drawing.Point(124, 19);
             this.cmb_trait_2.Name = "cmb_trait_2";
             this.cmb_trait_2.Size = new System.Drawing.Size(111, 21);
             this.cmb_trait_2.TabIndex = 2;
-            this.cmb_trait_2.Text = "---";
+            this.cmb_trait_2.SelectedIndexChanged += new System.EventHandler(this.cmb_trait_SelectedIndexChanged);
+            this.cmb_trait_2.MouseHover += new System.EventHandler(this.loadTraitParams);
             // 
             // cmb_trait_1
             // 
+            this.cmb_trait_1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_trait_1.FormattingEnabled = true;
             this.cmb_trait_1.Location = new System.Drawing.Point(7, 19);
             this.cmb_trait_1.Name = "cmb_trait_1";
             this.cmb_trait_1.Size = new System.Drawing.Size(111, 21);
             this.cmb_trait_1.TabIndex = 2;
-            this.cmb_trait_1.Text = "---";
+            this.cmb_trait_1.SelectedIndexChanged += new System.EventHandler(this.cmb_trait_SelectedIndexChanged);
+            this.cmb_trait_1.MouseHover += new System.EventHandler(this.loadTraitParams);
             // 
             // grp_skills
             // 
@@ -6225,157 +6303,160 @@
             // 
             // pnl_pg_4_journal
             // 
-            this.pnl_pg_4_journal.Controls.Add(this.pictureBox2);
-            this.pnl_pg_4_journal.Controls.Add(this.textBox6);
-            this.pnl_pg_4_journal.Controls.Add(this.textBox4);
-            this.pnl_pg_4_journal.Controls.Add(this.textBox7);
-            this.pnl_pg_4_journal.Controls.Add(this.textBox3);
-            this.pnl_pg_4_journal.Controls.Add(this.label1);
-            this.pnl_pg_4_journal.Controls.Add(this.label7);
-            this.pnl_pg_4_journal.Controls.Add(this.label8);
-            this.pnl_pg_4_journal.Controls.Add(this.label9);
-            this.pnl_pg_4_journal.Controls.Add(this.textBox2);
-            this.pnl_pg_4_journal.Controls.Add(this.label10);
-            this.pnl_pg_4_journal.Controls.Add(this.label11);
-            this.pnl_pg_4_journal.Controls.Add(this.comboBox1);
-            this.pnl_pg_4_journal.Controls.Add(this.label12);
-            this.pnl_pg_4_journal.Controls.Add(this.textBox1);
+            this.pnl_pg_4_journal.Controls.Add(this.pic_flavor_appearance);
+            this.pnl_pg_4_journal.Controls.Add(this.txt_flavor_flaws);
+            this.pnl_pg_4_journal.Controls.Add(this.txt_flavor_ideals);
+            this.pnl_pg_4_journal.Controls.Add(this.txt_flavor_personality);
+            this.pnl_pg_4_journal.Controls.Add(this.txt_flavor_relationships);
+            this.pnl_pg_4_journal.Controls.Add(this.lbl_flavor_flaws);
+            this.pnl_pg_4_journal.Controls.Add(this.lbl_flavor_ideals);
+            this.pnl_pg_4_journal.Controls.Add(this.lbl_flavor_personality);
+            this.pnl_pg_4_journal.Controls.Add(this.lbl_flavor_relationships);
+            this.pnl_pg_4_journal.Controls.Add(this.txt_flavor_journal);
+            this.pnl_pg_4_journal.Controls.Add(this.lbl_flavor_appearance);
+            this.pnl_pg_4_journal.Controls.Add(this.lbl_flavor_journal);
+            this.pnl_pg_4_journal.Controls.Add(this.cmb_nature_name);
+            this.pnl_pg_4_journal.Controls.Add(this.lbl_nature_name);
+            this.pnl_pg_4_journal.Controls.Add(this.txt_nature_desc);
             this.pnl_pg_4_journal.Location = new System.Drawing.Point(7, 26);
             this.pnl_pg_4_journal.Name = "pnl_pg_4_journal";
             this.pnl_pg_4_journal.Size = new System.Drawing.Size(734, 634);
             this.pnl_pg_4_journal.TabIndex = 35;
             this.pnl_pg_4_journal.Visible = false;
             // 
-            // pictureBox2
+            // pic_flavor_appearance
             // 
-            this.pictureBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox2.Location = new System.Drawing.Point(1, 252);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(242, 374);
-            this.pictureBox2.TabIndex = 27;
-            this.pictureBox2.TabStop = false;
+            this.pic_flavor_appearance.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pic_flavor_appearance.Image = global::PMD_Tabletop_Sheet.Properties.Resources.badge_shimmering_outline;
+            this.pic_flavor_appearance.Location = new System.Drawing.Point(1, 252);
+            this.pic_flavor_appearance.Name = "pic_flavor_appearance";
+            this.pic_flavor_appearance.Size = new System.Drawing.Size(242, 374);
+            this.pic_flavor_appearance.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pic_flavor_appearance.TabIndex = 27;
+            this.pic_flavor_appearance.TabStop = false;
+            this.pic_flavor_appearance.Click += new System.EventHandler(this.pic_flavor_appearance_Click);
             // 
-            // textBox6
+            // txt_flavor_flaws
             // 
-            this.textBox6.Location = new System.Drawing.Point(493, 132);
-            this.textBox6.Multiline = true;
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(236, 101);
-            this.textBox6.TabIndex = 25;
+            this.txt_flavor_flaws.Location = new System.Drawing.Point(493, 132);
+            this.txt_flavor_flaws.Multiline = true;
+            this.txt_flavor_flaws.Name = "txt_flavor_flaws";
+            this.txt_flavor_flaws.Size = new System.Drawing.Size(236, 101);
+            this.txt_flavor_flaws.TabIndex = 25;
             // 
-            // textBox4
+            // txt_flavor_ideals
             // 
-            this.textBox4.Location = new System.Drawing.Point(493, 16);
-            this.textBox4.Multiline = true;
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(236, 99);
-            this.textBox4.TabIndex = 26;
+            this.txt_flavor_ideals.Location = new System.Drawing.Point(493, 16);
+            this.txt_flavor_ideals.Multiline = true;
+            this.txt_flavor_ideals.Name = "txt_flavor_ideals";
+            this.txt_flavor_ideals.Size = new System.Drawing.Size(236, 99);
+            this.txt_flavor_ideals.TabIndex = 26;
             // 
-            // textBox7
+            // txt_flavor_personality
             // 
-            this.textBox7.Location = new System.Drawing.Point(1, 86);
-            this.textBox7.Multiline = true;
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(242, 147);
-            this.textBox7.TabIndex = 23;
+            this.txt_flavor_personality.Location = new System.Drawing.Point(1, 86);
+            this.txt_flavor_personality.Multiline = true;
+            this.txt_flavor_personality.Name = "txt_flavor_personality";
+            this.txt_flavor_personality.Size = new System.Drawing.Size(242, 147);
+            this.txt_flavor_personality.TabIndex = 23;
             // 
-            // textBox3
+            // txt_flavor_relationships
             // 
-            this.textBox3.Location = new System.Drawing.Point(251, 16);
-            this.textBox3.Multiline = true;
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(236, 217);
-            this.textBox3.TabIndex = 24;
+            this.txt_flavor_relationships.Location = new System.Drawing.Point(251, 16);
+            this.txt_flavor_relationships.Multiline = true;
+            this.txt_flavor_relationships.Name = "txt_flavor_relationships";
+            this.txt_flavor_relationships.Size = new System.Drawing.Size(236, 217);
+            this.txt_flavor_relationships.TabIndex = 24;
             // 
-            // label1
+            // lbl_flavor_flaws
             // 
-            this.label1.Location = new System.Drawing.Point(490, 118);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(236, 18);
-            this.label1.TabIndex = 19;
-            this.label1.Text = "Flaws";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.lbl_flavor_flaws.Location = new System.Drawing.Point(490, 118);
+            this.lbl_flavor_flaws.Name = "lbl_flavor_flaws";
+            this.lbl_flavor_flaws.Size = new System.Drawing.Size(236, 18);
+            this.lbl_flavor_flaws.TabIndex = 19;
+            this.lbl_flavor_flaws.Text = "Flaws";
+            this.lbl_flavor_flaws.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // label7
+            // lbl_flavor_ideals
             // 
-            this.label7.Location = new System.Drawing.Point(490, 0);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(236, 13);
-            this.label7.TabIndex = 20;
-            this.label7.Text = "Ideals";
-            this.label7.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.lbl_flavor_ideals.Location = new System.Drawing.Point(490, 0);
+            this.lbl_flavor_ideals.Name = "lbl_flavor_ideals";
+            this.lbl_flavor_ideals.Size = new System.Drawing.Size(236, 13);
+            this.lbl_flavor_ideals.TabIndex = 20;
+            this.lbl_flavor_ideals.Text = "Ideals";
+            this.lbl_flavor_ideals.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // label8
+            // lbl_flavor_personality
             // 
-            this.label8.Location = new System.Drawing.Point(1, 65);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(236, 18);
-            this.label8.TabIndex = 21;
-            this.label8.Text = "Personality";
-            this.label8.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.lbl_flavor_personality.Location = new System.Drawing.Point(1, 69);
+            this.lbl_flavor_personality.Name = "lbl_flavor_personality";
+            this.lbl_flavor_personality.Size = new System.Drawing.Size(236, 14);
+            this.lbl_flavor_personality.TabIndex = 21;
+            this.lbl_flavor_personality.Text = "Personality";
+            this.lbl_flavor_personality.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // label9
+            // lbl_flavor_relationships
             // 
-            this.label9.Location = new System.Drawing.Point(251, 0);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(236, 13);
-            this.label9.TabIndex = 22;
-            this.label9.Text = "Affliations / Relationships";
-            this.label9.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.lbl_flavor_relationships.Location = new System.Drawing.Point(251, 0);
+            this.lbl_flavor_relationships.Name = "lbl_flavor_relationships";
+            this.lbl_flavor_relationships.Size = new System.Drawing.Size(236, 13);
+            this.lbl_flavor_relationships.TabIndex = 22;
+            this.lbl_flavor_relationships.Text = "Affliations / Relationships";
+            this.lbl_flavor_relationships.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // textBox2
+            // txt_flavor_journal
             // 
-            this.textBox2.Location = new System.Drawing.Point(251, 252);
-            this.textBox2.Multiline = true;
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(478, 374);
-            this.textBox2.TabIndex = 18;
+            this.txt_flavor_journal.Location = new System.Drawing.Point(251, 252);
+            this.txt_flavor_journal.Multiline = true;
+            this.txt_flavor_journal.Name = "txt_flavor_journal";
+            this.txt_flavor_journal.Size = new System.Drawing.Size(478, 374);
+            this.txt_flavor_journal.TabIndex = 18;
             // 
-            // label10
+            // lbl_flavor_appearance
             // 
-            this.label10.Location = new System.Drawing.Point(-2, 236);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(245, 13);
-            this.label10.TabIndex = 16;
-            this.label10.Text = "Appearance";
-            this.label10.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.lbl_flavor_appearance.Location = new System.Drawing.Point(-2, 236);
+            this.lbl_flavor_appearance.Name = "lbl_flavor_appearance";
+            this.lbl_flavor_appearance.Size = new System.Drawing.Size(245, 13);
+            this.lbl_flavor_appearance.TabIndex = 16;
+            this.lbl_flavor_appearance.Text = "Appearance";
+            this.lbl_flavor_appearance.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // label11
+            // lbl_flavor_journal
             // 
-            this.label11.Location = new System.Drawing.Point(251, 236);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(478, 13);
-            this.label11.TabIndex = 17;
-            this.label11.Text = "Biography / Journal";
-            this.label11.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.lbl_flavor_journal.Location = new System.Drawing.Point(251, 236);
+            this.lbl_flavor_journal.Name = "lbl_flavor_journal";
+            this.lbl_flavor_journal.Size = new System.Drawing.Size(478, 13);
+            this.lbl_flavor_journal.TabIndex = 17;
+            this.lbl_flavor_journal.Text = "Biography / Journal";
+            this.lbl_flavor_journal.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // comboBox1
+            // cmb_nature_name
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(46, 2);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(67, 21);
-            this.comboBox1.TabIndex = 15;
-            this.comboBox1.Text = "Adamant";
+            this.cmb_nature_name.FormattingEnabled = true;
+            this.cmb_nature_name.Location = new System.Drawing.Point(46, 2);
+            this.cmb_nature_name.Name = "cmb_nature_name";
+            this.cmb_nature_name.Size = new System.Drawing.Size(67, 21);
+            this.cmb_nature_name.TabIndex = 15;
+            this.cmb_nature_name.SelectedIndexChanged += new System.EventHandler(this.loadNaturesParams);
             // 
-            // label12
+            // lbl_nature_name
             // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(1, 5);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(39, 13);
-            this.label12.TabIndex = 14;
-            this.label12.Text = "Nature";
+            this.lbl_nature_name.AutoSize = true;
+            this.lbl_nature_name.Location = new System.Drawing.Point(1, 5);
+            this.lbl_nature_name.Name = "lbl_nature_name";
+            this.lbl_nature_name.Size = new System.Drawing.Size(39, 13);
+            this.lbl_nature_name.TabIndex = 14;
+            this.lbl_nature_name.Text = "Nature";
             // 
-            // textBox1
+            // txt_nature_desc
             // 
-            this.textBox1.Location = new System.Drawing.Point(1, 24);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(242, 38);
-            this.textBox1.TabIndex = 13;
-            this.textBox1.Text = "\"I follow my own path, nothing can change my mind once I\'m settled on something!\"" +
+            this.txt_nature_desc.Location = new System.Drawing.Point(1, 24);
+            this.txt_nature_desc.Multiline = true;
+            this.txt_nature_desc.Name = "txt_nature_desc";
+            this.txt_nature_desc.ReadOnly = true;
+            this.txt_nature_desc.Size = new System.Drawing.Size(242, 38);
+            this.txt_nature_desc.TabIndex = 13;
+            this.txt_nature_desc.Text = "\"I follow my own path, nothing can change my mind once I\'m settled on something!\"" +
     "";
             // 
             // Form_Main
@@ -6389,9 +6470,11 @@
             this.Controls.Add(this.pnl_pg_2_moves);
             this.Controls.Add(this.pnl_pg_3_inv);
             this.Controls.Add(this.pnl_pg_4_journal);
+            this.KeyPreview = true;
             this.Name = "Form_Main";
-            this.Text = "Form_Main";
+            this.Text = "PMDnD Character Sheet";
             this.Load += new System.EventHandler(this.Form_Main_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form_Main_KeyDown);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ctr_stat_hp_stage)).EndInit();
@@ -6519,7 +6602,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pic_combat_move_prev_atr)).EndInit();
             this.pnl_pg_4_journal.ResumeLayout(false);
             this.pnl_pg_4_journal.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pic_flavor_appearance)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -6962,12 +7045,12 @@
         private System.Windows.Forms.TextBox txt_inv_qty_16;
         private System.Windows.Forms.CheckBox chk_inv_held_19;
         private System.Windows.Forms.CheckBox chk_inv_held_22;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lbl_inv_name_3;
         private System.Windows.Forms.CheckBox chk_inv_held_26;
         private System.Windows.Forms.CheckBox chk_inv_held_25;
         private System.Windows.Forms.CheckBox chk_inv_held_18;
         private System.Windows.Forms.CheckBox chk_inv_held_21;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lbl_inv_qty_2;
         private System.Windows.Forms.CheckBox chk_inv_held_24;
         private System.Windows.Forms.CheckBox chk_inv_held_17;
         private System.Windows.Forms.CheckBox chk_inv_held_20;
@@ -6975,12 +7058,12 @@
         private System.Windows.Forms.CheckBox chk_inv_held_16;
         private System.Windows.Forms.TextBox txt_inv_preview_title;
         private System.Windows.Forms.TextBox txt_inv_preview_desc;
-        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label lbl_inv_max_qty;
         private System.Windows.Forms.TextBox txt_inv_max_qty;
-        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label lbl_inv_curr_qty;
         private System.Windows.Forms.TextBox txt_inv_curr_qty;
         private System.Windows.Forms.ComboBox cmb_inv_bag;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label lbl_inv_bag;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.TextBox txt_stat_belly_curr;
         private System.Windows.Forms.Label lbl_stat_belly_max;
@@ -7008,21 +7091,21 @@
         private System.Windows.Forms.TextBox txt_combat_move_prev_name;
         private System.Windows.Forms.Panel pnl_move_list;
         private System.Windows.Forms.Panel pnl_pg_4_journal;
-        private System.Windows.Forms.PictureBox pictureBox2;
-        private System.Windows.Forms.TextBox textBox6;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.TextBox textBox7;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.PictureBox pic_flavor_appearance;
+        private System.Windows.Forms.TextBox txt_flavor_flaws;
+        private System.Windows.Forms.TextBox txt_flavor_ideals;
+        private System.Windows.Forms.TextBox txt_flavor_personality;
+        private System.Windows.Forms.TextBox txt_flavor_relationships;
+        private System.Windows.Forms.Label lbl_flavor_flaws;
+        private System.Windows.Forms.Label lbl_flavor_ideals;
+        private System.Windows.Forms.Label lbl_flavor_personality;
+        private System.Windows.Forms.Label lbl_flavor_relationships;
+        private System.Windows.Forms.TextBox txt_flavor_journal;
+        private System.Windows.Forms.Label lbl_flavor_appearance;
+        private System.Windows.Forms.Label lbl_flavor_journal;
+        private System.Windows.Forms.ComboBox cmb_nature_name;
+        private System.Windows.Forms.Label lbl_nature_name;
+        private System.Windows.Forms.TextBox txt_nature_desc;
         private System.Windows.Forms.ComboBox cmb_sht_ability;
         private System.Windows.Forms.Label lbl_stat_hp_quarter;
         private System.Windows.Forms.Label lbl_stat_hp_half;
@@ -7048,5 +7131,6 @@
         private System.Windows.Forms.Label lbl_move_pp;
         private System.Windows.Forms.Label lbl_move_lv;
         private System.Windows.Forms.Label lbl_move_attr;
+        private System.Windows.Forms.ToolStripMenuItem ts_file_recentfiles_btn;
     }
 }

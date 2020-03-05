@@ -383,6 +383,16 @@ namespace PMD_Tabletop_Sheet.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icon_Physical_Attack_Shadow {
+            get {
+                object obj = ResourceManager.GetObject("icon_Physical_Attack_Shadow", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icon_Special_Attack {
             get {
                 object obj = ResourceManager.GetObject("icon_Special_Attack", resourceCulture);
@@ -393,9 +403,29 @@ namespace PMD_Tabletop_Sheet.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icon_Special_Attack_Shadow {
+            get {
+                object obj = ResourceManager.GetObject("icon_Special_Attack_Shadow", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icon_Status_Attack {
             get {
                 object obj = ResourceManager.GetObject("icon_Status_Attack", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icon_Status_Attack_Shadow {
+            get {
+                object obj = ResourceManager.GetObject("icon_Status_Attack_Shadow", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

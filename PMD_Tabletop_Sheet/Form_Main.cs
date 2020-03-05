@@ -3,6 +3,7 @@ using System.Windows.Forms;
 using System.Collections.Generic;
 using System.Data.SQLite;
 using System.Linq;
+using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -12,7 +13,7 @@ namespace PMD_Tabletop_Sheet
 
     public partial class Form_Main : Form
     {
-        public bool DynamaxEnabled; public bool MegaEnabled; public bool ShadowEnabled;
+        public bool DynamaxEnabled; public bool MegaEnabled;
         public int PageSelected;
         public int ClkInfliction; public int Clkstun; public int Clkmez; public int Clkdoom; public int Clkmisc1; public int Clkmisc2; public int Clkmisc3;
         public string Savefilepath; public string dbpath;
@@ -22,6 +23,10 @@ namespace PMD_Tabletop_Sheet
         private double exp_to_lv;
         private string pkmn_gmax_move = "";
         private string pkmn_gmax_type = "";
+        private double percent_hp_to_shadow = 0.10;
+        public List<string> shadow_moves = new List<string>();
+        public Random rng = new Random();
+
         public List<string> pkmn_battleset_list = new List<string>();
         public List<string> pkmn_battleset_types_list = new List<string>();
         public List<string> pkmn_battleset_atr_list = new List<string>();
@@ -51,6 +56,9 @@ namespace PMD_Tabletop_Sheet
         private System.Drawing.Bitmap rimgs_icon_Physical_Attack = Properties.Resources.icon_Physical_Attack;
         private System.Drawing.Bitmap rimgs_icon_Special_Attack = Properties.Resources.icon_Special_Attack;
         private System.Drawing.Bitmap rimgs_icon_Status_Attack = Properties.Resources.icon_Status_Attack;
+        private System.Drawing.Bitmap rimgs_icon_Physical_Attack_Shadow = Properties.Resources.icon_Physical_Attack_Shadow;
+        private System.Drawing.Bitmap rimgs_icon_Special_Attack_Shadow = Properties.Resources.icon_Special_Attack_Shadow;
+        private System.Drawing.Bitmap rimgs_icon_Status_Attack_Shadow = Properties.Resources.icon_Status_Attack_Shadow;
         private System.Drawing.Bitmap rimgs_token = Properties.Resources.token;
 
         public static Control FindControlAtPoint(Control container, System.Drawing.Point pos)
@@ -96,8 +104,12 @@ namespace PMD_Tabletop_Sheet
         {
             DynamaxEnabled = false;
             MegaEnabled = false;
-            ShadowEnabled = false;
             PageSelected = 1;
+            toggleShadowMoveVisible(false);
+            loadAllShadowMoves();
+            loadBags();
+            loadTraits();
+            loadNatures();
 
             foreach (string type_item in typeList)
             {
@@ -177,6 +189,7 @@ namespace PMD_Tabletop_Sheet
                 lbl_stat_fort_stage.Visible = false;
                 ctr_stat_fort_stage.Visible = false;
                 btn_dynamax.Visible = false;
+                toggleShadowMoveVisible(false);
                 this.Size = new System.Drawing.Size(546, 707);
             }
             else if (PageSelected == 3)
@@ -207,6 +220,7 @@ namespace PMD_Tabletop_Sheet
                 lbl_stat_fort_stage.Visible = true;
                 ctr_stat_fort_stage.Visible = true;
                 btn_dynamax.Visible = true;
+                toggleShadowMoveVisible(true);
                 this.Size = new System.Drawing.Size(810, 777);
             }
             else if (PageSelected == 3)
@@ -257,6 +271,8 @@ namespace PMD_Tabletop_Sheet
                 if (pkmn_battleset_list.Count > 1) { txt_combat_move_2_name.Text = pkmn_battleset_list[1]; }
                 if (pkmn_battleset_list.Count > 2) { txt_combat_move_3_name.Text = pkmn_battleset_list[2]; }
                 if (pkmn_battleset_list.Count > 3) { txt_combat_move_4_name.Text = pkmn_battleset_list[3]; }
+                if (Int32.TryParse(txt_stat_hp_max.Text, out int j)) { txt_stat_hp_max.Text = (Int32.Parse(txt_stat_hp_max.Text) / 2).ToString(); }
+                if (Int32.TryParse(txt_stat_hp_user.Text, out int k)) { txt_stat_hp_user.Text = (Int32.Parse(txt_stat_hp_user.Text) / 2).ToString(); }
             }
             else
             {
@@ -270,6 +286,8 @@ namespace PMD_Tabletop_Sheet
                 if (pkmn_dynamax_list.Count > 1) { txt_combat_move_2_name.Text = pkmn_dynamax_list[1]; }
                 if (pkmn_dynamax_list.Count > 2) { txt_combat_move_3_name.Text = pkmn_dynamax_list[2]; }
                 if (pkmn_dynamax_list.Count > 3) { txt_combat_move_4_name.Text = pkmn_dynamax_list[3]; }
+                if (Int32.TryParse(txt_stat_hp_max.Text, out int j)) { txt_stat_hp_max.Text = (Int32.Parse(txt_stat_hp_max.Text) * 2).ToString(); }
+                if (Int32.TryParse(txt_stat_hp_user.Text, out int k)) { txt_stat_hp_user.Text = (Int32.Parse(txt_stat_hp_user.Text) * 2).ToString(); }
             }
         }
 
@@ -314,6 +332,7 @@ namespace PMD_Tabletop_Sheet
                 lbl_stat_fort_stage.Visible = false;
                 ctr_stat_fort_stage.Visible = false;
                 btn_dynamax.Visible = false;
+                toggleShadowMoveVisible(false);
                 this.Size = new System.Drawing.Size(546, 707);
             }
             else if (ts_campaign_dnde_btn.Checked) {
@@ -331,6 +350,7 @@ namespace PMD_Tabletop_Sheet
                 lbl_stat_fort_stage.Visible = true;
                 ctr_stat_fort_stage.Visible = true;
                 btn_dynamax.Visible = true;
+                toggleShadowMoveVisible(true);
                 this.Size = new System.Drawing.Size(810, 777);
             }
         }
@@ -503,8 +523,8 @@ namespace PMD_Tabletop_Sheet
             }
 
             txt_inv_curr_qty.Text = curr_inv_qty.ToString();
-            if (ulong.TryParse(txt_inv_max_qty.Text, out ulong j) && ulong.Parse(txt_inv_max_qty.Text) < curr_inv_qty) { txt_inv_max_qty.BackColor = System.Drawing.Color.FromKnownColor(System.Drawing.KnownColor.Crimson); }
-            else { txt_inv_max_qty.BackColor = System.Drawing.SystemColors.Window; }
+            if (ulong.TryParse(txt_inv_max_qty.Text, out ulong j) && ulong.Parse(txt_inv_max_qty.Text) < curr_inv_qty) { lbl_inv_curr_qty.ForeColor = System.Drawing.Color.FromKnownColor(System.Drawing.KnownColor.Crimson); }
+            else { lbl_inv_curr_qty.ForeColor = System.Drawing.SystemColors.ControlText; }
         }
 
         private void clkChange()
@@ -1302,6 +1322,8 @@ namespace PMD_Tabletop_Sheet
                     Math.Floor((0.25*int.Parse(txt_stat_def_max.Text)) + (0.25 * int.Parse(txt_stat_sdef_max.Text)) + (0.25 * int.Parse(txt_stat_spd_max.Text))).ToString();
                 txt_stat_fort_max.Text =
                     Math.Floor((0.3333 * int.Parse(txt_stat_def_max.Text)) + (0.3333 * int.Parse(txt_stat_sdef_max.Text))).ToString();
+                if (DynamaxEnabled && Int32.TryParse(txt_stat_hp_max.Text, out int j)) { txt_stat_hp_max.Text = (Int32.Parse(txt_stat_hp_max.Text) * 2).ToString(); }
+
                 txt_stat_hp_user.Text = txt_stat_hp_max.Text;
                 txt_stat_atk_user.Text = txt_stat_atk_max.Text;
                 txt_stat_def_user.Text = txt_stat_def_max.Text;
@@ -1310,6 +1332,8 @@ namespace PMD_Tabletop_Sheet
                 txt_stat_spd_user.Text = txt_stat_spd_max.Text;
                 txt_stat_eva_user.Text = txt_stat_eva_max.Text;
                 txt_stat_fort_user.Text = txt_stat_fort_max.Text;
+
+                
             }
             calculateAllEffStats();
         }
@@ -1354,29 +1378,32 @@ namespace PMD_Tabletop_Sheet
 
         private void loadMoveParams(object sender, EventArgs e)
         {
-            Control ActiveControl = FindControlAtCursor(this);
-            if (!String.IsNullOrWhiteSpace(ActiveControl.Text))
+            if (pnl_pg_2_moves.Visible)
             {
-                using (SQLiteConnection cn = new SQLiteConnection("Data Source=" + dbpath + ";Version=3;New=True;Compress=True;"))
+                Control ActiveControl = FindControlAtCursor(this);
+                if (!String.IsNullOrWhiteSpace(ActiveControl.Text))
                 {
-                    cn.Open();
-                    SQLiteCommand sqlite_cmd;
-                    SQLiteDataReader sqlite_datareader;
-                    sqlite_cmd = cn.CreateCommand();
-                    sqlite_cmd.CommandText = "SELECT * FROM Moves Where Name = '" + ActiveControl.Text + "'";
-                    sqlite_datareader = sqlite_cmd.ExecuteReader();
-                    while (sqlite_datareader.Read())
+                    using (SQLiteConnection cn = new SQLiteConnection("Data Source=" + dbpath + ";Version=3;New=True;Compress=True;"))
                     {
-                        if (!sqlite_datareader.IsDBNull(1)) { txt_combat_move_prev_name.Text = sqlite_datareader.GetString(1); }
-                        if (!sqlite_datareader.IsDBNull(5)) { txt_combat_move_prev_pp.Text = sqlite_datareader.GetInt32(5).ToString(); }
-                        if (!sqlite_datareader.IsDBNull(7)) { txt_combat_move_prev_acc.Text = sqlite_datareader.GetString(7); }
-                        if (!sqlite_datareader.IsDBNull(4)) { txt_combat_move_prev_pow.Text = sqlite_datareader.GetInt32(4).ToString(); }
-                        if (!sqlite_datareader.IsDBNull(6) && !sqlite_datareader.IsDBNull(8)) { txt_combat_move_prev_effect.Text = sqlite_datareader.GetString(8) + "; " + sqlite_datareader.GetString(6); }
-                        else if (sqlite_datareader.IsDBNull(6) && !sqlite_datareader.IsDBNull(8)) { txt_combat_move_prev_effect.Text = sqlite_datareader.GetString(8) + "; Deals damage.";  }
-                        else { txt_combat_move_prev_effect.Text = ""; }
-                        if (!sqlite_datareader.IsDBNull(3)) { txt_combat_move_prev_atr.Text = sqlite_datareader.GetString(3); }
+                        cn.Open();
+                        SQLiteCommand sqlite_cmd;
+                        SQLiteDataReader sqlite_datareader;
+                        sqlite_cmd = cn.CreateCommand();
+                        sqlite_cmd.CommandText = "SELECT * FROM Moves Where Name = '" + ActiveControl.Text + "'";
+                        sqlite_datareader = sqlite_cmd.ExecuteReader();
+                        while (sqlite_datareader.Read())
+                        {
+                            if (!sqlite_datareader.IsDBNull(1)) { txt_combat_move_prev_name.Text = sqlite_datareader.GetString(1); }
+                            if (!sqlite_datareader.IsDBNull(5)) { txt_combat_move_prev_pp.Text = sqlite_datareader.GetInt32(5).ToString(); }
+                            if (!sqlite_datareader.IsDBNull(7)) { txt_combat_move_prev_acc.Text = sqlite_datareader.GetString(7); }
+                            if (!sqlite_datareader.IsDBNull(4)) { txt_combat_move_prev_pow.Text = sqlite_datareader.GetInt32(4).ToString(); }
+                            if (!sqlite_datareader.IsDBNull(6) && !sqlite_datareader.IsDBNull(8)) { txt_combat_move_prev_effect.Text = sqlite_datareader.GetString(8) + "; " + sqlite_datareader.GetString(6); }
+                            else if (sqlite_datareader.IsDBNull(6) && !sqlite_datareader.IsDBNull(8)) { txt_combat_move_prev_effect.Text = sqlite_datareader.GetString(8) + "; Deals damage."; }
+                            else { txt_combat_move_prev_effect.Text = ""; }
+                            if (!sqlite_datareader.IsDBNull(3)) { txt_combat_move_prev_atr.Text = sqlite_datareader.GetString(3); }
+                        }
+                        cn.Close();
                     }
-                    cn.Close();
                 }
             }
         }
@@ -1831,6 +1858,9 @@ namespace PMD_Tabletop_Sheet
             if (attribute.ToLowerInvariant() == "physical") { attrimage = rimgs_icon_Physical_Attack; }
             else if (attribute.ToLowerInvariant() == "special") { attrimage = rimgs_icon_Special_Attack; }
             else if (attribute.ToLowerInvariant() == "status") { attrimage = rimgs_icon_Status_Attack; }
+            else if (attribute.ToLowerInvariant() == "s-physical") { attrimage = rimgs_icon_Physical_Attack_Shadow; }
+            else if (attribute.ToLowerInvariant() == "s-special") { attrimage = rimgs_icon_Special_Attack_Shadow; }
+            else if (attribute.ToLowerInvariant() == "s-status") { attrimage = rimgs_icon_Status_Attack_Shadow; }
             return attrimage;
         }
 
@@ -1952,6 +1982,1024 @@ namespace PMD_Tabletop_Sheet
                 else { txt_combat_move_4_pp.BackColor = System.Drawing.SystemColors.Window; }
             }
             else { txt_combat_move_4_pp.BackColor = System.Drawing.SystemColors.Window; }
+        }
+
+        private void txt_combat_move_5_pp_TextChanged(object sender, EventArgs e)
+        {
+            if (Int32.TryParse(txt_combat_move_5_pp.Text, out int i) && Int32.TryParse(txt_combat_move_5_pp_max.Text, out int j))
+            {
+                if (Int32.Parse(txt_combat_move_5_pp.Text) > Int32.Parse(txt_combat_move_5_pp_max.Text)) { txt_combat_move_5_pp.BackColor = System.Drawing.Color.FromKnownColor(System.Drawing.KnownColor.Crimson); }
+                else if (Int32.Parse(txt_combat_move_5_pp.Text) == 0) { txt_combat_move_5_pp.BackColor = System.Drawing.SystemColors.ControlDarkDark; }
+                else { txt_combat_move_5_pp.BackColor = System.Drawing.Color.FromKnownColor(System.Drawing.KnownColor.DarkSlateBlue); }
+            }
+            else { txt_combat_move_5_pp.BackColor = System.Drawing.Color.FromKnownColor(System.Drawing.KnownColor.DarkSlateBlue); }
+        }
+
+        private void disposeShadowMove()
+        {
+            txt_combat_move_5_name.Text = "";
+            txt_combat_move_5_pp.Text = "";
+            txt_combat_move_5_pp_max.Text = "";
+            txt_combat_move_5_acc.Text = "";
+            cmb_combat_move_5_type.Text = "???";
+            txt_combat_move_5_pow.Text = "";
+            txt_combat_move_5_atr.Text = "";
+            txt_combat_move_5_effect.Text = "";
+            pic_combat_move_5_atr.Image = rimgs_token;
+        }
+
+        private void toggleShadowMoveVisible(bool setvisible)
+        {
+            bool allowvisible = false;
+            if (!lbl_combat_move_5_name.Visible && Int32.TryParse(txt_stat_hp_eff.Text, out int i) && Int32.TryParse(txt_stat_hp_max.Text, out int j)
+                && Int32.Parse(txt_stat_hp_eff.Text) <= percent_hp_to_shadow*Int32.Parse(txt_stat_hp_max.Text) && Int32.Parse(txt_stat_hp_eff.Text) > 0)
+            {
+                allowvisible = true;
+                loadShadowMove();
+            }
+            if ((allowvisible && setvisible) || !setvisible)
+            {
+                lbl_combat_move_5_name.Visible = setvisible;
+                txt_combat_move_5_name.Visible = setvisible;
+                txt_combat_move_5_pp.Visible = setvisible;
+                lbl_combat_move_5_pp.Visible = setvisible;
+                txt_combat_move_5_pp_max.Visible = setvisible;
+                lbl_combat_move_5_pp_max.Visible = setvisible;
+                txt_combat_move_5_acc.Visible = setvisible;
+                lbl_combat_move_5_acc.Visible = setvisible;
+                cmb_combat_move_5_type.Visible = setvisible;
+                lbl_combat_move_5_type.Visible = setvisible;
+                txt_combat_move_5_pow.Visible = setvisible;
+                lbl_combat_move_5_pow.Visible = setvisible;
+                txt_combat_move_5_atr.Visible = setvisible;
+                txt_combat_move_5_effect.Visible = setvisible;
+                lbl_combat_move_5_effect.Visible = setvisible;
+                pic_combat_move_5_atr.Visible = setvisible;
+            }
+        }
+
+        private void txt_stat_hp_eff_TextChanged(object sender, EventArgs e)
+        {
+            if (ts_campaign_dnde_btn.Checked && Int32.TryParse(txt_stat_hp_eff.Text, out int i) && Int32.TryParse(txt_stat_hp_max.Text, out int j))
+            {
+                if (Int32.Parse(txt_stat_hp_eff.Text) <= percent_hp_to_shadow * Int32.Parse(txt_stat_hp_max.Text) && Int32.Parse(txt_stat_hp_eff.Text) > 0) { toggleShadowMoveVisible(true);  }
+                else { toggleShadowMoveVisible(false); }
+            }
+        }
+
+        private void loadAllShadowMoves()
+        {
+            shadow_moves.Clear();
+            using (SQLiteConnection cn = new SQLiteConnection("Data Source=" + dbpath + ";Version=3;New=True;Compress=True;"))
+            {
+                cn.Open();
+                SQLiteCommand sqlite_cmd;
+                SQLiteDataReader sqlite_datareader;
+                sqlite_cmd = cn.CreateCommand();
+                sqlite_cmd.CommandText = "Select Name from Moves WHERE Attribute like 'S-%' and Type = '---' ORDER BY ID";
+                sqlite_datareader = sqlite_cmd.ExecuteReader();
+                while (sqlite_datareader.Read())
+                {
+                    if (!sqlite_datareader.IsDBNull(0)) { shadow_moves.Add(sqlite_datareader.GetString(0)); }
+                }
+                cn.Close();
+            }
+            if (shadow_moves.Count > 0)
+            {
+                // Increase the frequency of Shadow Rush, Shadow Lance and Shadow Slash
+                shadow_moves.Add(shadow_moves[0]); shadow_moves.Add(shadow_moves[0]); shadow_moves.Add(shadow_moves[0]); shadow_moves.Add(shadow_moves[0]); shadow_moves.Add(shadow_moves[0]); shadow_moves.Add(shadow_moves[0]);
+                shadow_moves.Add(shadow_moves[1]); shadow_moves.Add(shadow_moves[1]); 
+                shadow_moves.Add(shadow_moves[4]); shadow_moves.Add(shadow_moves[4]); 
+                // Increase the frequency of all moves EXCEPT shadow punisher as well
+                int original_count = shadow_moves.Count;
+                for (int i = 0; i < original_count-1; i++) {
+                    shadow_moves.Add(shadow_moves[i]);
+                    shadow_moves.Add(shadow_moves[i]);
+                }
+                // Randomize the list order
+                int n = shadow_moves.Count;
+                while (n > 1)
+                {
+                    n--;
+                    int k = rng.Next(n + 1);
+                    string value = shadow_moves[k];
+                    shadow_moves[k] = shadow_moves[n];
+                    shadow_moves[n] = value;
+                }
+            }
+        }
+
+        
+        private void loadShadowMove()
+        {
+            string loadmove = "";
+            disposeShadowMove();
+            if (shadow_moves.Count > 0) {
+                loadmove = shadow_moves[rng.Next(0, shadow_moves.Count-1)];
+                txt_combat_move_5_name.Text = loadmove;
+            }
+            if (!String.IsNullOrWhiteSpace(loadmove))
+            {
+                using (SQLiteConnection cn = new SQLiteConnection("Data Source=" + dbpath + ";Version=3;New=True;Compress=True;"))
+                {
+                    cn.Open();
+                    SQLiteCommand sqlite_cmd;
+                    SQLiteDataReader sqlite_datareader;
+                    sqlite_cmd = cn.CreateCommand();
+                    sqlite_cmd.CommandText = "SELECT * FROM Moves Where Name = '" + loadmove + "'";
+                    sqlite_datareader = sqlite_cmd.ExecuteReader();
+                    while (sqlite_datareader.Read())
+                    {
+                        if (!sqlite_datareader.IsDBNull(5)) { txt_combat_move_5_pp_max.Text = sqlite_datareader.GetInt32(5).ToString(); }
+                        if (!sqlite_datareader.IsDBNull(7)) { txt_combat_move_5_acc.Text = sqlite_datareader.GetString(7); }
+                        if (!sqlite_datareader.IsDBNull(4)) { txt_combat_move_5_pow.Text = sqlite_datareader.GetInt32(4).ToString(); }
+                        if (!sqlite_datareader.IsDBNull(6) && !sqlite_datareader.IsDBNull(8)) { txt_combat_move_5_effect.Text = sqlite_datareader.GetString(8) + "; " + sqlite_datareader.GetString(6); }
+                        else if (sqlite_datareader.IsDBNull(6) && !sqlite_datareader.IsDBNull(8)) { txt_combat_move_5_effect.Text = sqlite_datareader.GetString(8) + "; Deals damage."; }
+                        else { txt_combat_move_5_effect.Text = ""; }
+                        if (!sqlite_datareader.IsDBNull(3)) { txt_combat_move_5_atr.Text = sqlite_datareader.GetString(3); }
+                        if (!sqlite_datareader.IsDBNull(2)) { cmb_combat_move_5_type.SelectedIndex = cmb_combat_move_5_type.FindStringExact(sqlite_datareader.GetString(2)); }
+                    }
+                    cn.Close();
+                }
+            }
+            txt_combat_move_5_pp.Text = txt_combat_move_5_pp_max.Text;
+            pic_combat_move_5_atr.Image = determineMoveAttributeImage(txt_combat_move_5_atr.Text);
+        }
+
+        private void textbox_nouserinput(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
+
+        private void loadItemParams(object sender, EventArgs e)
+        {
+            if (pnl_pg_3_inv.Visible)
+            {
+                txt_inv_preview_title.Text = "Item Preview";
+                txt_inv_preview_desc.Text = "Mouse over an item to view its description!";
+                Control ActiveControl = FindControlAtCursor(this);
+                if (!String.IsNullOrWhiteSpace(ActiveControl.Text))
+                {
+                    using (SQLiteConnection cn = new SQLiteConnection("Data Source=" + dbpath + ";Version=3;New=True;Compress=True;"))
+                    {
+                        cn.Open();
+                        SQLiteCommand sqlite_cmd;
+                        SQLiteDataReader sqlite_datareader;
+                        sqlite_cmd = cn.CreateCommand();
+                        sqlite_cmd.CommandText = "SELECT * FROM Items Where Name = '" + ActiveControl.Text + "'";
+                        sqlite_datareader = sqlite_cmd.ExecuteReader();
+                        while (sqlite_datareader.Read())
+                        {
+                            if (!sqlite_datareader.IsDBNull(1)) { txt_inv_preview_title.Text = sqlite_datareader.GetString(1); }
+                            if (!sqlite_datareader.IsDBNull(2)) { txt_inv_preview_desc.Text = sqlite_datareader.GetString(2); }
+                        }
+                        cn.Close();
+                    }
+                }
+            }
+        }
+
+        private void loadBags()
+        {
+            using (SQLiteConnection cn = new SQLiteConnection("Data Source=" + dbpath + ";Version=3;New=True;Compress=True;"))
+            {
+                cn.Open();
+                SQLiteCommand sqlite_cmd;
+                SQLiteDataReader sqlite_datareader;
+                sqlite_cmd = cn.CreateCommand();
+                sqlite_cmd.CommandText = "SELECT TRIM(SUBSTR(Name,7,LENGTH(Name)-6)) FROM Items Where Name like 'Bag - %'";
+                sqlite_datareader = sqlite_cmd.ExecuteReader();
+                while (sqlite_datareader.Read())
+                {
+                    if (!sqlite_datareader.IsDBNull(0)) { cmb_inv_bag.Items.Add(sqlite_datareader.GetString(0)); }
+                }
+                cn.Close();
+            }
+            cmb_inv_bag.SelectedIndex = 0;
+        }
+
+        private void loadBag()
+        {
+            if (!String.IsNullOrWhiteSpace(cmb_inv_bag.Text))
+            {
+                using (SQLiteConnection cn = new SQLiteConnection("Data Source=" + dbpath + ";Version=3;New=True;Compress=True;"))
+                {
+                    cn.Open();
+                    SQLiteCommand sqlite_cmd;
+                    SQLiteDataReader sqlite_datareader;
+                    sqlite_cmd = cn.CreateCommand();
+                    sqlite_cmd.CommandText = @"SELECT Description FROM Items Where Name = ""Bag - " + cmb_inv_bag.Text + @"""";
+                    sqlite_datareader = sqlite_cmd.ExecuteReader();
+                    while (sqlite_datareader.Read())
+                    {
+                        if (!sqlite_datareader.IsDBNull(0)) { txt_inv_max_qty.Text = sqlite_datareader.GetString(0); }
+                    }
+                    cn.Close();
+                }
+            }
+        }
+
+        private void cmb_inv_bag_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            loadBag();
+            inv_qty_change();
+        }
+
+        private void loadTraitParams(object sender, EventArgs e)
+        {
+            txt_trait_preview_title.Text = "Trait Preview";
+            txt_trait_preview_desc.Text = "Mouse over a trait to view its description!";
+            Control ActiveControl = FindControlAtCursor(this);
+            if (!String.IsNullOrWhiteSpace(ActiveControl.Text))
+            {
+                using (SQLiteConnection cn = new SQLiteConnection("Data Source=" + dbpath + ";Version=3;New=True;Compress=True;"))
+                {
+                    cn.Open();
+                    SQLiteCommand sqlite_cmd;
+                    SQLiteDataReader sqlite_datareader;
+                    sqlite_cmd = cn.CreateCommand();
+                    sqlite_cmd.CommandText = @"SELECT * FROM Traits Where Name = """ + ActiveControl.Text + @"""";
+                    sqlite_datareader = sqlite_cmd.ExecuteReader();
+                    while (sqlite_datareader.Read())
+                    {
+                        if (!sqlite_datareader.IsDBNull(1)) { txt_trait_preview_title.Text = sqlite_datareader.GetString(1); }
+                        if (!sqlite_datareader.IsDBNull(3)) { txt_trait_preview_desc.Text = sqlite_datareader.GetString(3); }
+                    }
+                    cn.Close();
+                }
+            }
+        }
+
+        private void loadTraits()
+        {
+            ComboBox[] traitBoxes = { cmb_trait_1, cmb_trait_2, cmb_trait_3, cmb_trait_4, cmb_trait_5, cmb_trait_6,
+                cmb_trait_7, cmb_trait_8, cmb_trait_9, cmb_trait_10, cmb_trait_11, cmb_trait_12 };
+            foreach (ComboBox tbox in traitBoxes) { tbox.Items.Add("---"); }
+            using (SQLiteConnection cn = new SQLiteConnection("Data Source=" + dbpath + ";Version=3;New=True;Compress=True;"))
+            {
+                cn.Open();
+                SQLiteCommand sqlite_cmd;
+                SQLiteDataReader sqlite_datareader;
+                sqlite_cmd = cn.CreateCommand();
+                sqlite_cmd.CommandText = "SELECT Name FROM Traits";
+                sqlite_datareader = sqlite_cmd.ExecuteReader();
+                while (sqlite_datareader.Read())
+                {
+                    
+                    if (!sqlite_datareader.IsDBNull(0)) {
+                        foreach (ComboBox tbox in traitBoxes) { tbox.Items.Add(sqlite_datareader.GetString(0)); }
+                    }
+                }
+                cn.Close();
+            }
+            foreach (ComboBox tbox in traitBoxes) { tbox.SelectedIndex = 0;
+                /*foreach (Object tboxitem in tbox.Items) {
+                    tboxitem.GotMouseCapture += new EventHandler(loadTraitParams);
+                }*/
+            }
+        }
+
+        private void cmb_trait_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ComboBox[] traitBoxes = { cmb_trait_1, cmb_trait_2, cmb_trait_3, cmb_trait_4, cmb_trait_5, cmb_trait_6,
+                cmb_trait_7, cmb_trait_8, cmb_trait_9, cmb_trait_10, cmb_trait_11, cmb_trait_12 };
+            ComboBox changed_trait = (sender as ComboBox);
+            foreach (ComboBox tbox in traitBoxes) {
+                if (changed_trait.SelectedIndex == 0) { break; }
+                else if (tbox.Name != changed_trait.Name && tbox.SelectedIndex == changed_trait.SelectedIndex)
+                {
+                    //MessageBox.Show("Please only choose one unique trait.");
+                    changed_trait.SelectedIndex = 0;
+                }
+            }
+        }
+
+        private void loadNaturesParams(object sender, EventArgs e)
+        {
+            txt_nature_desc.Text = "";
+            if (!String.IsNullOrWhiteSpace(cmb_nature_name.Text))
+            {
+                using (SQLiteConnection cn = new SQLiteConnection("Data Source=" + dbpath + ";Version=3;New=True;Compress=True;"))
+                {
+                    cn.Open();
+                    SQLiteCommand sqlite_cmd;
+                    SQLiteDataReader sqlite_datareader;
+                    sqlite_cmd = cn.CreateCommand();
+                    sqlite_cmd.CommandText = @"SELECT Description FROM Natures Where Name = """ + cmb_nature_name.Text + @"""";
+                    sqlite_datareader = sqlite_cmd.ExecuteReader();
+                    while (sqlite_datareader.Read())
+                    {
+                        if (!sqlite_datareader.IsDBNull(0)) { txt_nature_desc.Text = sqlite_datareader.GetString(0); }
+                    }
+                    cn.Close();
+                }
+            }
+        }
+
+        private void loadNatures()
+        {
+            using (SQLiteConnection cn = new SQLiteConnection("Data Source=" + dbpath + ";Version=3;New=True;Compress=True;"))
+            {
+                cn.Open();
+                SQLiteCommand sqlite_cmd;
+                SQLiteDataReader sqlite_datareader;
+                sqlite_cmd = cn.CreateCommand();
+                sqlite_cmd.CommandText = "SELECT Name FROM Natures";
+                sqlite_datareader = sqlite_cmd.ExecuteReader();
+                while (sqlite_datareader.Read())
+                {
+
+                    if (!sqlite_datareader.IsDBNull(0))
+                    {
+                        cmb_nature_name.Items.Add(sqlite_datareader.GetString(0));
+                    }
+                }
+                cn.Close();
+            }
+
+            cmb_nature_name.SelectedIndex = 0;
+
+        }
+
+        private void pic_flavor_appearance_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog dlgOpenFileDialog = new OpenFileDialog();
+            dlgOpenFileDialog.Multiselect = false;
+            dlgOpenFileDialog.Filter = "Image files (*.bmp, *.jpg, *.jpeg, *.jpe, *.jfif, *.png) | *.bmp; *.jpg; *.jpeg; *.jpe; *.jfif; *.png";
+            if (dlgOpenFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    pic_flavor_appearance.Image = System.Drawing.Image.FromFile(dlgOpenFileDialog.FileName);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+        }
+
+        private void disposeEntireSheet()
+        {
+            txt_sht_name.Text = "";
+            txt_sht_age.Text = "";
+            txt_sht_species.Text = "";
+            txt_sht_lv.Text = "";
+            txt_sht_exp.Text = "";
+
+            txt_stat_belly_curr.Text = "100";
+            txt_stat_belly_max.Text = "100";
+            txt_stat_hp_user.Text = ""; txt_stat_hp_eff.Text = ""; txt_stat_hp_max.Text = ""; txt_stat_hp_half.Text = ""; txt_stat_hp_quarter.Text = "";
+            txt_stat_atk_user.Text = ""; txt_stat_atk_eff.Text = ""; txt_stat_atk_max.Text = ""; txt_stat_atk_half.Text = ""; txt_stat_atk_quarter.Text = "";
+            txt_stat_def_user.Text = ""; txt_stat_def_eff.Text = ""; txt_stat_def_max.Text = ""; txt_stat_def_half.Text = ""; txt_stat_def_quarter.Text = "";
+            txt_stat_satk_user.Text = ""; txt_stat_satk_eff.Text = ""; txt_stat_satk_max.Text = ""; txt_stat_satk_half.Text = ""; txt_stat_satk_quarter.Text = "";
+            txt_stat_sdef_user.Text = ""; txt_stat_sdef_eff.Text = ""; txt_stat_sdef_max.Text = ""; txt_stat_sdef_half.Text = ""; txt_stat_sdef_quarter.Text = "";
+            txt_stat_spd_user.Text = ""; txt_stat_spd_eff.Text = ""; txt_stat_spd_max.Text = ""; txt_stat_spd_half.Text = ""; txt_stat_spd_quarter.Text = "";
+            txt_stat_eva_user.Text = ""; txt_stat_eva_eff.Text = ""; txt_stat_eva_max.Text = ""; txt_stat_eva_half.Text = ""; txt_stat_eva_quarter.Text = "";
+            txt_stat_fort_user.Text = ""; txt_stat_fort_eff.Text = ""; txt_stat_fort_max.Text = ""; txt_stat_fort_half.Text = ""; txt_stat_fort_quarter.Text = "";
+            ctr_stat_hp_stage.Value = 0;
+            ctr_stat_atk_stage.Value = 0;
+            ctr_stat_def_stage.Value = 0;
+            ctr_stat_satk_stage.Value = 0;
+            ctr_stat_sdef_stage.Value = 0;
+            ctr_stat_spd_stage.Value = 0;
+            ctr_stat_eva_stage.Value = 0;
+            ctr_stat_fort_stage.Value = 0;
+
+            txt_inf_ready_morale.Text = "";
+            txt_inf_ready_ing.Text = "";
+            txt_inf_ready_insp.Text = "";
+            txt_inf_ready_luck.Text = "";
+            txt_inf_base_morale.Text = "";
+            txt_inf_base_ing.Text = "";
+            txt_inf_base_insp.Text = "";
+            txt_inf_base_luck.Text = "";
+
+            ClkInfliction = 0;
+            Clkstun = 0;
+            Clkmez = 0;
+            Clkdoom = 0;
+            Clkmisc1 = 0;
+            Clkmisc2 = 0;
+            Clkmisc3 = 0;
+            clkChange();
+
+            txt_clocks_misc1.Text = "Misc I";
+            txt_clocks_misc2.Text = "Misc II";
+            txt_clocks_misc3.Text = "Misc III";
+
+            txt_combat_move_1_pp.Text = "";
+            txt_combat_move_2_pp.Text = "";
+            txt_combat_move_3_pp.Text = "";
+            txt_combat_move_4_pp.Text = "";
+            txt_combat_move_5_pp.Text = "";
+
+            if (DynamaxEnabled) { toggleDynamax();  }
+
+            txt_inv_qty_1.Text = "";
+            chk_inv_held_2.Checked = false; txt_inv_qty_2.Text = ""; txt_inv_name_2.Text = "";
+            chk_inv_held_3.Checked = false; txt_inv_qty_3.Text = ""; txt_inv_name_3.Text = "";
+            chk_inv_held_4.Checked = false; txt_inv_qty_4.Text = ""; txt_inv_name_4.Text = "";
+            chk_inv_held_5.Checked = false; txt_inv_qty_5.Text = ""; txt_inv_name_5.Text = "";
+            chk_inv_held_6.Checked = false; txt_inv_qty_6.Text = ""; txt_inv_name_6.Text = "";
+            chk_inv_held_7.Checked = false; txt_inv_qty_7.Text = ""; txt_inv_name_7.Text = "";
+            chk_inv_held_8.Checked = false; txt_inv_qty_8.Text = ""; txt_inv_name_8.Text = "";
+            chk_inv_held_9.Checked = false; txt_inv_qty_9.Text = ""; txt_inv_name_9.Text = "";
+            chk_inv_held_10.Checked = false; txt_inv_qty_10.Text = ""; txt_inv_name_10.Text = "";
+            chk_inv_held_11.Checked = false; txt_inv_qty_11.Text = ""; txt_inv_name_11.Text = "";
+            chk_inv_held_12.Checked = false; txt_inv_qty_12.Text = ""; txt_inv_name_12.Text = "";
+            chk_inv_held_13.Checked = false; txt_inv_qty_13.Text = ""; txt_inv_name_13.Text = "";
+            chk_inv_held_14.Checked = false; txt_inv_qty_14.Text = ""; txt_inv_name_14.Text = "";
+            chk_inv_held_15.Checked = false; txt_inv_qty_15.Text = ""; txt_inv_name_15.Text = "";
+            chk_inv_held_16.Checked = false; txt_inv_qty_16.Text = ""; txt_inv_name_16.Text = "";
+            chk_inv_held_17.Checked = false; txt_inv_qty_17.Text = ""; txt_inv_name_17.Text = "";
+            chk_inv_held_18.Checked = false; txt_inv_qty_18.Text = ""; txt_inv_name_18.Text = "";
+            chk_inv_held_19.Checked = false; txt_inv_qty_19.Text = ""; txt_inv_name_19.Text = "";
+            chk_inv_held_20.Checked = false; txt_inv_qty_20.Text = ""; txt_inv_name_20.Text = "";
+            chk_inv_held_21.Checked = false; txt_inv_qty_21.Text = ""; txt_inv_name_21.Text = "";
+            chk_inv_held_22.Checked = false; txt_inv_qty_22.Text = ""; txt_inv_name_22.Text = "";
+            chk_inv_held_23.Checked = false; txt_inv_qty_23.Text = ""; txt_inv_name_23.Text = "";
+            chk_inv_held_24.Checked = false; txt_inv_qty_24.Text = ""; txt_inv_name_24.Text = "";
+            chk_inv_held_25.Checked = false; txt_inv_qty_25.Text = ""; txt_inv_name_25.Text = "";
+            chk_inv_held_26.Checked = false; txt_inv_qty_26.Text = ""; txt_inv_name_26.Text = "";
+            cmb_inv_bag.SelectedIndex = 0;
+
+            cmb_trait_1.SelectedIndex = 0; cmb_trait_2.SelectedIndex = 0; cmb_trait_3.SelectedIndex = 0;
+            cmb_trait_4.SelectedIndex = 0; cmb_trait_5.SelectedIndex = 0; cmb_trait_6.SelectedIndex = 0;
+            cmb_trait_7.SelectedIndex = 0; cmb_trait_8.SelectedIndex = 0; cmb_trait_9.SelectedIndex = 0;
+            cmb_trait_10.SelectedIndex = 0; cmb_trait_11.SelectedIndex = 0; cmb_trait_12.SelectedIndex = 0;
+
+            chk_skills_gathering.Checked = false; txt_skills_gathering.Text = "";
+            chk_skills_tracking.Checked = false; txt_skills_tracking.Text = "";
+            chk_skills_medicine.Checked = false; txt_skills_medicine.Text = "";
+            chk_skills_nature.Checked = false; txt_skills_nature.Text = "";
+            chk_skills_deception.Checked = false; txt_skills_deception.Text = "";
+            chk_skills_persuasion.Checked = false; txt_skills_persuasion.Text = "";
+            chk_skills_intimidation.Checked = false; txt_skills_intimidation.Text = "";
+            chk_skills_perf.Checked = false; txt_skills_perf.Text = "";
+            chk_skills_crafting.Checked = false; txt_skills_crafting.Text = "";
+            chk_skills_app.Checked = false; txt_skills_app.Text = "";
+            chk_skills_hist.Checked = false; txt_skills_hist.Text = "";
+            chk_skills_build.Checked = false; txt_skills_build.Text = "";
+            chk_skills_other1.Checked = false; txt_skills_nm_other1.Text = ""; txt_skills_val_other1.Text = "";
+            chk_skills_other2.Checked = false; txt_skills_nm_other2.Text = ""; txt_skills_val_other2.Text = "";
+            chk_skills_other3.Checked = false; txt_skills_nm_other3.Text = ""; txt_skills_val_other3.Text = "";
+            chk_skills_other4.Checked = false; txt_skills_nm_other4.Text = ""; txt_skills_val_other4.Text = "";
+
+            cmb_nature_name.SelectedIndex = 0;
+            txt_flavor_personality.Text = "";
+            txt_flavor_relationships.Text = "";
+            txt_flavor_ideals.Text = "";
+            txt_flavor_flaws.Text = "";
+            txt_flavor_journal.Text = "";
+            if (pic_flavor_appearance.Image != null) { try { pic_flavor_appearance.Image.Dispose(); } catch (Exception) { throw; } }
+            pic_flavor_appearance.Image = rimgs_badge_shimmering_outline;
+
+            pkmn_EXP_Growth = "Slow";
+            pkmn_gmax_move = "";
+            pkmn_gmax_type = "";
+            exp_to_lv = 0;
+
+            pkmn_battleset_list.Clear();
+            pkmn_battleset_types_list.Clear();
+            pkmn_battleset_atr_list.Clear();
+            pkmn_dynamax_list.Clear();
+            pkmn_moveset_list.Clear();
+
+            PageSelected = 1;
+            toggleShadowMoveVisible(false);
+        }
+
+        private void writeSheetToFile()
+        {
+            // Save the image to binary array first
+            byte[] imgarr;
+            using (MemoryStream ms = new MemoryStream())
+            {
+                pic_flavor_appearance.Image.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+                imgarr = ms.ToArray();
+            }
+            // Save the file
+            using (BinaryWriter b = new BinaryWriter(File.Open(Savefilepath, FileMode.Create)))
+            {
+                b.Write(txt_sht_name.Text);
+                b.Write(txt_sht_age.Text);
+                b.Write(txt_sht_species.Text);
+                b.Write(txt_sht_lv.Text);
+                b.Write(txt_sht_exp.Text);
+                b.Write(cmb_sht_ability.Text);
+
+                b.Write(txt_stat_belly_curr.Text);
+                b.Write(txt_stat_belly_max.Text);
+                b.Write(txt_stat_hp_user.Text);
+                b.Write(txt_stat_atk_user.Text);
+                b.Write(txt_stat_def_user.Text);
+                b.Write(txt_stat_satk_user.Text);
+                b.Write(txt_stat_sdef_user.Text);
+                b.Write(txt_stat_spd_user.Text);
+                b.Write(txt_stat_eva_user.Text);
+                b.Write(txt_stat_fort_user.Text);
+                b.Write((int)ctr_stat_hp_stage.Value);
+                b.Write((int)ctr_stat_atk_stage.Value);
+                b.Write((int)ctr_stat_def_stage.Value);
+                b.Write((int)ctr_stat_satk_stage.Value);
+                b.Write((int)ctr_stat_sdef_stage.Value);
+                b.Write((int)ctr_stat_spd_stage.Value);
+                b.Write((int)ctr_stat_eva_stage.Value);
+                b.Write((int)ctr_stat_fort_stage.Value);
+
+                b.Write(txt_inf_ready_morale.Text);
+                b.Write(txt_inf_ready_ing.Text);
+                b.Write(txt_inf_ready_insp.Text);
+                b.Write(txt_inf_ready_luck.Text);
+                b.Write(txt_inf_base_morale.Text);
+                b.Write(txt_inf_base_ing.Text);
+                b.Write(txt_inf_base_insp.Text);
+                b.Write(txt_inf_base_luck.Text);
+
+                b.Write((int)ClkInfliction);
+                b.Write((int)Clkstun);
+                b.Write((int)Clkmez);
+                b.Write((int)Clkdoom);
+                b.Write((int)Clkmisc1);
+                b.Write((int)Clkmisc2);
+                b.Write((int)Clkmisc3);
+
+                b.Write(txt_clocks_misc1.Text);
+                b.Write(txt_clocks_misc2.Text);
+                b.Write(txt_clocks_misc3.Text);
+
+                // To-Do: make sure to save the ACTUAL moves and not the dynamax moves
+                b.Write(txt_combat_move_1_name.Text);
+                b.Write(txt_combat_move_2_name.Text);
+                b.Write(txt_combat_move_3_name.Text);
+                b.Write(txt_combat_move_4_name.Text);
+                b.Write(txt_combat_move_5_name.Text);
+                b.Write(txt_combat_move_1_pp.Text);
+                b.Write(txt_combat_move_2_pp.Text);
+                b.Write(txt_combat_move_3_pp.Text);
+                b.Write(txt_combat_move_4_pp.Text);
+                // To-Do: fix shadow move load
+                b.Write(txt_combat_move_5_pp.Text);
+
+                b.Write(DynamaxEnabled);
+
+                b.Write(txt_inv_qty_1.Text);
+                b.Write(chk_inv_held_2.Checked);
+                b.Write(txt_inv_qty_2.Text);
+                b.Write(txt_inv_name_2.Text);
+                b.Write(chk_inv_held_3.Checked);
+                b.Write(txt_inv_qty_3.Text);
+                b.Write(txt_inv_name_3.Text);
+                b.Write(chk_inv_held_4.Checked);
+                b.Write(txt_inv_qty_4.Text);
+                b.Write(txt_inv_name_4.Text);
+                b.Write(chk_inv_held_5.Checked);
+                b.Write(txt_inv_qty_5.Text);
+                b.Write(txt_inv_name_5.Text);
+                b.Write(chk_inv_held_6.Checked);
+                b.Write(txt_inv_qty_6.Text);
+                b.Write(txt_inv_name_6.Text);
+                b.Write(chk_inv_held_7.Checked);
+                b.Write(txt_inv_qty_7.Text);
+                b.Write(txt_inv_name_7.Text);
+                b.Write(chk_inv_held_8.Checked);
+                b.Write(txt_inv_qty_8.Text);
+                b.Write(txt_inv_name_8.Text);
+                b.Write(chk_inv_held_9.Checked);
+                b.Write(txt_inv_qty_9.Text);
+                b.Write(txt_inv_name_9.Text);
+                b.Write(chk_inv_held_10.Checked);
+                b.Write(txt_inv_qty_10.Text);
+                b.Write(txt_inv_name_10.Text);
+                b.Write(chk_inv_held_11.Checked);
+                b.Write(txt_inv_qty_11.Text);
+                b.Write(txt_inv_name_11.Text);
+                b.Write(chk_inv_held_12.Checked);
+                b.Write(txt_inv_qty_12.Text);
+                b.Write(txt_inv_name_12.Text);
+                b.Write(chk_inv_held_13.Checked);
+                b.Write(txt_inv_qty_13.Text);
+                b.Write(txt_inv_name_13.Text);
+                b.Write(chk_inv_held_14.Checked);
+                b.Write(txt_inv_qty_14.Text);
+                b.Write(txt_inv_name_14.Text);
+                b.Write(chk_inv_held_15.Checked);
+                b.Write(txt_inv_qty_15.Text);
+                b.Write(txt_inv_name_15.Text);
+                b.Write(chk_inv_held_16.Checked);
+                b.Write(txt_inv_qty_16.Text);
+                b.Write(txt_inv_name_16.Text);
+                b.Write(chk_inv_held_17.Checked);
+                b.Write(txt_inv_qty_17.Text);
+                b.Write(txt_inv_name_17.Text);
+                b.Write(chk_inv_held_18.Checked);
+                b.Write(txt_inv_qty_18.Text);
+                b.Write(txt_inv_name_18.Text);
+                b.Write(chk_inv_held_19.Checked);
+                b.Write(txt_inv_qty_19.Text);
+                b.Write(txt_inv_name_19.Text);
+                b.Write(chk_inv_held_20.Checked);
+                b.Write(txt_inv_qty_20.Text);
+                b.Write(txt_inv_name_20.Text);
+                b.Write(chk_inv_held_21.Checked);
+                b.Write(txt_inv_qty_21.Text);
+                b.Write(txt_inv_name_21.Text);
+                b.Write(chk_inv_held_22.Checked);
+                b.Write(txt_inv_qty_22.Text);
+                b.Write(txt_inv_name_22.Text);
+                b.Write(chk_inv_held_23.Checked);
+                b.Write(txt_inv_qty_23.Text);
+                b.Write(txt_inv_name_23.Text);
+                b.Write(chk_inv_held_24.Checked);
+                b.Write(txt_inv_qty_24.Text);
+                b.Write(txt_inv_name_24.Text);
+                b.Write(chk_inv_held_25.Checked);
+                b.Write(txt_inv_qty_25.Text);
+                b.Write(txt_inv_name_25.Text);
+                b.Write(chk_inv_held_26.Checked);
+                b.Write(txt_inv_qty_26.Text);
+                b.Write(txt_inv_name_26.Text);
+                b.Write(cmb_inv_bag.Text);
+                b.Write(cmb_trait_1.Text);
+                b.Write(cmb_trait_2.Text);
+                b.Write(cmb_trait_3.Text);
+                b.Write(cmb_trait_4.Text);
+                b.Write(cmb_trait_5.Text);
+                b.Write(cmb_trait_6.Text);
+                b.Write(cmb_trait_7.Text);
+                b.Write(cmb_trait_8.Text);
+                b.Write(cmb_trait_9.Text);
+                b.Write(cmb_trait_10.Text);
+                b.Write(cmb_trait_11.Text);
+                b.Write(cmb_trait_12.Text);
+                b.Write(chk_skills_gathering.Checked);
+                b.Write(txt_skills_gathering.Text);
+                b.Write(chk_skills_tracking.Checked);
+                b.Write(txt_skills_tracking.Text);
+                b.Write(chk_skills_medicine.Checked);
+                b.Write(txt_skills_medicine.Text);
+                b.Write(chk_skills_nature.Checked);
+                b.Write(txt_skills_nature.Text);
+                b.Write(chk_skills_deception.Checked);
+                b.Write(txt_skills_deception.Text);
+                b.Write(chk_skills_persuasion.Checked);
+                b.Write(txt_skills_persuasion.Text);
+                b.Write(chk_skills_intimidation.Checked);
+                b.Write(txt_skills_intimidation.Text);
+                b.Write(chk_skills_perf.Checked);
+                b.Write(txt_skills_perf.Text);
+                b.Write(chk_skills_crafting.Checked);
+                b.Write(txt_skills_crafting.Text);
+                b.Write(chk_skills_app.Checked);
+                b.Write(txt_skills_app.Text);
+                b.Write(chk_skills_hist.Checked);
+                b.Write(txt_skills_hist.Text);
+                b.Write(chk_skills_build.Checked);
+                b.Write(txt_skills_build.Text);
+                b.Write(chk_skills_other1.Checked);
+                b.Write(txt_skills_nm_other1.Text);
+                b.Write(txt_skills_val_other1.Text);
+                b.Write(chk_skills_other2.Checked);
+                b.Write(txt_skills_nm_other2.Text);
+                b.Write(txt_skills_val_other2.Text);
+                b.Write(chk_skills_other3.Checked);
+                b.Write(txt_skills_nm_other3.Text);
+                b.Write(txt_skills_val_other3.Text);
+                b.Write(chk_skills_other4.Checked);
+                b.Write(txt_skills_nm_other4.Text);
+                b.Write(txt_skills_val_other4.Text);
+
+                b.Write(cmb_nature_name.Text);
+                b.Write(txt_flavor_personality.Text);
+                b.Write(txt_flavor_relationships.Text);
+                b.Write(txt_flavor_ideals.Text);
+                b.Write(txt_flavor_flaws.Text);
+                b.Write(txt_flavor_journal.Text);
+                b.Write(imgarr);
+            }
+        }
+
+        private void loadSheetToFile()
+        {
+            List<byte> imgarr = new List<byte>();
+            // Load the file
+            using (BinaryReader b = new BinaryReader(File.Open(Savefilepath, FileMode.Open)))
+            {
+                txt_sht_name.Text = b.ReadString();
+                txt_sht_age.Text = b.ReadString();
+                txt_sht_species.Text = b.ReadString();
+                txt_sht_lv.Text = b.ReadString();
+                txt_sht_exp.Text = b.ReadString();
+                cmb_sht_ability.SelectedIndex = cmb_sht_ability.FindStringExact(b.ReadString());
+
+                txt_stat_belly_curr.Text = b.ReadString();
+                txt_stat_belly_max.Text = b.ReadString();
+                txt_stat_hp_user.Text = b.ReadString();
+                txt_stat_atk_user.Text = b.ReadString();
+                txt_stat_def_user.Text = b.ReadString();
+                txt_stat_satk_user.Text = b.ReadString();
+                txt_stat_sdef_user.Text = b.ReadString();
+                txt_stat_spd_user.Text = b.ReadString();
+                txt_stat_eva_user.Text = b.ReadString();
+                txt_stat_fort_user.Text = b.ReadString();
+
+                ctr_stat_hp_stage.Value = b.ReadInt32();
+                ctr_stat_atk_stage.Value = b.ReadInt32();
+                ctr_stat_def_stage.Value = b.ReadInt32();
+                ctr_stat_satk_stage.Value = b.ReadInt32();
+                ctr_stat_sdef_stage.Value = b.ReadInt32();
+                ctr_stat_spd_stage.Value = b.ReadInt32();
+                ctr_stat_eva_stage.Value = b.ReadInt32();
+                ctr_stat_fort_stage.Value = b.ReadInt32();
+
+                txt_inf_ready_morale.Text = b.ReadString();
+                txt_inf_ready_ing.Text = b.ReadString();
+                txt_inf_ready_insp.Text = b.ReadString();
+                txt_inf_ready_luck.Text = b.ReadString();
+                txt_inf_base_morale.Text = b.ReadString();
+                txt_inf_base_ing.Text = b.ReadString();
+                txt_inf_base_insp.Text = b.ReadString();
+                txt_inf_base_luck.Text = b.ReadString();
+
+                ClkInfliction = b.ReadInt32();
+                Clkstun = b.ReadInt32();
+                Clkmez = b.ReadInt32();
+                Clkdoom = b.ReadInt32();
+                Clkmisc1 = b.ReadInt32();
+                Clkmisc2 = b.ReadInt32();
+                Clkmisc3 = b.ReadInt32();
+                clkChange();
+
+                txt_clocks_misc1.Text = b.ReadString();
+                txt_clocks_misc2.Text = b.ReadString();
+                txt_clocks_misc3.Text = b.ReadString();
+
+                string[] combatnames = {"","","",""};
+                combatnames[0] = b.ReadString();
+                combatnames[1] = b.ReadString();
+                combatnames[2] = b.ReadString();
+                combatnames[3] = b.ReadString();
+                // Match combat name to learnset list and checkbox accordingly
+                for (int carr_iter = 0; carr_iter < 4; carr_iter++)
+                {
+                    for (int move_iter = 0; move_iter < pkmn_moveset_txt_move_name.Count; move_iter++)
+                    {
+                        if (pkmn_moveset_txt_move_name[move_iter].Text == combatnames[carr_iter])
+                        {
+                            pkmn_moveset_chk_move_selected[move_iter].Checked = true;
+                            break;
+                        }
+                    }
+                }
+                txt_combat_move_5_name.Text = b.ReadString();
+                txt_combat_move_1_pp.Text = b.ReadString();
+                txt_combat_move_2_pp.Text = b.ReadString();
+                txt_combat_move_3_pp.Text = b.ReadString();
+                txt_combat_move_4_pp.Text = b.ReadString();
+                txt_combat_move_5_pp.Text = b.ReadString();
+
+                bool dynamax_load;
+                dynamax_load = b.ReadBoolean();
+                if (dynamax_load != DynamaxEnabled) { toggleDynamax(); }
+
+                txt_inv_qty_1.Text = b.ReadString();
+                chk_inv_held_2.Checked = b.ReadBoolean();
+                txt_inv_qty_2.Text = b.ReadString();
+                txt_inv_name_2.Text = b.ReadString();
+                chk_inv_held_3.Checked = b.ReadBoolean();
+                txt_inv_qty_3.Text = b.ReadString();
+                txt_inv_name_3.Text = b.ReadString();
+                chk_inv_held_4.Checked = b.ReadBoolean();
+                txt_inv_qty_4.Text = b.ReadString();
+                txt_inv_name_4.Text = b.ReadString();
+                chk_inv_held_5.Checked = b.ReadBoolean();
+                txt_inv_qty_5.Text = b.ReadString();
+                txt_inv_name_5.Text = b.ReadString();
+                chk_inv_held_6.Checked = b.ReadBoolean();
+                txt_inv_qty_6.Text = b.ReadString();
+                txt_inv_name_6.Text = b.ReadString();
+                chk_inv_held_7.Checked = b.ReadBoolean();
+                txt_inv_qty_7.Text = b.ReadString();
+                txt_inv_name_7.Text = b.ReadString();
+                chk_inv_held_8.Checked = b.ReadBoolean();
+                txt_inv_qty_8.Text = b.ReadString();
+                txt_inv_name_8.Text = b.ReadString();
+                chk_inv_held_9.Checked = b.ReadBoolean();
+                txt_inv_qty_9.Text = b.ReadString();
+                txt_inv_name_9.Text = b.ReadString();
+                chk_inv_held_10.Checked = b.ReadBoolean();
+                txt_inv_qty_10.Text = b.ReadString();
+                txt_inv_name_10.Text = b.ReadString();
+                chk_inv_held_11.Checked = b.ReadBoolean();
+                txt_inv_qty_11.Text = b.ReadString();
+                txt_inv_name_11.Text = b.ReadString();
+                chk_inv_held_12.Checked = b.ReadBoolean();
+                txt_inv_qty_12.Text = b.ReadString();
+                txt_inv_name_12.Text = b.ReadString();
+                chk_inv_held_13.Checked = b.ReadBoolean();
+                txt_inv_qty_13.Text = b.ReadString();
+                txt_inv_name_13.Text = b.ReadString();
+                chk_inv_held_14.Checked = b.ReadBoolean();
+                txt_inv_qty_14.Text = b.ReadString();
+                txt_inv_name_14.Text = b.ReadString();
+                chk_inv_held_15.Checked = b.ReadBoolean();
+                txt_inv_qty_15.Text = b.ReadString();
+                txt_inv_name_15.Text = b.ReadString();
+                chk_inv_held_16.Checked = b.ReadBoolean();
+                txt_inv_qty_16.Text = b.ReadString();
+                txt_inv_name_16.Text = b.ReadString();
+                chk_inv_held_17.Checked = b.ReadBoolean();
+                txt_inv_qty_17.Text = b.ReadString();
+                txt_inv_name_17.Text = b.ReadString();
+                chk_inv_held_18.Checked = b.ReadBoolean();
+                txt_inv_qty_18.Text = b.ReadString();
+                txt_inv_name_18.Text = b.ReadString();
+                chk_inv_held_19.Checked = b.ReadBoolean();
+                txt_inv_qty_19.Text = b.ReadString();
+                txt_inv_name_19.Text = b.ReadString();
+                chk_inv_held_20.Checked = b.ReadBoolean();
+                txt_inv_qty_20.Text = b.ReadString();
+                txt_inv_name_20.Text = b.ReadString();
+                chk_inv_held_21.Checked = b.ReadBoolean();
+                txt_inv_qty_21.Text = b.ReadString();
+                txt_inv_name_21.Text = b.ReadString();
+                chk_inv_held_22.Checked = b.ReadBoolean();
+                txt_inv_qty_22.Text = b.ReadString();
+                txt_inv_name_22.Text = b.ReadString();
+                chk_inv_held_23.Checked = b.ReadBoolean();
+                txt_inv_qty_23.Text = b.ReadString();
+                txt_inv_name_23.Text = b.ReadString();
+                chk_inv_held_24.Checked = b.ReadBoolean();
+                txt_inv_qty_24.Text = b.ReadString();
+                txt_inv_name_24.Text = b.ReadString();
+                chk_inv_held_25.Checked = b.ReadBoolean();
+                txt_inv_qty_25.Text = b.ReadString();
+                txt_inv_name_25.Text = b.ReadString();
+                chk_inv_held_26.Checked = b.ReadBoolean();
+                txt_inv_qty_26.Text = b.ReadString();
+                txt_inv_name_26.Text = b.ReadString();
+                cmb_inv_bag.SelectedIndex = cmb_inv_bag.FindStringExact(b.ReadString());
+                cmb_trait_1.SelectedIndex = cmb_trait_1.FindStringExact(b.ReadString());
+                cmb_trait_2.SelectedIndex = cmb_trait_2.FindStringExact(b.ReadString());
+                cmb_trait_3.SelectedIndex = cmb_trait_3.FindStringExact(b.ReadString());
+                cmb_trait_4.SelectedIndex = cmb_trait_4.FindStringExact(b.ReadString());
+                cmb_trait_5.SelectedIndex = cmb_trait_5.FindStringExact(b.ReadString());
+                cmb_trait_6.SelectedIndex = cmb_trait_6.FindStringExact(b.ReadString());
+                cmb_trait_7.SelectedIndex = cmb_trait_7.FindStringExact(b.ReadString());
+                cmb_trait_8.SelectedIndex = cmb_trait_8.FindStringExact(b.ReadString());
+                cmb_trait_9.SelectedIndex = cmb_trait_9.FindStringExact(b.ReadString());
+                cmb_trait_10.SelectedIndex = cmb_trait_10.FindStringExact(b.ReadString());
+                cmb_trait_11.SelectedIndex = cmb_trait_11.FindStringExact(b.ReadString());
+                cmb_trait_12.SelectedIndex = cmb_trait_12.FindStringExact(b.ReadString());
+                chk_skills_gathering.Checked = b.ReadBoolean();
+                txt_skills_gathering.Text = b.ReadString();
+                chk_skills_tracking.Checked = b.ReadBoolean();
+                txt_skills_tracking.Text = b.ReadString();
+                chk_skills_medicine.Checked = b.ReadBoolean();
+                txt_skills_medicine.Text = b.ReadString();
+                chk_skills_nature.Checked = b.ReadBoolean();
+                txt_skills_nature.Text = b.ReadString();
+                chk_skills_deception.Checked = b.ReadBoolean();
+                txt_skills_deception.Text = b.ReadString();
+                chk_skills_persuasion.Checked = b.ReadBoolean();
+                txt_skills_persuasion.Text = b.ReadString();
+                chk_skills_intimidation.Checked = b.ReadBoolean();
+                txt_skills_intimidation.Text = b.ReadString();
+                chk_skills_perf.Checked = b.ReadBoolean();
+                txt_skills_perf.Text = b.ReadString();
+                chk_skills_crafting.Checked = b.ReadBoolean();
+                txt_skills_crafting.Text = b.ReadString();
+                chk_skills_app.Checked = b.ReadBoolean();
+                txt_skills_app.Text = b.ReadString();
+                chk_skills_hist.Checked = b.ReadBoolean();
+                txt_skills_hist.Text = b.ReadString();
+                chk_skills_build.Checked = b.ReadBoolean();
+                txt_skills_build.Text = b.ReadString();
+                chk_skills_other1.Checked = b.ReadBoolean();
+                txt_skills_nm_other1.Text = b.ReadString();
+                txt_skills_val_other1.Text = b.ReadString();
+                chk_skills_other2.Checked = b.ReadBoolean();
+                txt_skills_nm_other2.Text = b.ReadString();
+                txt_skills_val_other2.Text = b.ReadString();
+                chk_skills_other3.Checked = b.ReadBoolean();
+                txt_skills_nm_other3.Text = b.ReadString();
+                txt_skills_val_other3.Text = b.ReadString();
+                chk_skills_other4.Checked = b.ReadBoolean();
+                txt_skills_nm_other4.Text = b.ReadString();
+                txt_skills_val_other4.Text = b.ReadString();
+
+                cmb_nature_name.SelectedIndex = cmb_nature_name.FindStringExact(b.ReadString());
+                txt_flavor_personality.Text = b.ReadString();
+                txt_flavor_relationships.Text = b.ReadString();
+                txt_flavor_ideals.Text = b.ReadString();
+                txt_flavor_flaws.Text = b.ReadString();
+                txt_flavor_journal.Text = b.ReadString();
+                try
+                {
+                    while (b.BaseStream.Position < b.BaseStream.Length) { imgarr.Add(b.ReadByte()); }
+                }
+                catch (IOException e)
+                {
+                    throw;
+                }
+            }
+            // Load image from byte array
+            using (MemoryStream ms = new MemoryStream(imgarr.ToArray()))
+            {
+                pic_flavor_appearance.Image = System.Drawing.Image.FromStream(ms);
+            }
+
+        }
+        private void ts_file_new_btn_Click(object sender, EventArgs e)
+        {
+            DialogResult dialogResult = MessageBox.Show("Are you sure you want to start a new sheet? All unsaved data will be lost.", "Start New Sheet?", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                disposeEntireSheet();
+            }
+        }
+
+        private void ts_save_file_dialog(bool force_show = false)
+        {
+            if (String.IsNullOrWhiteSpace(Savefilepath) || force_show)
+            {
+                SaveFileDialog dlgSaveFileDialog = new SaveFileDialog();
+                dlgSaveFileDialog.InitialDirectory = AppDomain.CurrentDomain.BaseDirectory;
+                dlgSaveFileDialog.RestoreDirectory = true;
+                dlgSaveFileDialog.Title = "Save Character Sheet";
+                dlgSaveFileDialog.Filter = "PMDnD Character Sheet files (*.pmdnd)|*.pmdnd|All files (*.*)|*.*";
+                dlgSaveFileDialog.DefaultExt = "pmdnd";
+                dlgSaveFileDialog.CheckPathExists = true;
+                if (dlgSaveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    Savefilepath = dlgSaveFileDialog.FileName;
+                    writeSheetToFile();
+                    MessageBox.Show("Successfully saved to " + dlgSaveFileDialog.FileName);
+                }
+            }
+            else
+            {
+                writeSheetToFile();
+            }
+        }
+
+        private void ts_file_saveas_btn_Click(object sender, EventArgs e)
+        {
+            ts_save_file_dialog(true);
+        }
+
+        private void ts_file_save_btn_Click(object sender, EventArgs e)
+        {
+            ts_save_file_dialog();
+        }
+
+        private void Form_Main_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Control && e.Alt && e.KeyCode == Keys.S)
+            {
+                ts_save_file_dialog(true);
+            }
+            else if (e.Control && e.KeyCode == Keys.S)
+            {
+                ts_save_file_dialog();
+            }
+            else if (e.Control && e.KeyCode == Keys.N)
+            {
+                DialogResult dialogResult = MessageBox.Show("Are you sure you want to start a new sheet? All unsaved data will be lost.", "Start New Sheet?", MessageBoxButtons.YesNo);
+                if (dialogResult == DialogResult.Yes)
+                {
+                    disposeEntireSheet();
+                }
+            }
+        }
+
+        private void ts_open_file_dialog()
+        {
+            OpenFileDialog dlgOpenFileDialog = new OpenFileDialog();
+            dlgOpenFileDialog.Multiselect = false;
+            dlgOpenFileDialog.InitialDirectory = AppDomain.CurrentDomain.BaseDirectory;
+            dlgOpenFileDialog.RestoreDirectory = true;
+            dlgOpenFileDialog.Title = "Save Character Sheet";
+            dlgOpenFileDialog.Filter = "PMDnD Character Sheet files (*.pmdnd)|*.pmdnd|All files (*.*)|*.*";
+            dlgOpenFileDialog.DefaultExt = "pmdnd";
+            dlgOpenFileDialog.CheckPathExists = true;
+            if (dlgOpenFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    Savefilepath = dlgOpenFileDialog.FileName;
+                    loadSheetToFile();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+        }
+        private void ts_file_open_btn_Click(object sender, EventArgs e)
+        {
+            ts_open_file_dialog();
         }
     }
 }
