@@ -163,17 +163,26 @@
   <data name="icon_inspiration" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon_inspiration.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="mega_stone_dormant" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\mega_stone_dormant.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="gmax_glow" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\gmax_glow.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="icon_stun_colored" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon_stun_colored.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="mega_stone_glow" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\mega_stone_glow.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="icon_mez" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon_mez.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="mega_stone_glow" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\mega_stone_glow.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="icon_Status_Attack" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon_Status_Attack.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_Physical_Attack" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon_Physical_Attack.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="badge_shimmering_outline" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\badge_shimmering_outline.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -202,11 +211,11 @@
   <data name="icon_luck_colored" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon_luck_colored.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="mega_stone_dormant" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\mega_stone_dormant.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="icon_misc_1_colored" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon_misc_1_colored.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_Special_Attack" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon_Special_Attack.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="icon_misc_3_colored" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon_misc_3_colored.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -229,13 +238,13 @@
   <data name="icon_misc_2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon_misc_2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="icon_Physical_Attack" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon_Physical_Attack.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="icon_Physical_Attack_Shadow" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon_Physical_Attack_Shadow.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="icon_Special_Attack" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon_Special_Attack.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="icon_Special_Attack_Shadow" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon_Special_Attack_Shadow.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="icon_Status_Attack" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon_Status_Attack.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="icon_Status_Attack_Shadow" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon_Status_Attack_Shadow.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
