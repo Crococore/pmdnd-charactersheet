@@ -13,11 +13,12 @@ namespace PMD_Tabletop_Sheet
 
     public partial class Form_Main : Form
     {
+        public Form_DamageCalc frm_dmgcalc = new Form_DamageCalc();
         public bool DynamaxEnabled; public bool MegaEnabled;
         public int PageSelected;
         public int ClkInfliction; public int Clkstun; public int Clkmez; public int Clkdoom; public int Clkmisc1; public int Clkmisc2; public int Clkmisc3;
         public string Savefilepath; public string dbpath; public bool fileio = false;
-        private string[] typeList = { "---", "Normal", "Fire", "Water", "Electric", "Grass", "Ice", "Fighting", "Poison", "Ground", "Flying", "Psychic", "Bug", "Rock", "Ghost", "Dragon", "Dark", "Steel", "Fairy" };
+        public string[] typeList = { "---", "Normal", "Fire", "Water", "Electric", "Grass", "Ice", "Fighting", "Poison", "Ground", "Flying", "Psychic", "Bug", "Rock", "Ghost", "Dragon", "Dark", "Steel", "Fairy" };
         private int[] pkmn_Stats = { 0, 0, 0, 0, 0, 0 }; // HP, ATK, DEF, SATK, SDEF, SPD
         private string pkmn_EXP_Growth = "Slow";
         private double exp_to_lv;
@@ -98,6 +99,7 @@ namespace PMD_Tabletop_Sheet
             InitializeComponent();
             dbpath = System.IO.Directory.GetCurrentDirectory();
             dbpath += "\\Stat_References.db";
+            frm_dmgcalc.dbpath = dbpath;
         }
 
         private void Form_Main_Load(object sender, EventArgs e)
@@ -123,6 +125,9 @@ namespace PMD_Tabletop_Sheet
                 cmb_moves_char_type1.Items.Add(type_item);
                 cmb_moves_char_type2.Items.Add(type_item);
                 cmb_combat_move_prev_type.Items.Add(type_item);
+                frm_dmgcalc.cmb_atkr_move_type.Items.Add(type_item);
+                frm_dmgcalc.cmb_def_type1.Items.Add(type_item);
+                frm_dmgcalc.cmb_def_type2.Items.Add(type_item);
             }
 
             // Create moves template
@@ -2472,7 +2477,7 @@ namespace PMD_Tabletop_Sheet
             txt_flavor_flaws.Text = "";
             txt_flavor_journal.Text = "";
             if (pic_flavor_appearance.Image != null) { try { pic_flavor_appearance.Image.Dispose(); } catch (Exception) { throw; } }
-            pic_flavor_appearance.Image = rimgs_badge_shimmering_outline;
+            pic_flavor_appearance.Image = Properties.Resources.badge_shimmering_outline;
 
             pkmn_EXP_Growth = "Slow";
             pkmn_gmax_move = "";
@@ -3197,6 +3202,16 @@ namespace PMD_Tabletop_Sheet
                 recentFileRemove(3);
                 MessageBox.Show("File not found.");
             }
+        }
+
+        private void grp_combat_moves_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ts_ddb_dmgcalc_Click(object sender, EventArgs e)
+        {
+            frm_dmgcalc.Show();
         }
     }
 }

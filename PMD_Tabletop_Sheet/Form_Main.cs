@@ -16,7 +16,7 @@ namespace PMD_Tabletop_Sheet
         public bool DynamaxEnabled; public bool MegaEnabled;
         public int PageSelected;
         public int ClkInfliction; public int Clkstun; public int Clkmez; public int Clkdoom; public int Clkmisc1; public int Clkmisc2; public int Clkmisc3;
-        public string Savefilepath; public string dbpath; public bool fileio = false;
+        public string Savefilepath; public string dbpath;
         private string[] typeList = { "---", "Normal", "Fire", "Water", "Electric", "Grass", "Ice", "Fighting", "Poison", "Ground", "Flying", "Psychic", "Bug", "Rock", "Ghost", "Dragon", "Dark", "Steel", "Fairy" };
         private int[] pkmn_Stats = { 0, 0, 0, 0, 0, 0 }; // HP, ATK, DEF, SATK, SDEF, SPD
         private string pkmn_EXP_Growth = "Slow";
@@ -110,7 +110,6 @@ namespace PMD_Tabletop_Sheet
             loadBags();
             loadTraits();
             loadNatures();
-            recentFilePathRead();
 
             foreach (string type_item in typeList)
             {
@@ -169,80 +168,66 @@ namespace PMD_Tabletop_Sheet
 
         }
 
-        private void toggleCampaign(string campaign)
-        {
-            if (campaign == "se")
-            {
-                // Starward Express
-                ts_campaign_dnde_btn.Checked = false;
-                ts_campaign_se_btn.Checked = true;
-                pic_sht_badge.Image = rimgs_badge_expedition;
-                if (PageSelected == 1)
-                {
-                    grp_clocks.Visible = false;
-                    grp_inf.Visible = false;
-                    lbl_stat_fort.Visible = false;
-                    txt_stat_fort_user.Visible = false;
-                    txt_stat_fort_eff.Visible = false;
-                    lbl_stat_fort_max.Visible = false;
-                    txt_stat_fort_max.Visible = false;
-                    lbl_stat_fort_half.Visible = false;
-                    txt_stat_fort_half.Visible = false;
-                    lbl_stat_fort_quarter.Visible = false;
-                    txt_stat_fort_quarter.Visible = false;
-                    lbl_stat_fort_stage.Visible = false;
-                    ctr_stat_fort_stage.Visible = false;
-                    btn_dynamax.Visible = false;
-                    toggleShadowMoveVisible(false);
-                    this.Size = new System.Drawing.Size(546, 707);
-                }
-                else if (PageSelected == 3)
-                {
-                    if (ts_campaign_se_btn.Checked) { this.Size = new System.Drawing.Size(619, 500); }
-                    else if (ts_campaign_dnde_btn.Checked) { this.Size = new System.Drawing.Size(619, 777); }
-                }
-            }
-            else if (campaign == "dnde")
-            {
-                // Dungeons & Dragonites
-                ts_campaign_se_btn.Checked = false;
-                ts_campaign_dnde_btn.Checked = true;
-                pic_sht_badge.Image = rimgs_badge_shimmering_outline;
-                if (PageSelected == 1)
-                {
-                    grp_clocks.Visible = true;
-                    grp_inf.Visible = true;
-                    lbl_stat_fort.Visible = true;
-                    txt_stat_fort_user.Visible = true;
-                    txt_stat_fort_eff.Visible = true;
-                    lbl_stat_fort_max.Visible = true;
-                    txt_stat_fort_max.Visible = true;
-                    lbl_stat_fort_half.Visible = true;
-                    txt_stat_fort_half.Visible = true;
-                    lbl_stat_fort_quarter.Visible = true;
-                    txt_stat_fort_quarter.Visible = true;
-                    lbl_stat_fort_stage.Visible = true;
-                    ctr_stat_fort_stage.Visible = true;
-                    btn_dynamax.Visible = true;
-                    toggleShadowMoveVisible(true);
-                    this.Size = new System.Drawing.Size(810, 777);
-                }
-                else if (PageSelected == 3)
-                {
-                    if (ts_campaign_se_btn.Checked) { this.Size = new System.Drawing.Size(619, 500); }
-                    else if (ts_campaign_dnde_btn.Checked) { this.Size = new System.Drawing.Size(619, 777); }
-                }
-            }
-        }
-
         private void ts_campaign_se_btn_Click(object sender, EventArgs e)
         {
-            toggleCampaign("se");
+            ts_campaign_dnde_btn.Checked = false;
+            ts_campaign_se_btn.Checked = true;
+            pic_sht_badge.Image = rimgs_badge_expedition;
+            if (PageSelected == 1)
+            {
+                grp_clocks.Visible = false;
+                grp_inf.Visible = false;
+                lbl_stat_fort.Visible = false;
+                txt_stat_fort_user.Visible = false;
+                txt_stat_fort_eff.Visible = false;
+                lbl_stat_fort_max.Visible = false;
+                txt_stat_fort_max.Visible = false;
+                lbl_stat_fort_half.Visible = false;
+                txt_stat_fort_half.Visible = false;
+                lbl_stat_fort_quarter.Visible = false;
+                txt_stat_fort_quarter.Visible = false;
+                lbl_stat_fort_stage.Visible = false;
+                ctr_stat_fort_stage.Visible = false;
+                btn_dynamax.Visible = false;
+                toggleShadowMoveVisible(false);
+                this.Size = new System.Drawing.Size(546, 707);
+            }
+            else if (PageSelected == 3)
+            {
+                if (ts_campaign_se_btn.Checked) { this.Size = new System.Drawing.Size(619, 500); }
+                else if (ts_campaign_dnde_btn.Checked) { this.Size = new System.Drawing.Size(619, 777); }
+            }
         }
 
         private void ts_campaign_dnde_btn_Click(object sender, EventArgs e)
         {
-            toggleCampaign("dnde");
+            ts_campaign_se_btn.Checked = false;
+            ts_campaign_dnde_btn.Checked = true;
+            pic_sht_badge.Image = rimgs_badge_shimmering_outline;
+            if (PageSelected == 1)
+            {
+                grp_clocks.Visible = true;
+                grp_inf.Visible = true;
+                lbl_stat_fort.Visible = true;
+                txt_stat_fort_user.Visible = true;
+                txt_stat_fort_eff.Visible = true;
+                lbl_stat_fort_max.Visible = true;
+                txt_stat_fort_max.Visible = true;
+                lbl_stat_fort_half.Visible = true;
+                txt_stat_fort_half.Visible = true;
+                lbl_stat_fort_quarter.Visible = true;
+                txt_stat_fort_quarter.Visible = true;
+                lbl_stat_fort_stage.Visible = true;
+                ctr_stat_fort_stage.Visible = true;
+                btn_dynamax.Visible = true;
+                toggleShadowMoveVisible(true);
+                this.Size = new System.Drawing.Size(810, 777);
+            }
+            else if (PageSelected == 3)
+            {
+                if (ts_campaign_se_btn.Checked) { this.Size = new System.Drawing.Size(619, 500); }
+                else if (ts_campaign_dnde_btn.Checked) { this.Size = new System.Drawing.Size(619, 777); }
+            }
         }
 
         private void toggleMega()
@@ -1232,7 +1217,6 @@ namespace PMD_Tabletop_Sheet
                 else if (long.Parse(txt_sht_exp.Text) < calculateEXPtoLv(int.Parse(txt_sht_lv.Text))) { txt_sht_exp.BackColor = System.Drawing.Color.FromKnownColor(System.Drawing.KnownColor.Crimson);}
                 else { txt_sht_exp.BackColor = System.Drawing.SystemColors.Window; }
             }
-            else { txt_sht_exp.BackColor = System.Drawing.SystemColors.Window; }
         }
 
         private int calculateEffStat(int statid, int currstat, decimal stage = 0)
@@ -1565,7 +1549,6 @@ namespace PMD_Tabletop_Sheet
             ComboBox cmb_move_type;
             TextBox txt_move_pp;
             PictureBox pbox_move_attr;
-            int tab_counter = 40;
             using (SQLiteConnection cn = new SQLiteConnection("Data Source=" + dbpath + ";Version=3;New=True;Compress=True;"))
             {
                 cn.Open();
@@ -1586,8 +1569,6 @@ namespace PMD_Tabletop_Sheet
                         chk_move_selected.Size = chk_move_selected_template.Size;
                         chk_move_selected.Location = new System.Drawing.Point(chk_move_selected_template.Location.X, chk_move_selected_template.Location.Y + (24 * (pkmn_moveset_chk_move_selected.Count() - 1)));
                         chk_move_selected.CheckedChanged += new EventHandler(moveCheckBoxClick);
-                        chk_move_selected.TabIndex += tab_counter;
-                        tab_counter++;
                         pnl_move_list.Controls.Add(chk_move_selected);
 
                         txt_move_name = new TextBox();
@@ -2111,9 +2092,9 @@ namespace PMD_Tabletop_Sheet
         
         private void loadShadowMove()
         {
-            string loadmove = txt_combat_move_5_name.Text;
+            string loadmove = "";
             disposeShadowMove();
-            if (shadow_moves.Count > 0 && !fileio) {
+            if (shadow_moves.Count > 0) {
                 loadmove = shadow_moves[rng.Next(0, shadow_moves.Count-1)];
                 txt_combat_move_5_name.Text = loadmove;
             }
@@ -2472,7 +2453,7 @@ namespace PMD_Tabletop_Sheet
             txt_flavor_flaws.Text = "";
             txt_flavor_journal.Text = "";
             if (pic_flavor_appearance.Image != null) { try { pic_flavor_appearance.Image.Dispose(); } catch (Exception) { throw; } }
-            pic_flavor_appearance.Image = Properties.Resources.badge_shimmering_outline;
+            pic_flavor_appearance.Image = rimgs_badge_shimmering_outline;
 
             pkmn_EXP_Growth = "Slow";
             pkmn_gmax_move = "";
@@ -2491,7 +2472,6 @@ namespace PMD_Tabletop_Sheet
 
         private void writeSheetToFile()
         {
-            fileio = true;
             // Save the image to binary array first
             byte[] imgarr;
             using (MemoryStream ms = new MemoryStream())
@@ -2550,15 +2530,16 @@ namespace PMD_Tabletop_Sheet
                 b.Write(txt_clocks_misc3.Text);
 
                 // To-Do: make sure to save the ACTUAL moves and not the dynamax moves
-                if (pkmn_battleset_list.Count > 0) { b.Write(pkmn_battleset_list[0]); } else { b.Write(txt_combat_move_1_name.Text); } //pkmn_battleset_list
-                if (pkmn_battleset_list.Count > 1) { b.Write(pkmn_battleset_list[1]); } else { b.Write(txt_combat_move_2_name.Text); } //pkmn_battleset_list
-                if (pkmn_battleset_list.Count > 2) { b.Write(pkmn_battleset_list[2]); } else { b.Write(txt_combat_move_3_name.Text); } //pkmn_battleset_list
-                if (pkmn_battleset_list.Count > 3) { b.Write(pkmn_battleset_list[3]); } else { b.Write(txt_combat_move_4_name.Text); } //pkmn_battleset_list
+                b.Write(txt_combat_move_1_name.Text);
+                b.Write(txt_combat_move_2_name.Text);
+                b.Write(txt_combat_move_3_name.Text);
+                b.Write(txt_combat_move_4_name.Text);
                 b.Write(txt_combat_move_5_name.Text);
                 b.Write(txt_combat_move_1_pp.Text);
                 b.Write(txt_combat_move_2_pp.Text);
                 b.Write(txt_combat_move_3_pp.Text);
                 b.Write(txt_combat_move_4_pp.Text);
+                // To-Do: fix shadow move load
                 b.Write(txt_combat_move_5_pp.Text);
 
                 b.Write(DynamaxEnabled);
@@ -2695,22 +2676,13 @@ namespace PMD_Tabletop_Sheet
                 b.Write(txt_flavor_ideals.Text);
                 b.Write(txt_flavor_flaws.Text);
                 b.Write(txt_flavor_journal.Text);
-
-                if (ts_campaign_se_btn.Checked) { b.Write("se"); }
-                else if (ts_campaign_dnde_btn.Checked) { b.Write("dnde"); }
-                else { b.Write("dnde"); }
-
                 b.Write(imgarr);
-
             }
-            fileio = false;
         }
 
         private void loadSheetToFile()
         {
-            fileio = true;
             List<byte> imgarr = new List<byte>();
-            disposeEntireSheet();
             // Load the file
             using (BinaryReader b = new BinaryReader(File.Open(Savefilepath, FileMode.Open)))
             {
@@ -2923,10 +2895,6 @@ namespace PMD_Tabletop_Sheet
                 txt_flavor_ideals.Text = b.ReadString();
                 txt_flavor_flaws.Text = b.ReadString();
                 txt_flavor_journal.Text = b.ReadString();
-
-                string campaign = b.ReadString();
-                toggleCampaign(campaign);
-
                 try
                 {
                     while (b.BaseStream.Position < b.BaseStream.Length) { imgarr.Add(b.ReadByte()); }
@@ -2941,7 +2909,7 @@ namespace PMD_Tabletop_Sheet
             {
                 pic_flavor_appearance.Image = System.Drawing.Image.FromStream(ms);
             }
-            fileio = false;
+
         }
         private void ts_file_new_btn_Click(object sender, EventArgs e)
         {
@@ -2950,59 +2918,6 @@ namespace PMD_Tabletop_Sheet
             {
                 disposeEntireSheet();
             }
-        }
-
-        private void recentFilePathRead()
-        {
-            ts_file_recentfiles_1_btn.Text = "1: " + Properties.Settings.Default.RecentFile1;
-            ts_file_recentfiles_2_btn.Text = "2: " + Properties.Settings.Default.RecentFile2;
-            ts_file_recentfiles_3_btn.Text = "3: " + Properties.Settings.Default.RecentFile3;
-            ts_file_recentfiles_4_btn.Text = "4: " + Properties.Settings.Default.RecentFile4;
-            if (String.IsNullOrWhiteSpace(Properties.Settings.Default.RecentFile1)) { ts_file_recentfiles_1_btn.Visible = false; } else { ts_file_recentfiles_1_btn.Visible = true; }
-            if (String.IsNullOrWhiteSpace(Properties.Settings.Default.RecentFile2)) { ts_file_recentfiles_2_btn.Visible = false; } else { ts_file_recentfiles_2_btn.Visible = true; }
-            if (String.IsNullOrWhiteSpace(Properties.Settings.Default.RecentFile3)) { ts_file_recentfiles_3_btn.Visible = false; } else { ts_file_recentfiles_3_btn.Visible = true; }
-            if (String.IsNullOrWhiteSpace(Properties.Settings.Default.RecentFile4)) { ts_file_recentfiles_4_btn.Visible = false; } else { ts_file_recentfiles_4_btn.Visible = true; }
-        }
-
-        private void recentFilePathWrite()
-        {
-            string[] arr_prev = { Properties.Settings.Default.RecentFile1, Properties.Settings.Default.RecentFile2, Properties.Settings.Default.RecentFile3, Properties.Settings.Default.RecentFile4 };
-            string[] arr_new = { "", "", "", "" };
-            int arr_counter = 0; 
-            for (int i = 0; i < 4; i++)
-            {
-                if (Savefilepath != arr_prev[i]) {
-                    arr_new[arr_counter] = arr_prev[i];
-                    arr_counter++;
-                }
-            }
-            Properties.Settings.Default.RecentFile4 = arr_new[2];
-            Properties.Settings.Default.RecentFile3 = arr_new[1];
-            Properties.Settings.Default.RecentFile2 = arr_new[0];
-            Properties.Settings.Default.RecentFile1 = Savefilepath;
-            Properties.Settings.Default.Save();
-            recentFilePathRead();
-        }
-
-        private void recentFileRemove(int index)
-        {
-            string[] arr_prev = { Properties.Settings.Default.RecentFile1, Properties.Settings.Default.RecentFile2, Properties.Settings.Default.RecentFile3, Properties.Settings.Default.RecentFile4 };
-            string[] arr_new = { "", "", "", "" };
-            int arr_counter = 0;
-            for (int i = 0; i < 4; i++)
-            {
-                if (i != index)
-                {
-                    arr_new[arr_counter] = arr_prev[i];
-                    arr_counter++;
-                }
-            }
-            Properties.Settings.Default.RecentFile4 = arr_new[3];
-            Properties.Settings.Default.RecentFile3 = arr_new[2];
-            Properties.Settings.Default.RecentFile2 = arr_new[1];
-            Properties.Settings.Default.RecentFile1 = arr_new[0];
-            Properties.Settings.Default.Save();
-            recentFilePathRead();
         }
 
         private void ts_save_file_dialog(bool force_show = false)
@@ -3019,14 +2934,12 @@ namespace PMD_Tabletop_Sheet
                 if (dlgSaveFileDialog.ShowDialog() == DialogResult.OK)
                 {
                     Savefilepath = dlgSaveFileDialog.FileName;
-                    recentFilePathWrite();
                     writeSheetToFile();
                     MessageBox.Show("Successfully saved to " + dlgSaveFileDialog.FileName);
                 }
             }
             else
             {
-                recentFilePathWrite();
                 writeSheetToFile();
             }
         }
@@ -3061,37 +2974,21 @@ namespace PMD_Tabletop_Sheet
             }
         }
 
-        private void ts_open_file_dialog(bool forceload = false)
+        private void ts_open_file_dialog()
         {
-            if (!forceload)
-            {
-                OpenFileDialog dlgOpenFileDialog = new OpenFileDialog();
-                dlgOpenFileDialog.Multiselect = false;
-                dlgOpenFileDialog.InitialDirectory = AppDomain.CurrentDomain.BaseDirectory;
-                dlgOpenFileDialog.RestoreDirectory = true;
-                dlgOpenFileDialog.Title = "Load Character Sheet";
-                dlgOpenFileDialog.Filter = "PMDnD Character Sheet files (*.pmdnd)|*.pmdnd|All files (*.*)|*.*";
-                dlgOpenFileDialog.DefaultExt = "pmdnd";
-                dlgOpenFileDialog.CheckPathExists = true;
-                if (dlgOpenFileDialog.ShowDialog() == DialogResult.OK)
-                {
-                    try
-                    {
-                        Savefilepath = dlgOpenFileDialog.FileName;
-                        recentFilePathWrite();
-                        loadSheetToFile();
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message);
-                    }
-                }
-            }
-            else
+            OpenFileDialog dlgOpenFileDialog = new OpenFileDialog();
+            dlgOpenFileDialog.Multiselect = false;
+            dlgOpenFileDialog.InitialDirectory = AppDomain.CurrentDomain.BaseDirectory;
+            dlgOpenFileDialog.RestoreDirectory = true;
+            dlgOpenFileDialog.Title = "Save Character Sheet";
+            dlgOpenFileDialog.Filter = "PMDnD Character Sheet files (*.pmdnd)|*.pmdnd|All files (*.*)|*.*";
+            dlgOpenFileDialog.DefaultExt = "pmdnd";
+            dlgOpenFileDialog.CheckPathExists = true;
+            if (dlgOpenFileDialog.ShowDialog() == DialogResult.OK)
             {
                 try
                 {
-                    recentFilePathWrite();
+                    Savefilepath = dlgOpenFileDialog.FileName;
                     loadSheetToFile();
                 }
                 catch (Exception ex)
@@ -3103,100 +3000,6 @@ namespace PMD_Tabletop_Sheet
         private void ts_file_open_btn_Click(object sender, EventArgs e)
         {
             ts_open_file_dialog();
-        }
-
-        private void ts_file_exit_btn_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
-        private void Form_Main_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            string charname;
-            if (String.IsNullOrWhiteSpace(txt_sht_name.Text)) { charname = "your character"; } else { charname = txt_sht_name.Text; }
-            DialogResult dialogResult = MessageBox.Show("Do you want to save changes to " + charname + "?", "PMDnD Character Sheet", MessageBoxButtons.YesNoCancel);
-            if (dialogResult == DialogResult.Yes)
-            {
-                Properties.Settings.Default.Save(); 
-                ts_save_file_dialog();
-            }
-            else if (dialogResult == DialogResult.No)
-            {
-                //Pass
-            }
-            else if (dialogResult == DialogResult.Cancel)
-            {
-                e.Cancel = true;
-            }
-        }
-
-        private void ts_file_about_btn_Click(object sender, EventArgs e)
-        {
-            System.Reflection.Assembly assembly = System.Reflection.Assembly.GetExecutingAssembly();
-            System.Diagnostics.FileVersionInfo fvi = System.Diagnostics.FileVersionInfo.GetVersionInfo(assembly.Location);
-            string version = fvi.FileVersion;
-            MessageBox.Show(
-            "Created by @Crococore\n\nVersion "+ fvi.FileVersion);
-        }
-
-        private void ts_file_recentfiles_1_btn_Click(object sender, EventArgs e)
-        {
-            FileInfo fileInfo = new FileInfo(ts_file_recentfiles_1_btn.Text.Substring(3, ts_file_recentfiles_1_btn.Text.Length - 3));
-            if (fileInfo.Exists)
-            {
-                Savefilepath = ts_file_recentfiles_1_btn.Text.Substring(3, ts_file_recentfiles_1_btn.Text.Length - 3);
-                ts_open_file_dialog(true);
-            }
-            else
-            {
-                recentFileRemove(0);
-                MessageBox.Show("File not found.");
-            }
-        }
-
-        private void ts_file_recentfiles_2_btn_Click(object sender, EventArgs e)
-        {
-            FileInfo fileInfo = new FileInfo(ts_file_recentfiles_2_btn.Text.Substring(3, ts_file_recentfiles_2_btn.Text.Length - 3));
-            if (fileInfo.Exists)
-            {
-                Savefilepath = ts_file_recentfiles_2_btn.Text.Substring(3, ts_file_recentfiles_2_btn.Text.Length - 3);
-                ts_open_file_dialog(true);
-            }
-            else
-            {
-                recentFileRemove(1);
-                MessageBox.Show("File not found.");
-            }
-        }
-
-        private void ts_file_recentfiles_3_btn_Click(object sender, EventArgs e)
-        {
-            FileInfo fileInfo = new FileInfo(ts_file_recentfiles_3_btn.Text.Substring(3, ts_file_recentfiles_3_btn.Text.Length - 3));
-            if (fileInfo.Exists)
-            {
-                Savefilepath = ts_file_recentfiles_3_btn.Text.Substring(3, ts_file_recentfiles_3_btn.Text.Length - 3);
-                ts_open_file_dialog(true);
-            }
-            else
-            {
-                recentFileRemove(2);
-                MessageBox.Show("File not found.");
-            }
-        }
-
-        private void ts_file_recentfiles_4_btn_Click(object sender, EventArgs e)
-        {
-            FileInfo fileInfo = new FileInfo(ts_file_recentfiles_4_btn.Text.Substring(3, ts_file_recentfiles_4_btn.Text.Length - 3));
-            if (fileInfo.Exists)
-            {
-                Savefilepath = ts_file_recentfiles_4_btn.Text.Substring(3, ts_file_recentfiles_4_btn.Text.Length - 3);
-                ts_open_file_dialog(true);
-            }
-            else
-            {
-                recentFileRemove(3);
-                MessageBox.Show("File not found.");
-            }
         }
     }
 }

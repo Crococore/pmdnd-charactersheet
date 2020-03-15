@@ -556,6 +556,7 @@
             this.cmb_nature_name = new System.Windows.Forms.ComboBox();
             this.lbl_nature_name = new System.Windows.Forms.Label();
             this.txt_nature_desc = new System.Windows.Forms.TextBox();
+            this.ts_ddb_dmgcalc = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ctr_stat_hp_stage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ctr_stat_atk_stage)).BeginInit();
@@ -678,7 +679,8 @@
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ts_ddb_file,
             this.ts_ddb_campaign,
-            this.ts_ddb_page});
+            this.ts_ddb_page,
+            this.ts_ddb_dmgcalc});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(794, 25);
@@ -3400,6 +3402,7 @@
             this.grp_combat_moves.TabIndex = 24;
             this.grp_combat_moves.TabStop = false;
             this.grp_combat_moves.Text = "Combat Moves";
+            this.grp_combat_moves.Enter += new System.EventHandler(this.grp_combat_moves_Enter);
             // 
             // txt_combat_move_5_atr
             // 
@@ -6579,6 +6582,16 @@
             this.txt_nature_desc.Text = "\"I follow my own path, nothing can change my mind once I\'m settled on something!\"" +
     "";
             // 
+            // ts_ddb_dmgcalc
+            // 
+            this.ts_ddb_dmgcalc.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.ts_ddb_dmgcalc.Image = ((System.Drawing.Image)(resources.GetObject("ts_ddb_dmgcalc.Image")));
+            this.ts_ddb_dmgcalc.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ts_ddb_dmgcalc.Name = "ts_ddb_dmgcalc";
+            this.ts_ddb_dmgcalc.Size = new System.Drawing.Size(112, 22);
+            this.ts_ddb_dmgcalc.Text = "Damage Calculator";
+            this.ts_ddb_dmgcalc.Click += new System.EventHandler(this.ts_ddb_dmgcalc_Click);
+            // 
             // Form_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -7258,5 +7271,6 @@
         private System.Windows.Forms.ToolStripMenuItem ts_file_recentfiles_2_btn;
         private System.Windows.Forms.ToolStripMenuItem ts_file_recentfiles_3_btn;
         private System.Windows.Forms.ToolStripMenuItem ts_file_recentfiles_4_btn;
+        private System.Windows.Forms.ToolStripButton ts_ddb_dmgcalc;
     }
 }
