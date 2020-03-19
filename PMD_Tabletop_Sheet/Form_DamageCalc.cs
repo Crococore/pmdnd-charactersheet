@@ -311,5 +311,10 @@ namespace PMD_Tabletop_Sheet
             }
             lbl_damage.Text = final_damage.ToString();
         }
+
+        private void lbl_damage_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

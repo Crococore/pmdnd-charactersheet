@@ -36,8 +36,12 @@
             this.ts_file_open_btn = new System.Windows.Forms.ToolStripMenuItem();
             this.ts_file_save_btn = new System.Windows.Forms.ToolStripMenuItem();
             this.ts_file_saveas_btn = new System.Windows.Forms.ToolStripMenuItem();
-            this.ts_file_about_btn = new System.Windows.Forms.ToolStripMenuItem();
             this.ts_file_recentfiles_btn = new System.Windows.Forms.ToolStripMenuItem();
+            this.ts_file_recentfiles_1_btn = new System.Windows.Forms.ToolStripMenuItem();
+            this.ts_file_recentfiles_2_btn = new System.Windows.Forms.ToolStripMenuItem();
+            this.ts_file_recentfiles_3_btn = new System.Windows.Forms.ToolStripMenuItem();
+            this.ts_file_recentfiles_4_btn = new System.Windows.Forms.ToolStripMenuItem();
+            this.ts_file_about_btn = new System.Windows.Forms.ToolStripMenuItem();
             this.ts_file_exit_btn = new System.Windows.Forms.ToolStripMenuItem();
             this.ts_ddb_campaign = new System.Windows.Forms.ToolStripDropDownButton();
             this.ts_campaign_se_btn = new System.Windows.Forms.ToolStripMenuItem();
@@ -47,6 +51,7 @@
             this.ts_page_moves_btn = new System.Windows.Forms.ToolStripMenuItem();
             this.ts_page_inv_btn = new System.Windows.Forms.ToolStripMenuItem();
             this.ts_page_journal_btn = new System.Windows.Forms.ToolStripMenuItem();
+            this.ts_ddb_dmgcalc = new System.Windows.Forms.ToolStripButton();
             this.lbl_sht_name = new System.Windows.Forms.Label();
             this.txt_sht_name = new System.Windows.Forms.TextBox();
             this.txt_sht_age = new System.Windows.Forms.TextBox();
@@ -674,12 +679,14 @@
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ts_ddb_file,
             this.ts_ddb_campaign,
-            this.ts_ddb_page});
+            this.ts_ddb_page,
+            this.ts_ddb_dmgcalc});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(794, 25);
-            this.toolStrip1.TabIndex = 0;
+            this.toolStrip1.TabIndex = 99999;
             this.toolStrip1.Text = "toolStrip1";
+            this.toolStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolStrip1_ItemClicked);
             // 
             // ts_ddb_file
             // 
@@ -726,23 +733,63 @@
             this.ts_file_saveas_btn.Text = "Save As...               (Ctrl+Alt+S)";
             this.ts_file_saveas_btn.Click += new System.EventHandler(this.ts_file_saveas_btn_Click);
             // 
+            // ts_file_recentfiles_btn
+            // 
+            this.ts_file_recentfiles_btn.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
+            this.ts_file_recentfiles_btn.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ts_file_recentfiles_1_btn,
+            this.ts_file_recentfiles_2_btn,
+            this.ts_file_recentfiles_3_btn,
+            this.ts_file_recentfiles_4_btn});
+            this.ts_file_recentfiles_btn.Name = "ts_file_recentfiles_btn";
+            this.ts_file_recentfiles_btn.Size = new System.Drawing.Size(232, 22);
+            this.ts_file_recentfiles_btn.Text = "Recent Files...";
+            // 
+            // ts_file_recentfiles_1_btn
+            // 
+            this.ts_file_recentfiles_1_btn.Name = "ts_file_recentfiles_1_btn";
+            this.ts_file_recentfiles_1_btn.Size = new System.Drawing.Size(86, 22);
+            this.ts_file_recentfiles_1_btn.Text = "1: ";
+            this.ts_file_recentfiles_1_btn.Visible = false;
+            this.ts_file_recentfiles_1_btn.Click += new System.EventHandler(this.ts_file_recentfiles_1_btn_Click);
+            // 
+            // ts_file_recentfiles_2_btn
+            // 
+            this.ts_file_recentfiles_2_btn.Name = "ts_file_recentfiles_2_btn";
+            this.ts_file_recentfiles_2_btn.Size = new System.Drawing.Size(86, 22);
+            this.ts_file_recentfiles_2_btn.Text = "2: ";
+            this.ts_file_recentfiles_2_btn.Visible = false;
+            this.ts_file_recentfiles_2_btn.Click += new System.EventHandler(this.ts_file_recentfiles_2_btn_Click);
+            // 
+            // ts_file_recentfiles_3_btn
+            // 
+            this.ts_file_recentfiles_3_btn.Name = "ts_file_recentfiles_3_btn";
+            this.ts_file_recentfiles_3_btn.Size = new System.Drawing.Size(86, 22);
+            this.ts_file_recentfiles_3_btn.Text = "3: ";
+            this.ts_file_recentfiles_3_btn.Visible = false;
+            this.ts_file_recentfiles_3_btn.Click += new System.EventHandler(this.ts_file_recentfiles_3_btn_Click);
+            // 
+            // ts_file_recentfiles_4_btn
+            // 
+            this.ts_file_recentfiles_4_btn.Name = "ts_file_recentfiles_4_btn";
+            this.ts_file_recentfiles_4_btn.Size = new System.Drawing.Size(86, 22);
+            this.ts_file_recentfiles_4_btn.Text = "4: ";
+            this.ts_file_recentfiles_4_btn.Visible = false;
+            this.ts_file_recentfiles_4_btn.Click += new System.EventHandler(this.ts_file_recentfiles_4_btn_Click);
+            // 
             // ts_file_about_btn
             // 
             this.ts_file_about_btn.Name = "ts_file_about_btn";
             this.ts_file_about_btn.Size = new System.Drawing.Size(232, 22);
             this.ts_file_about_btn.Text = "About";
-            // 
-            // ts_file_recentfiles_btn
-            // 
-            this.ts_file_recentfiles_btn.Name = "ts_file_recentfiles_btn";
-            this.ts_file_recentfiles_btn.Size = new System.Drawing.Size(232, 22);
-            this.ts_file_recentfiles_btn.Text = "Recent Files...";
+            this.ts_file_about_btn.Click += new System.EventHandler(this.ts_file_about_btn_Click);
             // 
             // ts_file_exit_btn
             // 
             this.ts_file_exit_btn.Name = "ts_file_exit_btn";
             this.ts_file_exit_btn.Size = new System.Drawing.Size(232, 22);
             this.ts_file_exit_btn.Text = "Exit                          (Alt+F4)";
+            this.ts_file_exit_btn.Click += new System.EventHandler(this.ts_file_exit_btn_Click);
             // 
             // ts_ddb_campaign
             // 
@@ -816,13 +863,23 @@
             this.ts_page_journal_btn.Text = "Personality && Journal";
             this.ts_page_journal_btn.Click += new System.EventHandler(this.ts_page_journal_btn_Click);
             // 
+            // ts_ddb_dmgcalc
+            // 
+            this.ts_ddb_dmgcalc.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.ts_ddb_dmgcalc.Image = ((System.Drawing.Image)(resources.GetObject("ts_ddb_dmgcalc.Image")));
+            this.ts_ddb_dmgcalc.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ts_ddb_dmgcalc.Name = "ts_ddb_dmgcalc";
+            this.ts_ddb_dmgcalc.Size = new System.Drawing.Size(112, 22);
+            this.ts_ddb_dmgcalc.Text = "Damage Calculator";
+            this.ts_ddb_dmgcalc.Click += new System.EventHandler(this.ts_ddb_dmgcalc_Click);
+            // 
             // lbl_sht_name
             // 
             this.lbl_sht_name.AutoSize = true;
             this.lbl_sht_name.Location = new System.Drawing.Point(143, 0);
             this.lbl_sht_name.Name = "lbl_sht_name";
             this.lbl_sht_name.Size = new System.Drawing.Size(35, 13);
-            this.lbl_sht_name.TabIndex = 1;
+            this.lbl_sht_name.TabIndex = 99999;
             this.lbl_sht_name.Text = "Name";
             // 
             // txt_sht_name
@@ -830,7 +887,7 @@
             this.txt_sht_name.Location = new System.Drawing.Point(146, 16);
             this.txt_sht_name.Name = "txt_sht_name";
             this.txt_sht_name.Size = new System.Drawing.Size(140, 20);
-            this.txt_sht_name.TabIndex = 2;
+            this.txt_sht_name.TabIndex = 0;
             // 
             // txt_sht_age
             // 
@@ -838,7 +895,7 @@
             this.txt_sht_age.MaxLength = 4;
             this.txt_sht_age.Name = "txt_sht_age";
             this.txt_sht_age.Size = new System.Drawing.Size(32, 20);
-            this.txt_sht_age.TabIndex = 4;
+            this.txt_sht_age.TabIndex = 1;
             this.txt_sht_age.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_qty_KeyPress);
             // 
             // lbl_sht_age
@@ -847,7 +904,7 @@
             this.lbl_sht_age.Location = new System.Drawing.Point(289, 0);
             this.lbl_sht_age.Name = "lbl_sht_age";
             this.lbl_sht_age.Size = new System.Drawing.Size(26, 13);
-            this.lbl_sht_age.TabIndex = 3;
+            this.lbl_sht_age.TabIndex = 99999;
             this.lbl_sht_age.Text = "Age";
             // 
             // txt_sht_species
@@ -855,7 +912,7 @@
             this.txt_sht_species.Location = new System.Drawing.Point(333, 16);
             this.txt_sht_species.Name = "txt_sht_species";
             this.txt_sht_species.Size = new System.Drawing.Size(121, 20);
-            this.txt_sht_species.TabIndex = 6;
+            this.txt_sht_species.TabIndex = 2;
             this.txt_sht_species.TextChanged += new System.EventHandler(this.txt_sht_species_TextChanged);
             // 
             // lbl_sht_species
@@ -864,7 +921,7 @@
             this.lbl_sht_species.Location = new System.Drawing.Point(330, 0);
             this.lbl_sht_species.Name = "lbl_sht_species";
             this.lbl_sht_species.Size = new System.Drawing.Size(45, 13);
-            this.lbl_sht_species.TabIndex = 5;
+            this.lbl_sht_species.TabIndex = 99999;
             this.lbl_sht_species.Text = "Species";
             // 
             // lbl_sht_type1
@@ -873,7 +930,7 @@
             this.lbl_sht_type1.Location = new System.Drawing.Point(460, 0);
             this.lbl_sht_type1.Name = "lbl_sht_type1";
             this.lbl_sht_type1.Size = new System.Drawing.Size(40, 13);
-            this.lbl_sht_type1.TabIndex = 7;
+            this.lbl_sht_type1.TabIndex = 99999;
             this.lbl_sht_type1.Text = "Type 1";
             // 
             // cmb_sht_type1
@@ -884,7 +941,8 @@
             this.cmb_sht_type1.MaxDropDownItems = 19;
             this.cmb_sht_type1.Name = "cmb_sht_type1";
             this.cmb_sht_type1.Size = new System.Drawing.Size(63, 21);
-            this.cmb_sht_type1.TabIndex = 8;
+            this.cmb_sht_type1.TabIndex = 99999;
+            this.cmb_sht_type1.TabStop = false;
             this.cmb_sht_type1.Text = "Normal";
             // 
             // cmb_sht_type2
@@ -895,7 +953,8 @@
             this.cmb_sht_type2.MaxDropDownItems = 19;
             this.cmb_sht_type2.Name = "cmb_sht_type2";
             this.cmb_sht_type2.Size = new System.Drawing.Size(63, 21);
-            this.cmb_sht_type2.TabIndex = 10;
+            this.cmb_sht_type2.TabIndex = 99999;
+            this.cmb_sht_type2.TabStop = false;
             this.cmb_sht_type2.Text = "---";
             // 
             // lbl_sht_type2
@@ -904,7 +963,7 @@
             this.lbl_sht_type2.Location = new System.Drawing.Point(460, 41);
             this.lbl_sht_type2.Name = "lbl_sht_type2";
             this.lbl_sht_type2.Size = new System.Drawing.Size(40, 13);
-            this.lbl_sht_type2.TabIndex = 9;
+            this.lbl_sht_type2.TabIndex = 99999;
             this.lbl_sht_type2.Text = "Type 2";
             // 
             // txt_sht_lv
@@ -913,7 +972,7 @@
             this.txt_sht_lv.MaxLength = 3;
             this.txt_sht_lv.Name = "txt_sht_lv";
             this.txt_sht_lv.Size = new System.Drawing.Size(32, 20);
-            this.txt_sht_lv.TabIndex = 12;
+            this.txt_sht_lv.TabIndex = 3;
             this.txt_sht_lv.TextChanged += new System.EventHandler(this.txt_sht_lv_TextChanged);
             this.txt_sht_lv.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_qty_KeyPress);
             // 
@@ -923,7 +982,7 @@
             this.lbl_sht_lv.Location = new System.Drawing.Point(143, 41);
             this.lbl_sht_lv.Name = "lbl_sht_lv";
             this.lbl_sht_lv.Size = new System.Drawing.Size(20, 13);
-            this.lbl_sht_lv.TabIndex = 11;
+            this.lbl_sht_lv.TabIndex = 99999;
             this.lbl_sht_lv.Text = "LV";
             // 
             // txt_sht_exp
@@ -931,7 +990,7 @@
             this.txt_sht_exp.Location = new System.Drawing.Point(187, 57);
             this.txt_sht_exp.Name = "txt_sht_exp";
             this.txt_sht_exp.Size = new System.Drawing.Size(100, 20);
-            this.txt_sht_exp.TabIndex = 14;
+            this.txt_sht_exp.TabIndex = 4;
             this.txt_sht_exp.TextChanged += new System.EventHandler(this.txt_sht_exp_TextChanged);
             this.txt_sht_exp.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_qty_KeyPress);
             // 
@@ -941,7 +1000,7 @@
             this.lbl_sht_exp.Location = new System.Drawing.Point(184, 41);
             this.lbl_sht_exp.Name = "lbl_sht_exp";
             this.lbl_sht_exp.Size = new System.Drawing.Size(28, 13);
-            this.lbl_sht_exp.TabIndex = 13;
+            this.lbl_sht_exp.TabIndex = 99999;
             this.lbl_sht_exp.Text = "EXP";
             // 
             // lbl_sht_ability
@@ -950,7 +1009,7 @@
             this.lbl_sht_ability.Location = new System.Drawing.Point(290, 41);
             this.lbl_sht_ability.Name = "lbl_sht_ability";
             this.lbl_sht_ability.Size = new System.Drawing.Size(34, 13);
-            this.lbl_sht_ability.TabIndex = 15;
+            this.lbl_sht_ability.TabIndex = 99999;
             this.lbl_sht_ability.Text = "Ability";
             // 
             // txt_sht_ability_effect
@@ -960,7 +1019,8 @@
             this.txt_sht_ability_effect.Name = "txt_sht_ability_effect";
             this.txt_sht_ability_effect.ReadOnly = true;
             this.txt_sht_ability_effect.Size = new System.Drawing.Size(239, 44);
-            this.txt_sht_ability_effect.TabIndex = 20;
+            this.txt_sht_ability_effect.TabIndex = 99999;
+            this.txt_sht_ability_effect.TabStop = false;
             // 
             // lbl_sht_ability_effect
             // 
@@ -968,7 +1028,7 @@
             this.lbl_sht_ability_effect.Location = new System.Drawing.Point(143, 80);
             this.lbl_sht_ability_effect.Name = "lbl_sht_ability_effect";
             this.lbl_sht_ability_effect.Size = new System.Drawing.Size(65, 13);
-            this.lbl_sht_ability_effect.TabIndex = 19;
+            this.lbl_sht_ability_effect.TabIndex = 99999;
             this.lbl_sht_ability_effect.Text = "Ability Effect";
             // 
             // lbl_stat_hp
@@ -978,7 +1038,7 @@
             this.lbl_stat_hp.Location = new System.Drawing.Point(4, 178);
             this.lbl_stat_hp.Name = "lbl_stat_hp";
             this.lbl_stat_hp.Size = new System.Drawing.Size(27, 16);
-            this.lbl_stat_hp.TabIndex = 22;
+            this.lbl_stat_hp.TabIndex = 99999;
             this.lbl_stat_hp.Text = "HP";
             // 
             // txt_stat_hp_user
@@ -987,7 +1047,7 @@
             this.txt_stat_hp_user.MaxLength = 6;
             this.txt_stat_hp_user.Name = "txt_stat_hp_user";
             this.txt_stat_hp_user.Size = new System.Drawing.Size(40, 20);
-            this.txt_stat_hp_user.TabIndex = 23;
+            this.txt_stat_hp_user.TabIndex = 8;
             this.txt_stat_hp_user.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txt_stat_hp_user.TextChanged += new System.EventHandler(this.txt_stat_user_TextChanged);
             this.txt_stat_hp_user.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_qty_KeyPress);
@@ -998,7 +1058,8 @@
             this.txt_stat_hp_eff.Name = "txt_stat_hp_eff";
             this.txt_stat_hp_eff.ReadOnly = true;
             this.txt_stat_hp_eff.Size = new System.Drawing.Size(40, 20);
-            this.txt_stat_hp_eff.TabIndex = 24;
+            this.txt_stat_hp_eff.TabIndex = 99999;
+            this.txt_stat_hp_eff.TabStop = false;
             this.txt_stat_hp_eff.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txt_stat_hp_eff.TextChanged += new System.EventHandler(this.txt_stat_hp_eff_TextChanged);
             // 
@@ -1008,7 +1069,8 @@
             this.txt_stat_hp_half.Name = "txt_stat_hp_half";
             this.txt_stat_hp_half.ReadOnly = true;
             this.txt_stat_hp_half.Size = new System.Drawing.Size(24, 20);
-            this.txt_stat_hp_half.TabIndex = 28;
+            this.txt_stat_hp_half.TabIndex = 99999;
+            this.txt_stat_hp_half.TabStop = false;
             this.txt_stat_hp_half.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txt_stat_hp_half.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_qty_KeyPress);
             // 
@@ -1018,7 +1080,8 @@
             this.txt_stat_hp_quarter.Name = "txt_stat_hp_quarter";
             this.txt_stat_hp_quarter.ReadOnly = true;
             this.txt_stat_hp_quarter.Size = new System.Drawing.Size(24, 20);
-            this.txt_stat_hp_quarter.TabIndex = 30;
+            this.txt_stat_hp_quarter.TabIndex = 99999;
+            this.txt_stat_hp_quarter.TabStop = false;
             this.txt_stat_hp_quarter.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txt_stat_hp_quarter.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_qty_KeyPress);
             // 
@@ -1037,7 +1100,7 @@
             -2147483648});
             this.ctr_stat_hp_stage.Name = "ctr_stat_hp_stage";
             this.ctr_stat_hp_stage.Size = new System.Drawing.Size(40, 20);
-            this.ctr_stat_hp_stage.TabIndex = 0;
+            this.ctr_stat_hp_stage.TabIndex = 9;
             this.ctr_stat_hp_stage.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.ctr_stat_hp_stage.ValueChanged += new System.EventHandler(this.txt_stat_user_TextChanged);
             // 
@@ -1048,7 +1111,7 @@
             this.lbl_stat_hp_stage.Location = new System.Drawing.Point(97, 200);
             this.lbl_stat_hp_stage.Name = "lbl_stat_hp_stage";
             this.lbl_stat_hp_stage.Size = new System.Drawing.Size(35, 13);
-            this.lbl_stat_hp_stage.TabIndex = 31;
+            this.lbl_stat_hp_stage.TabIndex = 99999;
             this.lbl_stat_hp_stage.Text = "Stage";
             this.lbl_stat_hp_stage.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
@@ -1059,7 +1122,7 @@
             this.lbl_stat_atk.Location = new System.Drawing.Point(5, 243);
             this.lbl_stat_atk.Name = "lbl_stat_atk";
             this.lbl_stat_atk.Size = new System.Drawing.Size(34, 16);
-            this.lbl_stat_atk.TabIndex = 22;
+            this.lbl_stat_atk.TabIndex = 99999;
             this.lbl_stat_atk.Text = "ATK";
             // 
             // txt_stat_atk_user
@@ -1068,7 +1131,7 @@
             this.txt_stat_atk_user.MaxLength = 6;
             this.txt_stat_atk_user.Name = "txt_stat_atk_user";
             this.txt_stat_atk_user.Size = new System.Drawing.Size(42, 20);
-            this.txt_stat_atk_user.TabIndex = 23;
+            this.txt_stat_atk_user.TabIndex = 10;
             this.txt_stat_atk_user.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txt_stat_atk_user.TextChanged += new System.EventHandler(this.txt_stat_user_TextChanged);
             this.txt_stat_atk_user.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_qty_KeyPress);
@@ -1079,7 +1142,7 @@
             this.txt_stat_atk_eff.Name = "txt_stat_atk_eff";
             this.txt_stat_atk_eff.ReadOnly = true;
             this.txt_stat_atk_eff.Size = new System.Drawing.Size(40, 20);
-            this.txt_stat_atk_eff.TabIndex = 24;
+            this.txt_stat_atk_eff.TabIndex = 99999;
             this.txt_stat_atk_eff.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // lbl_stat_atk_half
@@ -1089,7 +1152,7 @@
             this.lbl_stat_atk_half.Location = new System.Drawing.Point(40, 265);
             this.lbl_stat_atk_half.Name = "lbl_stat_atk_half";
             this.lbl_stat_atk_half.Size = new System.Drawing.Size(24, 13);
-            this.lbl_stat_atk_half.TabIndex = 26;
+            this.lbl_stat_atk_half.TabIndex = 99999;
             this.lbl_stat_atk_half.Text = "1/2";
             this.lbl_stat_atk_half.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
@@ -1099,7 +1162,8 @@
             this.txt_stat_atk_half.Name = "txt_stat_atk_half";
             this.txt_stat_atk_half.ReadOnly = true;
             this.txt_stat_atk_half.Size = new System.Drawing.Size(24, 20);
-            this.txt_stat_atk_half.TabIndex = 28;
+            this.txt_stat_atk_half.TabIndex = 99999;
+            this.txt_stat_atk_half.TabStop = false;
             this.txt_stat_atk_half.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txt_stat_atk_half.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_qty_KeyPress);
             // 
@@ -1110,7 +1174,7 @@
             this.lbl_stat_atk_quarter.Location = new System.Drawing.Point(69, 265);
             this.lbl_stat_atk_quarter.Name = "lbl_stat_atk_quarter";
             this.lbl_stat_atk_quarter.Size = new System.Drawing.Size(24, 13);
-            this.lbl_stat_atk_quarter.TabIndex = 29;
+            this.lbl_stat_atk_quarter.TabIndex = 99999;
             this.lbl_stat_atk_quarter.Text = "1/4";
             this.lbl_stat_atk_quarter.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
@@ -1120,7 +1184,8 @@
             this.txt_stat_atk_quarter.Name = "txt_stat_atk_quarter";
             this.txt_stat_atk_quarter.ReadOnly = true;
             this.txt_stat_atk_quarter.Size = new System.Drawing.Size(24, 20);
-            this.txt_stat_atk_quarter.TabIndex = 30;
+            this.txt_stat_atk_quarter.TabIndex = 99999;
+            this.txt_stat_atk_quarter.TabStop = false;
             this.txt_stat_atk_quarter.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txt_stat_atk_quarter.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_qty_KeyPress);
             // 
@@ -1139,7 +1204,7 @@
             -2147483648});
             this.ctr_stat_atk_stage.Name = "ctr_stat_atk_stage";
             this.ctr_stat_atk_stage.Size = new System.Drawing.Size(40, 20);
-            this.ctr_stat_atk_stage.TabIndex = 0;
+            this.ctr_stat_atk_stage.TabIndex = 11;
             this.ctr_stat_atk_stage.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.ctr_stat_atk_stage.ValueChanged += new System.EventHandler(this.txt_stat_user_TextChanged);
             // 
@@ -1150,7 +1215,7 @@
             this.lbl_stat_atk_stage.Location = new System.Drawing.Point(97, 265);
             this.lbl_stat_atk_stage.Name = "lbl_stat_atk_stage";
             this.lbl_stat_atk_stage.Size = new System.Drawing.Size(35, 13);
-            this.lbl_stat_atk_stage.TabIndex = 31;
+            this.lbl_stat_atk_stage.TabIndex = 99999;
             this.lbl_stat_atk_stage.Text = "Stage";
             this.lbl_stat_atk_stage.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
@@ -1161,7 +1226,7 @@
             this.lbl_stat_def.Location = new System.Drawing.Point(5, 308);
             this.lbl_stat_def.Name = "lbl_stat_def";
             this.lbl_stat_def.Size = new System.Drawing.Size(35, 16);
-            this.lbl_stat_def.TabIndex = 22;
+            this.lbl_stat_def.TabIndex = 99999;
             this.lbl_stat_def.Text = "DEF";
             // 
             // txt_stat_def_user
@@ -1170,7 +1235,7 @@
             this.txt_stat_def_user.MaxLength = 6;
             this.txt_stat_def_user.Name = "txt_stat_def_user";
             this.txt_stat_def_user.Size = new System.Drawing.Size(42, 20);
-            this.txt_stat_def_user.TabIndex = 23;
+            this.txt_stat_def_user.TabIndex = 12;
             this.txt_stat_def_user.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txt_stat_def_user.TextChanged += new System.EventHandler(this.txt_stat_user_TextChanged);
             this.txt_stat_def_user.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_qty_KeyPress);
@@ -1181,7 +1246,8 @@
             this.txt_stat_def_eff.Name = "txt_stat_def_eff";
             this.txt_stat_def_eff.ReadOnly = true;
             this.txt_stat_def_eff.Size = new System.Drawing.Size(40, 20);
-            this.txt_stat_def_eff.TabIndex = 24;
+            this.txt_stat_def_eff.TabIndex = 99999;
+            this.txt_stat_def_eff.TabStop = false;
             this.txt_stat_def_eff.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // lbl_stat_def_half
@@ -1191,7 +1257,7 @@
             this.lbl_stat_def_half.Location = new System.Drawing.Point(40, 330);
             this.lbl_stat_def_half.Name = "lbl_stat_def_half";
             this.lbl_stat_def_half.Size = new System.Drawing.Size(24, 13);
-            this.lbl_stat_def_half.TabIndex = 26;
+            this.lbl_stat_def_half.TabIndex = 99999;
             this.lbl_stat_def_half.Text = "1/2";
             this.lbl_stat_def_half.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
@@ -1201,7 +1267,8 @@
             this.txt_stat_def_half.Name = "txt_stat_def_half";
             this.txt_stat_def_half.ReadOnly = true;
             this.txt_stat_def_half.Size = new System.Drawing.Size(24, 20);
-            this.txt_stat_def_half.TabIndex = 28;
+            this.txt_stat_def_half.TabIndex = 99999;
+            this.txt_stat_def_half.TabStop = false;
             this.txt_stat_def_half.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txt_stat_def_half.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_qty_KeyPress);
             // 
@@ -1212,7 +1279,7 @@
             this.lbl_stat_def_quarter.Location = new System.Drawing.Point(69, 330);
             this.lbl_stat_def_quarter.Name = "lbl_stat_def_quarter";
             this.lbl_stat_def_quarter.Size = new System.Drawing.Size(24, 13);
-            this.lbl_stat_def_quarter.TabIndex = 29;
+            this.lbl_stat_def_quarter.TabIndex = 99999;
             this.lbl_stat_def_quarter.Text = "1/4";
             this.lbl_stat_def_quarter.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
@@ -1222,7 +1289,8 @@
             this.txt_stat_def_quarter.Name = "txt_stat_def_quarter";
             this.txt_stat_def_quarter.ReadOnly = true;
             this.txt_stat_def_quarter.Size = new System.Drawing.Size(24, 20);
-            this.txt_stat_def_quarter.TabIndex = 30;
+            this.txt_stat_def_quarter.TabIndex = 99999;
+            this.txt_stat_def_quarter.TabStop = false;
             this.txt_stat_def_quarter.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txt_stat_def_quarter.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_qty_KeyPress);
             // 
@@ -1241,7 +1309,7 @@
             -2147483648});
             this.ctr_stat_def_stage.Name = "ctr_stat_def_stage";
             this.ctr_stat_def_stage.Size = new System.Drawing.Size(40, 20);
-            this.ctr_stat_def_stage.TabIndex = 0;
+            this.ctr_stat_def_stage.TabIndex = 13;
             this.ctr_stat_def_stage.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.ctr_stat_def_stage.ValueChanged += new System.EventHandler(this.txt_stat_user_TextChanged);
             // 
@@ -1252,7 +1320,7 @@
             this.lbl_stat_def_stage.Location = new System.Drawing.Point(97, 330);
             this.lbl_stat_def_stage.Name = "lbl_stat_def_stage";
             this.lbl_stat_def_stage.Size = new System.Drawing.Size(35, 13);
-            this.lbl_stat_def_stage.TabIndex = 31;
+            this.lbl_stat_def_stage.TabIndex = 99999;
             this.lbl_stat_def_stage.Text = "Stage";
             this.lbl_stat_def_stage.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
@@ -1263,7 +1331,7 @@
             this.lbl_stat_satk.Location = new System.Drawing.Point(7, 373);
             this.lbl_stat_satk.Name = "lbl_stat_satk";
             this.lbl_stat_satk.Size = new System.Drawing.Size(46, 16);
-            this.lbl_stat_satk.TabIndex = 22;
+            this.lbl_stat_satk.TabIndex = 99999;
             this.lbl_stat_satk.Text = "S.ATK";
             // 
             // txt_stat_satk_user
@@ -1272,7 +1340,7 @@
             this.txt_stat_satk_user.MaxLength = 6;
             this.txt_stat_satk_user.Name = "txt_stat_satk_user";
             this.txt_stat_satk_user.Size = new System.Drawing.Size(42, 20);
-            this.txt_stat_satk_user.TabIndex = 23;
+            this.txt_stat_satk_user.TabIndex = 14;
             this.txt_stat_satk_user.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txt_stat_satk_user.TextChanged += new System.EventHandler(this.txt_stat_user_TextChanged);
             this.txt_stat_satk_user.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_qty_KeyPress);
@@ -1283,7 +1351,8 @@
             this.txt_stat_satk_eff.Name = "txt_stat_satk_eff";
             this.txt_stat_satk_eff.ReadOnly = true;
             this.txt_stat_satk_eff.Size = new System.Drawing.Size(40, 20);
-            this.txt_stat_satk_eff.TabIndex = 24;
+            this.txt_stat_satk_eff.TabIndex = 99999;
+            this.txt_stat_satk_eff.TabStop = false;
             this.txt_stat_satk_eff.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // lbl_stat_satk_half
@@ -1293,7 +1362,7 @@
             this.lbl_stat_satk_half.Location = new System.Drawing.Point(40, 395);
             this.lbl_stat_satk_half.Name = "lbl_stat_satk_half";
             this.lbl_stat_satk_half.Size = new System.Drawing.Size(24, 13);
-            this.lbl_stat_satk_half.TabIndex = 26;
+            this.lbl_stat_satk_half.TabIndex = 99999;
             this.lbl_stat_satk_half.Text = "1/2";
             this.lbl_stat_satk_half.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
@@ -1303,7 +1372,8 @@
             this.txt_stat_satk_half.Name = "txt_stat_satk_half";
             this.txt_stat_satk_half.ReadOnly = true;
             this.txt_stat_satk_half.Size = new System.Drawing.Size(24, 20);
-            this.txt_stat_satk_half.TabIndex = 28;
+            this.txt_stat_satk_half.TabIndex = 99999;
+            this.txt_stat_satk_half.TabStop = false;
             this.txt_stat_satk_half.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txt_stat_satk_half.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_qty_KeyPress);
             // 
@@ -1314,7 +1384,7 @@
             this.lbl_stat_satk_quarter.Location = new System.Drawing.Point(69, 395);
             this.lbl_stat_satk_quarter.Name = "lbl_stat_satk_quarter";
             this.lbl_stat_satk_quarter.Size = new System.Drawing.Size(24, 13);
-            this.lbl_stat_satk_quarter.TabIndex = 29;
+            this.lbl_stat_satk_quarter.TabIndex = 99999;
             this.lbl_stat_satk_quarter.Text = "1/4";
             this.lbl_stat_satk_quarter.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
@@ -1324,7 +1394,8 @@
             this.txt_stat_satk_quarter.Name = "txt_stat_satk_quarter";
             this.txt_stat_satk_quarter.ReadOnly = true;
             this.txt_stat_satk_quarter.Size = new System.Drawing.Size(24, 20);
-            this.txt_stat_satk_quarter.TabIndex = 30;
+            this.txt_stat_satk_quarter.TabIndex = 99999;
+            this.txt_stat_satk_quarter.TabStop = false;
             this.txt_stat_satk_quarter.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txt_stat_satk_quarter.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_qty_KeyPress);
             // 
@@ -1343,7 +1414,7 @@
             -2147483648});
             this.ctr_stat_satk_stage.Name = "ctr_stat_satk_stage";
             this.ctr_stat_satk_stage.Size = new System.Drawing.Size(40, 20);
-            this.ctr_stat_satk_stage.TabIndex = 0;
+            this.ctr_stat_satk_stage.TabIndex = 15;
             this.ctr_stat_satk_stage.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.ctr_stat_satk_stage.ValueChanged += new System.EventHandler(this.txt_stat_user_TextChanged);
             // 
@@ -1354,7 +1425,7 @@
             this.lbl_stat_satk_stage.Location = new System.Drawing.Point(97, 395);
             this.lbl_stat_satk_stage.Name = "lbl_stat_satk_stage";
             this.lbl_stat_satk_stage.Size = new System.Drawing.Size(35, 13);
-            this.lbl_stat_satk_stage.TabIndex = 31;
+            this.lbl_stat_satk_stage.TabIndex = 99999;
             this.lbl_stat_satk_stage.Text = "Stage";
             this.lbl_stat_satk_stage.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
@@ -1365,7 +1436,7 @@
             this.lbl_stat_sdef.Location = new System.Drawing.Point(7, 437);
             this.lbl_stat_sdef.Name = "lbl_stat_sdef";
             this.lbl_stat_sdef.Size = new System.Drawing.Size(47, 16);
-            this.lbl_stat_sdef.TabIndex = 22;
+            this.lbl_stat_sdef.TabIndex = 99999;
             this.lbl_stat_sdef.Text = "S.DEF";
             // 
             // txt_stat_sdef_user
@@ -1374,7 +1445,7 @@
             this.txt_stat_sdef_user.MaxLength = 6;
             this.txt_stat_sdef_user.Name = "txt_stat_sdef_user";
             this.txt_stat_sdef_user.Size = new System.Drawing.Size(42, 20);
-            this.txt_stat_sdef_user.TabIndex = 23;
+            this.txt_stat_sdef_user.TabIndex = 16;
             this.txt_stat_sdef_user.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txt_stat_sdef_user.TextChanged += new System.EventHandler(this.txt_stat_user_TextChanged);
             this.txt_stat_sdef_user.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_qty_KeyPress);
@@ -1385,7 +1456,8 @@
             this.txt_stat_sdef_eff.Name = "txt_stat_sdef_eff";
             this.txt_stat_sdef_eff.ReadOnly = true;
             this.txt_stat_sdef_eff.Size = new System.Drawing.Size(40, 20);
-            this.txt_stat_sdef_eff.TabIndex = 24;
+            this.txt_stat_sdef_eff.TabIndex = 99999;
+            this.txt_stat_sdef_eff.TabStop = false;
             this.txt_stat_sdef_eff.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // lbl_stat_sdef_half
@@ -1395,7 +1467,7 @@
             this.lbl_stat_sdef_half.Location = new System.Drawing.Point(40, 460);
             this.lbl_stat_sdef_half.Name = "lbl_stat_sdef_half";
             this.lbl_stat_sdef_half.Size = new System.Drawing.Size(24, 13);
-            this.lbl_stat_sdef_half.TabIndex = 26;
+            this.lbl_stat_sdef_half.TabIndex = 99999;
             this.lbl_stat_sdef_half.Text = "1/2";
             this.lbl_stat_sdef_half.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
@@ -1405,7 +1477,8 @@
             this.txt_stat_sdef_half.Name = "txt_stat_sdef_half";
             this.txt_stat_sdef_half.ReadOnly = true;
             this.txt_stat_sdef_half.Size = new System.Drawing.Size(24, 20);
-            this.txt_stat_sdef_half.TabIndex = 28;
+            this.txt_stat_sdef_half.TabIndex = 99999;
+            this.txt_stat_sdef_half.TabStop = false;
             this.txt_stat_sdef_half.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txt_stat_sdef_half.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_qty_KeyPress);
             // 
@@ -1416,7 +1489,7 @@
             this.lbl_stat_sdef_quarter.Location = new System.Drawing.Point(69, 460);
             this.lbl_stat_sdef_quarter.Name = "lbl_stat_sdef_quarter";
             this.lbl_stat_sdef_quarter.Size = new System.Drawing.Size(24, 13);
-            this.lbl_stat_sdef_quarter.TabIndex = 29;
+            this.lbl_stat_sdef_quarter.TabIndex = 99999;
             this.lbl_stat_sdef_quarter.Text = "1/4";
             this.lbl_stat_sdef_quarter.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
@@ -1426,7 +1499,8 @@
             this.txt_stat_sdef_quarter.Name = "txt_stat_sdef_quarter";
             this.txt_stat_sdef_quarter.ReadOnly = true;
             this.txt_stat_sdef_quarter.Size = new System.Drawing.Size(24, 20);
-            this.txt_stat_sdef_quarter.TabIndex = 30;
+            this.txt_stat_sdef_quarter.TabIndex = 99999;
+            this.txt_stat_sdef_quarter.TabStop = false;
             this.txt_stat_sdef_quarter.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txt_stat_sdef_quarter.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_qty_KeyPress);
             // 
@@ -1445,7 +1519,7 @@
             -2147483648});
             this.ctr_stat_sdef_stage.Name = "ctr_stat_sdef_stage";
             this.ctr_stat_sdef_stage.Size = new System.Drawing.Size(40, 20);
-            this.ctr_stat_sdef_stage.TabIndex = 0;
+            this.ctr_stat_sdef_stage.TabIndex = 17;
             this.ctr_stat_sdef_stage.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.ctr_stat_sdef_stage.ValueChanged += new System.EventHandler(this.txt_stat_user_TextChanged);
             // 
@@ -1456,7 +1530,7 @@
             this.lbl_stat_sdef_stage.Location = new System.Drawing.Point(97, 460);
             this.lbl_stat_sdef_stage.Name = "lbl_stat_sdef_stage";
             this.lbl_stat_sdef_stage.Size = new System.Drawing.Size(35, 13);
-            this.lbl_stat_sdef_stage.TabIndex = 31;
+            this.lbl_stat_sdef_stage.TabIndex = 99999;
             this.lbl_stat_sdef_stage.Text = "Stage";
             this.lbl_stat_sdef_stage.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
@@ -1467,7 +1541,7 @@
             this.lbl_stat_spd.Location = new System.Drawing.Point(7, 503);
             this.lbl_stat_spd.Name = "lbl_stat_spd";
             this.lbl_stat_spd.Size = new System.Drawing.Size(36, 16);
-            this.lbl_stat_spd.TabIndex = 22;
+            this.lbl_stat_spd.TabIndex = 99999;
             this.lbl_stat_spd.Text = "SPD";
             // 
             // txt_stat_spd_user
@@ -1476,7 +1550,7 @@
             this.txt_stat_spd_user.MaxLength = 6;
             this.txt_stat_spd_user.Name = "txt_stat_spd_user";
             this.txt_stat_spd_user.Size = new System.Drawing.Size(42, 20);
-            this.txt_stat_spd_user.TabIndex = 23;
+            this.txt_stat_spd_user.TabIndex = 18;
             this.txt_stat_spd_user.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txt_stat_spd_user.TextChanged += new System.EventHandler(this.txt_stat_user_TextChanged);
             this.txt_stat_spd_user.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_qty_KeyPress);
@@ -1487,7 +1561,8 @@
             this.txt_stat_spd_eff.Name = "txt_stat_spd_eff";
             this.txt_stat_spd_eff.ReadOnly = true;
             this.txt_stat_spd_eff.Size = new System.Drawing.Size(40, 20);
-            this.txt_stat_spd_eff.TabIndex = 24;
+            this.txt_stat_spd_eff.TabIndex = 99999;
+            this.txt_stat_spd_eff.TabStop = false;
             this.txt_stat_spd_eff.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // lbl_stat_spd_half
@@ -1497,7 +1572,7 @@
             this.lbl_stat_spd_half.Location = new System.Drawing.Point(40, 525);
             this.lbl_stat_spd_half.Name = "lbl_stat_spd_half";
             this.lbl_stat_spd_half.Size = new System.Drawing.Size(24, 13);
-            this.lbl_stat_spd_half.TabIndex = 26;
+            this.lbl_stat_spd_half.TabIndex = 99999;
             this.lbl_stat_spd_half.Text = "1/2";
             this.lbl_stat_spd_half.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
@@ -1507,7 +1582,8 @@
             this.txt_stat_spd_half.Name = "txt_stat_spd_half";
             this.txt_stat_spd_half.ReadOnly = true;
             this.txt_stat_spd_half.Size = new System.Drawing.Size(24, 20);
-            this.txt_stat_spd_half.TabIndex = 28;
+            this.txt_stat_spd_half.TabIndex = 99999;
+            this.txt_stat_spd_half.TabStop = false;
             this.txt_stat_spd_half.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txt_stat_spd_half.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_qty_KeyPress);
             // 
@@ -1518,7 +1594,7 @@
             this.lbl_stat_spd_quarter.Location = new System.Drawing.Point(69, 525);
             this.lbl_stat_spd_quarter.Name = "lbl_stat_spd_quarter";
             this.lbl_stat_spd_quarter.Size = new System.Drawing.Size(24, 13);
-            this.lbl_stat_spd_quarter.TabIndex = 29;
+            this.lbl_stat_spd_quarter.TabIndex = 99999;
             this.lbl_stat_spd_quarter.Text = "1/4";
             this.lbl_stat_spd_quarter.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
@@ -1528,7 +1604,8 @@
             this.txt_stat_spd_quarter.Name = "txt_stat_spd_quarter";
             this.txt_stat_spd_quarter.ReadOnly = true;
             this.txt_stat_spd_quarter.Size = new System.Drawing.Size(24, 20);
-            this.txt_stat_spd_quarter.TabIndex = 30;
+            this.txt_stat_spd_quarter.TabIndex = 99999;
+            this.txt_stat_spd_quarter.TabStop = false;
             this.txt_stat_spd_quarter.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txt_stat_spd_quarter.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_qty_KeyPress);
             // 
@@ -1547,7 +1624,7 @@
             -2147483648});
             this.ctr_stat_spd_stage.Name = "ctr_stat_spd_stage";
             this.ctr_stat_spd_stage.Size = new System.Drawing.Size(40, 20);
-            this.ctr_stat_spd_stage.TabIndex = 0;
+            this.ctr_stat_spd_stage.TabIndex = 19;
             this.ctr_stat_spd_stage.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.ctr_stat_spd_stage.ValueChanged += new System.EventHandler(this.txt_stat_user_TextChanged);
             // 
@@ -1558,7 +1635,7 @@
             this.lbl_stat_spd_stage.Location = new System.Drawing.Point(97, 525);
             this.lbl_stat_spd_stage.Name = "lbl_stat_spd_stage";
             this.lbl_stat_spd_stage.Size = new System.Drawing.Size(35, 13);
-            this.lbl_stat_spd_stage.TabIndex = 31;
+            this.lbl_stat_spd_stage.TabIndex = 99999;
             this.lbl_stat_spd_stage.Text = "Stage";
             this.lbl_stat_spd_stage.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
@@ -1569,7 +1646,7 @@
             this.lbl_stat_eva.Location = new System.Drawing.Point(7, 568);
             this.lbl_stat_eva.Name = "lbl_stat_eva";
             this.lbl_stat_eva.Size = new System.Drawing.Size(35, 16);
-            this.lbl_stat_eva.TabIndex = 22;
+            this.lbl_stat_eva.TabIndex = 99999;
             this.lbl_stat_eva.Text = "EVA";
             // 
             // txt_stat_eva_user
@@ -1578,7 +1655,7 @@
             this.txt_stat_eva_user.MaxLength = 6;
             this.txt_stat_eva_user.Name = "txt_stat_eva_user";
             this.txt_stat_eva_user.Size = new System.Drawing.Size(42, 20);
-            this.txt_stat_eva_user.TabIndex = 23;
+            this.txt_stat_eva_user.TabIndex = 20;
             this.txt_stat_eva_user.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txt_stat_eva_user.TextChanged += new System.EventHandler(this.txt_stat_user_TextChanged);
             this.txt_stat_eva_user.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_qty_KeyPress);
@@ -1590,7 +1667,7 @@
             this.lbl_stat_eva_half.Location = new System.Drawing.Point(40, 590);
             this.lbl_stat_eva_half.Name = "lbl_stat_eva_half";
             this.lbl_stat_eva_half.Size = new System.Drawing.Size(24, 13);
-            this.lbl_stat_eva_half.TabIndex = 26;
+            this.lbl_stat_eva_half.TabIndex = 99999;
             this.lbl_stat_eva_half.Text = "1/2";
             this.lbl_stat_eva_half.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
@@ -1600,7 +1677,8 @@
             this.txt_stat_eva_half.Name = "txt_stat_eva_half";
             this.txt_stat_eva_half.ReadOnly = true;
             this.txt_stat_eva_half.Size = new System.Drawing.Size(24, 20);
-            this.txt_stat_eva_half.TabIndex = 28;
+            this.txt_stat_eva_half.TabIndex = 99999;
+            this.txt_stat_eva_half.TabStop = false;
             this.txt_stat_eva_half.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txt_stat_eva_half.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_qty_KeyPress);
             // 
@@ -1611,7 +1689,7 @@
             this.lbl_stat_eva_quarter.Location = new System.Drawing.Point(69, 590);
             this.lbl_stat_eva_quarter.Name = "lbl_stat_eva_quarter";
             this.lbl_stat_eva_quarter.Size = new System.Drawing.Size(24, 13);
-            this.lbl_stat_eva_quarter.TabIndex = 29;
+            this.lbl_stat_eva_quarter.TabIndex = 99999;
             this.lbl_stat_eva_quarter.Text = "1/4";
             this.lbl_stat_eva_quarter.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
@@ -1621,7 +1699,8 @@
             this.txt_stat_eva_quarter.Name = "txt_stat_eva_quarter";
             this.txt_stat_eva_quarter.ReadOnly = true;
             this.txt_stat_eva_quarter.Size = new System.Drawing.Size(24, 20);
-            this.txt_stat_eva_quarter.TabIndex = 30;
+            this.txt_stat_eva_quarter.TabIndex = 99999;
+            this.txt_stat_eva_quarter.TabStop = false;
             this.txt_stat_eva_quarter.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txt_stat_eva_quarter.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_qty_KeyPress);
             // 
@@ -1640,7 +1719,7 @@
             -2147483648});
             this.ctr_stat_eva_stage.Name = "ctr_stat_eva_stage";
             this.ctr_stat_eva_stage.Size = new System.Drawing.Size(40, 20);
-            this.ctr_stat_eva_stage.TabIndex = 0;
+            this.ctr_stat_eva_stage.TabIndex = 21;
             this.ctr_stat_eva_stage.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.ctr_stat_eva_stage.ValueChanged += new System.EventHandler(this.txt_stat_user_TextChanged);
             // 
@@ -1651,7 +1730,7 @@
             this.lbl_stat_eva_stage.Location = new System.Drawing.Point(97, 590);
             this.lbl_stat_eva_stage.Name = "lbl_stat_eva_stage";
             this.lbl_stat_eva_stage.Size = new System.Drawing.Size(35, 13);
-            this.lbl_stat_eva_stage.TabIndex = 31;
+            this.lbl_stat_eva_stage.TabIndex = 99999;
             this.lbl_stat_eva_stage.Text = "Stage";
             this.lbl_stat_eva_stage.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
@@ -1661,7 +1740,8 @@
             this.txt_stat_eva_eff.Name = "txt_stat_eva_eff";
             this.txt_stat_eva_eff.ReadOnly = true;
             this.txt_stat_eva_eff.Size = new System.Drawing.Size(40, 20);
-            this.txt_stat_eva_eff.TabIndex = 24;
+            this.txt_stat_eva_eff.TabIndex = 99999;
+            this.txt_stat_eva_eff.TabStop = false;
             this.txt_stat_eva_eff.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // lbl_stat_fort
@@ -1671,7 +1751,7 @@
             this.lbl_stat_fort.Location = new System.Drawing.Point(5, 633);
             this.lbl_stat_fort.Name = "lbl_stat_fort";
             this.lbl_stat_fort.Size = new System.Drawing.Size(45, 16);
-            this.lbl_stat_fort.TabIndex = 22;
+            this.lbl_stat_fort.TabIndex = 99999;
             this.lbl_stat_fort.Text = "FORT";
             // 
             // txt_stat_fort_user
@@ -1680,7 +1760,7 @@
             this.txt_stat_fort_user.MaxLength = 6;
             this.txt_stat_fort_user.Name = "txt_stat_fort_user";
             this.txt_stat_fort_user.Size = new System.Drawing.Size(42, 20);
-            this.txt_stat_fort_user.TabIndex = 23;
+            this.txt_stat_fort_user.TabIndex = 22;
             this.txt_stat_fort_user.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txt_stat_fort_user.TextChanged += new System.EventHandler(this.txt_stat_user_TextChanged);
             this.txt_stat_fort_user.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_qty_KeyPress);
@@ -1691,7 +1771,8 @@
             this.txt_stat_fort_eff.Name = "txt_stat_fort_eff";
             this.txt_stat_fort_eff.ReadOnly = true;
             this.txt_stat_fort_eff.Size = new System.Drawing.Size(40, 20);
-            this.txt_stat_fort_eff.TabIndex = 24;
+            this.txt_stat_fort_eff.TabIndex = 99999;
+            this.txt_stat_fort_eff.TabStop = false;
             this.txt_stat_fort_eff.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // lbl_stat_fort_half
@@ -1701,7 +1782,7 @@
             this.lbl_stat_fort_half.Location = new System.Drawing.Point(40, 655);
             this.lbl_stat_fort_half.Name = "lbl_stat_fort_half";
             this.lbl_stat_fort_half.Size = new System.Drawing.Size(24, 13);
-            this.lbl_stat_fort_half.TabIndex = 26;
+            this.lbl_stat_fort_half.TabIndex = 99999;
             this.lbl_stat_fort_half.Text = "1/2";
             this.lbl_stat_fort_half.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
@@ -1711,7 +1792,8 @@
             this.txt_stat_fort_half.Name = "txt_stat_fort_half";
             this.txt_stat_fort_half.ReadOnly = true;
             this.txt_stat_fort_half.Size = new System.Drawing.Size(24, 20);
-            this.txt_stat_fort_half.TabIndex = 28;
+            this.txt_stat_fort_half.TabIndex = 99999;
+            this.txt_stat_fort_half.TabStop = false;
             this.txt_stat_fort_half.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txt_stat_fort_half.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_qty_KeyPress);
             // 
@@ -1722,7 +1804,7 @@
             this.lbl_stat_fort_quarter.Location = new System.Drawing.Point(69, 655);
             this.lbl_stat_fort_quarter.Name = "lbl_stat_fort_quarter";
             this.lbl_stat_fort_quarter.Size = new System.Drawing.Size(24, 13);
-            this.lbl_stat_fort_quarter.TabIndex = 29;
+            this.lbl_stat_fort_quarter.TabIndex = 99999;
             this.lbl_stat_fort_quarter.Text = "1/4";
             this.lbl_stat_fort_quarter.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
@@ -1732,7 +1814,8 @@
             this.txt_stat_fort_quarter.Name = "txt_stat_fort_quarter";
             this.txt_stat_fort_quarter.ReadOnly = true;
             this.txt_stat_fort_quarter.Size = new System.Drawing.Size(24, 20);
-            this.txt_stat_fort_quarter.TabIndex = 30;
+            this.txt_stat_fort_quarter.TabIndex = 99999;
+            this.txt_stat_fort_quarter.TabStop = false;
             this.txt_stat_fort_quarter.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txt_stat_fort_quarter.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_qty_KeyPress);
             // 
@@ -1751,7 +1834,7 @@
             -2147483648});
             this.ctr_stat_fort_stage.Name = "ctr_stat_fort_stage";
             this.ctr_stat_fort_stage.Size = new System.Drawing.Size(40, 20);
-            this.ctr_stat_fort_stage.TabIndex = 0;
+            this.ctr_stat_fort_stage.TabIndex = 23;
             this.ctr_stat_fort_stage.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.ctr_stat_fort_stage.ValueChanged += new System.EventHandler(this.txt_stat_user_TextChanged);
             // 
@@ -1762,7 +1845,7 @@
             this.lbl_stat_fort_stage.Location = new System.Drawing.Point(97, 655);
             this.lbl_stat_fort_stage.Name = "lbl_stat_fort_stage";
             this.lbl_stat_fort_stage.Size = new System.Drawing.Size(35, 13);
-            this.lbl_stat_fort_stage.TabIndex = 31;
+            this.lbl_stat_fort_stage.TabIndex = 99999;
             this.lbl_stat_fort_stage.Text = "Stage";
             this.lbl_stat_fort_stage.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
@@ -1888,7 +1971,7 @@
             this.pnl_pg_1_stats.Location = new System.Drawing.Point(0, 28);
             this.pnl_pg_1_stats.Name = "pnl_pg_1_stats";
             this.pnl_pg_1_stats.Size = new System.Drawing.Size(794, 704);
-            this.pnl_pg_1_stats.TabIndex = 32;
+            this.pnl_pg_1_stats.TabIndex = 99999;
             // 
             // lbl_stat_belly_max
             // 
@@ -1897,7 +1980,7 @@
             this.lbl_stat_belly_max.Location = new System.Drawing.Point(97, 131);
             this.lbl_stat_belly_max.Name = "lbl_stat_belly_max";
             this.lbl_stat_belly_max.Size = new System.Drawing.Size(33, 16);
-            this.lbl_stat_belly_max.TabIndex = 128;
+            this.lbl_stat_belly_max.TabIndex = 99999;
             this.lbl_stat_belly_max.Text = "Max";
             // 
             // lbl_stat_belly
@@ -1907,7 +1990,7 @@
             this.lbl_stat_belly.Location = new System.Drawing.Point(54, 131);
             this.lbl_stat_belly.Name = "lbl_stat_belly";
             this.lbl_stat_belly.Size = new System.Drawing.Size(38, 16);
-            this.lbl_stat_belly.TabIndex = 127;
+            this.lbl_stat_belly.TabIndex = 99999;
             this.lbl_stat_belly.Text = "Belly";
             // 
             // pictureBox1
@@ -1917,7 +2000,7 @@
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(36, 36);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 126;
+            this.pictureBox1.TabIndex = 99999;
             this.pictureBox1.TabStop = false;
             // 
             // grp_inf
@@ -1949,7 +2032,7 @@
             this.grp_inf.Location = new System.Drawing.Point(530, 3);
             this.grp_inf.Name = "grp_inf";
             this.grp_inf.Size = new System.Drawing.Size(252, 233);
-            this.grp_inf.TabIndex = 35;
+            this.grp_inf.TabIndex = 29;
             this.grp_inf.TabStop = false;
             this.grp_inf.Text = "Influence Points";
             // 
@@ -1959,7 +2042,7 @@
             this.lbl_inf_ready_ing.Location = new System.Drawing.Point(208, 41);
             this.lbl_inf_ready_ing.Name = "lbl_inf_ready_ing";
             this.lbl_inf_ready_ing.Size = new System.Drawing.Size(38, 13);
-            this.lbl_inf_ready_ing.TabIndex = 132;
+            this.lbl_inf_ready_ing.TabIndex = 99999;
             this.lbl_inf_ready_ing.Text = "Ready";
             this.lbl_inf_ready_ing.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
@@ -1969,7 +2052,7 @@
             this.lbl_inf_ready_luck.Location = new System.Drawing.Point(208, 145);
             this.lbl_inf_ready_luck.Name = "lbl_inf_ready_luck";
             this.lbl_inf_ready_luck.Size = new System.Drawing.Size(38, 13);
-            this.lbl_inf_ready_luck.TabIndex = 132;
+            this.lbl_inf_ready_luck.TabIndex = 99999;
             this.lbl_inf_ready_luck.Text = "Ready";
             this.lbl_inf_ready_luck.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
@@ -1979,7 +2062,7 @@
             this.lbl_inf_ready_insp.Location = new System.Drawing.Point(85, 145);
             this.lbl_inf_ready_insp.Name = "lbl_inf_ready_insp";
             this.lbl_inf_ready_insp.Size = new System.Drawing.Size(38, 13);
-            this.lbl_inf_ready_insp.TabIndex = 132;
+            this.lbl_inf_ready_insp.TabIndex = 99999;
             this.lbl_inf_ready_insp.Text = "Ready";
             this.lbl_inf_ready_insp.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
@@ -1989,7 +2072,7 @@
             this.lbl_inf_ready_morale.Location = new System.Drawing.Point(85, 41);
             this.lbl_inf_ready_morale.Name = "lbl_inf_ready_morale";
             this.lbl_inf_ready_morale.Size = new System.Drawing.Size(38, 13);
-            this.lbl_inf_ready_morale.TabIndex = 132;
+            this.lbl_inf_ready_morale.TabIndex = 99999;
             this.lbl_inf_ready_morale.Text = "Ready";
             this.lbl_inf_ready_morale.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
@@ -1999,7 +2082,7 @@
             this.lbl_inf_base_ing.Location = new System.Drawing.Point(210, 77);
             this.lbl_inf_base_ing.Name = "lbl_inf_base_ing";
             this.lbl_inf_base_ing.Size = new System.Drawing.Size(31, 13);
-            this.lbl_inf_base_ing.TabIndex = 131;
+            this.lbl_inf_base_ing.TabIndex = 99999;
             this.lbl_inf_base_ing.Text = "Base";
             this.lbl_inf_base_ing.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
@@ -2009,7 +2092,7 @@
             this.lbl_inf_base_luck.Location = new System.Drawing.Point(210, 181);
             this.lbl_inf_base_luck.Name = "lbl_inf_base_luck";
             this.lbl_inf_base_luck.Size = new System.Drawing.Size(31, 13);
-            this.lbl_inf_base_luck.TabIndex = 131;
+            this.lbl_inf_base_luck.TabIndex = 99999;
             this.lbl_inf_base_luck.Text = "Base";
             this.lbl_inf_base_luck.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
@@ -2019,7 +2102,7 @@
             this.lbl_inf_base_insp.Location = new System.Drawing.Point(87, 181);
             this.lbl_inf_base_insp.Name = "lbl_inf_base_insp";
             this.lbl_inf_base_insp.Size = new System.Drawing.Size(31, 13);
-            this.lbl_inf_base_insp.TabIndex = 131;
+            this.lbl_inf_base_insp.TabIndex = 99999;
             this.lbl_inf_base_insp.Text = "Base";
             this.lbl_inf_base_insp.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
@@ -2029,7 +2112,7 @@
             this.lbl_inf_base_morale.Location = new System.Drawing.Point(87, 77);
             this.lbl_inf_base_morale.Name = "lbl_inf_base_morale";
             this.lbl_inf_base_morale.Size = new System.Drawing.Size(31, 13);
-            this.lbl_inf_base_morale.TabIndex = 131;
+            this.lbl_inf_base_morale.TabIndex = 99999;
             this.lbl_inf_base_morale.Text = "Base";
             this.lbl_inf_base_morale.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
@@ -2039,7 +2122,7 @@
             this.lbl_inf_ing.Location = new System.Drawing.Point(130, 19);
             this.lbl_inf_ing.Name = "lbl_inf_ing";
             this.lbl_inf_ing.Size = new System.Drawing.Size(117, 18);
-            this.lbl_inf_ing.TabIndex = 129;
+            this.lbl_inf_ing.TabIndex = 99999;
             this.lbl_inf_ing.Text = "Ingenuity";
             this.lbl_inf_ing.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
@@ -2049,7 +2132,7 @@
             this.lbl_inf_luck.Location = new System.Drawing.Point(130, 123);
             this.lbl_inf_luck.Name = "lbl_inf_luck";
             this.lbl_inf_luck.Size = new System.Drawing.Size(117, 18);
-            this.lbl_inf_luck.TabIndex = 129;
+            this.lbl_inf_luck.TabIndex = 99999;
             this.lbl_inf_luck.Text = "Luck";
             this.lbl_inf_luck.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
@@ -2059,7 +2142,7 @@
             this.lbl_inf_insp.Location = new System.Drawing.Point(7, 123);
             this.lbl_inf_insp.Name = "lbl_inf_insp";
             this.lbl_inf_insp.Size = new System.Drawing.Size(117, 18);
-            this.lbl_inf_insp.TabIndex = 129;
+            this.lbl_inf_insp.TabIndex = 99999;
             this.lbl_inf_insp.Text = "Inspiration";
             this.lbl_inf_insp.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
@@ -2069,7 +2152,7 @@
             this.txt_inf_base_ing.MaxLength = 5;
             this.txt_inf_base_ing.Name = "txt_inf_base_ing";
             this.txt_inf_base_ing.Size = new System.Drawing.Size(36, 20);
-            this.txt_inf_base_ing.TabIndex = 128;
+            this.txt_inf_base_ing.TabIndex = 32;
             this.txt_inf_base_ing.TextChanged += new System.EventHandler(this.txt_inf_ready_ing_TextChanged);
             this.txt_inf_base_ing.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_qty_KeyPress);
             // 
@@ -2079,7 +2162,7 @@
             this.txt_inf_base_luck.MaxLength = 5;
             this.txt_inf_base_luck.Name = "txt_inf_base_luck";
             this.txt_inf_base_luck.Size = new System.Drawing.Size(36, 20);
-            this.txt_inf_base_luck.TabIndex = 128;
+            this.txt_inf_base_luck.TabIndex = 36;
             this.txt_inf_base_luck.TextChanged += new System.EventHandler(this.txt_inf_ready_luck_TextChanged);
             this.txt_inf_base_luck.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_qty_KeyPress);
             // 
@@ -2089,7 +2172,7 @@
             this.lbl_inf_morale.Location = new System.Drawing.Point(7, 19);
             this.lbl_inf_morale.Name = "lbl_inf_morale";
             this.lbl_inf_morale.Size = new System.Drawing.Size(117, 18);
-            this.lbl_inf_morale.TabIndex = 129;
+            this.lbl_inf_morale.TabIndex = 99999;
             this.lbl_inf_morale.Text = "Morale";
             this.lbl_inf_morale.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
@@ -2099,7 +2182,7 @@
             this.txt_inf_base_insp.MaxLength = 5;
             this.txt_inf_base_insp.Name = "txt_inf_base_insp";
             this.txt_inf_base_insp.Size = new System.Drawing.Size(36, 20);
-            this.txt_inf_base_insp.TabIndex = 128;
+            this.txt_inf_base_insp.TabIndex = 34;
             this.txt_inf_base_insp.TextChanged += new System.EventHandler(this.txt_inf_ready_insp_TextChanged);
             this.txt_inf_base_insp.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_qty_KeyPress);
             // 
@@ -2109,7 +2192,7 @@
             this.txt_inf_ready_ing.MaxLength = 5;
             this.txt_inf_ready_ing.Name = "txt_inf_ready_ing";
             this.txt_inf_ready_ing.Size = new System.Drawing.Size(36, 20);
-            this.txt_inf_ready_ing.TabIndex = 128;
+            this.txt_inf_ready_ing.TabIndex = 31;
             this.txt_inf_ready_ing.TextChanged += new System.EventHandler(this.txt_inf_ready_ing_TextChanged);
             this.txt_inf_ready_ing.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_qty_KeyPress);
             // 
@@ -2119,7 +2202,7 @@
             this.txt_inf_ready_luck.MaxLength = 5;
             this.txt_inf_ready_luck.Name = "txt_inf_ready_luck";
             this.txt_inf_ready_luck.Size = new System.Drawing.Size(36, 20);
-            this.txt_inf_ready_luck.TabIndex = 128;
+            this.txt_inf_ready_luck.TabIndex = 35;
             this.txt_inf_ready_luck.TextChanged += new System.EventHandler(this.txt_inf_ready_luck_TextChanged);
             this.txt_inf_ready_luck.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_qty_KeyPress);
             // 
@@ -2129,7 +2212,7 @@
             this.txt_inf_base_morale.MaxLength = 5;
             this.txt_inf_base_morale.Name = "txt_inf_base_morale";
             this.txt_inf_base_morale.Size = new System.Drawing.Size(36, 20);
-            this.txt_inf_base_morale.TabIndex = 128;
+            this.txt_inf_base_morale.TabIndex = 30;
             this.txt_inf_base_morale.TextChanged += new System.EventHandler(this.txt_inf_ready_morale_TextChanged);
             this.txt_inf_base_morale.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_qty_KeyPress);
             // 
@@ -2140,7 +2223,7 @@
             this.pic_inf_ing.Name = "pic_inf_ing";
             this.pic_inf_ing.Size = new System.Drawing.Size(76, 71);
             this.pic_inf_ing.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pic_inf_ing.TabIndex = 126;
+            this.pic_inf_ing.TabIndex = 99999;
             this.pic_inf_ing.TabStop = false;
             // 
             // txt_inf_ready_insp
@@ -2149,7 +2232,7 @@
             this.txt_inf_ready_insp.MaxLength = 5;
             this.txt_inf_ready_insp.Name = "txt_inf_ready_insp";
             this.txt_inf_ready_insp.Size = new System.Drawing.Size(36, 20);
-            this.txt_inf_ready_insp.TabIndex = 128;
+            this.txt_inf_ready_insp.TabIndex = 33;
             this.txt_inf_ready_insp.TextChanged += new System.EventHandler(this.txt_inf_ready_insp_TextChanged);
             this.txt_inf_ready_insp.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_qty_KeyPress);
             // 
@@ -2160,7 +2243,7 @@
             this.pic_inf_luck.Name = "pic_inf_luck";
             this.pic_inf_luck.Size = new System.Drawing.Size(76, 71);
             this.pic_inf_luck.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pic_inf_luck.TabIndex = 126;
+            this.pic_inf_luck.TabIndex = 99999;
             this.pic_inf_luck.TabStop = false;
             // 
             // txt_inf_ready_morale
@@ -2169,7 +2252,7 @@
             this.txt_inf_ready_morale.MaxLength = 5;
             this.txt_inf_ready_morale.Name = "txt_inf_ready_morale";
             this.txt_inf_ready_morale.Size = new System.Drawing.Size(36, 20);
-            this.txt_inf_ready_morale.TabIndex = 128;
+            this.txt_inf_ready_morale.TabIndex = 29;
             this.txt_inf_ready_morale.TextChanged += new System.EventHandler(this.txt_inf_ready_morale_TextChanged);
             this.txt_inf_ready_morale.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_qty_KeyPress);
             // 
@@ -2180,7 +2263,7 @@
             this.pic_inf_insp.Name = "pic_inf_insp";
             this.pic_inf_insp.Size = new System.Drawing.Size(76, 71);
             this.pic_inf_insp.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pic_inf_insp.TabIndex = 126;
+            this.pic_inf_insp.TabIndex = 99999;
             this.pic_inf_insp.TabStop = false;
             // 
             // pic_inf_morale
@@ -2190,7 +2273,7 @@
             this.pic_inf_morale.Name = "pic_inf_morale";
             this.pic_inf_morale.Size = new System.Drawing.Size(76, 71);
             this.pic_inf_morale.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pic_inf_morale.TabIndex = 126;
+            this.pic_inf_morale.TabIndex = 99999;
             this.pic_inf_morale.TabStop = false;
             // 
             // grp_clocks
@@ -2286,7 +2369,7 @@
             this.grp_clocks.Location = new System.Drawing.Point(529, 242);
             this.grp_clocks.Name = "grp_clocks";
             this.grp_clocks.Size = new System.Drawing.Size(259, 456);
-            this.grp_clocks.TabIndex = 34;
+            this.grp_clocks.TabIndex = 37;
             this.grp_clocks.TabStop = false;
             this.grp_clocks.Text = "Clocks";
             // 
@@ -2298,7 +2381,7 @@
             this.lbl_clocks_doom_desc.Location = new System.Drawing.Point(154, 262);
             this.lbl_clocks_doom_desc.Name = "lbl_clocks_doom_desc";
             this.lbl_clocks_doom_desc.Size = new System.Drawing.Size(100, 13);
-            this.lbl_clocks_doom_desc.TabIndex = 123;
+            this.lbl_clocks_doom_desc.TabIndex = 99999;
             this.lbl_clocks_doom_desc.Text = "You don\'t want this!";
             this.lbl_clocks_doom_desc.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
@@ -2310,7 +2393,7 @@
             this.lbl_clocks_mesmerize_desc.Location = new System.Drawing.Point(144, 201);
             this.lbl_clocks_mesmerize_desc.Name = "lbl_clocks_mesmerize_desc";
             this.lbl_clocks_mesmerize_desc.Size = new System.Drawing.Size(110, 13);
-            this.lbl_clocks_mesmerize_desc.TabIndex = 122;
+            this.lbl_clocks_mesmerize_desc.TabIndex = 99999;
             this.lbl_clocks_mesmerize_desc.Text = "Confusion, Infatuation";
             this.lbl_clocks_mesmerize_desc.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
@@ -2322,7 +2405,7 @@
             this.lbl_clocks_stun_desc.Location = new System.Drawing.Point(38, 134);
             this.lbl_clocks_stun_desc.Name = "lbl_clocks_stun_desc";
             this.lbl_clocks_stun_desc.Size = new System.Drawing.Size(216, 13);
-            this.lbl_clocks_stun_desc.TabIndex = 121;
+            this.lbl_clocks_stun_desc.TabIndex = 99999;
             this.lbl_clocks_stun_desc.Text = "Freeze, Paralysis, Petrify, Flinch, Sleep, Held";
             this.lbl_clocks_stun_desc.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
@@ -2334,7 +2417,7 @@
             this.lbl_clocks_infliction_desc.Location = new System.Drawing.Point(84, 70);
             this.lbl_clocks_infliction_desc.Name = "lbl_clocks_infliction_desc";
             this.lbl_clocks_infliction_desc.Size = new System.Drawing.Size(170, 13);
-            this.lbl_clocks_infliction_desc.TabIndex = 120;
+            this.lbl_clocks_infliction_desc.TabIndex = 99999;
             this.lbl_clocks_infliction_desc.Text = "Poisoned, Badly Poisoned, Burned";
             this.lbl_clocks_infliction_desc.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
@@ -2345,7 +2428,7 @@
             this.btn_clocks_misc3_9.Name = "btn_clocks_misc3_9";
             this.btn_clocks_misc3_9.Size = new System.Drawing.Size(41, 17);
             this.btn_clocks_misc3_9.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.btn_clocks_misc3_9.TabIndex = 108;
+            this.btn_clocks_misc3_9.TabIndex = 99999;
             this.btn_clocks_misc3_9.TabStop = false;
             this.btn_clocks_misc3_9.Click += new System.EventHandler(this.btn_clocks_misc3_9_Click);
             // 
@@ -2356,7 +2439,7 @@
             this.btn_clocks_misc3_4.Name = "btn_clocks_misc3_4";
             this.btn_clocks_misc3_4.Size = new System.Drawing.Size(41, 17);
             this.btn_clocks_misc3_4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.btn_clocks_misc3_4.TabIndex = 108;
+            this.btn_clocks_misc3_4.TabIndex = 99999;
             this.btn_clocks_misc3_4.TabStop = false;
             this.btn_clocks_misc3_4.Click += new System.EventHandler(this.btn_clocks_misc3_4_Click);
             // 
@@ -2367,7 +2450,7 @@
             this.btn_clocks_misc2_4.Name = "btn_clocks_misc2_4";
             this.btn_clocks_misc2_4.Size = new System.Drawing.Size(41, 17);
             this.btn_clocks_misc2_4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.btn_clocks_misc2_4.TabIndex = 111;
+            this.btn_clocks_misc2_4.TabIndex = 99999;
             this.btn_clocks_misc2_4.TabStop = false;
             this.btn_clocks_misc2_4.Click += new System.EventHandler(this.btn_clocks_misc2_4_Click);
             // 
@@ -2378,7 +2461,7 @@
             this.btn_clocks_misc1_4.Name = "btn_clocks_misc1_4";
             this.btn_clocks_misc1_4.Size = new System.Drawing.Size(41, 17);
             this.btn_clocks_misc1_4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.btn_clocks_misc1_4.TabIndex = 109;
+            this.btn_clocks_misc1_4.TabIndex = 99999;
             this.btn_clocks_misc1_4.TabStop = false;
             this.btn_clocks_misc1_4.Click += new System.EventHandler(this.btn_clocks_misc1_4_Click);
             // 
@@ -2389,7 +2472,7 @@
             this.lbl_clocks_doom.Location = new System.Drawing.Point(53, 211);
             this.lbl_clocks_doom.Name = "lbl_clocks_doom";
             this.lbl_clocks_doom.Size = new System.Drawing.Size(35, 13);
-            this.lbl_clocks_doom.TabIndex = 115;
+            this.lbl_clocks_doom.TabIndex = 99999;
             this.lbl_clocks_doom.Text = "Doom";
             // 
             // btn_clocks_doom_4
@@ -2399,7 +2482,7 @@
             this.btn_clocks_doom_4.Name = "btn_clocks_doom_4";
             this.btn_clocks_doom_4.Size = new System.Drawing.Size(41, 17);
             this.btn_clocks_doom_4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.btn_clocks_doom_4.TabIndex = 107;
+            this.btn_clocks_doom_4.TabIndex = 99999;
             this.btn_clocks_doom_4.TabStop = false;
             this.btn_clocks_doom_4.Click += new System.EventHandler(this.btn_clocks_doom_4_Click);
             // 
@@ -2410,7 +2493,7 @@
             this.lbl_clocks_mez.Location = new System.Drawing.Point(53, 150);
             this.lbl_clocks_mez.Name = "lbl_clocks_mez";
             this.lbl_clocks_mez.Size = new System.Drawing.Size(57, 13);
-            this.lbl_clocks_mez.TabIndex = 116;
+            this.lbl_clocks_mez.TabIndex = 99999;
             this.lbl_clocks_mez.Text = "Mesmerize";
             // 
             // btn_clocks_misc2_9
@@ -2420,7 +2503,7 @@
             this.btn_clocks_misc2_9.Name = "btn_clocks_misc2_9";
             this.btn_clocks_misc2_9.Size = new System.Drawing.Size(41, 17);
             this.btn_clocks_misc2_9.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.btn_clocks_misc2_9.TabIndex = 98;
+            this.btn_clocks_misc2_9.TabIndex = 99999;
             this.btn_clocks_misc2_9.TabStop = false;
             this.btn_clocks_misc2_9.Click += new System.EventHandler(this.btn_clocks_misc2_9_Click);
             // 
@@ -2431,7 +2514,7 @@
             this.btn_clocks_mez_4.Name = "btn_clocks_mez_4";
             this.btn_clocks_mez_4.Size = new System.Drawing.Size(41, 17);
             this.btn_clocks_mez_4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.btn_clocks_mez_4.TabIndex = 105;
+            this.btn_clocks_mez_4.TabIndex = 99999;
             this.btn_clocks_mez_4.TabStop = false;
             this.btn_clocks_mez_4.Click += new System.EventHandler(this.btn_clocks_mez_4_Click);
             // 
@@ -2442,7 +2525,7 @@
             this.btn_clocks_misc1_9.Name = "btn_clocks_misc1_9";
             this.btn_clocks_misc1_9.Size = new System.Drawing.Size(41, 17);
             this.btn_clocks_misc1_9.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.btn_clocks_misc1_9.TabIndex = 101;
+            this.btn_clocks_misc1_9.TabIndex = 99999;
             this.btn_clocks_misc1_9.TabStop = false;
             this.btn_clocks_misc1_9.Click += new System.EventHandler(this.btn_clocks_misc1_9_Click);
             // 
@@ -2453,7 +2536,7 @@
             this.lbl_clocks_stun.Location = new System.Drawing.Point(53, 83);
             this.lbl_clocks_stun.Name = "lbl_clocks_stun";
             this.lbl_clocks_stun.Size = new System.Drawing.Size(29, 13);
-            this.lbl_clocks_stun.TabIndex = 117;
+            this.lbl_clocks_stun.TabIndex = 99999;
             this.lbl_clocks_stun.Text = "Stun";
             // 
             // btn_clocks_doom_9
@@ -2463,7 +2546,7 @@
             this.btn_clocks_doom_9.Name = "btn_clocks_doom_9";
             this.btn_clocks_doom_9.Size = new System.Drawing.Size(41, 17);
             this.btn_clocks_doom_9.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.btn_clocks_doom_9.TabIndex = 99;
+            this.btn_clocks_doom_9.TabIndex = 99999;
             this.btn_clocks_doom_9.TabStop = false;
             this.btn_clocks_doom_9.Click += new System.EventHandler(this.btn_clocks_doom_9_Click);
             // 
@@ -2474,7 +2557,7 @@
             this.btn_clocks_misc3_8.Name = "btn_clocks_misc3_8";
             this.btn_clocks_misc3_8.Size = new System.Drawing.Size(41, 17);
             this.btn_clocks_misc3_8.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.btn_clocks_misc3_8.TabIndex = 94;
+            this.btn_clocks_misc3_8.TabIndex = 99999;
             this.btn_clocks_misc3_8.TabStop = false;
             this.btn_clocks_misc3_8.Click += new System.EventHandler(this.btn_clocks_misc3_8_Click);
             // 
@@ -2485,7 +2568,7 @@
             this.btn_clocks_stun_4.Name = "btn_clocks_stun_4";
             this.btn_clocks_stun_4.Size = new System.Drawing.Size(41, 17);
             this.btn_clocks_stun_4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.btn_clocks_stun_4.TabIndex = 110;
+            this.btn_clocks_stun_4.TabIndex = 99999;
             this.btn_clocks_stun_4.TabStop = false;
             this.btn_clocks_stun_4.Click += new System.EventHandler(this.btn_clocks_stun_4_Click);
             // 
@@ -2496,7 +2579,7 @@
             this.btn_clocks_misc2_8.Name = "btn_clocks_misc2_8";
             this.btn_clocks_misc2_8.Size = new System.Drawing.Size(41, 17);
             this.btn_clocks_misc2_8.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.btn_clocks_misc2_8.TabIndex = 97;
+            this.btn_clocks_misc2_8.TabIndex = 99999;
             this.btn_clocks_misc2_8.TabStop = false;
             this.btn_clocks_misc2_8.Click += new System.EventHandler(this.btn_clocks_misc2_8_Click);
             // 
@@ -2507,7 +2590,7 @@
             this.btn_clocks_mez_9.Name = "btn_clocks_mez_9";
             this.btn_clocks_mez_9.Size = new System.Drawing.Size(41, 17);
             this.btn_clocks_mez_9.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.btn_clocks_mez_9.TabIndex = 102;
+            this.btn_clocks_mez_9.TabIndex = 99999;
             this.btn_clocks_mez_9.TabStop = false;
             this.btn_clocks_mez_9.Click += new System.EventHandler(this.btn_clocks_mez_9_Click);
             // 
@@ -2518,7 +2601,7 @@
             this.btn_clocks_misc1_8.Name = "btn_clocks_misc1_8";
             this.btn_clocks_misc1_8.Size = new System.Drawing.Size(41, 17);
             this.btn_clocks_misc1_8.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.btn_clocks_misc1_8.TabIndex = 91;
+            this.btn_clocks_misc1_8.TabIndex = 99999;
             this.btn_clocks_misc1_8.TabStop = false;
             this.btn_clocks_misc1_8.Click += new System.EventHandler(this.btn_clocks_misc1_8_Click);
             // 
@@ -2529,7 +2612,7 @@
             this.lbl_clocks_infliction.Location = new System.Drawing.Point(53, 19);
             this.lbl_clocks_infliction.Name = "lbl_clocks_infliction";
             this.lbl_clocks_infliction.Size = new System.Drawing.Size(46, 13);
-            this.lbl_clocks_infliction.TabIndex = 118;
+            this.lbl_clocks_infliction.TabIndex = 99999;
             this.lbl_clocks_infliction.Text = "Infliction";
             // 
             // btn_clocks_doom_8
@@ -2539,7 +2622,7 @@
             this.btn_clocks_doom_8.Name = "btn_clocks_doom_8";
             this.btn_clocks_doom_8.Size = new System.Drawing.Size(41, 17);
             this.btn_clocks_doom_8.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.btn_clocks_doom_8.TabIndex = 93;
+            this.btn_clocks_doom_8.TabIndex = 99999;
             this.btn_clocks_doom_8.TabStop = false;
             this.btn_clocks_doom_8.Click += new System.EventHandler(this.btn_clocks_doom_8_Click);
             // 
@@ -2550,7 +2633,7 @@
             this.btn_clocks_misc3_7.Name = "btn_clocks_misc3_7";
             this.btn_clocks_misc3_7.Size = new System.Drawing.Size(41, 17);
             this.btn_clocks_misc3_7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.btn_clocks_misc3_7.TabIndex = 89;
+            this.btn_clocks_misc3_7.TabIndex = 99999;
             this.btn_clocks_misc3_7.TabStop = false;
             this.btn_clocks_misc3_7.Click += new System.EventHandler(this.btn_clocks_misc3_7_Click);
             // 
@@ -2561,7 +2644,7 @@
             this.btn_clocks_stun_9.Name = "btn_clocks_stun_9";
             this.btn_clocks_stun_9.Size = new System.Drawing.Size(41, 17);
             this.btn_clocks_stun_9.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.btn_clocks_stun_9.TabIndex = 103;
+            this.btn_clocks_stun_9.TabIndex = 99999;
             this.btn_clocks_stun_9.TabStop = false;
             this.btn_clocks_stun_9.Click += new System.EventHandler(this.btn_clocks_stun_9_Click);
             // 
@@ -2572,7 +2655,7 @@
             this.btn_clocks_misc2_7.Name = "btn_clocks_misc2_7";
             this.btn_clocks_misc2_7.Size = new System.Drawing.Size(41, 17);
             this.btn_clocks_misc2_7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.btn_clocks_misc2_7.TabIndex = 88;
+            this.btn_clocks_misc2_7.TabIndex = 99999;
             this.btn_clocks_misc2_7.TabStop = false;
             this.btn_clocks_misc2_7.Click += new System.EventHandler(this.btn_clocks_misc2_7_Click);
             // 
@@ -2583,7 +2666,7 @@
             this.btn_clocks_mez_8.Name = "btn_clocks_mez_8";
             this.btn_clocks_mez_8.Size = new System.Drawing.Size(41, 17);
             this.btn_clocks_mez_8.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.btn_clocks_mez_8.TabIndex = 95;
+            this.btn_clocks_mez_8.TabIndex = 99999;
             this.btn_clocks_mez_8.TabStop = false;
             this.btn_clocks_mez_8.Click += new System.EventHandler(this.btn_clocks_mez_8_Click);
             // 
@@ -2594,7 +2677,7 @@
             this.btn_clocks_misc1_7.Name = "btn_clocks_misc1_7";
             this.btn_clocks_misc1_7.Size = new System.Drawing.Size(41, 17);
             this.btn_clocks_misc1_7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.btn_clocks_misc1_7.TabIndex = 86;
+            this.btn_clocks_misc1_7.TabIndex = 99999;
             this.btn_clocks_misc1_7.TabStop = false;
             this.btn_clocks_misc1_7.Click += new System.EventHandler(this.btn_clocks_misc1_7_Click);
             // 
@@ -2605,7 +2688,7 @@
             this.btn_clocks_infliction_4.Name = "btn_clocks_infliction_4";
             this.btn_clocks_infliction_4.Size = new System.Drawing.Size(41, 17);
             this.btn_clocks_infliction_4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.btn_clocks_infliction_4.TabIndex = 106;
+            this.btn_clocks_infliction_4.TabIndex = 99999;
             this.btn_clocks_infliction_4.TabStop = false;
             this.btn_clocks_infliction_4.Click += new System.EventHandler(this.btn_clocks_infliction_4_Click);
             // 
@@ -2616,7 +2699,7 @@
             this.btn_clocks_doom_7.Name = "btn_clocks_doom_7";
             this.btn_clocks_doom_7.Size = new System.Drawing.Size(41, 17);
             this.btn_clocks_doom_7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.btn_clocks_doom_7.TabIndex = 85;
+            this.btn_clocks_doom_7.TabIndex = 99999;
             this.btn_clocks_doom_7.TabStop = false;
             this.btn_clocks_doom_7.Click += new System.EventHandler(this.btn_clocks_doom_7_Click);
             // 
@@ -2627,7 +2710,7 @@
             this.btn_clocks_misc3_6.Name = "btn_clocks_misc3_6";
             this.btn_clocks_misc3_6.Size = new System.Drawing.Size(41, 17);
             this.btn_clocks_misc3_6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.btn_clocks_misc3_6.TabIndex = 76;
+            this.btn_clocks_misc3_6.TabIndex = 99999;
             this.btn_clocks_misc3_6.TabStop = false;
             this.btn_clocks_misc3_6.Click += new System.EventHandler(this.btn_clocks_misc3_6_Click);
             // 
@@ -2638,7 +2721,7 @@
             this.btn_clocks_stun_8.Name = "btn_clocks_stun_8";
             this.btn_clocks_stun_8.Size = new System.Drawing.Size(41, 17);
             this.btn_clocks_stun_8.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.btn_clocks_stun_8.TabIndex = 96;
+            this.btn_clocks_stun_8.TabIndex = 99999;
             this.btn_clocks_stun_8.TabStop = false;
             this.btn_clocks_stun_8.Click += new System.EventHandler(this.btn_clocks_stun_8_Click);
             // 
@@ -2649,7 +2732,7 @@
             this.btn_clocks_misc2_6.Name = "btn_clocks_misc2_6";
             this.btn_clocks_misc2_6.Size = new System.Drawing.Size(41, 17);
             this.btn_clocks_misc2_6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.btn_clocks_misc2_6.TabIndex = 81;
+            this.btn_clocks_misc2_6.TabIndex = 99999;
             this.btn_clocks_misc2_6.TabStop = false;
             this.btn_clocks_misc2_6.Click += new System.EventHandler(this.btn_clocks_misc2_6_Click);
             // 
@@ -2660,7 +2743,7 @@
             this.btn_clocks_mez_7.Name = "btn_clocks_mez_7";
             this.btn_clocks_mez_7.Size = new System.Drawing.Size(41, 17);
             this.btn_clocks_mez_7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.btn_clocks_mez_7.TabIndex = 84;
+            this.btn_clocks_mez_7.TabIndex = 99999;
             this.btn_clocks_mez_7.TabStop = false;
             this.btn_clocks_mez_7.Click += new System.EventHandler(this.btn_clocks_mez_7_Click);
             // 
@@ -2671,7 +2754,7 @@
             this.btn_clocks_misc1_6.Name = "btn_clocks_misc1_6";
             this.btn_clocks_misc1_6.Size = new System.Drawing.Size(41, 17);
             this.btn_clocks_misc1_6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.btn_clocks_misc1_6.TabIndex = 74;
+            this.btn_clocks_misc1_6.TabIndex = 99999;
             this.btn_clocks_misc1_6.TabStop = false;
             this.btn_clocks_misc1_6.Click += new System.EventHandler(this.btn_clocks_misc1_6_Click);
             // 
@@ -2682,7 +2765,7 @@
             this.btn_clocks_infliction_9.Name = "btn_clocks_infliction_9";
             this.btn_clocks_infliction_9.Size = new System.Drawing.Size(41, 17);
             this.btn_clocks_infliction_9.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.btn_clocks_infliction_9.TabIndex = 100;
+            this.btn_clocks_infliction_9.TabIndex = 99999;
             this.btn_clocks_infliction_9.TabStop = false;
             this.btn_clocks_infliction_9.Click += new System.EventHandler(this.btn_clocks_infliction_9_Click);
             // 
@@ -2693,7 +2776,7 @@
             this.btn_clocks_doom_6.Name = "btn_clocks_doom_6";
             this.btn_clocks_doom_6.Size = new System.Drawing.Size(41, 17);
             this.btn_clocks_doom_6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.btn_clocks_doom_6.TabIndex = 77;
+            this.btn_clocks_doom_6.TabIndex = 99999;
             this.btn_clocks_doom_6.TabStop = false;
             this.btn_clocks_doom_6.Click += new System.EventHandler(this.btn_clocks_doom_6_Click);
             // 
@@ -2704,7 +2787,7 @@
             this.btn_clocks_misc3_5.Name = "btn_clocks_misc3_5";
             this.btn_clocks_misc3_5.Size = new System.Drawing.Size(41, 17);
             this.btn_clocks_misc3_5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.btn_clocks_misc3_5.TabIndex = 68;
+            this.btn_clocks_misc3_5.TabIndex = 99999;
             this.btn_clocks_misc3_5.TabStop = false;
             this.btn_clocks_misc3_5.Click += new System.EventHandler(this.btn_clocks_misc3_5_Click);
             // 
@@ -2715,7 +2798,7 @@
             this.btn_clocks_stun_7.Name = "btn_clocks_stun_7";
             this.btn_clocks_stun_7.Size = new System.Drawing.Size(41, 17);
             this.btn_clocks_stun_7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.btn_clocks_stun_7.TabIndex = 83;
+            this.btn_clocks_stun_7.TabIndex = 99999;
             this.btn_clocks_stun_7.TabStop = false;
             this.btn_clocks_stun_7.Click += new System.EventHandler(this.btn_clocks_stun_7_Click);
             // 
@@ -2726,7 +2809,7 @@
             this.btn_clocks_misc2_5.Name = "btn_clocks_misc2_5";
             this.btn_clocks_misc2_5.Size = new System.Drawing.Size(41, 17);
             this.btn_clocks_misc2_5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.btn_clocks_misc2_5.TabIndex = 67;
+            this.btn_clocks_misc2_5.TabIndex = 99999;
             this.btn_clocks_misc2_5.TabStop = false;
             this.btn_clocks_misc2_5.Click += new System.EventHandler(this.btn_clocks_misc2_5_Click);
             // 
@@ -2737,7 +2820,7 @@
             this.btn_clocks_mez_6.Name = "btn_clocks_mez_6";
             this.btn_clocks_mez_6.Size = new System.Drawing.Size(41, 17);
             this.btn_clocks_mez_6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.btn_clocks_mez_6.TabIndex = 79;
+            this.btn_clocks_mez_6.TabIndex = 99999;
             this.btn_clocks_mez_6.TabStop = false;
             this.btn_clocks_mez_6.Click += new System.EventHandler(this.btn_clocks_mez_6_Click);
             // 
@@ -2748,7 +2831,7 @@
             this.btn_clocks_misc1_5.Name = "btn_clocks_misc1_5";
             this.btn_clocks_misc1_5.Size = new System.Drawing.Size(41, 17);
             this.btn_clocks_misc1_5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.btn_clocks_misc1_5.TabIndex = 66;
+            this.btn_clocks_misc1_5.TabIndex = 99999;
             this.btn_clocks_misc1_5.TabStop = false;
             this.btn_clocks_misc1_5.Click += new System.EventHandler(this.btn_clocks_misc1_5_Click);
             // 
@@ -2759,7 +2842,7 @@
             this.btn_clocks_infliction_8.Name = "btn_clocks_infliction_8";
             this.btn_clocks_infliction_8.Size = new System.Drawing.Size(41, 17);
             this.btn_clocks_infliction_8.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.btn_clocks_infliction_8.TabIndex = 90;
+            this.btn_clocks_infliction_8.TabIndex = 99999;
             this.btn_clocks_infliction_8.TabStop = false;
             this.btn_clocks_infliction_8.Click += new System.EventHandler(this.btn_clocks_infliction_8_Click);
             // 
@@ -2770,7 +2853,7 @@
             this.btn_clocks_doom_5.Name = "btn_clocks_doom_5";
             this.btn_clocks_doom_5.Size = new System.Drawing.Size(41, 17);
             this.btn_clocks_doom_5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.btn_clocks_doom_5.TabIndex = 73;
+            this.btn_clocks_doom_5.TabIndex = 99999;
             this.btn_clocks_doom_5.TabStop = false;
             this.btn_clocks_doom_5.Click += new System.EventHandler(this.btn_clocks_doom_5_Click);
             // 
@@ -2781,7 +2864,7 @@
             this.btn_clocks_misc3_3.Name = "btn_clocks_misc3_3";
             this.btn_clocks_misc3_3.Size = new System.Drawing.Size(41, 17);
             this.btn_clocks_misc3_3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.btn_clocks_misc3_3.TabIndex = 59;
+            this.btn_clocks_misc3_3.TabIndex = 99999;
             this.btn_clocks_misc3_3.TabStop = false;
             this.btn_clocks_misc3_3.Click += new System.EventHandler(this.btn_clocks_misc3_3_Click);
             // 
@@ -2792,7 +2875,7 @@
             this.btn_clocks_stun_6.Name = "btn_clocks_stun_6";
             this.btn_clocks_stun_6.Size = new System.Drawing.Size(41, 17);
             this.btn_clocks_stun_6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.btn_clocks_stun_6.TabIndex = 75;
+            this.btn_clocks_stun_6.TabIndex = 99999;
             this.btn_clocks_stun_6.TabStop = false;
             this.btn_clocks_stun_6.Click += new System.EventHandler(this.btn_clocks_stun_6_Click);
             // 
@@ -2803,7 +2886,7 @@
             this.btn_clocks_misc2_3.Name = "btn_clocks_misc2_3";
             this.btn_clocks_misc2_3.Size = new System.Drawing.Size(41, 17);
             this.btn_clocks_misc2_3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.btn_clocks_misc2_3.TabIndex = 65;
+            this.btn_clocks_misc2_3.TabIndex = 99999;
             this.btn_clocks_misc2_3.TabStop = false;
             this.btn_clocks_misc2_3.Click += new System.EventHandler(this.btn_clocks_misc2_3_Click);
             // 
@@ -2814,7 +2897,7 @@
             this.btn_clocks_mez_5.Name = "btn_clocks_mez_5";
             this.btn_clocks_mez_5.Size = new System.Drawing.Size(41, 17);
             this.btn_clocks_mez_5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.btn_clocks_mez_5.TabIndex = 70;
+            this.btn_clocks_mez_5.TabIndex = 99999;
             this.btn_clocks_mez_5.TabStop = false;
             this.btn_clocks_mez_5.Click += new System.EventHandler(this.btn_clocks_mez_5_Click);
             // 
@@ -2825,7 +2908,7 @@
             this.btn_clocks_misc1_3.Name = "btn_clocks_misc1_3";
             this.btn_clocks_misc1_3.Size = new System.Drawing.Size(41, 17);
             this.btn_clocks_misc1_3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.btn_clocks_misc1_3.TabIndex = 63;
+            this.btn_clocks_misc1_3.TabIndex = 99999;
             this.btn_clocks_misc1_3.TabStop = false;
             this.btn_clocks_misc1_3.Click += new System.EventHandler(this.btn_clocks_misc1_3_Click);
             // 
@@ -2836,7 +2919,7 @@
             this.btn_clocks_infliction_7.Name = "btn_clocks_infliction_7";
             this.btn_clocks_infliction_7.Size = new System.Drawing.Size(41, 17);
             this.btn_clocks_infliction_7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.btn_clocks_infliction_7.TabIndex = 82;
+            this.btn_clocks_infliction_7.TabIndex = 99999;
             this.btn_clocks_infliction_7.TabStop = false;
             this.btn_clocks_infliction_7.Click += new System.EventHandler(this.btn_clocks_infliction_7_Click);
             // 
@@ -2847,7 +2930,7 @@
             this.btn_clocks_doom_3.Name = "btn_clocks_doom_3";
             this.btn_clocks_doom_3.Size = new System.Drawing.Size(41, 17);
             this.btn_clocks_doom_3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.btn_clocks_doom_3.TabIndex = 61;
+            this.btn_clocks_doom_3.TabIndex = 99999;
             this.btn_clocks_doom_3.TabStop = false;
             this.btn_clocks_doom_3.Click += new System.EventHandler(this.btn_clocks_doom_3_Click);
             // 
@@ -2858,7 +2941,7 @@
             this.btn_clocks_misc3_2.Name = "btn_clocks_misc3_2";
             this.btn_clocks_misc3_2.Size = new System.Drawing.Size(41, 17);
             this.btn_clocks_misc3_2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.btn_clocks_misc3_2.TabIndex = 53;
+            this.btn_clocks_misc3_2.TabIndex = 99999;
             this.btn_clocks_misc3_2.TabStop = false;
             this.btn_clocks_misc3_2.Click += new System.EventHandler(this.btn_clocks_misc3_2_Click);
             // 
@@ -2869,7 +2952,7 @@
             this.btn_clocks_stun_5.Name = "btn_clocks_stun_5";
             this.btn_clocks_stun_5.Size = new System.Drawing.Size(41, 17);
             this.btn_clocks_stun_5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.btn_clocks_stun_5.TabIndex = 71;
+            this.btn_clocks_stun_5.TabIndex = 99999;
             this.btn_clocks_stun_5.TabStop = false;
             this.btn_clocks_stun_5.Click += new System.EventHandler(this.btn_clocks_stun_5_Click);
             // 
@@ -2880,7 +2963,7 @@
             this.btn_clocks_misc2_2.Name = "btn_clocks_misc2_2";
             this.btn_clocks_misc2_2.Size = new System.Drawing.Size(41, 17);
             this.btn_clocks_misc2_2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.btn_clocks_misc2_2.TabIndex = 51;
+            this.btn_clocks_misc2_2.TabIndex = 99999;
             this.btn_clocks_misc2_2.TabStop = false;
             this.btn_clocks_misc2_2.Click += new System.EventHandler(this.btn_clocks_misc2_2_Click);
             // 
@@ -2891,7 +2974,7 @@
             this.btn_clocks_mez_3.Name = "btn_clocks_mez_3";
             this.btn_clocks_mez_3.Size = new System.Drawing.Size(41, 17);
             this.btn_clocks_mez_3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.btn_clocks_mez_3.TabIndex = 60;
+            this.btn_clocks_mez_3.TabIndex = 99999;
             this.btn_clocks_mez_3.TabStop = false;
             this.btn_clocks_mez_3.Click += new System.EventHandler(this.btn_clocks_mez_3_Click);
             // 
@@ -2902,7 +2985,7 @@
             this.btn_clocks_misc1_2.Name = "btn_clocks_misc1_2";
             this.btn_clocks_misc1_2.Size = new System.Drawing.Size(41, 17);
             this.btn_clocks_misc1_2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.btn_clocks_misc1_2.TabIndex = 52;
+            this.btn_clocks_misc1_2.TabIndex = 99999;
             this.btn_clocks_misc1_2.TabStop = false;
             this.btn_clocks_misc1_2.Click += new System.EventHandler(this.btn_clocks_misc1_2_Click);
             // 
@@ -2913,7 +2996,7 @@
             this.btn_clocks_infliction_6.Name = "btn_clocks_infliction_6";
             this.btn_clocks_infliction_6.Size = new System.Drawing.Size(41, 17);
             this.btn_clocks_infliction_6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.btn_clocks_infliction_6.TabIndex = 80;
+            this.btn_clocks_infliction_6.TabIndex = 99999;
             this.btn_clocks_infliction_6.TabStop = false;
             this.btn_clocks_infliction_6.Click += new System.EventHandler(this.btn_clocks_infliction_6_Click);
             // 
@@ -2924,7 +3007,7 @@
             this.btn_clocks_doom_2.Name = "btn_clocks_doom_2";
             this.btn_clocks_doom_2.Size = new System.Drawing.Size(41, 17);
             this.btn_clocks_doom_2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.btn_clocks_doom_2.TabIndex = 54;
+            this.btn_clocks_doom_2.TabIndex = 99999;
             this.btn_clocks_doom_2.TabStop = false;
             this.btn_clocks_doom_2.Click += new System.EventHandler(this.btn_clocks_doom_2_Click);
             // 
@@ -2935,7 +3018,7 @@
             this.btn_clocks_misc3_1.Name = "btn_clocks_misc3_1";
             this.btn_clocks_misc3_1.Size = new System.Drawing.Size(41, 17);
             this.btn_clocks_misc3_1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.btn_clocks_misc3_1.TabIndex = 49;
+            this.btn_clocks_misc3_1.TabIndex = 99999;
             this.btn_clocks_misc3_1.TabStop = false;
             this.btn_clocks_misc3_1.Click += new System.EventHandler(this.btn_clocks_misc3_1_Click);
             // 
@@ -2946,7 +3029,7 @@
             this.btn_clocks_stun_3.Name = "btn_clocks_stun_3";
             this.btn_clocks_stun_3.Size = new System.Drawing.Size(41, 17);
             this.btn_clocks_stun_3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.btn_clocks_stun_3.TabIndex = 58;
+            this.btn_clocks_stun_3.TabIndex = 99999;
             this.btn_clocks_stun_3.TabStop = false;
             this.btn_clocks_stun_3.Click += new System.EventHandler(this.btn_clocks_stun_3_Click);
             // 
@@ -2957,7 +3040,7 @@
             this.btn_clocks_misc2_1.Name = "btn_clocks_misc2_1";
             this.btn_clocks_misc2_1.Size = new System.Drawing.Size(41, 17);
             this.btn_clocks_misc2_1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.btn_clocks_misc2_1.TabIndex = 42;
+            this.btn_clocks_misc2_1.TabIndex = 99999;
             this.btn_clocks_misc2_1.TabStop = false;
             this.btn_clocks_misc2_1.Click += new System.EventHandler(this.btn_clocks_misc2_1_Click);
             // 
@@ -2968,7 +3051,7 @@
             this.btn_clocks_mez_2.Name = "btn_clocks_mez_2";
             this.btn_clocks_mez_2.Size = new System.Drawing.Size(41, 17);
             this.btn_clocks_mez_2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.btn_clocks_mez_2.TabIndex = 55;
+            this.btn_clocks_mez_2.TabIndex = 99999;
             this.btn_clocks_mez_2.TabStop = false;
             this.btn_clocks_mez_2.Click += new System.EventHandler(this.btn_clocks_mez_2_Click);
             // 
@@ -2979,7 +3062,7 @@
             this.btn_clocks_misc1_1.Name = "btn_clocks_misc1_1";
             this.btn_clocks_misc1_1.Size = new System.Drawing.Size(41, 17);
             this.btn_clocks_misc1_1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.btn_clocks_misc1_1.TabIndex = 43;
+            this.btn_clocks_misc1_1.TabIndex = 99999;
             this.btn_clocks_misc1_1.TabStop = false;
             this.btn_clocks_misc1_1.Click += new System.EventHandler(this.btn_clocks_misc1_1_Click);
             // 
@@ -2990,7 +3073,7 @@
             this.btn_clocks_infliction_5.Name = "btn_clocks_infliction_5";
             this.btn_clocks_infliction_5.Size = new System.Drawing.Size(41, 17);
             this.btn_clocks_infliction_5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.btn_clocks_infliction_5.TabIndex = 72;
+            this.btn_clocks_infliction_5.TabIndex = 99999;
             this.btn_clocks_infliction_5.TabStop = false;
             this.btn_clocks_infliction_5.Click += new System.EventHandler(this.btn_clocks_infliction_5_Click);
             // 
@@ -3001,7 +3084,7 @@
             this.btn_clocks_doom_1.Name = "btn_clocks_doom_1";
             this.btn_clocks_doom_1.Size = new System.Drawing.Size(41, 17);
             this.btn_clocks_doom_1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.btn_clocks_doom_1.TabIndex = 44;
+            this.btn_clocks_doom_1.TabIndex = 99999;
             this.btn_clocks_doom_1.TabStop = false;
             this.btn_clocks_doom_1.Click += new System.EventHandler(this.btn_clocks_doom_1_Click);
             // 
@@ -3012,7 +3095,7 @@
             this.btn_clocks_misc3_0.Name = "btn_clocks_misc3_0";
             this.btn_clocks_misc3_0.Size = new System.Drawing.Size(41, 17);
             this.btn_clocks_misc3_0.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.btn_clocks_misc3_0.TabIndex = 41;
+            this.btn_clocks_misc3_0.TabIndex = 99999;
             this.btn_clocks_misc3_0.TabStop = false;
             this.btn_clocks_misc3_0.Click += new System.EventHandler(this.btn_clocks_misc3_0_Click);
             // 
@@ -3023,7 +3106,7 @@
             this.btn_clocks_stun_2.Name = "btn_clocks_stun_2";
             this.btn_clocks_stun_2.Size = new System.Drawing.Size(41, 17);
             this.btn_clocks_stun_2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.btn_clocks_stun_2.TabIndex = 56;
+            this.btn_clocks_stun_2.TabIndex = 99999;
             this.btn_clocks_stun_2.TabStop = false;
             this.btn_clocks_stun_2.Click += new System.EventHandler(this.btn_clocks_stun_2_Click);
             // 
@@ -3034,7 +3117,7 @@
             this.btn_clocks_misc2_0.Name = "btn_clocks_misc2_0";
             this.btn_clocks_misc2_0.Size = new System.Drawing.Size(41, 17);
             this.btn_clocks_misc2_0.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.btn_clocks_misc2_0.TabIndex = 40;
+            this.btn_clocks_misc2_0.TabIndex = 99999;
             this.btn_clocks_misc2_0.TabStop = false;
             this.btn_clocks_misc2_0.Click += new System.EventHandler(this.btn_clocks_misc2_0_Click);
             // 
@@ -3045,7 +3128,7 @@
             this.btn_clocks_mez_1.Name = "btn_clocks_mez_1";
             this.btn_clocks_mez_1.Size = new System.Drawing.Size(41, 17);
             this.btn_clocks_mez_1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.btn_clocks_mez_1.TabIndex = 45;
+            this.btn_clocks_mez_1.TabIndex = 99999;
             this.btn_clocks_mez_1.TabStop = false;
             this.btn_clocks_mez_1.Click += new System.EventHandler(this.btn_clocks_mez_1_Click);
             // 
@@ -3056,7 +3139,7 @@
             this.btn_clocks_misc1_0.Name = "btn_clocks_misc1_0";
             this.btn_clocks_misc1_0.Size = new System.Drawing.Size(41, 17);
             this.btn_clocks_misc1_0.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.btn_clocks_misc1_0.TabIndex = 38;
+            this.btn_clocks_misc1_0.TabIndex = 99999;
             this.btn_clocks_misc1_0.TabStop = false;
             this.btn_clocks_misc1_0.Click += new System.EventHandler(this.btn_clocks_misc1_0_Click);
             // 
@@ -3067,7 +3150,7 @@
             this.btn_clocks_infliction_3.Name = "btn_clocks_infliction_3";
             this.btn_clocks_infliction_3.Size = new System.Drawing.Size(41, 17);
             this.btn_clocks_infliction_3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.btn_clocks_infliction_3.TabIndex = 62;
+            this.btn_clocks_infliction_3.TabIndex = 99999;
             this.btn_clocks_infliction_3.TabStop = false;
             this.btn_clocks_infliction_3.Click += new System.EventHandler(this.btn_clocks_infliction_3_Click);
             // 
@@ -3078,7 +3161,7 @@
             this.btn_clocks_doom_0.Name = "btn_clocks_doom_0";
             this.btn_clocks_doom_0.Size = new System.Drawing.Size(41, 17);
             this.btn_clocks_doom_0.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.btn_clocks_doom_0.TabIndex = 36;
+            this.btn_clocks_doom_0.TabIndex = 99999;
             this.btn_clocks_doom_0.TabStop = false;
             this.btn_clocks_doom_0.Click += new System.EventHandler(this.btn_clocks_doom_0_Click);
             // 
@@ -3089,7 +3172,7 @@
             this.pic_clocks_misc3.Name = "pic_clocks_misc3";
             this.pic_clocks_misc3.Size = new System.Drawing.Size(41, 48);
             this.pic_clocks_misc3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pic_clocks_misc3.TabIndex = 27;
+            this.pic_clocks_misc3.TabIndex = 99999;
             this.pic_clocks_misc3.TabStop = false;
             // 
             // btn_clocks_stun_1
@@ -3099,7 +3182,7 @@
             this.btn_clocks_stun_1.Name = "btn_clocks_stun_1";
             this.btn_clocks_stun_1.Size = new System.Drawing.Size(41, 17);
             this.btn_clocks_stun_1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.btn_clocks_stun_1.TabIndex = 47;
+            this.btn_clocks_stun_1.TabIndex = 99999;
             this.btn_clocks_stun_1.TabStop = false;
             this.btn_clocks_stun_1.Click += new System.EventHandler(this.btn_clocks_stun_1_Click);
             // 
@@ -3110,7 +3193,7 @@
             this.pic_clocks_misc2.Name = "pic_clocks_misc2";
             this.pic_clocks_misc2.Size = new System.Drawing.Size(41, 48);
             this.pic_clocks_misc2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pic_clocks_misc2.TabIndex = 28;
+            this.pic_clocks_misc2.TabIndex = 99999;
             this.pic_clocks_misc2.TabStop = false;
             // 
             // btn_clocks_mez_0
@@ -3120,7 +3203,7 @@
             this.btn_clocks_mez_0.Name = "btn_clocks_mez_0";
             this.btn_clocks_mez_0.Size = new System.Drawing.Size(41, 17);
             this.btn_clocks_mez_0.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.btn_clocks_mez_0.TabIndex = 35;
+            this.btn_clocks_mez_0.TabIndex = 99999;
             this.btn_clocks_mez_0.TabStop = false;
             this.btn_clocks_mez_0.Click += new System.EventHandler(this.btn_clocks_mez_0_Click);
             // 
@@ -3131,7 +3214,7 @@
             this.pic_clocks_misc1.Name = "pic_clocks_misc1";
             this.pic_clocks_misc1.Size = new System.Drawing.Size(41, 48);
             this.pic_clocks_misc1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pic_clocks_misc1.TabIndex = 29;
+            this.pic_clocks_misc1.TabIndex = 99999;
             this.pic_clocks_misc1.TabStop = false;
             // 
             // btn_clocks_infliction_2
@@ -3141,7 +3224,7 @@
             this.btn_clocks_infliction_2.Name = "btn_clocks_infliction_2";
             this.btn_clocks_infliction_2.Size = new System.Drawing.Size(41, 17);
             this.btn_clocks_infliction_2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.btn_clocks_infliction_2.TabIndex = 57;
+            this.btn_clocks_infliction_2.TabIndex = 99999;
             this.btn_clocks_infliction_2.TabStop = false;
             this.btn_clocks_infliction_2.Click += new System.EventHandler(this.btn_clocks_infliction_2_Click);
             // 
@@ -3152,7 +3235,7 @@
             this.pic_clocks_doom.Name = "pic_clocks_doom";
             this.pic_clocks_doom.Size = new System.Drawing.Size(41, 48);
             this.pic_clocks_doom.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pic_clocks_doom.TabIndex = 30;
+            this.pic_clocks_doom.TabIndex = 99999;
             this.pic_clocks_doom.TabStop = false;
             // 
             // btn_clocks_stun_0
@@ -3162,7 +3245,7 @@
             this.btn_clocks_stun_0.Name = "btn_clocks_stun_0";
             this.btn_clocks_stun_0.Size = new System.Drawing.Size(41, 17);
             this.btn_clocks_stun_0.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.btn_clocks_stun_0.TabIndex = 39;
+            this.btn_clocks_stun_0.TabIndex = 99999;
             this.btn_clocks_stun_0.TabStop = false;
             this.btn_clocks_stun_0.Click += new System.EventHandler(this.btn_clocks_stun_0_Click);
             // 
@@ -3173,7 +3256,7 @@
             this.pic_clocks_mez.Name = "pic_clocks_mez";
             this.pic_clocks_mez.Size = new System.Drawing.Size(41, 48);
             this.pic_clocks_mez.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pic_clocks_mez.TabIndex = 32;
+            this.pic_clocks_mez.TabIndex = 99999;
             this.pic_clocks_mez.TabStop = false;
             // 
             // btn_clocks_infliction_1
@@ -3183,7 +3266,7 @@
             this.btn_clocks_infliction_1.Name = "btn_clocks_infliction_1";
             this.btn_clocks_infliction_1.Size = new System.Drawing.Size(41, 17);
             this.btn_clocks_infliction_1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.btn_clocks_infliction_1.TabIndex = 48;
+            this.btn_clocks_infliction_1.TabIndex = 99999;
             this.btn_clocks_infliction_1.TabStop = false;
             this.btn_clocks_infliction_1.Click += new System.EventHandler(this.btn_clocks_infliction_1_Click);
             // 
@@ -3194,7 +3277,7 @@
             this.pic_clocks_stun.Name = "pic_clocks_stun";
             this.pic_clocks_stun.Size = new System.Drawing.Size(41, 48);
             this.pic_clocks_stun.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pic_clocks_stun.TabIndex = 33;
+            this.pic_clocks_stun.TabIndex = 99999;
             this.pic_clocks_stun.TabStop = false;
             // 
             // btn_clocks_infliction_0
@@ -3204,7 +3287,7 @@
             this.btn_clocks_infliction_0.Name = "btn_clocks_infliction_0";
             this.btn_clocks_infliction_0.Size = new System.Drawing.Size(41, 17);
             this.btn_clocks_infliction_0.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.btn_clocks_infliction_0.TabIndex = 34;
+            this.btn_clocks_infliction_0.TabIndex = 99999;
             this.btn_clocks_infliction_0.TabStop = false;
             this.btn_clocks_infliction_0.Click += new System.EventHandler(this.btn_clocks_infliction_0_Click);
             // 
@@ -3215,7 +3298,7 @@
             this.pic_clocks_infliction.Name = "pic_clocks_infliction";
             this.pic_clocks_infliction.Size = new System.Drawing.Size(41, 48);
             this.pic_clocks_infliction.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pic_clocks_infliction.TabIndex = 26;
+            this.pic_clocks_infliction.TabIndex = 99999;
             this.pic_clocks_infliction.TabStop = false;
             // 
             // txt_clocks_misc3
@@ -3223,7 +3306,7 @@
             this.txt_clocks_misc3.Location = new System.Drawing.Point(53, 392);
             this.txt_clocks_misc3.Name = "txt_clocks_misc3";
             this.txt_clocks_misc3.Size = new System.Drawing.Size(103, 20);
-            this.txt_clocks_misc3.TabIndex = 45;
+            this.txt_clocks_misc3.TabIndex = 39;
             this.txt_clocks_misc3.Text = "Misc III";
             // 
             // txt_clocks_misc2
@@ -3231,7 +3314,7 @@
             this.txt_clocks_misc2.Location = new System.Drawing.Point(53, 334);
             this.txt_clocks_misc2.Name = "txt_clocks_misc2";
             this.txt_clocks_misc2.Size = new System.Drawing.Size(103, 20);
-            this.txt_clocks_misc2.TabIndex = 124;
+            this.txt_clocks_misc2.TabIndex = 38;
             this.txt_clocks_misc2.Text = "Misc II";
             // 
             // txt_clocks_misc1
@@ -3239,7 +3322,7 @@
             this.txt_clocks_misc1.Location = new System.Drawing.Point(53, 278);
             this.txt_clocks_misc1.Name = "txt_clocks_misc1";
             this.txt_clocks_misc1.Size = new System.Drawing.Size(103, 20);
-            this.txt_clocks_misc1.TabIndex = 125;
+            this.txt_clocks_misc1.TabIndex = 37;
             this.txt_clocks_misc1.Text = "Misc I";
             // 
             // grp_combat_moves
@@ -3327,9 +3410,10 @@
             this.grp_combat_moves.Location = new System.Drawing.Point(146, 147);
             this.grp_combat_moves.Name = "grp_combat_moves";
             this.grp_combat_moves.Size = new System.Drawing.Size(377, 551);
-            this.grp_combat_moves.TabIndex = 33;
+            this.grp_combat_moves.TabIndex = 24;
             this.grp_combat_moves.TabStop = false;
             this.grp_combat_moves.Text = "Combat Moves";
+            this.grp_combat_moves.Enter += new System.EventHandler(this.grp_combat_moves_Enter);
             // 
             // txt_combat_move_5_atr
             // 
@@ -3338,7 +3422,8 @@
             this.txt_combat_move_5_atr.Location = new System.Drawing.Point(34, 524);
             this.txt_combat_move_5_atr.Name = "txt_combat_move_5_atr";
             this.txt_combat_move_5_atr.Size = new System.Drawing.Size(73, 20);
-            this.txt_combat_move_5_atr.TabIndex = 60;
+            this.txt_combat_move_5_atr.TabIndex = 99999;
+            this.txt_combat_move_5_atr.TabStop = false;
             this.txt_combat_move_5_atr.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txt_combat_move_5_atr.Visible = false;
             this.txt_combat_move_5_atr.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textbox_nouserinput);
@@ -3349,7 +3434,8 @@
             this.txt_combat_move_4_atr.Name = "txt_combat_move_4_atr";
             this.txt_combat_move_4_atr.ReadOnly = true;
             this.txt_combat_move_4_atr.Size = new System.Drawing.Size(73, 20);
-            this.txt_combat_move_4_atr.TabIndex = 60;
+            this.txt_combat_move_4_atr.TabIndex = 99999;
+            this.txt_combat_move_4_atr.TabStop = false;
             this.txt_combat_move_4_atr.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // txt_combat_move_3_atr
@@ -3358,7 +3444,8 @@
             this.txt_combat_move_3_atr.Name = "txt_combat_move_3_atr";
             this.txt_combat_move_3_atr.ReadOnly = true;
             this.txt_combat_move_3_atr.Size = new System.Drawing.Size(73, 20);
-            this.txt_combat_move_3_atr.TabIndex = 60;
+            this.txt_combat_move_3_atr.TabIndex = 99999;
+            this.txt_combat_move_3_atr.TabStop = false;
             this.txt_combat_move_3_atr.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // txt_combat_move_2_atr
@@ -3367,7 +3454,8 @@
             this.txt_combat_move_2_atr.Name = "txt_combat_move_2_atr";
             this.txt_combat_move_2_atr.ReadOnly = true;
             this.txt_combat_move_2_atr.Size = new System.Drawing.Size(73, 20);
-            this.txt_combat_move_2_atr.TabIndex = 60;
+            this.txt_combat_move_2_atr.TabIndex = 99999;
+            this.txt_combat_move_2_atr.TabStop = false;
             this.txt_combat_move_2_atr.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // txt_combat_move_1_atr
@@ -3376,7 +3464,8 @@
             this.txt_combat_move_1_atr.Name = "txt_combat_move_1_atr";
             this.txt_combat_move_1_atr.ReadOnly = true;
             this.txt_combat_move_1_atr.Size = new System.Drawing.Size(73, 20);
-            this.txt_combat_move_1_atr.TabIndex = 60;
+            this.txt_combat_move_1_atr.TabIndex = 99999;
+            this.txt_combat_move_1_atr.TabStop = false;
             this.txt_combat_move_1_atr.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // lbl_combat_move_5_effect
@@ -3385,7 +3474,7 @@
             this.lbl_combat_move_5_effect.Location = new System.Drawing.Point(112, 482);
             this.lbl_combat_move_5_effect.Name = "lbl_combat_move_5_effect";
             this.lbl_combat_move_5_effect.Size = new System.Drawing.Size(35, 13);
-            this.lbl_combat_move_5_effect.TabIndex = 59;
+            this.lbl_combat_move_5_effect.TabIndex = 99999;
             this.lbl_combat_move_5_effect.Text = "Effect";
             this.lbl_combat_move_5_effect.Visible = false;
             // 
@@ -3395,7 +3484,7 @@
             this.lbl_combat_move_4_effect.Location = new System.Drawing.Point(113, 375);
             this.lbl_combat_move_4_effect.Name = "lbl_combat_move_4_effect";
             this.lbl_combat_move_4_effect.Size = new System.Drawing.Size(35, 13);
-            this.lbl_combat_move_4_effect.TabIndex = 59;
+            this.lbl_combat_move_4_effect.TabIndex = 99999;
             this.lbl_combat_move_4_effect.Text = "Effect";
             // 
             // lbl_combat_move_3_effect
@@ -3404,7 +3493,7 @@
             this.lbl_combat_move_3_effect.Location = new System.Drawing.Point(115, 268);
             this.lbl_combat_move_3_effect.Name = "lbl_combat_move_3_effect";
             this.lbl_combat_move_3_effect.Size = new System.Drawing.Size(35, 13);
-            this.lbl_combat_move_3_effect.TabIndex = 59;
+            this.lbl_combat_move_3_effect.TabIndex = 99999;
             this.lbl_combat_move_3_effect.Text = "Effect";
             // 
             // lbl_combat_move_2_effect
@@ -3413,7 +3502,7 @@
             this.lbl_combat_move_2_effect.Location = new System.Drawing.Point(115, 159);
             this.lbl_combat_move_2_effect.Name = "lbl_combat_move_2_effect";
             this.lbl_combat_move_2_effect.Size = new System.Drawing.Size(35, 13);
-            this.lbl_combat_move_2_effect.TabIndex = 59;
+            this.lbl_combat_move_2_effect.TabIndex = 99999;
             this.lbl_combat_move_2_effect.Text = "Effect";
             // 
             // lbl_combat_move_1_effect
@@ -3422,7 +3511,7 @@
             this.lbl_combat_move_1_effect.Location = new System.Drawing.Point(115, 55);
             this.lbl_combat_move_1_effect.Name = "lbl_combat_move_1_effect";
             this.lbl_combat_move_1_effect.Size = new System.Drawing.Size(35, 13);
-            this.lbl_combat_move_1_effect.TabIndex = 59;
+            this.lbl_combat_move_1_effect.TabIndex = 99999;
             this.lbl_combat_move_1_effect.Text = "Effect";
             // 
             // pic_combat_move_5_atr
@@ -3432,7 +3521,7 @@
             this.pic_combat_move_5_atr.Name = "pic_combat_move_5_atr";
             this.pic_combat_move_5_atr.Size = new System.Drawing.Size(26, 26);
             this.pic_combat_move_5_atr.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pic_combat_move_5_atr.TabIndex = 45;
+            this.pic_combat_move_5_atr.TabIndex = 99999;
             this.pic_combat_move_5_atr.TabStop = false;
             this.pic_combat_move_5_atr.Visible = false;
             // 
@@ -3443,7 +3532,7 @@
             this.pic_combat_move_4_atr.Name = "pic_combat_move_4_atr";
             this.pic_combat_move_4_atr.Size = new System.Drawing.Size(26, 26);
             this.pic_combat_move_4_atr.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pic_combat_move_4_atr.TabIndex = 45;
+            this.pic_combat_move_4_atr.TabIndex = 99999;
             this.pic_combat_move_4_atr.TabStop = false;
             // 
             // pic_combat_move_3_atr
@@ -3453,7 +3542,7 @@
             this.pic_combat_move_3_atr.Name = "pic_combat_move_3_atr";
             this.pic_combat_move_3_atr.Size = new System.Drawing.Size(26, 26);
             this.pic_combat_move_3_atr.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pic_combat_move_3_atr.TabIndex = 45;
+            this.pic_combat_move_3_atr.TabIndex = 99999;
             this.pic_combat_move_3_atr.TabStop = false;
             // 
             // pic_combat_move_2_atr
@@ -3463,7 +3552,7 @@
             this.pic_combat_move_2_atr.Name = "pic_combat_move_2_atr";
             this.pic_combat_move_2_atr.Size = new System.Drawing.Size(26, 26);
             this.pic_combat_move_2_atr.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pic_combat_move_2_atr.TabIndex = 45;
+            this.pic_combat_move_2_atr.TabIndex = 99999;
             this.pic_combat_move_2_atr.TabStop = false;
             // 
             // pic_combat_move_1_atr
@@ -3473,7 +3562,7 @@
             this.pic_combat_move_1_atr.Name = "pic_combat_move_1_atr";
             this.pic_combat_move_1_atr.Size = new System.Drawing.Size(26, 26);
             this.pic_combat_move_1_atr.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pic_combat_move_1_atr.TabIndex = 45;
+            this.pic_combat_move_1_atr.TabIndex = 99999;
             this.pic_combat_move_1_atr.TabStop = false;
             // 
             // txt_combat_move_5_effect
@@ -3485,7 +3574,8 @@
             this.txt_combat_move_5_effect.Multiline = true;
             this.txt_combat_move_5_effect.Name = "txt_combat_move_5_effect";
             this.txt_combat_move_5_effect.Size = new System.Drawing.Size(242, 46);
-            this.txt_combat_move_5_effect.TabIndex = 58;
+            this.txt_combat_move_5_effect.TabIndex = 99999;
+            this.txt_combat_move_5_effect.TabStop = false;
             this.txt_combat_move_5_effect.Text = "MOVE SPAWNED FROM DESPAIR";
             this.txt_combat_move_5_effect.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txt_combat_move_5_effect.Visible = false;
@@ -3498,7 +3588,8 @@
             this.txt_combat_move_4_effect.Name = "txt_combat_move_4_effect";
             this.txt_combat_move_4_effect.ReadOnly = true;
             this.txt_combat_move_4_effect.Size = new System.Drawing.Size(242, 46);
-            this.txt_combat_move_4_effect.TabIndex = 58;
+            this.txt_combat_move_4_effect.TabIndex = 99999;
+            this.txt_combat_move_4_effect.TabStop = false;
             this.txt_combat_move_4_effect.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // txt_combat_move_3_effect
@@ -3508,7 +3599,8 @@
             this.txt_combat_move_3_effect.Name = "txt_combat_move_3_effect";
             this.txt_combat_move_3_effect.ReadOnly = true;
             this.txt_combat_move_3_effect.Size = new System.Drawing.Size(242, 46);
-            this.txt_combat_move_3_effect.TabIndex = 58;
+            this.txt_combat_move_3_effect.TabIndex = 99999;
+            this.txt_combat_move_3_effect.TabStop = false;
             this.txt_combat_move_3_effect.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // txt_combat_move_2_effect
@@ -3518,7 +3610,8 @@
             this.txt_combat_move_2_effect.Name = "txt_combat_move_2_effect";
             this.txt_combat_move_2_effect.ReadOnly = true;
             this.txt_combat_move_2_effect.Size = new System.Drawing.Size(242, 46);
-            this.txt_combat_move_2_effect.TabIndex = 58;
+            this.txt_combat_move_2_effect.TabIndex = 99999;
+            this.txt_combat_move_2_effect.TabStop = false;
             this.txt_combat_move_2_effect.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // txt_combat_move_1_effect
@@ -3528,7 +3621,8 @@
             this.txt_combat_move_1_effect.Name = "txt_combat_move_1_effect";
             this.txt_combat_move_1_effect.ReadOnly = true;
             this.txt_combat_move_1_effect.Size = new System.Drawing.Size(242, 46);
-            this.txt_combat_move_1_effect.TabIndex = 58;
+            this.txt_combat_move_1_effect.TabIndex = 99999;
+            this.txt_combat_move_1_effect.TabStop = false;
             this.txt_combat_move_1_effect.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // lbl_combat_move_5_pow
@@ -3537,7 +3631,7 @@
             this.lbl_combat_move_5_pow.Location = new System.Drawing.Point(72, 482);
             this.lbl_combat_move_5_pow.Name = "lbl_combat_move_5_pow";
             this.lbl_combat_move_5_pow.Size = new System.Drawing.Size(37, 13);
-            this.lbl_combat_move_5_pow.TabIndex = 57;
+            this.lbl_combat_move_5_pow.TabIndex = 99999;
             this.lbl_combat_move_5_pow.Text = "Power";
             this.lbl_combat_move_5_pow.Visible = false;
             // 
@@ -3547,7 +3641,7 @@
             this.lbl_combat_move_4_pow.Location = new System.Drawing.Point(73, 375);
             this.lbl_combat_move_4_pow.Name = "lbl_combat_move_4_pow";
             this.lbl_combat_move_4_pow.Size = new System.Drawing.Size(37, 13);
-            this.lbl_combat_move_4_pow.TabIndex = 57;
+            this.lbl_combat_move_4_pow.TabIndex = 99999;
             this.lbl_combat_move_4_pow.Text = "Power";
             // 
             // lbl_combat_move_3_pow
@@ -3556,7 +3650,7 @@
             this.lbl_combat_move_3_pow.Location = new System.Drawing.Point(75, 268);
             this.lbl_combat_move_3_pow.Name = "lbl_combat_move_3_pow";
             this.lbl_combat_move_3_pow.Size = new System.Drawing.Size(37, 13);
-            this.lbl_combat_move_3_pow.TabIndex = 57;
+            this.lbl_combat_move_3_pow.TabIndex = 99999;
             this.lbl_combat_move_3_pow.Text = "Power";
             // 
             // lbl_combat_move_2_pow
@@ -3565,7 +3659,7 @@
             this.lbl_combat_move_2_pow.Location = new System.Drawing.Point(75, 159);
             this.lbl_combat_move_2_pow.Name = "lbl_combat_move_2_pow";
             this.lbl_combat_move_2_pow.Size = new System.Drawing.Size(37, 13);
-            this.lbl_combat_move_2_pow.TabIndex = 57;
+            this.lbl_combat_move_2_pow.TabIndex = 99999;
             this.lbl_combat_move_2_pow.Text = "Power";
             // 
             // lbl_combat_move_1_pow
@@ -3574,7 +3668,7 @@
             this.lbl_combat_move_1_pow.Location = new System.Drawing.Point(75, 55);
             this.lbl_combat_move_1_pow.Name = "lbl_combat_move_1_pow";
             this.lbl_combat_move_1_pow.Size = new System.Drawing.Size(37, 13);
-            this.lbl_combat_move_1_pow.TabIndex = 57;
+            this.lbl_combat_move_1_pow.TabIndex = 99999;
             this.lbl_combat_move_1_pow.Text = "Power";
             // 
             // txt_combat_move_5_pow
@@ -3584,7 +3678,8 @@
             this.txt_combat_move_5_pow.Location = new System.Drawing.Point(73, 498);
             this.txt_combat_move_5_pow.Name = "txt_combat_move_5_pow";
             this.txt_combat_move_5_pow.Size = new System.Drawing.Size(35, 20);
-            this.txt_combat_move_5_pow.TabIndex = 56;
+            this.txt_combat_move_5_pow.TabIndex = 99999;
+            this.txt_combat_move_5_pow.TabStop = false;
             this.txt_combat_move_5_pow.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txt_combat_move_5_pow.Visible = false;
             this.txt_combat_move_5_pow.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textbox_nouserinput);
@@ -3595,7 +3690,8 @@
             this.txt_combat_move_4_pow.Name = "txt_combat_move_4_pow";
             this.txt_combat_move_4_pow.ReadOnly = true;
             this.txt_combat_move_4_pow.Size = new System.Drawing.Size(35, 20);
-            this.txt_combat_move_4_pow.TabIndex = 56;
+            this.txt_combat_move_4_pow.TabIndex = 99999;
+            this.txt_combat_move_4_pow.TabStop = false;
             this.txt_combat_move_4_pow.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // txt_combat_move_3_pow
@@ -3604,7 +3700,8 @@
             this.txt_combat_move_3_pow.Name = "txt_combat_move_3_pow";
             this.txt_combat_move_3_pow.ReadOnly = true;
             this.txt_combat_move_3_pow.Size = new System.Drawing.Size(35, 20);
-            this.txt_combat_move_3_pow.TabIndex = 56;
+            this.txt_combat_move_3_pow.TabIndex = 99999;
+            this.txt_combat_move_3_pow.TabStop = false;
             this.txt_combat_move_3_pow.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // txt_combat_move_2_pow
@@ -3613,7 +3710,8 @@
             this.txt_combat_move_2_pow.Name = "txt_combat_move_2_pow";
             this.txt_combat_move_2_pow.ReadOnly = true;
             this.txt_combat_move_2_pow.Size = new System.Drawing.Size(35, 20);
-            this.txt_combat_move_2_pow.TabIndex = 56;
+            this.txt_combat_move_2_pow.TabIndex = 99999;
+            this.txt_combat_move_2_pow.TabStop = false;
             this.txt_combat_move_2_pow.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // txt_combat_move_1_pow
@@ -3622,7 +3720,8 @@
             this.txt_combat_move_1_pow.Name = "txt_combat_move_1_pow";
             this.txt_combat_move_1_pow.ReadOnly = true;
             this.txt_combat_move_1_pow.Size = new System.Drawing.Size(35, 20);
-            this.txt_combat_move_1_pow.TabIndex = 56;
+            this.txt_combat_move_1_pow.TabIndex = 99999;
+            this.txt_combat_move_1_pow.TabStop = false;
             this.txt_combat_move_1_pow.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // lbl_combat_move_5_acc
@@ -3631,7 +3730,7 @@
             this.lbl_combat_move_5_acc.Location = new System.Drawing.Point(173, 443);
             this.lbl_combat_move_5_acc.Name = "lbl_combat_move_5_acc";
             this.lbl_combat_move_5_acc.Size = new System.Drawing.Size(52, 13);
-            this.lbl_combat_move_5_acc.TabIndex = 55;
+            this.lbl_combat_move_5_acc.TabIndex = 99999;
             this.lbl_combat_move_5_acc.Text = "Accuracy";
             this.lbl_combat_move_5_acc.Visible = false;
             // 
@@ -3641,7 +3740,7 @@
             this.lbl_combat_move_4_acc.Location = new System.Drawing.Point(174, 336);
             this.lbl_combat_move_4_acc.Name = "lbl_combat_move_4_acc";
             this.lbl_combat_move_4_acc.Size = new System.Drawing.Size(52, 13);
-            this.lbl_combat_move_4_acc.TabIndex = 55;
+            this.lbl_combat_move_4_acc.TabIndex = 99999;
             this.lbl_combat_move_4_acc.Text = "Accuracy";
             // 
             // lbl_combat_move_3_acc
@@ -3650,7 +3749,7 @@
             this.lbl_combat_move_3_acc.Location = new System.Drawing.Point(176, 229);
             this.lbl_combat_move_3_acc.Name = "lbl_combat_move_3_acc";
             this.lbl_combat_move_3_acc.Size = new System.Drawing.Size(52, 13);
-            this.lbl_combat_move_3_acc.TabIndex = 55;
+            this.lbl_combat_move_3_acc.TabIndex = 99999;
             this.lbl_combat_move_3_acc.Text = "Accuracy";
             // 
             // lbl_combat_move_2_acc
@@ -3659,7 +3758,7 @@
             this.lbl_combat_move_2_acc.Location = new System.Drawing.Point(176, 120);
             this.lbl_combat_move_2_acc.Name = "lbl_combat_move_2_acc";
             this.lbl_combat_move_2_acc.Size = new System.Drawing.Size(52, 13);
-            this.lbl_combat_move_2_acc.TabIndex = 55;
+            this.lbl_combat_move_2_acc.TabIndex = 99999;
             this.lbl_combat_move_2_acc.Text = "Accuracy";
             // 
             // lbl_combat_move_1_acc
@@ -3668,7 +3767,7 @@
             this.lbl_combat_move_1_acc.Location = new System.Drawing.Point(176, 16);
             this.lbl_combat_move_1_acc.Name = "lbl_combat_move_1_acc";
             this.lbl_combat_move_1_acc.Size = new System.Drawing.Size(52, 13);
-            this.lbl_combat_move_1_acc.TabIndex = 55;
+            this.lbl_combat_move_1_acc.TabIndex = 99999;
             this.lbl_combat_move_1_acc.Text = "Accuracy";
             // 
             // lbl_combat_move_5_pp_max
@@ -3677,7 +3776,7 @@
             this.lbl_combat_move_5_pp_max.Location = new System.Drawing.Point(140, 443);
             this.lbl_combat_move_5_pp_max.Name = "lbl_combat_move_5_pp_max";
             this.lbl_combat_move_5_pp_max.Size = new System.Drawing.Size(27, 13);
-            this.lbl_combat_move_5_pp_max.TabIndex = 54;
+            this.lbl_combat_move_5_pp_max.TabIndex = 99999;
             this.lbl_combat_move_5_pp_max.Text = "Max";
             this.lbl_combat_move_5_pp_max.Visible = false;
             // 
@@ -3687,7 +3786,7 @@
             this.lbl_combat_move_4_pp_max.Location = new System.Drawing.Point(141, 336);
             this.lbl_combat_move_4_pp_max.Name = "lbl_combat_move_4_pp_max";
             this.lbl_combat_move_4_pp_max.Size = new System.Drawing.Size(27, 13);
-            this.lbl_combat_move_4_pp_max.TabIndex = 54;
+            this.lbl_combat_move_4_pp_max.TabIndex = 99999;
             this.lbl_combat_move_4_pp_max.Text = "Max";
             // 
             // lbl_combat_move_3_pp_max
@@ -3696,7 +3795,7 @@
             this.lbl_combat_move_3_pp_max.Location = new System.Drawing.Point(143, 229);
             this.lbl_combat_move_3_pp_max.Name = "lbl_combat_move_3_pp_max";
             this.lbl_combat_move_3_pp_max.Size = new System.Drawing.Size(27, 13);
-            this.lbl_combat_move_3_pp_max.TabIndex = 54;
+            this.lbl_combat_move_3_pp_max.TabIndex = 99999;
             this.lbl_combat_move_3_pp_max.Text = "Max";
             // 
             // lbl_combat_move_2_pp_max
@@ -3705,7 +3804,7 @@
             this.lbl_combat_move_2_pp_max.Location = new System.Drawing.Point(143, 120);
             this.lbl_combat_move_2_pp_max.Name = "lbl_combat_move_2_pp_max";
             this.lbl_combat_move_2_pp_max.Size = new System.Drawing.Size(27, 13);
-            this.lbl_combat_move_2_pp_max.TabIndex = 54;
+            this.lbl_combat_move_2_pp_max.TabIndex = 99999;
             this.lbl_combat_move_2_pp_max.Text = "Max";
             // 
             // lbl_combat_move_1_pp_max
@@ -3714,7 +3813,7 @@
             this.lbl_combat_move_1_pp_max.Location = new System.Drawing.Point(143, 16);
             this.lbl_combat_move_1_pp_max.Name = "lbl_combat_move_1_pp_max";
             this.lbl_combat_move_1_pp_max.Size = new System.Drawing.Size(27, 13);
-            this.lbl_combat_move_1_pp_max.TabIndex = 54;
+            this.lbl_combat_move_1_pp_max.TabIndex = 99999;
             this.lbl_combat_move_1_pp_max.Text = "Max";
             // 
             // lbl_combat_move_5_pp
@@ -3723,7 +3822,7 @@
             this.lbl_combat_move_5_pp.Location = new System.Drawing.Point(111, 443);
             this.lbl_combat_move_5_pp.Name = "lbl_combat_move_5_pp";
             this.lbl_combat_move_5_pp.Size = new System.Drawing.Size(21, 13);
-            this.lbl_combat_move_5_pp.TabIndex = 53;
+            this.lbl_combat_move_5_pp.TabIndex = 99999;
             this.lbl_combat_move_5_pp.Text = "PP";
             this.lbl_combat_move_5_pp.Visible = false;
             // 
@@ -3733,7 +3832,7 @@
             this.lbl_combat_move_4_pp.Location = new System.Drawing.Point(112, 336);
             this.lbl_combat_move_4_pp.Name = "lbl_combat_move_4_pp";
             this.lbl_combat_move_4_pp.Size = new System.Drawing.Size(21, 13);
-            this.lbl_combat_move_4_pp.TabIndex = 53;
+            this.lbl_combat_move_4_pp.TabIndex = 99999;
             this.lbl_combat_move_4_pp.Text = "PP";
             // 
             // lbl_combat_move_3_pp
@@ -3742,7 +3841,7 @@
             this.lbl_combat_move_3_pp.Location = new System.Drawing.Point(114, 229);
             this.lbl_combat_move_3_pp.Name = "lbl_combat_move_3_pp";
             this.lbl_combat_move_3_pp.Size = new System.Drawing.Size(21, 13);
-            this.lbl_combat_move_3_pp.TabIndex = 53;
+            this.lbl_combat_move_3_pp.TabIndex = 99999;
             this.lbl_combat_move_3_pp.Text = "PP";
             // 
             // lbl_combat_move_2_pp
@@ -3751,7 +3850,7 @@
             this.lbl_combat_move_2_pp.Location = new System.Drawing.Point(114, 120);
             this.lbl_combat_move_2_pp.Name = "lbl_combat_move_2_pp";
             this.lbl_combat_move_2_pp.Size = new System.Drawing.Size(21, 13);
-            this.lbl_combat_move_2_pp.TabIndex = 53;
+            this.lbl_combat_move_2_pp.TabIndex = 99999;
             this.lbl_combat_move_2_pp.Text = "PP";
             // 
             // lbl_combat_move_1_pp
@@ -3760,7 +3859,7 @@
             this.lbl_combat_move_1_pp.Location = new System.Drawing.Point(114, 16);
             this.lbl_combat_move_1_pp.Name = "lbl_combat_move_1_pp";
             this.lbl_combat_move_1_pp.Size = new System.Drawing.Size(21, 13);
-            this.lbl_combat_move_1_pp.TabIndex = 53;
+            this.lbl_combat_move_1_pp.TabIndex = 99999;
             this.lbl_combat_move_1_pp.Text = "PP";
             // 
             // lbl_combat_move_5_name
@@ -3769,7 +3868,7 @@
             this.lbl_combat_move_5_name.Location = new System.Drawing.Point(3, 443);
             this.lbl_combat_move_5_name.Name = "lbl_combat_move_5_name";
             this.lbl_combat_move_5_name.Size = new System.Drawing.Size(65, 13);
-            this.lbl_combat_move_5_name.TabIndex = 52;
+            this.lbl_combat_move_5_name.TabIndex = 99999;
             this.lbl_combat_move_5_name.Text = "Move Name";
             this.lbl_combat_move_5_name.Visible = false;
             // 
@@ -3779,7 +3878,7 @@
             this.lbl_combat_move_4_name.Location = new System.Drawing.Point(4, 336);
             this.lbl_combat_move_4_name.Name = "lbl_combat_move_4_name";
             this.lbl_combat_move_4_name.Size = new System.Drawing.Size(65, 13);
-            this.lbl_combat_move_4_name.TabIndex = 52;
+            this.lbl_combat_move_4_name.TabIndex = 99999;
             this.lbl_combat_move_4_name.Text = "Move Name";
             // 
             // lbl_combat_move_3_name
@@ -3788,7 +3887,7 @@
             this.lbl_combat_move_3_name.Location = new System.Drawing.Point(6, 229);
             this.lbl_combat_move_3_name.Name = "lbl_combat_move_3_name";
             this.lbl_combat_move_3_name.Size = new System.Drawing.Size(65, 13);
-            this.lbl_combat_move_3_name.TabIndex = 52;
+            this.lbl_combat_move_3_name.TabIndex = 99999;
             this.lbl_combat_move_3_name.Text = "Move Name";
             // 
             // lbl_combat_move_2_name
@@ -3797,7 +3896,7 @@
             this.lbl_combat_move_2_name.Location = new System.Drawing.Point(6, 120);
             this.lbl_combat_move_2_name.Name = "lbl_combat_move_2_name";
             this.lbl_combat_move_2_name.Size = new System.Drawing.Size(65, 13);
-            this.lbl_combat_move_2_name.TabIndex = 52;
+            this.lbl_combat_move_2_name.TabIndex = 99999;
             this.lbl_combat_move_2_name.Text = "Move Name";
             // 
             // lbl_combat_move_1_name
@@ -3806,7 +3905,7 @@
             this.lbl_combat_move_1_name.Location = new System.Drawing.Point(6, 16);
             this.lbl_combat_move_1_name.Name = "lbl_combat_move_1_name";
             this.lbl_combat_move_1_name.Size = new System.Drawing.Size(65, 13);
-            this.lbl_combat_move_1_name.TabIndex = 52;
+            this.lbl_combat_move_1_name.TabIndex = 99999;
             this.lbl_combat_move_1_name.Text = "Move Name";
             // 
             // lbl_combat_move_5_type
@@ -3815,7 +3914,7 @@
             this.lbl_combat_move_5_type.Location = new System.Drawing.Point(2, 482);
             this.lbl_combat_move_5_type.Name = "lbl_combat_move_5_type";
             this.lbl_combat_move_5_type.Size = new System.Drawing.Size(61, 13);
-            this.lbl_combat_move_5_type.TabIndex = 50;
+            this.lbl_combat_move_5_type.TabIndex = 99999;
             this.lbl_combat_move_5_type.Text = "Move Type";
             this.lbl_combat_move_5_type.Visible = false;
             // 
@@ -3825,7 +3924,7 @@
             this.lbl_combat_move_4_type.Location = new System.Drawing.Point(3, 375);
             this.lbl_combat_move_4_type.Name = "lbl_combat_move_4_type";
             this.lbl_combat_move_4_type.Size = new System.Drawing.Size(61, 13);
-            this.lbl_combat_move_4_type.TabIndex = 50;
+            this.lbl_combat_move_4_type.TabIndex = 99999;
             this.lbl_combat_move_4_type.Text = "Move Type";
             // 
             // lbl_combat_move_3_type
@@ -3834,7 +3933,7 @@
             this.lbl_combat_move_3_type.Location = new System.Drawing.Point(5, 268);
             this.lbl_combat_move_3_type.Name = "lbl_combat_move_3_type";
             this.lbl_combat_move_3_type.Size = new System.Drawing.Size(61, 13);
-            this.lbl_combat_move_3_type.TabIndex = 50;
+            this.lbl_combat_move_3_type.TabIndex = 99999;
             this.lbl_combat_move_3_type.Text = "Move Type";
             // 
             // lbl_combat_move_2_type
@@ -3843,7 +3942,7 @@
             this.lbl_combat_move_2_type.Location = new System.Drawing.Point(5, 159);
             this.lbl_combat_move_2_type.Name = "lbl_combat_move_2_type";
             this.lbl_combat_move_2_type.Size = new System.Drawing.Size(61, 13);
-            this.lbl_combat_move_2_type.TabIndex = 50;
+            this.lbl_combat_move_2_type.TabIndex = 99999;
             this.lbl_combat_move_2_type.Text = "Move Type";
             // 
             // lbl_combat_move_1_type
@@ -3852,7 +3951,7 @@
             this.lbl_combat_move_1_type.Location = new System.Drawing.Point(5, 55);
             this.lbl_combat_move_1_type.Name = "lbl_combat_move_1_type";
             this.lbl_combat_move_1_type.Size = new System.Drawing.Size(61, 13);
-            this.lbl_combat_move_1_type.TabIndex = 50;
+            this.lbl_combat_move_1_type.TabIndex = 99999;
             this.lbl_combat_move_1_type.Text = "Move Type";
             // 
             // cmb_combat_move_5_type
@@ -3865,7 +3964,8 @@
             this.cmb_combat_move_5_type.MaxDropDownItems = 19;
             this.cmb_combat_move_5_type.Name = "cmb_combat_move_5_type";
             this.cmb_combat_move_5_type.Size = new System.Drawing.Size(63, 21);
-            this.cmb_combat_move_5_type.TabIndex = 51;
+            this.cmb_combat_move_5_type.TabIndex = 99999;
+            this.cmb_combat_move_5_type.TabStop = false;
             this.cmb_combat_move_5_type.Text = "???";
             this.cmb_combat_move_5_type.Visible = false;
             // 
@@ -3877,7 +3977,8 @@
             this.cmb_combat_move_4_type.MaxDropDownItems = 19;
             this.cmb_combat_move_4_type.Name = "cmb_combat_move_4_type";
             this.cmb_combat_move_4_type.Size = new System.Drawing.Size(63, 21);
-            this.cmb_combat_move_4_type.TabIndex = 51;
+            this.cmb_combat_move_4_type.TabIndex = 99999;
+            this.cmb_combat_move_4_type.TabStop = false;
             this.cmb_combat_move_4_type.Text = "Normal";
             // 
             // cmb_combat_move_3_type
@@ -3888,7 +3989,8 @@
             this.cmb_combat_move_3_type.MaxDropDownItems = 19;
             this.cmb_combat_move_3_type.Name = "cmb_combat_move_3_type";
             this.cmb_combat_move_3_type.Size = new System.Drawing.Size(63, 21);
-            this.cmb_combat_move_3_type.TabIndex = 51;
+            this.cmb_combat_move_3_type.TabIndex = 99999;
+            this.cmb_combat_move_3_type.TabStop = false;
             this.cmb_combat_move_3_type.Text = "Normal";
             // 
             // cmb_combat_move_2_type
@@ -3899,7 +4001,8 @@
             this.cmb_combat_move_2_type.MaxDropDownItems = 19;
             this.cmb_combat_move_2_type.Name = "cmb_combat_move_2_type";
             this.cmb_combat_move_2_type.Size = new System.Drawing.Size(63, 21);
-            this.cmb_combat_move_2_type.TabIndex = 51;
+            this.cmb_combat_move_2_type.TabIndex = 99999;
+            this.cmb_combat_move_2_type.TabStop = false;
             this.cmb_combat_move_2_type.Text = "Normal";
             // 
             // cmb_combat_move_1_type
@@ -3910,7 +4013,8 @@
             this.cmb_combat_move_1_type.MaxDropDownItems = 19;
             this.cmb_combat_move_1_type.Name = "cmb_combat_move_1_type";
             this.cmb_combat_move_1_type.Size = new System.Drawing.Size(63, 21);
-            this.cmb_combat_move_1_type.TabIndex = 51;
+            this.cmb_combat_move_1_type.TabIndex = 99999;
+            this.cmb_combat_move_1_type.TabStop = false;
             this.cmb_combat_move_1_type.Text = "Normal";
             // 
             // txt_combat_move_5_acc
@@ -3920,7 +4024,8 @@
             this.txt_combat_move_5_acc.Location = new System.Drawing.Point(174, 459);
             this.txt_combat_move_5_acc.Name = "txt_combat_move_5_acc";
             this.txt_combat_move_5_acc.Size = new System.Drawing.Size(181, 20);
-            this.txt_combat_move_5_acc.TabIndex = 49;
+            this.txt_combat_move_5_acc.TabIndex = 99999;
+            this.txt_combat_move_5_acc.TabStop = false;
             this.txt_combat_move_5_acc.Visible = false;
             this.txt_combat_move_5_acc.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textbox_nouserinput);
             // 
@@ -3930,7 +4035,8 @@
             this.txt_combat_move_4_acc.Name = "txt_combat_move_4_acc";
             this.txt_combat_move_4_acc.ReadOnly = true;
             this.txt_combat_move_4_acc.Size = new System.Drawing.Size(181, 20);
-            this.txt_combat_move_4_acc.TabIndex = 49;
+            this.txt_combat_move_4_acc.TabIndex = 99999;
+            this.txt_combat_move_4_acc.TabStop = false;
             // 
             // txt_combat_move_3_acc
             // 
@@ -3938,7 +4044,8 @@
             this.txt_combat_move_3_acc.Name = "txt_combat_move_3_acc";
             this.txt_combat_move_3_acc.ReadOnly = true;
             this.txt_combat_move_3_acc.Size = new System.Drawing.Size(181, 20);
-            this.txt_combat_move_3_acc.TabIndex = 49;
+            this.txt_combat_move_3_acc.TabIndex = 99999;
+            this.txt_combat_move_3_acc.TabStop = false;
             // 
             // txt_combat_move_2_acc
             // 
@@ -3946,7 +4053,8 @@
             this.txt_combat_move_2_acc.Name = "txt_combat_move_2_acc";
             this.txt_combat_move_2_acc.ReadOnly = true;
             this.txt_combat_move_2_acc.Size = new System.Drawing.Size(181, 20);
-            this.txt_combat_move_2_acc.TabIndex = 49;
+            this.txt_combat_move_2_acc.TabIndex = 99999;
+            this.txt_combat_move_2_acc.TabStop = false;
             // 
             // txt_combat_move_1_acc
             // 
@@ -3954,7 +4062,8 @@
             this.txt_combat_move_1_acc.Name = "txt_combat_move_1_acc";
             this.txt_combat_move_1_acc.ReadOnly = true;
             this.txt_combat_move_1_acc.Size = new System.Drawing.Size(181, 20);
-            this.txt_combat_move_1_acc.TabIndex = 49;
+            this.txt_combat_move_1_acc.TabIndex = 99999;
+            this.txt_combat_move_1_acc.TabStop = false;
             // 
             // txt_combat_move_5_pp_max
             // 
@@ -3964,7 +4073,8 @@
             this.txt_combat_move_5_pp_max.MaxLength = 3;
             this.txt_combat_move_5_pp_max.Name = "txt_combat_move_5_pp_max";
             this.txt_combat_move_5_pp_max.Size = new System.Drawing.Size(25, 20);
-            this.txt_combat_move_5_pp_max.TabIndex = 48;
+            this.txt_combat_move_5_pp_max.TabIndex = 99999;
+            this.txt_combat_move_5_pp_max.TabStop = false;
             this.txt_combat_move_5_pp_max.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txt_combat_move_5_pp_max.Visible = false;
             this.txt_combat_move_5_pp_max.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textbox_nouserinput);
@@ -3976,7 +4086,8 @@
             this.txt_combat_move_4_pp_max.Name = "txt_combat_move_4_pp_max";
             this.txt_combat_move_4_pp_max.ReadOnly = true;
             this.txt_combat_move_4_pp_max.Size = new System.Drawing.Size(25, 20);
-            this.txt_combat_move_4_pp_max.TabIndex = 48;
+            this.txt_combat_move_4_pp_max.TabIndex = 99999;
+            this.txt_combat_move_4_pp_max.TabStop = false;
             this.txt_combat_move_4_pp_max.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // txt_combat_move_3_pp_max
@@ -3986,7 +4097,8 @@
             this.txt_combat_move_3_pp_max.Name = "txt_combat_move_3_pp_max";
             this.txt_combat_move_3_pp_max.ReadOnly = true;
             this.txt_combat_move_3_pp_max.Size = new System.Drawing.Size(25, 20);
-            this.txt_combat_move_3_pp_max.TabIndex = 48;
+            this.txt_combat_move_3_pp_max.TabIndex = 99999;
+            this.txt_combat_move_3_pp_max.TabStop = false;
             this.txt_combat_move_3_pp_max.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // txt_combat_move_2_pp_max
@@ -3996,7 +4108,8 @@
             this.txt_combat_move_2_pp_max.Name = "txt_combat_move_2_pp_max";
             this.txt_combat_move_2_pp_max.ReadOnly = true;
             this.txt_combat_move_2_pp_max.Size = new System.Drawing.Size(25, 20);
-            this.txt_combat_move_2_pp_max.TabIndex = 48;
+            this.txt_combat_move_2_pp_max.TabIndex = 99999;
+            this.txt_combat_move_2_pp_max.TabStop = false;
             this.txt_combat_move_2_pp_max.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // txt_combat_move_1_pp_max
@@ -4006,7 +4119,8 @@
             this.txt_combat_move_1_pp_max.Name = "txt_combat_move_1_pp_max";
             this.txt_combat_move_1_pp_max.ReadOnly = true;
             this.txt_combat_move_1_pp_max.Size = new System.Drawing.Size(25, 20);
-            this.txt_combat_move_1_pp_max.TabIndex = 48;
+            this.txt_combat_move_1_pp_max.TabIndex = 99999;
+            this.txt_combat_move_1_pp_max.TabStop = false;
             this.txt_combat_move_1_pp_max.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // txt_combat_move_5_pp
@@ -4017,7 +4131,7 @@
             this.txt_combat_move_5_pp.MaxLength = 3;
             this.txt_combat_move_5_pp.Name = "txt_combat_move_5_pp";
             this.txt_combat_move_5_pp.Size = new System.Drawing.Size(25, 20);
-            this.txt_combat_move_5_pp.TabIndex = 47;
+            this.txt_combat_move_5_pp.TabIndex = 28;
             this.txt_combat_move_5_pp.Text = "5";
             this.txt_combat_move_5_pp.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txt_combat_move_5_pp.Visible = false;
@@ -4030,7 +4144,7 @@
             this.txt_combat_move_4_pp.MaxLength = 3;
             this.txt_combat_move_4_pp.Name = "txt_combat_move_4_pp";
             this.txt_combat_move_4_pp.Size = new System.Drawing.Size(25, 20);
-            this.txt_combat_move_4_pp.TabIndex = 47;
+            this.txt_combat_move_4_pp.TabIndex = 27;
             this.txt_combat_move_4_pp.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txt_combat_move_4_pp.TextChanged += new System.EventHandler(this.txt_combat_move_4_pp_TextChanged);
             this.txt_combat_move_4_pp.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_qty_KeyPress);
@@ -4041,7 +4155,7 @@
             this.txt_combat_move_3_pp.MaxLength = 3;
             this.txt_combat_move_3_pp.Name = "txt_combat_move_3_pp";
             this.txt_combat_move_3_pp.Size = new System.Drawing.Size(25, 20);
-            this.txt_combat_move_3_pp.TabIndex = 47;
+            this.txt_combat_move_3_pp.TabIndex = 26;
             this.txt_combat_move_3_pp.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txt_combat_move_3_pp.TextChanged += new System.EventHandler(this.txt_combat_move_3_pp_TextChanged);
             this.txt_combat_move_3_pp.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_qty_KeyPress);
@@ -4052,7 +4166,7 @@
             this.txt_combat_move_2_pp.MaxLength = 3;
             this.txt_combat_move_2_pp.Name = "txt_combat_move_2_pp";
             this.txt_combat_move_2_pp.Size = new System.Drawing.Size(25, 20);
-            this.txt_combat_move_2_pp.TabIndex = 47;
+            this.txt_combat_move_2_pp.TabIndex = 25;
             this.txt_combat_move_2_pp.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txt_combat_move_2_pp.TextChanged += new System.EventHandler(this.txt_combat_move_2_pp_TextChanged);
             this.txt_combat_move_2_pp.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_qty_KeyPress);
@@ -4064,7 +4178,7 @@
             this.txt_combat_move_1_pp.MaxLength = 3;
             this.txt_combat_move_1_pp.Name = "txt_combat_move_1_pp";
             this.txt_combat_move_1_pp.Size = new System.Drawing.Size(25, 20);
-            this.txt_combat_move_1_pp.TabIndex = 47;
+            this.txt_combat_move_1_pp.TabIndex = 24;
             this.txt_combat_move_1_pp.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txt_combat_move_1_pp.TextChanged += new System.EventHandler(this.txt_combat_move_1_pp_TextChanged);
             this.txt_combat_move_1_pp.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_qty_KeyPress);
@@ -4077,7 +4191,8 @@
             this.txt_combat_move_5_name.Location = new System.Drawing.Point(6, 459);
             this.txt_combat_move_5_name.Name = "txt_combat_move_5_name";
             this.txt_combat_move_5_name.Size = new System.Drawing.Size(103, 20);
-            this.txt_combat_move_5_name.TabIndex = 46;
+            this.txt_combat_move_5_name.TabIndex = 99999;
+            this.txt_combat_move_5_name.TabStop = false;
             this.txt_combat_move_5_name.Visible = false;
             this.txt_combat_move_5_name.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textbox_nouserinput);
             // 
@@ -4087,7 +4202,8 @@
             this.txt_combat_move_4_name.Name = "txt_combat_move_4_name";
             this.txt_combat_move_4_name.ReadOnly = true;
             this.txt_combat_move_4_name.Size = new System.Drawing.Size(103, 20);
-            this.txt_combat_move_4_name.TabIndex = 46;
+            this.txt_combat_move_4_name.TabIndex = 99999;
+            this.txt_combat_move_4_name.TabStop = false;
             this.txt_combat_move_4_name.TextChanged += new System.EventHandler(this.txt_combat_move_4_name_TextChanged);
             // 
             // txt_combat_move_3_name
@@ -4096,7 +4212,8 @@
             this.txt_combat_move_3_name.Name = "txt_combat_move_3_name";
             this.txt_combat_move_3_name.ReadOnly = true;
             this.txt_combat_move_3_name.Size = new System.Drawing.Size(103, 20);
-            this.txt_combat_move_3_name.TabIndex = 46;
+            this.txt_combat_move_3_name.TabIndex = 99999;
+            this.txt_combat_move_3_name.TabStop = false;
             this.txt_combat_move_3_name.TextChanged += new System.EventHandler(this.txt_combat_move_3_name_TextChanged);
             // 
             // txt_combat_move_2_name
@@ -4105,7 +4222,8 @@
             this.txt_combat_move_2_name.Name = "txt_combat_move_2_name";
             this.txt_combat_move_2_name.ReadOnly = true;
             this.txt_combat_move_2_name.Size = new System.Drawing.Size(103, 20);
-            this.txt_combat_move_2_name.TabIndex = 46;
+            this.txt_combat_move_2_name.TabIndex = 99999;
+            this.txt_combat_move_2_name.TabStop = false;
             this.txt_combat_move_2_name.TextChanged += new System.EventHandler(this.txt_combat_move_2_name_TextChanged);
             // 
             // txt_combat_move_1_name
@@ -4114,7 +4232,8 @@
             this.txt_combat_move_1_name.Name = "txt_combat_move_1_name";
             this.txt_combat_move_1_name.ReadOnly = true;
             this.txt_combat_move_1_name.Size = new System.Drawing.Size(103, 20);
-            this.txt_combat_move_1_name.TabIndex = 46;
+            this.txt_combat_move_1_name.TabIndex = 99999;
+            this.txt_combat_move_1_name.TabStop = false;
             this.txt_combat_move_1_name.TextChanged += new System.EventHandler(this.txt_combat_move_1_name_TextChanged);
             // 
             // pic_sht_badge
@@ -4124,7 +4243,7 @@
             this.pic_sht_badge.Name = "pic_sht_badge";
             this.pic_sht_badge.Size = new System.Drawing.Size(137, 126);
             this.pic_sht_badge.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pic_sht_badge.TabIndex = 18;
+            this.pic_sht_badge.TabIndex = 99999;
             this.pic_sht_badge.TabStop = false;
             // 
             // cmb_sht_ability
@@ -4134,7 +4253,7 @@
             this.cmb_sht_ability.MaxDropDownItems = 19;
             this.cmb_sht_ability.Name = "cmb_sht_ability";
             this.cmb_sht_ability.Size = new System.Drawing.Size(161, 21);
-            this.cmb_sht_ability.TabIndex = 10;
+            this.cmb_sht_ability.TabIndex = 5;
             this.cmb_sht_ability.TextChanged += new System.EventHandler(this.cmb_sht_ability_TextChanged);
             // 
             // btn_dynamax
@@ -4145,7 +4264,7 @@
             this.btn_dynamax.Name = "btn_dynamax";
             this.btn_dynamax.Size = new System.Drawing.Size(63, 56);
             this.btn_dynamax.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.btn_dynamax.TabIndex = 17;
+            this.btn_dynamax.TabIndex = 99999;
             this.btn_dynamax.TabStop = false;
             this.btn_dynamax.Click += new System.EventHandler(this.btn_dynamax_Click);
             // 
@@ -4157,7 +4276,7 @@
             this.btn_megaevolve.Name = "btn_megaevolve";
             this.btn_megaevolve.Size = new System.Drawing.Size(63, 56);
             this.btn_megaevolve.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.btn_megaevolve.TabIndex = 21;
+            this.btn_megaevolve.TabIndex = 99999;
             this.btn_megaevolve.TabStop = false;
             this.btn_megaevolve.Click += new System.EventHandler(this.btn_megaevolve_Click);
             // 
@@ -4168,7 +4287,7 @@
             this.lbl_stat_hp_quarter.Location = new System.Drawing.Point(69, 200);
             this.lbl_stat_hp_quarter.Name = "lbl_stat_hp_quarter";
             this.lbl_stat_hp_quarter.Size = new System.Drawing.Size(24, 13);
-            this.lbl_stat_hp_quarter.TabIndex = 29;
+            this.lbl_stat_hp_quarter.TabIndex = 99999;
             this.lbl_stat_hp_quarter.Text = "1/4";
             this.lbl_stat_hp_quarter.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
@@ -4178,7 +4297,8 @@
             this.txt_stat_fort_max.Name = "txt_stat_fort_max";
             this.txt_stat_fort_max.ReadOnly = true;
             this.txt_stat_fort_max.Size = new System.Drawing.Size(27, 20);
-            this.txt_stat_fort_max.TabIndex = 28;
+            this.txt_stat_fort_max.TabIndex = 99999;
+            this.txt_stat_fort_max.TabStop = false;
             this.txt_stat_fort_max.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txt_stat_fort_max.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_qty_KeyPress);
             // 
@@ -4188,7 +4308,8 @@
             this.txt_stat_eva_max.Name = "txt_stat_eva_max";
             this.txt_stat_eva_max.ReadOnly = true;
             this.txt_stat_eva_max.Size = new System.Drawing.Size(27, 20);
-            this.txt_stat_eva_max.TabIndex = 28;
+            this.txt_stat_eva_max.TabIndex = 99999;
+            this.txt_stat_eva_max.TabStop = false;
             this.txt_stat_eva_max.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txt_stat_eva_max.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_qty_KeyPress);
             // 
@@ -4198,7 +4319,8 @@
             this.txt_stat_spd_max.Name = "txt_stat_spd_max";
             this.txt_stat_spd_max.ReadOnly = true;
             this.txt_stat_spd_max.Size = new System.Drawing.Size(27, 20);
-            this.txt_stat_spd_max.TabIndex = 28;
+            this.txt_stat_spd_max.TabIndex = 99999;
+            this.txt_stat_spd_max.TabStop = false;
             this.txt_stat_spd_max.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txt_stat_spd_max.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_qty_KeyPress);
             // 
@@ -4208,7 +4330,8 @@
             this.txt_stat_sdef_max.Name = "txt_stat_sdef_max";
             this.txt_stat_sdef_max.ReadOnly = true;
             this.txt_stat_sdef_max.Size = new System.Drawing.Size(27, 20);
-            this.txt_stat_sdef_max.TabIndex = 28;
+            this.txt_stat_sdef_max.TabIndex = 99999;
+            this.txt_stat_sdef_max.TabStop = false;
             this.txt_stat_sdef_max.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txt_stat_sdef_max.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_qty_KeyPress);
             // 
@@ -4218,7 +4341,7 @@
             this.txt_stat_belly_curr.MaxLength = 6;
             this.txt_stat_belly_curr.Name = "txt_stat_belly_curr";
             this.txt_stat_belly_curr.Size = new System.Drawing.Size(40, 20);
-            this.txt_stat_belly_curr.TabIndex = 24;
+            this.txt_stat_belly_curr.TabIndex = 6;
             this.txt_stat_belly_curr.Text = "100";
             this.txt_stat_belly_curr.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txt_stat_belly_curr.TextChanged += new System.EventHandler(this.txt_stat_belly_curr_TextChanged);
@@ -4230,7 +4353,8 @@
             this.txt_stat_satk_max.Name = "txt_stat_satk_max";
             this.txt_stat_satk_max.ReadOnly = true;
             this.txt_stat_satk_max.Size = new System.Drawing.Size(27, 20);
-            this.txt_stat_satk_max.TabIndex = 28;
+            this.txt_stat_satk_max.TabIndex = 99999;
+            this.txt_stat_satk_max.TabStop = false;
             this.txt_stat_satk_max.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txt_stat_satk_max.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_qty_KeyPress);
             // 
@@ -4240,7 +4364,7 @@
             this.txt_stat_belly_max.MaxLength = 6;
             this.txt_stat_belly_max.Name = "txt_stat_belly_max";
             this.txt_stat_belly_max.Size = new System.Drawing.Size(40, 20);
-            this.txt_stat_belly_max.TabIndex = 24;
+            this.txt_stat_belly_max.TabIndex = 7;
             this.txt_stat_belly_max.Text = "100";
             this.txt_stat_belly_max.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txt_stat_belly_max.TextChanged += new System.EventHandler(this.txt_stat_belly_curr_TextChanged);
@@ -4252,7 +4376,8 @@
             this.txt_stat_def_max.Name = "txt_stat_def_max";
             this.txt_stat_def_max.ReadOnly = true;
             this.txt_stat_def_max.Size = new System.Drawing.Size(27, 20);
-            this.txt_stat_def_max.TabIndex = 28;
+            this.txt_stat_def_max.TabIndex = 99999;
+            this.txt_stat_def_max.TabStop = false;
             this.txt_stat_def_max.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txt_stat_def_max.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_qty_KeyPress);
             // 
@@ -4262,7 +4387,8 @@
             this.txt_stat_atk_max.Name = "txt_stat_atk_max";
             this.txt_stat_atk_max.ReadOnly = true;
             this.txt_stat_atk_max.Size = new System.Drawing.Size(27, 20);
-            this.txt_stat_atk_max.TabIndex = 28;
+            this.txt_stat_atk_max.TabIndex = 99999;
+            this.txt_stat_atk_max.TabStop = false;
             this.txt_stat_atk_max.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txt_stat_atk_max.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_qty_KeyPress);
             // 
@@ -4272,7 +4398,8 @@
             this.txt_stat_hp_max.Name = "txt_stat_hp_max";
             this.txt_stat_hp_max.ReadOnly = true;
             this.txt_stat_hp_max.Size = new System.Drawing.Size(27, 20);
-            this.txt_stat_hp_max.TabIndex = 28;
+            this.txt_stat_hp_max.TabIndex = 99999;
+            this.txt_stat_hp_max.TabStop = false;
             this.txt_stat_hp_max.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txt_stat_hp_max.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_qty_KeyPress);
             // 
@@ -4283,7 +4410,7 @@
             this.lbl_stat_fort_max.Location = new System.Drawing.Point(8, 655);
             this.lbl_stat_fort_max.Name = "lbl_stat_fort_max";
             this.lbl_stat_fort_max.Size = new System.Drawing.Size(27, 13);
-            this.lbl_stat_fort_max.TabIndex = 26;
+            this.lbl_stat_fort_max.TabIndex = 99999;
             this.lbl_stat_fort_max.Text = "Max";
             this.lbl_stat_fort_max.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
@@ -4294,7 +4421,7 @@
             this.lbl_stat_eva_max.Location = new System.Drawing.Point(7, 590);
             this.lbl_stat_eva_max.Name = "lbl_stat_eva_max";
             this.lbl_stat_eva_max.Size = new System.Drawing.Size(27, 13);
-            this.lbl_stat_eva_max.TabIndex = 26;
+            this.lbl_stat_eva_max.TabIndex = 99999;
             this.lbl_stat_eva_max.Text = "Max";
             this.lbl_stat_eva_max.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
@@ -4305,7 +4432,7 @@
             this.lbl_stat_spd_max.Location = new System.Drawing.Point(7, 525);
             this.lbl_stat_spd_max.Name = "lbl_stat_spd_max";
             this.lbl_stat_spd_max.Size = new System.Drawing.Size(27, 13);
-            this.lbl_stat_spd_max.TabIndex = 26;
+            this.lbl_stat_spd_max.TabIndex = 99999;
             this.lbl_stat_spd_max.Text = "Max";
             this.lbl_stat_spd_max.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
@@ -4316,7 +4443,7 @@
             this.lbl_stat_sdef_max.Location = new System.Drawing.Point(7, 460);
             this.lbl_stat_sdef_max.Name = "lbl_stat_sdef_max";
             this.lbl_stat_sdef_max.Size = new System.Drawing.Size(27, 13);
-            this.lbl_stat_sdef_max.TabIndex = 26;
+            this.lbl_stat_sdef_max.TabIndex = 99999;
             this.lbl_stat_sdef_max.Text = "Max";
             this.lbl_stat_sdef_max.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
@@ -4327,7 +4454,7 @@
             this.lbl_stat_satk_max.Location = new System.Drawing.Point(7, 395);
             this.lbl_stat_satk_max.Name = "lbl_stat_satk_max";
             this.lbl_stat_satk_max.Size = new System.Drawing.Size(27, 13);
-            this.lbl_stat_satk_max.TabIndex = 26;
+            this.lbl_stat_satk_max.TabIndex = 99999;
             this.lbl_stat_satk_max.Text = "Max";
             this.lbl_stat_satk_max.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
@@ -4338,7 +4465,7 @@
             this.lbl_stat_hp_max.Location = new System.Drawing.Point(7, 200);
             this.lbl_stat_hp_max.Name = "lbl_stat_hp_max";
             this.lbl_stat_hp_max.Size = new System.Drawing.Size(27, 13);
-            this.lbl_stat_hp_max.TabIndex = 26;
+            this.lbl_stat_hp_max.TabIndex = 99999;
             this.lbl_stat_hp_max.Text = "Max";
             this.lbl_stat_hp_max.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
@@ -4349,7 +4476,7 @@
             this.lbl_stat_def_max.Location = new System.Drawing.Point(7, 330);
             this.lbl_stat_def_max.Name = "lbl_stat_def_max";
             this.lbl_stat_def_max.Size = new System.Drawing.Size(27, 13);
-            this.lbl_stat_def_max.TabIndex = 26;
+            this.lbl_stat_def_max.TabIndex = 99999;
             this.lbl_stat_def_max.Text = "Max";
             this.lbl_stat_def_max.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
@@ -4360,7 +4487,7 @@
             this.lbl_stat_hp_half.Location = new System.Drawing.Point(40, 200);
             this.lbl_stat_hp_half.Name = "lbl_stat_hp_half";
             this.lbl_stat_hp_half.Size = new System.Drawing.Size(24, 13);
-            this.lbl_stat_hp_half.TabIndex = 26;
+            this.lbl_stat_hp_half.TabIndex = 99999;
             this.lbl_stat_hp_half.Text = "1/2";
             this.lbl_stat_hp_half.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
@@ -4371,7 +4498,7 @@
             this.lbl_stat_atk_max.Location = new System.Drawing.Point(7, 265);
             this.lbl_stat_atk_max.Name = "lbl_stat_atk_max";
             this.lbl_stat_atk_max.Size = new System.Drawing.Size(27, 13);
-            this.lbl_stat_atk_max.TabIndex = 26;
+            this.lbl_stat_atk_max.TabIndex = 99999;
             this.lbl_stat_atk_max.Text = "Max";
             this.lbl_stat_atk_max.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
@@ -4383,7 +4510,7 @@
             this.pnl_pg_3_inv.Location = new System.Drawing.Point(0, 28);
             this.pnl_pg_3_inv.Name = "pnl_pg_3_inv";
             this.pnl_pg_3_inv.Size = new System.Drawing.Size(607, 716);
-            this.pnl_pg_3_inv.TabIndex = 33;
+            this.pnl_pg_3_inv.TabIndex = 99999;
             this.pnl_pg_3_inv.Visible = false;
             // 
             // grp_inv
@@ -4483,7 +4610,7 @@
             this.grp_inv.Location = new System.Drawing.Point(3, 3);
             this.grp_inv.Name = "grp_inv";
             this.grp_inv.Size = new System.Drawing.Size(592, 428);
-            this.grp_inv.TabIndex = 2;
+            this.grp_inv.TabIndex = 100;
             this.grp_inv.TabStop = false;
             this.grp_inv.Text = "Inventory";
             // 
@@ -4492,7 +4619,7 @@
             this.lbl_inv_max_qty.Location = new System.Drawing.Point(503, 109);
             this.lbl_inv_max_qty.Name = "lbl_inv_max_qty";
             this.lbl_inv_max_qty.Size = new System.Drawing.Size(82, 14);
-            this.lbl_inv_max_qty.TabIndex = 14;
+            this.lbl_inv_max_qty.TabIndex = 99999;
             this.lbl_inv_max_qty.Text = "Max QTY";
             // 
             // txt_inv_max_qty
@@ -4501,7 +4628,8 @@
             this.txt_inv_max_qty.Name = "txt_inv_max_qty";
             this.txt_inv_max_qty.ReadOnly = true;
             this.txt_inv_max_qty.Size = new System.Drawing.Size(82, 20);
-            this.txt_inv_max_qty.TabIndex = 13;
+            this.txt_inv_max_qty.TabIndex = 99999;
+            this.txt_inv_max_qty.TabStop = false;
             this.txt_inv_max_qty.Text = "1";
             this.txt_inv_max_qty.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txt_inv_max_qty.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_qty_KeyPress);
@@ -4511,7 +4639,7 @@
             this.lbl_inv_curr_qty.Location = new System.Drawing.Point(503, 64);
             this.lbl_inv_curr_qty.Name = "lbl_inv_curr_qty";
             this.lbl_inv_curr_qty.Size = new System.Drawing.Size(82, 14);
-            this.lbl_inv_curr_qty.TabIndex = 12;
+            this.lbl_inv_curr_qty.TabIndex = 99999;
             this.lbl_inv_curr_qty.Text = "Current QTY";
             // 
             // txt_inv_curr_qty
@@ -4520,7 +4648,8 @@
             this.txt_inv_curr_qty.Name = "txt_inv_curr_qty";
             this.txt_inv_curr_qty.ReadOnly = true;
             this.txt_inv_curr_qty.Size = new System.Drawing.Size(82, 20);
-            this.txt_inv_curr_qty.TabIndex = 11;
+            this.txt_inv_curr_qty.TabIndex = 99999;
+            this.txt_inv_curr_qty.TabStop = false;
             this.txt_inv_curr_qty.Text = "0";
             this.txt_inv_curr_qty.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -4530,7 +4659,7 @@
             this.cmb_inv_bag.Location = new System.Drawing.Point(503, 35);
             this.cmb_inv_bag.Name = "cmb_inv_bag";
             this.cmb_inv_bag.Size = new System.Drawing.Size(82, 21);
-            this.cmb_inv_bag.TabIndex = 10;
+            this.cmb_inv_bag.TabIndex = 177;
             this.cmb_inv_bag.SelectedIndexChanged += new System.EventHandler(this.cmb_inv_bag_SelectedIndexChanged);
             // 
             // txt_inv_preview_title
@@ -4541,7 +4670,8 @@
             this.txt_inv_preview_title.Name = "txt_inv_preview_title";
             this.txt_inv_preview_title.ReadOnly = true;
             this.txt_inv_preview_title.Size = new System.Drawing.Size(310, 20);
-            this.txt_inv_preview_title.TabIndex = 9;
+            this.txt_inv_preview_title.TabIndex = 99999;
+            this.txt_inv_preview_title.TabStop = false;
             this.txt_inv_preview_title.Text = "Item Preview";
             this.txt_inv_preview_title.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -4552,7 +4682,8 @@
             this.txt_inv_preview_desc.Name = "txt_inv_preview_desc";
             this.txt_inv_preview_desc.ReadOnly = true;
             this.txt_inv_preview_desc.Size = new System.Drawing.Size(309, 82);
-            this.txt_inv_preview_desc.TabIndex = 8;
+            this.txt_inv_preview_desc.TabIndex = 99999;
+            this.txt_inv_preview_desc.TabStop = false;
             this.txt_inv_preview_desc.Text = "Mouse over an item to view its description!";
             // 
             // txt_inv_name_15
@@ -4560,7 +4691,7 @@
             this.txt_inv_name_15.Location = new System.Drawing.Point(107, 400);
             this.txt_inv_name_15.Name = "txt_inv_name_15";
             this.txt_inv_name_15.Size = new System.Drawing.Size(139, 20);
-            this.txt_inv_name_15.TabIndex = 5;
+            this.txt_inv_name_15.TabIndex = 143;
             this.txt_inv_name_15.MouseHover += new System.EventHandler(this.loadItemParams);
             // 
             // txt_inv_name_14
@@ -4568,7 +4699,7 @@
             this.txt_inv_name_14.Location = new System.Drawing.Point(107, 374);
             this.txt_inv_name_14.Name = "txt_inv_name_14";
             this.txt_inv_name_14.Size = new System.Drawing.Size(139, 20);
-            this.txt_inv_name_14.TabIndex = 5;
+            this.txt_inv_name_14.TabIndex = 140;
             this.txt_inv_name_14.MouseHover += new System.EventHandler(this.loadItemParams);
             // 
             // txt_inv_name_12
@@ -4576,7 +4707,7 @@
             this.txt_inv_name_12.Location = new System.Drawing.Point(107, 322);
             this.txt_inv_name_12.Name = "txt_inv_name_12";
             this.txt_inv_name_12.Size = new System.Drawing.Size(139, 20);
-            this.txt_inv_name_12.TabIndex = 5;
+            this.txt_inv_name_12.TabIndex = 134;
             this.txt_inv_name_12.MouseHover += new System.EventHandler(this.loadItemParams);
             // 
             // txt_inv_name_23
@@ -4584,7 +4715,7 @@
             this.txt_inv_name_23.Location = new System.Drawing.Point(358, 218);
             this.txt_inv_name_23.Name = "txt_inv_name_23";
             this.txt_inv_name_23.Size = new System.Drawing.Size(139, 20);
-            this.txt_inv_name_23.TabIndex = 5;
+            this.txt_inv_name_23.TabIndex = 167;
             this.txt_inv_name_23.MouseHover += new System.EventHandler(this.loadItemParams);
             // 
             // txt_inv_name_8
@@ -4592,7 +4723,7 @@
             this.txt_inv_name_8.Location = new System.Drawing.Point(107, 218);
             this.txt_inv_name_8.Name = "txt_inv_name_8";
             this.txt_inv_name_8.Size = new System.Drawing.Size(139, 20);
-            this.txt_inv_name_8.TabIndex = 5;
+            this.txt_inv_name_8.TabIndex = 122;
             this.txt_inv_name_8.MouseHover += new System.EventHandler(this.loadItemParams);
             // 
             // txt_inv_qty_15
@@ -4601,7 +4732,7 @@
             this.txt_inv_qty_15.MaxLength = 9;
             this.txt_inv_qty_15.Name = "txt_inv_qty_15";
             this.txt_inv_qty_15.Size = new System.Drawing.Size(63, 20);
-            this.txt_inv_qty_15.TabIndex = 4;
+            this.txt_inv_qty_15.TabIndex = 142;
             this.txt_inv_qty_15.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txt_inv_qty_15.TextChanged += new System.EventHandler(this.txt_inv_qty_TextChanged);
             this.txt_inv_qty_15.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_qty_KeyPress);
@@ -4611,7 +4742,7 @@
             this.txt_inv_name_19.Location = new System.Drawing.Point(358, 114);
             this.txt_inv_name_19.Name = "txt_inv_name_19";
             this.txt_inv_name_19.Size = new System.Drawing.Size(139, 20);
-            this.txt_inv_name_19.TabIndex = 5;
+            this.txt_inv_name_19.TabIndex = 155;
             this.txt_inv_name_19.MouseHover += new System.EventHandler(this.loadItemParams);
             // 
             // txt_inv_name_4
@@ -4619,7 +4750,7 @@
             this.txt_inv_name_4.Location = new System.Drawing.Point(107, 114);
             this.txt_inv_name_4.Name = "txt_inv_name_4";
             this.txt_inv_name_4.Size = new System.Drawing.Size(139, 20);
-            this.txt_inv_name_4.TabIndex = 5;
+            this.txt_inv_name_4.TabIndex = 110;
             this.txt_inv_name_4.MouseHover += new System.EventHandler(this.loadItemParams);
             // 
             // txt_inv_qty_14
@@ -4628,7 +4759,7 @@
             this.txt_inv_qty_14.MaxLength = 9;
             this.txt_inv_qty_14.Name = "txt_inv_qty_14";
             this.txt_inv_qty_14.Size = new System.Drawing.Size(63, 20);
-            this.txt_inv_qty_14.TabIndex = 4;
+            this.txt_inv_qty_14.TabIndex = 139;
             this.txt_inv_qty_14.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txt_inv_qty_14.TextChanged += new System.EventHandler(this.txt_inv_qty_TextChanged);
             this.txt_inv_qty_14.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_qty_KeyPress);
@@ -4639,7 +4770,7 @@
             this.txt_inv_qty_12.MaxLength = 9;
             this.txt_inv_qty_12.Name = "txt_inv_qty_12";
             this.txt_inv_qty_12.Size = new System.Drawing.Size(63, 20);
-            this.txt_inv_qty_12.TabIndex = 4;
+            this.txt_inv_qty_12.TabIndex = 133;
             this.txt_inv_qty_12.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txt_inv_qty_12.TextChanged += new System.EventHandler(this.txt_inv_qty_TextChanged);
             this.txt_inv_qty_12.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_qty_KeyPress);
@@ -4650,7 +4781,7 @@
             this.txt_inv_qty_23.MaxLength = 9;
             this.txt_inv_qty_23.Name = "txt_inv_qty_23";
             this.txt_inv_qty_23.Size = new System.Drawing.Size(63, 20);
-            this.txt_inv_qty_23.TabIndex = 4;
+            this.txt_inv_qty_23.TabIndex = 166;
             this.txt_inv_qty_23.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txt_inv_qty_23.TextChanged += new System.EventHandler(this.txt_inv_qty_TextChanged);
             this.txt_inv_qty_23.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_qty_KeyPress);
@@ -4661,7 +4792,7 @@
             this.txt_inv_qty_8.MaxLength = 9;
             this.txt_inv_qty_8.Name = "txt_inv_qty_8";
             this.txt_inv_qty_8.Size = new System.Drawing.Size(63, 20);
-            this.txt_inv_qty_8.TabIndex = 4;
+            this.txt_inv_qty_8.TabIndex = 121;
             this.txt_inv_qty_8.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txt_inv_qty_8.TextChanged += new System.EventHandler(this.txt_inv_qty_TextChanged);
             this.txt_inv_qty_8.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_qty_KeyPress);
@@ -4672,7 +4803,7 @@
             this.txt_inv_qty_19.MaxLength = 9;
             this.txt_inv_qty_19.Name = "txt_inv_qty_19";
             this.txt_inv_qty_19.Size = new System.Drawing.Size(63, 20);
-            this.txt_inv_qty_19.TabIndex = 4;
+            this.txt_inv_qty_19.TabIndex = 154;
             this.txt_inv_qty_19.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txt_inv_qty_19.TextChanged += new System.EventHandler(this.txt_inv_qty_TextChanged);
             this.txt_inv_qty_19.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_qty_KeyPress);
@@ -4683,7 +4814,7 @@
             this.txt_inv_qty_4.MaxLength = 9;
             this.txt_inv_qty_4.Name = "txt_inv_qty_4";
             this.txt_inv_qty_4.Size = new System.Drawing.Size(63, 20);
-            this.txt_inv_qty_4.TabIndex = 4;
+            this.txt_inv_qty_4.TabIndex = 109;
             this.txt_inv_qty_4.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txt_inv_qty_4.TextChanged += new System.EventHandler(this.txt_inv_qty_TextChanged);
             this.txt_inv_qty_4.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_qty_KeyPress);
@@ -4693,7 +4824,7 @@
             this.txt_inv_name_13.Location = new System.Drawing.Point(107, 348);
             this.txt_inv_name_13.Name = "txt_inv_name_13";
             this.txt_inv_name_13.Size = new System.Drawing.Size(139, 20);
-            this.txt_inv_name_13.TabIndex = 5;
+            this.txt_inv_name_13.TabIndex = 137;
             this.txt_inv_name_13.MouseHover += new System.EventHandler(this.loadItemParams);
             // 
             // txt_inv_name_11
@@ -4701,7 +4832,7 @@
             this.txt_inv_name_11.Location = new System.Drawing.Point(107, 296);
             this.txt_inv_name_11.Name = "txt_inv_name_11";
             this.txt_inv_name_11.Size = new System.Drawing.Size(139, 20);
-            this.txt_inv_name_11.TabIndex = 5;
+            this.txt_inv_name_11.TabIndex = 131;
             this.txt_inv_name_11.MouseHover += new System.EventHandler(this.loadItemParams);
             // 
             // txt_inv_name_22
@@ -4709,7 +4840,7 @@
             this.txt_inv_name_22.Location = new System.Drawing.Point(358, 192);
             this.txt_inv_name_22.Name = "txt_inv_name_22";
             this.txt_inv_name_22.Size = new System.Drawing.Size(139, 20);
-            this.txt_inv_name_22.TabIndex = 5;
+            this.txt_inv_name_22.TabIndex = 164;
             this.txt_inv_name_22.MouseHover += new System.EventHandler(this.loadItemParams);
             // 
             // txt_inv_name_7
@@ -4717,7 +4848,7 @@
             this.txt_inv_name_7.Location = new System.Drawing.Point(107, 192);
             this.txt_inv_name_7.Name = "txt_inv_name_7";
             this.txt_inv_name_7.Size = new System.Drawing.Size(139, 20);
-            this.txt_inv_name_7.TabIndex = 5;
+            this.txt_inv_name_7.TabIndex = 119;
             this.txt_inv_name_7.MouseHover += new System.EventHandler(this.loadItemParams);
             // 
             // txt_inv_qty_13
@@ -4726,7 +4857,7 @@
             this.txt_inv_qty_13.MaxLength = 9;
             this.txt_inv_qty_13.Name = "txt_inv_qty_13";
             this.txt_inv_qty_13.Size = new System.Drawing.Size(63, 20);
-            this.txt_inv_qty_13.TabIndex = 4;
+            this.txt_inv_qty_13.TabIndex = 136;
             this.txt_inv_qty_13.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txt_inv_qty_13.TextChanged += new System.EventHandler(this.txt_inv_qty_TextChanged);
             this.txt_inv_qty_13.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_qty_KeyPress);
@@ -4736,7 +4867,7 @@
             this.txt_inv_name_18.Location = new System.Drawing.Point(358, 88);
             this.txt_inv_name_18.Name = "txt_inv_name_18";
             this.txt_inv_name_18.Size = new System.Drawing.Size(139, 20);
-            this.txt_inv_name_18.TabIndex = 5;
+            this.txt_inv_name_18.TabIndex = 152;
             this.txt_inv_name_18.MouseHover += new System.EventHandler(this.loadItemParams);
             // 
             // txt_inv_name_3
@@ -4744,7 +4875,7 @@
             this.txt_inv_name_3.Location = new System.Drawing.Point(107, 88);
             this.txt_inv_name_3.Name = "txt_inv_name_3";
             this.txt_inv_name_3.Size = new System.Drawing.Size(139, 20);
-            this.txt_inv_name_3.TabIndex = 5;
+            this.txt_inv_name_3.TabIndex = 107;
             this.txt_inv_name_3.MouseHover += new System.EventHandler(this.loadItemParams);
             // 
             // txt_inv_qty_11
@@ -4753,7 +4884,7 @@
             this.txt_inv_qty_11.MaxLength = 9;
             this.txt_inv_qty_11.Name = "txt_inv_qty_11";
             this.txt_inv_qty_11.Size = new System.Drawing.Size(63, 20);
-            this.txt_inv_qty_11.TabIndex = 4;
+            this.txt_inv_qty_11.TabIndex = 130;
             this.txt_inv_qty_11.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txt_inv_qty_11.TextChanged += new System.EventHandler(this.txt_inv_qty_TextChanged);
             this.txt_inv_qty_11.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_qty_KeyPress);
@@ -4764,7 +4895,7 @@
             this.txt_inv_qty_22.MaxLength = 9;
             this.txt_inv_qty_22.Name = "txt_inv_qty_22";
             this.txt_inv_qty_22.Size = new System.Drawing.Size(63, 20);
-            this.txt_inv_qty_22.TabIndex = 4;
+            this.txt_inv_qty_22.TabIndex = 163;
             this.txt_inv_qty_22.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txt_inv_qty_22.TextChanged += new System.EventHandler(this.txt_inv_qty_TextChanged);
             this.txt_inv_qty_22.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_qty_KeyPress);
@@ -4775,7 +4906,7 @@
             this.txt_inv_qty_7.MaxLength = 9;
             this.txt_inv_qty_7.Name = "txt_inv_qty_7";
             this.txt_inv_qty_7.Size = new System.Drawing.Size(63, 20);
-            this.txt_inv_qty_7.TabIndex = 4;
+            this.txt_inv_qty_7.TabIndex = 118;
             this.txt_inv_qty_7.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txt_inv_qty_7.TextChanged += new System.EventHandler(this.txt_inv_qty_TextChanged);
             this.txt_inv_qty_7.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_qty_KeyPress);
@@ -4786,7 +4917,7 @@
             this.txt_inv_qty_18.MaxLength = 9;
             this.txt_inv_qty_18.Name = "txt_inv_qty_18";
             this.txt_inv_qty_18.Size = new System.Drawing.Size(63, 20);
-            this.txt_inv_qty_18.TabIndex = 4;
+            this.txt_inv_qty_18.TabIndex = 151;
             this.txt_inv_qty_18.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txt_inv_qty_18.TextChanged += new System.EventHandler(this.txt_inv_qty_TextChanged);
             this.txt_inv_qty_18.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_qty_KeyPress);
@@ -4797,7 +4928,7 @@
             this.txt_inv_qty_3.MaxLength = 9;
             this.txt_inv_qty_3.Name = "txt_inv_qty_3";
             this.txt_inv_qty_3.Size = new System.Drawing.Size(63, 20);
-            this.txt_inv_qty_3.TabIndex = 4;
+            this.txt_inv_qty_3.TabIndex = 106;
             this.txt_inv_qty_3.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txt_inv_qty_3.TextChanged += new System.EventHandler(this.txt_inv_qty_TextChanged);
             this.txt_inv_qty_3.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_qty_KeyPress);
@@ -4807,7 +4938,7 @@
             this.txt_inv_name_26.Location = new System.Drawing.Point(358, 296);
             this.txt_inv_name_26.Name = "txt_inv_name_26";
             this.txt_inv_name_26.Size = new System.Drawing.Size(139, 20);
-            this.txt_inv_name_26.TabIndex = 5;
+            this.txt_inv_name_26.TabIndex = 176;
             this.txt_inv_name_26.MouseHover += new System.EventHandler(this.loadItemParams);
             // 
             // txt_inv_name_25
@@ -4815,7 +4946,7 @@
             this.txt_inv_name_25.Location = new System.Drawing.Point(358, 270);
             this.txt_inv_name_25.Name = "txt_inv_name_25";
             this.txt_inv_name_25.Size = new System.Drawing.Size(139, 20);
-            this.txt_inv_name_25.TabIndex = 5;
+            this.txt_inv_name_25.TabIndex = 173;
             this.txt_inv_name_25.MouseHover += new System.EventHandler(this.loadItemParams);
             // 
             // txt_inv_name_10
@@ -4823,7 +4954,7 @@
             this.txt_inv_name_10.Location = new System.Drawing.Point(107, 270);
             this.txt_inv_name_10.Name = "txt_inv_name_10";
             this.txt_inv_name_10.Size = new System.Drawing.Size(139, 20);
-            this.txt_inv_name_10.TabIndex = 5;
+            this.txt_inv_name_10.TabIndex = 128;
             this.txt_inv_name_10.MouseHover += new System.EventHandler(this.loadItemParams);
             // 
             // txt_inv_name_21
@@ -4831,7 +4962,7 @@
             this.txt_inv_name_21.Location = new System.Drawing.Point(358, 166);
             this.txt_inv_name_21.Name = "txt_inv_name_21";
             this.txt_inv_name_21.Size = new System.Drawing.Size(139, 20);
-            this.txt_inv_name_21.TabIndex = 5;
+            this.txt_inv_name_21.TabIndex = 161;
             this.txt_inv_name_21.MouseHover += new System.EventHandler(this.loadItemParams);
             // 
             // txt_inv_name_6
@@ -4839,7 +4970,7 @@
             this.txt_inv_name_6.Location = new System.Drawing.Point(107, 166);
             this.txt_inv_name_6.Name = "txt_inv_name_6";
             this.txt_inv_name_6.Size = new System.Drawing.Size(139, 20);
-            this.txt_inv_name_6.TabIndex = 5;
+            this.txt_inv_name_6.TabIndex = 116;
             this.txt_inv_name_6.MouseHover += new System.EventHandler(this.loadItemParams);
             // 
             // txt_inv_name_17
@@ -4847,7 +4978,7 @@
             this.txt_inv_name_17.Location = new System.Drawing.Point(358, 62);
             this.txt_inv_name_17.Name = "txt_inv_name_17";
             this.txt_inv_name_17.Size = new System.Drawing.Size(139, 20);
-            this.txt_inv_name_17.TabIndex = 5;
+            this.txt_inv_name_17.TabIndex = 149;
             this.txt_inv_name_17.MouseHover += new System.EventHandler(this.loadItemParams);
             // 
             // txt_inv_qty_26
@@ -4856,7 +4987,7 @@
             this.txt_inv_qty_26.MaxLength = 9;
             this.txt_inv_qty_26.Name = "txt_inv_qty_26";
             this.txt_inv_qty_26.Size = new System.Drawing.Size(63, 20);
-            this.txt_inv_qty_26.TabIndex = 4;
+            this.txt_inv_qty_26.TabIndex = 175;
             this.txt_inv_qty_26.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txt_inv_qty_26.TextChanged += new System.EventHandler(this.txt_inv_qty_TextChanged);
             this.txt_inv_qty_26.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_qty_KeyPress);
@@ -4866,7 +4997,7 @@
             this.txt_inv_name_2.Location = new System.Drawing.Point(107, 62);
             this.txt_inv_name_2.Name = "txt_inv_name_2";
             this.txt_inv_name_2.Size = new System.Drawing.Size(139, 20);
-            this.txt_inv_name_2.TabIndex = 5;
+            this.txt_inv_name_2.TabIndex = 104;
             this.txt_inv_name_2.MouseHover += new System.EventHandler(this.loadItemParams);
             // 
             // txt_inv_qty_25
@@ -4875,7 +5006,7 @@
             this.txt_inv_qty_25.MaxLength = 9;
             this.txt_inv_qty_25.Name = "txt_inv_qty_25";
             this.txt_inv_qty_25.Size = new System.Drawing.Size(63, 20);
-            this.txt_inv_qty_25.TabIndex = 4;
+            this.txt_inv_qty_25.TabIndex = 172;
             this.txt_inv_qty_25.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txt_inv_qty_25.TextChanged += new System.EventHandler(this.txt_inv_qty_TextChanged);
             this.txt_inv_qty_25.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_qty_KeyPress);
@@ -4886,7 +5017,7 @@
             this.txt_inv_qty_10.MaxLength = 9;
             this.txt_inv_qty_10.Name = "txt_inv_qty_10";
             this.txt_inv_qty_10.Size = new System.Drawing.Size(63, 20);
-            this.txt_inv_qty_10.TabIndex = 4;
+            this.txt_inv_qty_10.TabIndex = 127;
             this.txt_inv_qty_10.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txt_inv_qty_10.TextChanged += new System.EventHandler(this.txt_inv_qty_TextChanged);
             this.txt_inv_qty_10.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_qty_KeyPress);
@@ -4897,7 +5028,7 @@
             this.txt_inv_qty_21.MaxLength = 9;
             this.txt_inv_qty_21.Name = "txt_inv_qty_21";
             this.txt_inv_qty_21.Size = new System.Drawing.Size(63, 20);
-            this.txt_inv_qty_21.TabIndex = 4;
+            this.txt_inv_qty_21.TabIndex = 160;
             this.txt_inv_qty_21.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txt_inv_qty_21.TextChanged += new System.EventHandler(this.txt_inv_qty_TextChanged);
             this.txt_inv_qty_21.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_qty_KeyPress);
@@ -4908,7 +5039,7 @@
             this.txt_inv_qty_6.MaxLength = 9;
             this.txt_inv_qty_6.Name = "txt_inv_qty_6";
             this.txt_inv_qty_6.Size = new System.Drawing.Size(63, 20);
-            this.txt_inv_qty_6.TabIndex = 4;
+            this.txt_inv_qty_6.TabIndex = 115;
             this.txt_inv_qty_6.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txt_inv_qty_6.TextChanged += new System.EventHandler(this.txt_inv_qty_TextChanged);
             this.txt_inv_qty_6.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_qty_KeyPress);
@@ -4919,7 +5050,7 @@
             this.txt_inv_qty_17.MaxLength = 9;
             this.txt_inv_qty_17.Name = "txt_inv_qty_17";
             this.txt_inv_qty_17.Size = new System.Drawing.Size(63, 20);
-            this.txt_inv_qty_17.TabIndex = 4;
+            this.txt_inv_qty_17.TabIndex = 148;
             this.txt_inv_qty_17.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txt_inv_qty_17.TextChanged += new System.EventHandler(this.txt_inv_qty_TextChanged);
             this.txt_inv_qty_17.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_qty_KeyPress);
@@ -4930,7 +5061,7 @@
             this.txt_inv_qty_2.MaxLength = 9;
             this.txt_inv_qty_2.Name = "txt_inv_qty_2";
             this.txt_inv_qty_2.Size = new System.Drawing.Size(63, 20);
-            this.txt_inv_qty_2.TabIndex = 4;
+            this.txt_inv_qty_2.TabIndex = 103;
             this.txt_inv_qty_2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txt_inv_qty_2.TextChanged += new System.EventHandler(this.txt_inv_qty_TextChanged);
             this.txt_inv_qty_2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_qty_KeyPress);
@@ -4940,7 +5071,7 @@
             this.txt_inv_name_24.Location = new System.Drawing.Point(358, 244);
             this.txt_inv_name_24.Name = "txt_inv_name_24";
             this.txt_inv_name_24.Size = new System.Drawing.Size(139, 20);
-            this.txt_inv_name_24.TabIndex = 5;
+            this.txt_inv_name_24.TabIndex = 170;
             this.txt_inv_name_24.MouseHover += new System.EventHandler(this.loadItemParams);
             // 
             // txt_inv_name_9
@@ -4948,7 +5079,7 @@
             this.txt_inv_name_9.Location = new System.Drawing.Point(107, 244);
             this.txt_inv_name_9.Name = "txt_inv_name_9";
             this.txt_inv_name_9.Size = new System.Drawing.Size(139, 20);
-            this.txt_inv_name_9.TabIndex = 5;
+            this.txt_inv_name_9.TabIndex = 125;
             this.txt_inv_name_9.MouseHover += new System.EventHandler(this.loadItemParams);
             // 
             // txt_inv_qty_24
@@ -4957,7 +5088,7 @@
             this.txt_inv_qty_24.MaxLength = 9;
             this.txt_inv_qty_24.Name = "txt_inv_qty_24";
             this.txt_inv_qty_24.Size = new System.Drawing.Size(63, 20);
-            this.txt_inv_qty_24.TabIndex = 4;
+            this.txt_inv_qty_24.TabIndex = 169;
             this.txt_inv_qty_24.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txt_inv_qty_24.TextChanged += new System.EventHandler(this.txt_inv_qty_TextChanged);
             this.txt_inv_qty_24.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_qty_KeyPress);
@@ -4968,7 +5099,7 @@
             this.txt_inv_qty_9.MaxLength = 9;
             this.txt_inv_qty_9.Name = "txt_inv_qty_9";
             this.txt_inv_qty_9.Size = new System.Drawing.Size(63, 20);
-            this.txt_inv_qty_9.TabIndex = 4;
+            this.txt_inv_qty_9.TabIndex = 124;
             this.txt_inv_qty_9.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txt_inv_qty_9.TextChanged += new System.EventHandler(this.txt_inv_qty_TextChanged);
             this.txt_inv_qty_9.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_qty_KeyPress);
@@ -4979,7 +5110,7 @@
             this.chk_inv_held_15.Location = new System.Drawing.Point(17, 403);
             this.chk_inv_held_15.Name = "chk_inv_held_15";
             this.chk_inv_held_15.Size = new System.Drawing.Size(15, 14);
-            this.chk_inv_held_15.TabIndex = 2;
+            this.chk_inv_held_15.TabIndex = 141;
             this.chk_inv_held_15.UseVisualStyleBackColor = true;
             this.chk_inv_held_15.CheckedChanged += new System.EventHandler(this.txt_inv_qty_TextChanged);
             // 
@@ -4988,7 +5119,7 @@
             this.txt_inv_name_20.Location = new System.Drawing.Point(358, 140);
             this.txt_inv_name_20.Name = "txt_inv_name_20";
             this.txt_inv_name_20.Size = new System.Drawing.Size(139, 20);
-            this.txt_inv_name_20.TabIndex = 5;
+            this.txt_inv_name_20.TabIndex = 158;
             this.txt_inv_name_20.MouseHover += new System.EventHandler(this.loadItemParams);
             // 
             // txt_inv_name_5
@@ -4996,7 +5127,7 @@
             this.txt_inv_name_5.Location = new System.Drawing.Point(107, 140);
             this.txt_inv_name_5.Name = "txt_inv_name_5";
             this.txt_inv_name_5.Size = new System.Drawing.Size(139, 20);
-            this.txt_inv_name_5.TabIndex = 5;
+            this.txt_inv_name_5.TabIndex = 113;
             this.txt_inv_name_5.MouseHover += new System.EventHandler(this.loadItemParams);
             // 
             // chk_inv_held_14
@@ -5005,7 +5136,7 @@
             this.chk_inv_held_14.Location = new System.Drawing.Point(17, 377);
             this.chk_inv_held_14.Name = "chk_inv_held_14";
             this.chk_inv_held_14.Size = new System.Drawing.Size(15, 14);
-            this.chk_inv_held_14.TabIndex = 2;
+            this.chk_inv_held_14.TabIndex = 138;
             this.chk_inv_held_14.UseVisualStyleBackColor = true;
             this.chk_inv_held_14.CheckedChanged += new System.EventHandler(this.txt_inv_qty_TextChanged);
             // 
@@ -5015,7 +5146,7 @@
             this.txt_inv_qty_20.MaxLength = 9;
             this.txt_inv_qty_20.Name = "txt_inv_qty_20";
             this.txt_inv_qty_20.Size = new System.Drawing.Size(63, 20);
-            this.txt_inv_qty_20.TabIndex = 4;
+            this.txt_inv_qty_20.TabIndex = 157;
             this.txt_inv_qty_20.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txt_inv_qty_20.TextChanged += new System.EventHandler(this.txt_inv_qty_TextChanged);
             this.txt_inv_qty_20.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_qty_KeyPress);
@@ -5026,7 +5157,7 @@
             this.txt_inv_qty_5.MaxLength = 9;
             this.txt_inv_qty_5.Name = "txt_inv_qty_5";
             this.txt_inv_qty_5.Size = new System.Drawing.Size(63, 20);
-            this.txt_inv_qty_5.TabIndex = 4;
+            this.txt_inv_qty_5.TabIndex = 112;
             this.txt_inv_qty_5.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txt_inv_qty_5.TextChanged += new System.EventHandler(this.txt_inv_qty_TextChanged);
             this.txt_inv_qty_5.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_qty_KeyPress);
@@ -5037,7 +5168,7 @@
             this.chk_inv_held_12.Location = new System.Drawing.Point(17, 325);
             this.chk_inv_held_12.Name = "chk_inv_held_12";
             this.chk_inv_held_12.Size = new System.Drawing.Size(15, 14);
-            this.chk_inv_held_12.TabIndex = 2;
+            this.chk_inv_held_12.TabIndex = 132;
             this.chk_inv_held_12.UseVisualStyleBackColor = true;
             this.chk_inv_held_12.CheckedChanged += new System.EventHandler(this.txt_inv_qty_TextChanged);
             // 
@@ -5046,7 +5177,7 @@
             this.txt_inv_name_16.Location = new System.Drawing.Point(358, 36);
             this.txt_inv_name_16.Name = "txt_inv_name_16";
             this.txt_inv_name_16.Size = new System.Drawing.Size(139, 20);
-            this.txt_inv_name_16.TabIndex = 5;
+            this.txt_inv_name_16.TabIndex = 146;
             this.txt_inv_name_16.MouseHover += new System.EventHandler(this.loadItemParams);
             // 
             // txt_inv_name_1
@@ -5056,7 +5187,7 @@
             this.txt_inv_name_1.Name = "txt_inv_name_1";
             this.txt_inv_name_1.ReadOnly = true;
             this.txt_inv_name_1.Size = new System.Drawing.Size(139, 20);
-            this.txt_inv_name_1.TabIndex = 5;
+            this.txt_inv_name_1.TabIndex = 99999;
             this.txt_inv_name_1.Text = "Poké";
             this.txt_inv_name_1.MouseHover += new System.EventHandler(this.loadItemParams);
             // 
@@ -5066,7 +5197,7 @@
             this.chk_inv_held_23.Location = new System.Drawing.Point(268, 221);
             this.chk_inv_held_23.Name = "chk_inv_held_23";
             this.chk_inv_held_23.Size = new System.Drawing.Size(15, 14);
-            this.chk_inv_held_23.TabIndex = 2;
+            this.chk_inv_held_23.TabIndex = 165;
             this.chk_inv_held_23.UseVisualStyleBackColor = true;
             this.chk_inv_held_23.CheckedChanged += new System.EventHandler(this.txt_inv_qty_TextChanged);
             // 
@@ -5076,7 +5207,7 @@
             this.chk_inv_held_8.Location = new System.Drawing.Point(17, 221);
             this.chk_inv_held_8.Name = "chk_inv_held_8";
             this.chk_inv_held_8.Size = new System.Drawing.Size(15, 14);
-            this.chk_inv_held_8.TabIndex = 2;
+            this.chk_inv_held_8.TabIndex = 120;
             this.chk_inv_held_8.UseVisualStyleBackColor = true;
             this.chk_inv_held_8.CheckedChanged += new System.EventHandler(this.txt_inv_qty_TextChanged);
             // 
@@ -5086,7 +5217,7 @@
             this.chk_inv_held_13.Location = new System.Drawing.Point(17, 351);
             this.chk_inv_held_13.Name = "chk_inv_held_13";
             this.chk_inv_held_13.Size = new System.Drawing.Size(15, 14);
-            this.chk_inv_held_13.TabIndex = 2;
+            this.chk_inv_held_13.TabIndex = 135;
             this.chk_inv_held_13.UseVisualStyleBackColor = true;
             this.chk_inv_held_13.CheckedChanged += new System.EventHandler(this.txt_inv_qty_TextChanged);
             // 
@@ -5096,7 +5227,7 @@
             this.txt_inv_qty_16.MaxLength = 9;
             this.txt_inv_qty_16.Name = "txt_inv_qty_16";
             this.txt_inv_qty_16.Size = new System.Drawing.Size(63, 20);
-            this.txt_inv_qty_16.TabIndex = 4;
+            this.txt_inv_qty_16.TabIndex = 145;
             this.txt_inv_qty_16.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txt_inv_qty_16.TextChanged += new System.EventHandler(this.txt_inv_qty_TextChanged);
             this.txt_inv_qty_16.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_qty_KeyPress);
@@ -5107,7 +5238,7 @@
             this.txt_inv_qty_1.MaxLength = 9;
             this.txt_inv_qty_1.Name = "txt_inv_qty_1";
             this.txt_inv_qty_1.Size = new System.Drawing.Size(63, 20);
-            this.txt_inv_qty_1.TabIndex = 4;
+            this.txt_inv_qty_1.TabIndex = 101;
             this.txt_inv_qty_1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txt_inv_qty_1.TextChanged += new System.EventHandler(this.txt_inv_qty_TextChanged);
             this.txt_inv_qty_1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_qty_KeyPress);
@@ -5118,7 +5249,7 @@
             this.chk_inv_held_19.Location = new System.Drawing.Point(268, 117);
             this.chk_inv_held_19.Name = "chk_inv_held_19";
             this.chk_inv_held_19.Size = new System.Drawing.Size(15, 14);
-            this.chk_inv_held_19.TabIndex = 2;
+            this.chk_inv_held_19.TabIndex = 153;
             this.chk_inv_held_19.UseVisualStyleBackColor = true;
             this.chk_inv_held_19.CheckedChanged += new System.EventHandler(this.txt_inv_qty_TextChanged);
             // 
@@ -5128,7 +5259,7 @@
             this.chk_inv_held_11.Location = new System.Drawing.Point(17, 299);
             this.chk_inv_held_11.Name = "chk_inv_held_11";
             this.chk_inv_held_11.Size = new System.Drawing.Size(15, 14);
-            this.chk_inv_held_11.TabIndex = 2;
+            this.chk_inv_held_11.TabIndex = 129;
             this.chk_inv_held_11.UseVisualStyleBackColor = true;
             this.chk_inv_held_11.CheckedChanged += new System.EventHandler(this.txt_inv_qty_TextChanged);
             // 
@@ -5138,7 +5269,7 @@
             this.chk_inv_held_22.Location = new System.Drawing.Point(268, 195);
             this.chk_inv_held_22.Name = "chk_inv_held_22";
             this.chk_inv_held_22.Size = new System.Drawing.Size(15, 14);
-            this.chk_inv_held_22.TabIndex = 2;
+            this.chk_inv_held_22.TabIndex = 162;
             this.chk_inv_held_22.UseVisualStyleBackColor = true;
             this.chk_inv_held_22.CheckedChanged += new System.EventHandler(this.txt_inv_qty_TextChanged);
             // 
@@ -5148,7 +5279,7 @@
             this.chk_inv_held_4.Location = new System.Drawing.Point(17, 117);
             this.chk_inv_held_4.Name = "chk_inv_held_4";
             this.chk_inv_held_4.Size = new System.Drawing.Size(15, 14);
-            this.chk_inv_held_4.TabIndex = 2;
+            this.chk_inv_held_4.TabIndex = 108;
             this.chk_inv_held_4.UseVisualStyleBackColor = true;
             this.chk_inv_held_4.CheckedChanged += new System.EventHandler(this.txt_inv_qty_TextChanged);
             // 
@@ -5157,7 +5288,7 @@
             this.lbl_inv_bag.Location = new System.Drawing.Point(503, 19);
             this.lbl_inv_bag.Name = "lbl_inv_bag";
             this.lbl_inv_bag.Size = new System.Drawing.Size(82, 14);
-            this.lbl_inv_bag.TabIndex = 3;
+            this.lbl_inv_bag.TabIndex = 99999;
             this.lbl_inv_bag.Text = "Bag";
             // 
             // lbl_inv_name_3
@@ -5165,7 +5296,7 @@
             this.lbl_inv_name_3.Location = new System.Drawing.Point(358, 19);
             this.lbl_inv_name_3.Name = "lbl_inv_name_3";
             this.lbl_inv_name_3.Size = new System.Drawing.Size(139, 14);
-            this.lbl_inv_name_3.TabIndex = 3;
+            this.lbl_inv_name_3.TabIndex = 99999;
             this.lbl_inv_name_3.Text = "Item Name";
             // 
             // chk_inv_held_26
@@ -5174,7 +5305,7 @@
             this.chk_inv_held_26.Location = new System.Drawing.Point(268, 299);
             this.chk_inv_held_26.Name = "chk_inv_held_26";
             this.chk_inv_held_26.Size = new System.Drawing.Size(15, 14);
-            this.chk_inv_held_26.TabIndex = 2;
+            this.chk_inv_held_26.TabIndex = 174;
             this.chk_inv_held_26.UseVisualStyleBackColor = true;
             this.chk_inv_held_26.CheckedChanged += new System.EventHandler(this.txt_inv_qty_TextChanged);
             // 
@@ -5184,7 +5315,7 @@
             this.chk_inv_held_7.Location = new System.Drawing.Point(17, 195);
             this.chk_inv_held_7.Name = "chk_inv_held_7";
             this.chk_inv_held_7.Size = new System.Drawing.Size(15, 14);
-            this.chk_inv_held_7.TabIndex = 2;
+            this.chk_inv_held_7.TabIndex = 117;
             this.chk_inv_held_7.UseVisualStyleBackColor = true;
             this.chk_inv_held_7.CheckedChanged += new System.EventHandler(this.txt_inv_qty_TextChanged);
             // 
@@ -5194,7 +5325,7 @@
             this.chk_inv_held_25.Location = new System.Drawing.Point(268, 273);
             this.chk_inv_held_25.Name = "chk_inv_held_25";
             this.chk_inv_held_25.Size = new System.Drawing.Size(15, 14);
-            this.chk_inv_held_25.TabIndex = 2;
+            this.chk_inv_held_25.TabIndex = 171;
             this.chk_inv_held_25.UseVisualStyleBackColor = true;
             this.chk_inv_held_25.CheckedChanged += new System.EventHandler(this.txt_inv_qty_TextChanged);
             // 
@@ -5203,7 +5334,7 @@
             this.lbl_inv_name_1.Location = new System.Drawing.Point(107, 19);
             this.lbl_inv_name_1.Name = "lbl_inv_name_1";
             this.lbl_inv_name_1.Size = new System.Drawing.Size(139, 14);
-            this.lbl_inv_name_1.TabIndex = 3;
+            this.lbl_inv_name_1.TabIndex = 99999;
             this.lbl_inv_name_1.Text = "Item Name";
             // 
             // chk_inv_held_18
@@ -5212,7 +5343,7 @@
             this.chk_inv_held_18.Location = new System.Drawing.Point(268, 91);
             this.chk_inv_held_18.Name = "chk_inv_held_18";
             this.chk_inv_held_18.Size = new System.Drawing.Size(15, 14);
-            this.chk_inv_held_18.TabIndex = 2;
+            this.chk_inv_held_18.TabIndex = 150;
             this.chk_inv_held_18.UseVisualStyleBackColor = true;
             this.chk_inv_held_18.CheckedChanged += new System.EventHandler(this.txt_inv_qty_TextChanged);
             // 
@@ -5222,7 +5353,7 @@
             this.chk_inv_held_10.Location = new System.Drawing.Point(17, 273);
             this.chk_inv_held_10.Name = "chk_inv_held_10";
             this.chk_inv_held_10.Size = new System.Drawing.Size(15, 14);
-            this.chk_inv_held_10.TabIndex = 2;
+            this.chk_inv_held_10.TabIndex = 126;
             this.chk_inv_held_10.UseVisualStyleBackColor = true;
             this.chk_inv_held_10.CheckedChanged += new System.EventHandler(this.txt_inv_qty_TextChanged);
             // 
@@ -5232,7 +5363,7 @@
             this.chk_inv_held_21.Location = new System.Drawing.Point(268, 169);
             this.chk_inv_held_21.Name = "chk_inv_held_21";
             this.chk_inv_held_21.Size = new System.Drawing.Size(15, 14);
-            this.chk_inv_held_21.TabIndex = 2;
+            this.chk_inv_held_21.TabIndex = 159;
             this.chk_inv_held_21.UseVisualStyleBackColor = true;
             this.chk_inv_held_21.CheckedChanged += new System.EventHandler(this.txt_inv_qty_TextChanged);
             // 
@@ -5242,7 +5373,7 @@
             this.chk_inv_held_3.Location = new System.Drawing.Point(17, 91);
             this.chk_inv_held_3.Name = "chk_inv_held_3";
             this.chk_inv_held_3.Size = new System.Drawing.Size(15, 14);
-            this.chk_inv_held_3.TabIndex = 2;
+            this.chk_inv_held_3.TabIndex = 105;
             this.chk_inv_held_3.UseVisualStyleBackColor = true;
             this.chk_inv_held_3.CheckedChanged += new System.EventHandler(this.txt_inv_qty_TextChanged);
             // 
@@ -5251,7 +5382,7 @@
             this.lbl_inv_qty_2.Location = new System.Drawing.Point(289, 19);
             this.lbl_inv_qty_2.Name = "lbl_inv_qty_2";
             this.lbl_inv_qty_2.Size = new System.Drawing.Size(63, 14);
-            this.lbl_inv_qty_2.TabIndex = 3;
+            this.lbl_inv_qty_2.TabIndex = 99999;
             this.lbl_inv_qty_2.Text = "QTY";
             // 
             // chk_inv_held_6
@@ -5260,7 +5391,7 @@
             this.chk_inv_held_6.Location = new System.Drawing.Point(17, 169);
             this.chk_inv_held_6.Name = "chk_inv_held_6";
             this.chk_inv_held_6.Size = new System.Drawing.Size(15, 14);
-            this.chk_inv_held_6.TabIndex = 2;
+            this.chk_inv_held_6.TabIndex = 114;
             this.chk_inv_held_6.UseVisualStyleBackColor = true;
             this.chk_inv_held_6.CheckedChanged += new System.EventHandler(this.txt_inv_qty_TextChanged);
             // 
@@ -5270,7 +5401,7 @@
             this.chk_inv_held_24.Location = new System.Drawing.Point(268, 247);
             this.chk_inv_held_24.Name = "chk_inv_held_24";
             this.chk_inv_held_24.Size = new System.Drawing.Size(15, 14);
-            this.chk_inv_held_24.TabIndex = 2;
+            this.chk_inv_held_24.TabIndex = 168;
             this.chk_inv_held_24.UseVisualStyleBackColor = true;
             this.chk_inv_held_24.CheckedChanged += new System.EventHandler(this.txt_inv_qty_TextChanged);
             // 
@@ -5279,7 +5410,7 @@
             this.lbl_inv_qty_1.Location = new System.Drawing.Point(38, 19);
             this.lbl_inv_qty_1.Name = "lbl_inv_qty_1";
             this.lbl_inv_qty_1.Size = new System.Drawing.Size(63, 14);
-            this.lbl_inv_qty_1.TabIndex = 3;
+            this.lbl_inv_qty_1.TabIndex = 99999;
             this.lbl_inv_qty_1.Text = "QTY";
             // 
             // chk_inv_held_17
@@ -5288,7 +5419,7 @@
             this.chk_inv_held_17.Location = new System.Drawing.Point(268, 65);
             this.chk_inv_held_17.Name = "chk_inv_held_17";
             this.chk_inv_held_17.Size = new System.Drawing.Size(15, 14);
-            this.chk_inv_held_17.TabIndex = 2;
+            this.chk_inv_held_17.TabIndex = 147;
             this.chk_inv_held_17.UseVisualStyleBackColor = true;
             this.chk_inv_held_17.CheckedChanged += new System.EventHandler(this.txt_inv_qty_TextChanged);
             // 
@@ -5298,7 +5429,7 @@
             this.chk_inv_held_9.Location = new System.Drawing.Point(17, 247);
             this.chk_inv_held_9.Name = "chk_inv_held_9";
             this.chk_inv_held_9.Size = new System.Drawing.Size(15, 14);
-            this.chk_inv_held_9.TabIndex = 2;
+            this.chk_inv_held_9.TabIndex = 123;
             this.chk_inv_held_9.UseVisualStyleBackColor = true;
             this.chk_inv_held_9.CheckedChanged += new System.EventHandler(this.txt_inv_qty_TextChanged);
             // 
@@ -5308,7 +5439,7 @@
             this.chk_inv_held_20.Location = new System.Drawing.Point(268, 143);
             this.chk_inv_held_20.Name = "chk_inv_held_20";
             this.chk_inv_held_20.Size = new System.Drawing.Size(15, 14);
-            this.chk_inv_held_20.TabIndex = 2;
+            this.chk_inv_held_20.TabIndex = 156;
             this.chk_inv_held_20.UseVisualStyleBackColor = true;
             this.chk_inv_held_20.CheckedChanged += new System.EventHandler(this.txt_inv_qty_TextChanged);
             // 
@@ -5318,7 +5449,7 @@
             this.chk_inv_held_2.Location = new System.Drawing.Point(17, 65);
             this.chk_inv_held_2.Name = "chk_inv_held_2";
             this.chk_inv_held_2.Size = new System.Drawing.Size(15, 14);
-            this.chk_inv_held_2.TabIndex = 2;
+            this.chk_inv_held_2.TabIndex = 102;
             this.chk_inv_held_2.UseVisualStyleBackColor = true;
             this.chk_inv_held_2.CheckedChanged += new System.EventHandler(this.txt_inv_qty_TextChanged);
             // 
@@ -5327,7 +5458,7 @@
             this.lbl_inv_held_2.Location = new System.Drawing.Point(260, 19);
             this.lbl_inv_held_2.Name = "lbl_inv_held_2";
             this.lbl_inv_held_2.Size = new System.Drawing.Size(30, 14);
-            this.lbl_inv_held_2.TabIndex = 3;
+            this.lbl_inv_held_2.TabIndex = 99999;
             this.lbl_inv_held_2.Text = "Held";
             // 
             // chk_inv_held_5
@@ -5336,7 +5467,7 @@
             this.chk_inv_held_5.Location = new System.Drawing.Point(17, 143);
             this.chk_inv_held_5.Name = "chk_inv_held_5";
             this.chk_inv_held_5.Size = new System.Drawing.Size(15, 14);
-            this.chk_inv_held_5.TabIndex = 2;
+            this.chk_inv_held_5.TabIndex = 111;
             this.chk_inv_held_5.UseVisualStyleBackColor = true;
             this.chk_inv_held_5.CheckedChanged += new System.EventHandler(this.txt_inv_qty_TextChanged);
             // 
@@ -5346,7 +5477,7 @@
             this.chk_inv_held_16.Location = new System.Drawing.Point(268, 39);
             this.chk_inv_held_16.Name = "chk_inv_held_16";
             this.chk_inv_held_16.Size = new System.Drawing.Size(15, 14);
-            this.chk_inv_held_16.TabIndex = 2;
+            this.chk_inv_held_16.TabIndex = 144;
             this.chk_inv_held_16.UseVisualStyleBackColor = true;
             this.chk_inv_held_16.CheckedChanged += new System.EventHandler(this.txt_inv_qty_TextChanged);
             // 
@@ -5355,7 +5486,7 @@
             this.lbl_inv_held_1.Location = new System.Drawing.Point(9, 19);
             this.lbl_inv_held_1.Name = "lbl_inv_held_1";
             this.lbl_inv_held_1.Size = new System.Drawing.Size(30, 14);
-            this.lbl_inv_held_1.TabIndex = 3;
+            this.lbl_inv_held_1.TabIndex = 99999;
             this.lbl_inv_held_1.Text = "Held";
             // 
             // chk_inv_held_1
@@ -5367,7 +5498,7 @@
             this.chk_inv_held_1.Location = new System.Drawing.Point(17, 39);
             this.chk_inv_held_1.Name = "chk_inv_held_1";
             this.chk_inv_held_1.Size = new System.Drawing.Size(15, 14);
-            this.chk_inv_held_1.TabIndex = 2;
+            this.chk_inv_held_1.TabIndex = 100;
             this.chk_inv_held_1.UseVisualStyleBackColor = true;
             this.chk_inv_held_1.CheckedChanged += new System.EventHandler(this.txt_inv_qty_TextChanged);
             // 
@@ -5390,7 +5521,7 @@
             this.grp_Traits.Location = new System.Drawing.Point(3, 431);
             this.grp_Traits.Name = "grp_Traits";
             this.grp_Traits.Size = new System.Drawing.Size(592, 133);
-            this.grp_Traits.TabIndex = 1;
+            this.grp_Traits.TabIndex = 178;
             this.grp_Traits.TabStop = false;
             this.grp_Traits.Text = "Traits";
             // 
@@ -5402,7 +5533,8 @@
             this.txt_trait_preview_title.Name = "txt_trait_preview_title";
             this.txt_trait_preview_title.ReadOnly = true;
             this.txt_trait_preview_title.Size = new System.Drawing.Size(227, 22);
-            this.txt_trait_preview_title.TabIndex = 7;
+            this.txt_trait_preview_title.TabIndex = 99999;
+            this.txt_trait_preview_title.TabStop = false;
             this.txt_trait_preview_title.Text = "Trait Preview";
             this.txt_trait_preview_title.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -5413,7 +5545,8 @@
             this.txt_trait_preview_desc.Name = "txt_trait_preview_desc";
             this.txt_trait_preview_desc.ReadOnly = true;
             this.txt_trait_preview_desc.Size = new System.Drawing.Size(227, 82);
-            this.txt_trait_preview_desc.TabIndex = 6;
+            this.txt_trait_preview_desc.TabIndex = 99999;
+            this.txt_trait_preview_desc.TabStop = false;
             this.txt_trait_preview_desc.Text = "Mouse over a trait to view its description!";
             // 
             // cmb_trait_11
@@ -5423,7 +5556,7 @@
             this.cmb_trait_11.Location = new System.Drawing.Point(124, 100);
             this.cmb_trait_11.Name = "cmb_trait_11";
             this.cmb_trait_11.Size = new System.Drawing.Size(111, 21);
-            this.cmb_trait_11.TabIndex = 5;
+            this.cmb_trait_11.TabIndex = 188;
             this.cmb_trait_11.SelectedIndexChanged += new System.EventHandler(this.cmb_trait_SelectedIndexChanged);
             this.cmb_trait_11.MouseHover += new System.EventHandler(this.loadTraitParams);
             // 
@@ -5434,7 +5567,7 @@
             this.cmb_trait_10.Location = new System.Drawing.Point(7, 100);
             this.cmb_trait_10.Name = "cmb_trait_10";
             this.cmb_trait_10.Size = new System.Drawing.Size(111, 21);
-            this.cmb_trait_10.TabIndex = 5;
+            this.cmb_trait_10.TabIndex = 187;
             this.cmb_trait_10.SelectedIndexChanged += new System.EventHandler(this.cmb_trait_SelectedIndexChanged);
             this.cmb_trait_10.MouseHover += new System.EventHandler(this.loadTraitParams);
             // 
@@ -5445,7 +5578,7 @@
             this.cmb_trait_8.Location = new System.Drawing.Point(124, 73);
             this.cmb_trait_8.Name = "cmb_trait_8";
             this.cmb_trait_8.Size = new System.Drawing.Size(111, 21);
-            this.cmb_trait_8.TabIndex = 4;
+            this.cmb_trait_8.TabIndex = 185;
             this.cmb_trait_8.SelectedIndexChanged += new System.EventHandler(this.cmb_trait_SelectedIndexChanged);
             this.cmb_trait_8.MouseHover += new System.EventHandler(this.loadTraitParams);
             // 
@@ -5456,7 +5589,7 @@
             this.cmb_trait_7.Location = new System.Drawing.Point(7, 73);
             this.cmb_trait_7.Name = "cmb_trait_7";
             this.cmb_trait_7.Size = new System.Drawing.Size(111, 21);
-            this.cmb_trait_7.TabIndex = 4;
+            this.cmb_trait_7.TabIndex = 184;
             this.cmb_trait_7.SelectedIndexChanged += new System.EventHandler(this.cmb_trait_SelectedIndexChanged);
             this.cmb_trait_7.MouseHover += new System.EventHandler(this.loadTraitParams);
             // 
@@ -5467,7 +5600,7 @@
             this.cmb_trait_5.Location = new System.Drawing.Point(124, 46);
             this.cmb_trait_5.Name = "cmb_trait_5";
             this.cmb_trait_5.Size = new System.Drawing.Size(111, 21);
-            this.cmb_trait_5.TabIndex = 3;
+            this.cmb_trait_5.TabIndex = 182;
             this.cmb_trait_5.SelectedIndexChanged += new System.EventHandler(this.cmb_trait_SelectedIndexChanged);
             this.cmb_trait_5.MouseHover += new System.EventHandler(this.loadTraitParams);
             // 
@@ -5478,7 +5611,7 @@
             this.cmb_trait_4.Location = new System.Drawing.Point(7, 46);
             this.cmb_trait_4.Name = "cmb_trait_4";
             this.cmb_trait_4.Size = new System.Drawing.Size(111, 21);
-            this.cmb_trait_4.TabIndex = 3;
+            this.cmb_trait_4.TabIndex = 181;
             this.cmb_trait_4.SelectedIndexChanged += new System.EventHandler(this.cmb_trait_SelectedIndexChanged);
             this.cmb_trait_4.MouseHover += new System.EventHandler(this.loadTraitParams);
             // 
@@ -5489,7 +5622,7 @@
             this.cmb_trait_12.Location = new System.Drawing.Point(241, 100);
             this.cmb_trait_12.Name = "cmb_trait_12";
             this.cmb_trait_12.Size = new System.Drawing.Size(111, 21);
-            this.cmb_trait_12.TabIndex = 2;
+            this.cmb_trait_12.TabIndex = 189;
             this.cmb_trait_12.SelectedIndexChanged += new System.EventHandler(this.cmb_trait_SelectedIndexChanged);
             this.cmb_trait_12.MouseHover += new System.EventHandler(this.loadTraitParams);
             // 
@@ -5500,7 +5633,7 @@
             this.cmb_trait_9.Location = new System.Drawing.Point(241, 73);
             this.cmb_trait_9.Name = "cmb_trait_9";
             this.cmb_trait_9.Size = new System.Drawing.Size(111, 21);
-            this.cmb_trait_9.TabIndex = 2;
+            this.cmb_trait_9.TabIndex = 186;
             this.cmb_trait_9.SelectedIndexChanged += new System.EventHandler(this.cmb_trait_SelectedIndexChanged);
             this.cmb_trait_9.MouseHover += new System.EventHandler(this.loadTraitParams);
             // 
@@ -5511,7 +5644,7 @@
             this.cmb_trait_6.Location = new System.Drawing.Point(241, 46);
             this.cmb_trait_6.Name = "cmb_trait_6";
             this.cmb_trait_6.Size = new System.Drawing.Size(111, 21);
-            this.cmb_trait_6.TabIndex = 2;
+            this.cmb_trait_6.TabIndex = 183;
             this.cmb_trait_6.SelectedIndexChanged += new System.EventHandler(this.cmb_trait_SelectedIndexChanged);
             this.cmb_trait_6.MouseHover += new System.EventHandler(this.loadTraitParams);
             // 
@@ -5522,7 +5655,7 @@
             this.cmb_trait_3.Location = new System.Drawing.Point(241, 19);
             this.cmb_trait_3.Name = "cmb_trait_3";
             this.cmb_trait_3.Size = new System.Drawing.Size(111, 21);
-            this.cmb_trait_3.TabIndex = 2;
+            this.cmb_trait_3.TabIndex = 180;
             this.cmb_trait_3.SelectedIndexChanged += new System.EventHandler(this.cmb_trait_SelectedIndexChanged);
             this.cmb_trait_3.MouseHover += new System.EventHandler(this.loadTraitParams);
             // 
@@ -5533,7 +5666,7 @@
             this.cmb_trait_2.Location = new System.Drawing.Point(124, 19);
             this.cmb_trait_2.Name = "cmb_trait_2";
             this.cmb_trait_2.Size = new System.Drawing.Size(111, 21);
-            this.cmb_trait_2.TabIndex = 2;
+            this.cmb_trait_2.TabIndex = 179;
             this.cmb_trait_2.SelectedIndexChanged += new System.EventHandler(this.cmb_trait_SelectedIndexChanged);
             this.cmb_trait_2.MouseHover += new System.EventHandler(this.loadTraitParams);
             // 
@@ -5544,7 +5677,7 @@
             this.cmb_trait_1.Location = new System.Drawing.Point(7, 19);
             this.cmb_trait_1.Name = "cmb_trait_1";
             this.cmb_trait_1.Size = new System.Drawing.Size(111, 21);
-            this.cmb_trait_1.TabIndex = 2;
+            this.cmb_trait_1.TabIndex = 178;
             this.cmb_trait_1.SelectedIndexChanged += new System.EventHandler(this.cmb_trait_SelectedIndexChanged);
             this.cmb_trait_1.MouseHover += new System.EventHandler(this.loadTraitParams);
             // 
@@ -5557,7 +5690,7 @@
             this.grp_skills.Location = new System.Drawing.Point(3, 564);
             this.grp_skills.Name = "grp_skills";
             this.grp_skills.Size = new System.Drawing.Size(592, 137);
-            this.grp_skills.TabIndex = 0;
+            this.grp_skills.TabIndex = 99999;
             this.grp_skills.TabStop = false;
             this.grp_skills.Text = "Non-Combat Skills";
             // 
@@ -5578,7 +5711,7 @@
             this.grp_skills_other.Location = new System.Drawing.Point(388, 18);
             this.grp_skills_other.Name = "grp_skills_other";
             this.grp_skills_other.Size = new System.Drawing.Size(188, 113);
-            this.grp_skills_other.TabIndex = 0;
+            this.grp_skills_other.TabIndex = 214;
             this.grp_skills_other.TabStop = false;
             this.grp_skills_other.Text = "Other";
             // 
@@ -5588,7 +5721,7 @@
             this.txt_skills_nm_other4.Multiline = true;
             this.txt_skills_nm_other4.Name = "txt_skills_nm_other4";
             this.txt_skills_nm_other4.Size = new System.Drawing.Size(122, 20);
-            this.txt_skills_nm_other4.TabIndex = 1;
+            this.txt_skills_nm_other4.TabIndex = 224;
             // 
             // txt_skills_val_other4
             // 
@@ -5597,7 +5730,7 @@
             this.txt_skills_val_other4.Multiline = true;
             this.txt_skills_val_other4.Name = "txt_skills_val_other4";
             this.txt_skills_val_other4.Size = new System.Drawing.Size(28, 20);
-            this.txt_skills_val_other4.TabIndex = 1;
+            this.txt_skills_val_other4.TabIndex = 225;
             this.txt_skills_val_other4.TextChanged += new System.EventHandler(this.sanitizeSkills);
             this.txt_skills_val_other4.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_qty_allow_negative_KeyPress);
             // 
@@ -5607,7 +5740,7 @@
             this.txt_skills_nm_other3.Multiline = true;
             this.txt_skills_nm_other3.Name = "txt_skills_nm_other3";
             this.txt_skills_nm_other3.Size = new System.Drawing.Size(122, 20);
-            this.txt_skills_nm_other3.TabIndex = 1;
+            this.txt_skills_nm_other3.TabIndex = 221;
             // 
             // txt_skills_val_other3
             // 
@@ -5616,7 +5749,7 @@
             this.txt_skills_val_other3.Multiline = true;
             this.txt_skills_val_other3.Name = "txt_skills_val_other3";
             this.txt_skills_val_other3.Size = new System.Drawing.Size(28, 20);
-            this.txt_skills_val_other3.TabIndex = 1;
+            this.txt_skills_val_other3.TabIndex = 222;
             this.txt_skills_val_other3.TextChanged += new System.EventHandler(this.sanitizeSkills);
             this.txt_skills_val_other3.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_qty_allow_negative_KeyPress);
             // 
@@ -5626,7 +5759,7 @@
             this.txt_skills_nm_other2.Multiline = true;
             this.txt_skills_nm_other2.Name = "txt_skills_nm_other2";
             this.txt_skills_nm_other2.Size = new System.Drawing.Size(122, 20);
-            this.txt_skills_nm_other2.TabIndex = 1;
+            this.txt_skills_nm_other2.TabIndex = 218;
             // 
             // txt_skills_nm_other1
             // 
@@ -5634,7 +5767,7 @@
             this.txt_skills_nm_other1.Multiline = true;
             this.txt_skills_nm_other1.Name = "txt_skills_nm_other1";
             this.txt_skills_nm_other1.Size = new System.Drawing.Size(122, 20);
-            this.txt_skills_nm_other1.TabIndex = 1;
+            this.txt_skills_nm_other1.TabIndex = 215;
             // 
             // txt_skills_val_other2
             // 
@@ -5643,7 +5776,7 @@
             this.txt_skills_val_other2.Multiline = true;
             this.txt_skills_val_other2.Name = "txt_skills_val_other2";
             this.txt_skills_val_other2.Size = new System.Drawing.Size(28, 20);
-            this.txt_skills_val_other2.TabIndex = 1;
+            this.txt_skills_val_other2.TabIndex = 219;
             this.txt_skills_val_other2.TextChanged += new System.EventHandler(this.sanitizeSkills);
             this.txt_skills_val_other2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_qty_allow_negative_KeyPress);
             // 
@@ -5654,7 +5787,7 @@
             this.txt_skills_val_other1.Multiline = true;
             this.txt_skills_val_other1.Name = "txt_skills_val_other1";
             this.txt_skills_val_other1.Size = new System.Drawing.Size(28, 20);
-            this.txt_skills_val_other1.TabIndex = 1;
+            this.txt_skills_val_other1.TabIndex = 216;
             this.txt_skills_val_other1.TextChanged += new System.EventHandler(this.sanitizeSkills);
             this.txt_skills_val_other1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_qty_allow_negative_KeyPress);
             // 
@@ -5664,7 +5797,7 @@
             this.chk_skills_other4.Location = new System.Drawing.Point(6, 88);
             this.chk_skills_other4.Name = "chk_skills_other4";
             this.chk_skills_other4.Size = new System.Drawing.Size(29, 17);
-            this.chk_skills_other4.TabIndex = 1;
+            this.chk_skills_other4.TabIndex = 223;
             this.chk_skills_other4.Text = " ";
             this.tooltip_1.SetToolTip(this.chk_skills_other4, resources.GetString("chk_skills_other4.ToolTip"));
             this.chk_skills_other4.UseVisualStyleBackColor = true;
@@ -5675,7 +5808,7 @@
             this.chk_skills_other3.Location = new System.Drawing.Point(6, 65);
             this.chk_skills_other3.Name = "chk_skills_other3";
             this.chk_skills_other3.Size = new System.Drawing.Size(29, 17);
-            this.chk_skills_other3.TabIndex = 1;
+            this.chk_skills_other3.TabIndex = 220;
             this.chk_skills_other3.Text = " ";
             this.tooltip_1.SetToolTip(this.chk_skills_other3, resources.GetString("chk_skills_other3.ToolTip"));
             this.chk_skills_other3.UseVisualStyleBackColor = true;
@@ -5686,7 +5819,7 @@
             this.chk_skills_other2.Location = new System.Drawing.Point(6, 42);
             this.chk_skills_other2.Name = "chk_skills_other2";
             this.chk_skills_other2.Size = new System.Drawing.Size(29, 17);
-            this.chk_skills_other2.TabIndex = 1;
+            this.chk_skills_other2.TabIndex = 217;
             this.chk_skills_other2.Text = " ";
             this.tooltip_1.SetToolTip(this.chk_skills_other2, resources.GetString("chk_skills_other2.ToolTip"));
             this.chk_skills_other2.UseVisualStyleBackColor = true;
@@ -5697,7 +5830,7 @@
             this.chk_skills_other1.Location = new System.Drawing.Point(6, 19);
             this.chk_skills_other1.Name = "chk_skills_other1";
             this.chk_skills_other1.Size = new System.Drawing.Size(29, 17);
-            this.chk_skills_other1.TabIndex = 1;
+            this.chk_skills_other1.TabIndex = 214;
             this.chk_skills_other1.Text = " ";
             this.tooltip_1.SetToolTip(this.chk_skills_other1, resources.GetString("chk_skills_other1.ToolTip"));
             this.chk_skills_other1.UseVisualStyleBackColor = true;
@@ -5715,7 +5848,7 @@
             this.grp_skills_spec.Location = new System.Drawing.Point(260, 18);
             this.grp_skills_spec.Name = "grp_skills_spec";
             this.grp_skills_spec.Size = new System.Drawing.Size(122, 113);
-            this.grp_skills_spec.TabIndex = 0;
+            this.grp_skills_spec.TabIndex = 206;
             this.grp_skills_spec.TabStop = false;
             this.grp_skills_spec.Text = "Specialized";
             // 
@@ -5726,7 +5859,7 @@
             this.txt_skills_build.Multiline = true;
             this.txt_skills_build.Name = "txt_skills_build";
             this.txt_skills_build.Size = new System.Drawing.Size(28, 20);
-            this.txt_skills_build.TabIndex = 1;
+            this.txt_skills_build.TabIndex = 213;
             this.txt_skills_build.TextChanged += new System.EventHandler(this.txt_skills_build_TextChanged);
             this.txt_skills_build.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_qty_allow_negative_KeyPress);
             // 
@@ -5737,7 +5870,7 @@
             this.txt_skills_hist.Multiline = true;
             this.txt_skills_hist.Name = "txt_skills_hist";
             this.txt_skills_hist.Size = new System.Drawing.Size(28, 20);
-            this.txt_skills_hist.TabIndex = 1;
+            this.txt_skills_hist.TabIndex = 211;
             this.txt_skills_hist.TextChanged += new System.EventHandler(this.txt_skills_hist_TextChanged);
             this.txt_skills_hist.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_qty_allow_negative_KeyPress);
             // 
@@ -5748,7 +5881,7 @@
             this.txt_skills_app.Multiline = true;
             this.txt_skills_app.Name = "txt_skills_app";
             this.txt_skills_app.Size = new System.Drawing.Size(28, 20);
-            this.txt_skills_app.TabIndex = 1;
+            this.txt_skills_app.TabIndex = 209;
             this.txt_skills_app.TextChanged += new System.EventHandler(this.txt_skills_app_TextChanged);
             this.txt_skills_app.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_qty_allow_negative_KeyPress);
             // 
@@ -5759,7 +5892,7 @@
             this.txt_skills_crafting.Multiline = true;
             this.txt_skills_crafting.Name = "txt_skills_crafting";
             this.txt_skills_crafting.Size = new System.Drawing.Size(28, 20);
-            this.txt_skills_crafting.TabIndex = 1;
+            this.txt_skills_crafting.TabIndex = 207;
             this.txt_skills_crafting.TextChanged += new System.EventHandler(this.txt_skills_crafting_TextChanged);
             this.txt_skills_crafting.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_qty_allow_negative_KeyPress);
             // 
@@ -5769,7 +5902,7 @@
             this.chk_skills_build.Location = new System.Drawing.Point(6, 88);
             this.chk_skills_build.Name = "chk_skills_build";
             this.chk_skills_build.Size = new System.Drawing.Size(63, 17);
-            this.chk_skills_build.TabIndex = 1;
+            this.chk_skills_build.TabIndex = 212;
             this.chk_skills_build.Text = "Building";
             this.tooltip_1.SetToolTip(this.chk_skills_build, resources.GetString("chk_skills_build.ToolTip"));
             this.chk_skills_build.UseVisualStyleBackColor = true;
@@ -5780,7 +5913,7 @@
             this.chk_skills_hist.Location = new System.Drawing.Point(6, 65);
             this.chk_skills_hist.Name = "chk_skills_hist";
             this.chk_skills_hist.Size = new System.Drawing.Size(58, 17);
-            this.chk_skills_hist.TabIndex = 1;
+            this.chk_skills_hist.TabIndex = 210;
             this.chk_skills_hist.Text = "History";
             this.tooltip_1.SetToolTip(this.chk_skills_hist, resources.GetString("chk_skills_hist.ToolTip"));
             this.chk_skills_hist.UseVisualStyleBackColor = true;
@@ -5791,7 +5924,7 @@
             this.chk_skills_app.Location = new System.Drawing.Point(6, 42);
             this.chk_skills_app.Name = "chk_skills_app";
             this.chk_skills_app.Size = new System.Drawing.Size(69, 17);
-            this.chk_skills_app.TabIndex = 1;
+            this.chk_skills_app.TabIndex = 208;
             this.chk_skills_app.Text = "Appraisal";
             this.tooltip_1.SetToolTip(this.chk_skills_app, resources.GetString("chk_skills_app.ToolTip"));
             this.chk_skills_app.UseVisualStyleBackColor = true;
@@ -5802,7 +5935,7 @@
             this.chk_skills_crafting.Location = new System.Drawing.Point(6, 19);
             this.chk_skills_crafting.Name = "chk_skills_crafting";
             this.chk_skills_crafting.Size = new System.Drawing.Size(62, 17);
-            this.chk_skills_crafting.TabIndex = 1;
+            this.chk_skills_crafting.TabIndex = 206;
             this.chk_skills_crafting.Text = "Crafting";
             this.tooltip_1.SetToolTip(this.chk_skills_crafting, resources.GetString("chk_skills_crafting.ToolTip"));
             this.chk_skills_crafting.UseVisualStyleBackColor = true;
@@ -5820,7 +5953,7 @@
             this.grp_skills_social.Location = new System.Drawing.Point(132, 18);
             this.grp_skills_social.Name = "grp_skills_social";
             this.grp_skills_social.Size = new System.Drawing.Size(122, 113);
-            this.grp_skills_social.TabIndex = 0;
+            this.grp_skills_social.TabIndex = 198;
             this.grp_skills_social.TabStop = false;
             this.grp_skills_social.Text = "Social";
             // 
@@ -5831,7 +5964,7 @@
             this.txt_skills_perf.Multiline = true;
             this.txt_skills_perf.Name = "txt_skills_perf";
             this.txt_skills_perf.Size = new System.Drawing.Size(28, 20);
-            this.txt_skills_perf.TabIndex = 1;
+            this.txt_skills_perf.TabIndex = 205;
             this.txt_skills_perf.TextChanged += new System.EventHandler(this.sanitizeSkills);
             this.txt_skills_perf.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_qty_allow_negative_KeyPress);
             // 
@@ -5842,7 +5975,7 @@
             this.txt_skills_intimidation.Multiline = true;
             this.txt_skills_intimidation.Name = "txt_skills_intimidation";
             this.txt_skills_intimidation.Size = new System.Drawing.Size(28, 20);
-            this.txt_skills_intimidation.TabIndex = 1;
+            this.txt_skills_intimidation.TabIndex = 203;
             this.txt_skills_intimidation.TextChanged += new System.EventHandler(this.sanitizeSkills);
             this.txt_skills_intimidation.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_qty_allow_negative_KeyPress);
             // 
@@ -5853,7 +5986,7 @@
             this.txt_skills_persuasion.Multiline = true;
             this.txt_skills_persuasion.Name = "txt_skills_persuasion";
             this.txt_skills_persuasion.Size = new System.Drawing.Size(28, 20);
-            this.txt_skills_persuasion.TabIndex = 1;
+            this.txt_skills_persuasion.TabIndex = 201;
             this.txt_skills_persuasion.TextChanged += new System.EventHandler(this.sanitizeSkills);
             this.txt_skills_persuasion.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_qty_allow_negative_KeyPress);
             // 
@@ -5864,7 +5997,7 @@
             this.txt_skills_deception.Multiline = true;
             this.txt_skills_deception.Name = "txt_skills_deception";
             this.txt_skills_deception.Size = new System.Drawing.Size(28, 20);
-            this.txt_skills_deception.TabIndex = 1;
+            this.txt_skills_deception.TabIndex = 199;
             this.txt_skills_deception.TextChanged += new System.EventHandler(this.sanitizeSkills);
             this.txt_skills_deception.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_qty_allow_negative_KeyPress);
             // 
@@ -5874,7 +6007,7 @@
             this.chk_skills_perf.Location = new System.Drawing.Point(6, 88);
             this.chk_skills_perf.Name = "chk_skills_perf";
             this.chk_skills_perf.Size = new System.Drawing.Size(76, 17);
-            this.chk_skills_perf.TabIndex = 1;
+            this.chk_skills_perf.TabIndex = 204;
             this.chk_skills_perf.Text = "Performing";
             this.tooltip_1.SetToolTip(this.chk_skills_perf, resources.GetString("chk_skills_perf.ToolTip"));
             this.chk_skills_perf.UseVisualStyleBackColor = true;
@@ -5885,7 +6018,7 @@
             this.chk_skills_intimidation.Location = new System.Drawing.Point(6, 65);
             this.chk_skills_intimidation.Name = "chk_skills_intimidation";
             this.chk_skills_intimidation.Size = new System.Drawing.Size(79, 17);
-            this.chk_skills_intimidation.TabIndex = 1;
+            this.chk_skills_intimidation.TabIndex = 202;
             this.chk_skills_intimidation.Text = "Intimidation";
             this.tooltip_1.SetToolTip(this.chk_skills_intimidation, resources.GetString("chk_skills_intimidation.ToolTip"));
             this.chk_skills_intimidation.UseVisualStyleBackColor = true;
@@ -5896,7 +6029,7 @@
             this.chk_skills_persuasion.Location = new System.Drawing.Point(6, 42);
             this.chk_skills_persuasion.Name = "chk_skills_persuasion";
             this.chk_skills_persuasion.Size = new System.Drawing.Size(78, 17);
-            this.chk_skills_persuasion.TabIndex = 1;
+            this.chk_skills_persuasion.TabIndex = 200;
             this.chk_skills_persuasion.Text = "Persuasion";
             this.tooltip_1.SetToolTip(this.chk_skills_persuasion, resources.GetString("chk_skills_persuasion.ToolTip"));
             this.chk_skills_persuasion.UseVisualStyleBackColor = true;
@@ -5907,7 +6040,7 @@
             this.chk_skills_deception.Location = new System.Drawing.Point(6, 19);
             this.chk_skills_deception.Name = "chk_skills_deception";
             this.chk_skills_deception.Size = new System.Drawing.Size(75, 17);
-            this.chk_skills_deception.TabIndex = 1;
+            this.chk_skills_deception.TabIndex = 198;
             this.chk_skills_deception.Text = "Deception";
             this.tooltip_1.SetToolTip(this.chk_skills_deception, resources.GetString("chk_skills_deception.ToolTip"));
             this.chk_skills_deception.UseVisualStyleBackColor = true;
@@ -5925,7 +6058,7 @@
             this.grp_skills_surv.Location = new System.Drawing.Point(4, 18);
             this.grp_skills_surv.Name = "grp_skills_surv";
             this.grp_skills_surv.Size = new System.Drawing.Size(122, 113);
-            this.grp_skills_surv.TabIndex = 0;
+            this.grp_skills_surv.TabIndex = 190;
             this.grp_skills_surv.TabStop = false;
             this.grp_skills_surv.Text = "Survival";
             // 
@@ -5936,7 +6069,7 @@
             this.txt_skills_nature.Multiline = true;
             this.txt_skills_nature.Name = "txt_skills_nature";
             this.txt_skills_nature.Size = new System.Drawing.Size(28, 20);
-            this.txt_skills_nature.TabIndex = 1;
+            this.txt_skills_nature.TabIndex = 197;
             this.txt_skills_nature.TextChanged += new System.EventHandler(this.sanitizeSkills);
             this.txt_skills_nature.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_qty_allow_negative_KeyPress);
             // 
@@ -5947,7 +6080,7 @@
             this.txt_skills_medicine.Multiline = true;
             this.txt_skills_medicine.Name = "txt_skills_medicine";
             this.txt_skills_medicine.Size = new System.Drawing.Size(28, 20);
-            this.txt_skills_medicine.TabIndex = 1;
+            this.txt_skills_medicine.TabIndex = 195;
             this.txt_skills_medicine.TextChanged += new System.EventHandler(this.sanitizeSkills);
             this.txt_skills_medicine.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_qty_allow_negative_KeyPress);
             // 
@@ -5958,7 +6091,7 @@
             this.txt_skills_tracking.Multiline = true;
             this.txt_skills_tracking.Name = "txt_skills_tracking";
             this.txt_skills_tracking.Size = new System.Drawing.Size(28, 20);
-            this.txt_skills_tracking.TabIndex = 1;
+            this.txt_skills_tracking.TabIndex = 193;
             this.txt_skills_tracking.TextChanged += new System.EventHandler(this.sanitizeSkills);
             this.txt_skills_tracking.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_qty_allow_negative_KeyPress);
             // 
@@ -5969,7 +6102,7 @@
             this.txt_skills_gathering.Multiline = true;
             this.txt_skills_gathering.Name = "txt_skills_gathering";
             this.txt_skills_gathering.Size = new System.Drawing.Size(28, 20);
-            this.txt_skills_gathering.TabIndex = 1;
+            this.txt_skills_gathering.TabIndex = 191;
             this.txt_skills_gathering.TextChanged += new System.EventHandler(this.sanitizeSkills);
             this.txt_skills_gathering.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_qty_allow_negative_KeyPress);
             // 
@@ -5979,7 +6112,7 @@
             this.chk_skills_nature.Location = new System.Drawing.Point(6, 88);
             this.chk_skills_nature.Name = "chk_skills_nature";
             this.chk_skills_nature.Size = new System.Drawing.Size(58, 17);
-            this.chk_skills_nature.TabIndex = 1;
+            this.chk_skills_nature.TabIndex = 196;
             this.chk_skills_nature.Text = "Nature";
             this.tooltip_1.SetToolTip(this.chk_skills_nature, resources.GetString("chk_skills_nature.ToolTip"));
             this.chk_skills_nature.UseVisualStyleBackColor = true;
@@ -5990,7 +6123,7 @@
             this.chk_skills_medicine.Location = new System.Drawing.Point(6, 65);
             this.chk_skills_medicine.Name = "chk_skills_medicine";
             this.chk_skills_medicine.Size = new System.Drawing.Size(69, 17);
-            this.chk_skills_medicine.TabIndex = 1;
+            this.chk_skills_medicine.TabIndex = 194;
             this.chk_skills_medicine.Text = "Medicine";
             this.tooltip_1.SetToolTip(this.chk_skills_medicine, resources.GetString("chk_skills_medicine.ToolTip"));
             this.chk_skills_medicine.UseVisualStyleBackColor = true;
@@ -6001,7 +6134,7 @@
             this.chk_skills_tracking.Location = new System.Drawing.Point(6, 42);
             this.chk_skills_tracking.Name = "chk_skills_tracking";
             this.chk_skills_tracking.Size = new System.Drawing.Size(68, 17);
-            this.chk_skills_tracking.TabIndex = 1;
+            this.chk_skills_tracking.TabIndex = 192;
             this.chk_skills_tracking.Text = "Tracking";
             this.tooltip_1.SetToolTip(this.chk_skills_tracking, resources.GetString("chk_skills_tracking.ToolTip"));
             this.chk_skills_tracking.UseVisualStyleBackColor = true;
@@ -6012,7 +6145,7 @@
             this.chk_skills_gathering.Location = new System.Drawing.Point(6, 19);
             this.chk_skills_gathering.Name = "chk_skills_gathering";
             this.chk_skills_gathering.Size = new System.Drawing.Size(72, 17);
-            this.chk_skills_gathering.TabIndex = 1;
+            this.chk_skills_gathering.TabIndex = 190;
             this.chk_skills_gathering.Text = "Gathering";
             this.tooltip_1.SetToolTip(this.chk_skills_gathering, resources.GetString("chk_skills_gathering.ToolTip"));
             this.chk_skills_gathering.UseVisualStyleBackColor = true;
@@ -6049,7 +6182,7 @@
             this.pnl_pg_2_moves.Location = new System.Drawing.Point(0, 28);
             this.pnl_pg_2_moves.Name = "pnl_pg_2_moves";
             this.pnl_pg_2_moves.Size = new System.Drawing.Size(371, 587);
-            this.pnl_pg_2_moves.TabIndex = 34;
+            this.pnl_pg_2_moves.TabIndex = 99999;
             this.pnl_pg_2_moves.Visible = false;
             // 
             // lbl_move_type
@@ -6058,7 +6191,7 @@
             this.lbl_move_type.Location = new System.Drawing.Point(226, 42);
             this.lbl_move_type.Name = "lbl_move_type";
             this.lbl_move_type.Size = new System.Drawing.Size(61, 13);
-            this.lbl_move_type.TabIndex = 68;
+            this.lbl_move_type.TabIndex = 99999;
             this.lbl_move_type.Text = "Move Type";
             // 
             // lbl_move_name
@@ -6067,7 +6200,7 @@
             this.lbl_move_name.Location = new System.Drawing.Point(135, 42);
             this.lbl_move_name.Name = "lbl_move_name";
             this.lbl_move_name.Size = new System.Drawing.Size(65, 13);
-            this.lbl_move_name.TabIndex = 3;
+            this.lbl_move_name.TabIndex = 99999;
             this.lbl_move_name.Text = "Move Name";
             // 
             // lbl_combat_move_prev_effect
@@ -6076,7 +6209,7 @@
             this.lbl_combat_move_prev_effect.Location = new System.Drawing.Point(115, 516);
             this.lbl_combat_move_prev_effect.Name = "lbl_combat_move_prev_effect";
             this.lbl_combat_move_prev_effect.Size = new System.Drawing.Size(35, 13);
-            this.lbl_combat_move_prev_effect.TabIndex = 70;
+            this.lbl_combat_move_prev_effect.TabIndex = 99999;
             this.lbl_combat_move_prev_effect.Text = "Effect";
             // 
             // lbl_move_attr
@@ -6085,7 +6218,7 @@
             this.lbl_move_attr.Location = new System.Drawing.Point(13, 42);
             this.lbl_move_attr.Name = "lbl_move_attr";
             this.lbl_move_attr.Size = new System.Drawing.Size(26, 13);
-            this.lbl_move_attr.TabIndex = 2;
+            this.lbl_move_attr.TabIndex = 99999;
             this.lbl_move_attr.Text = "Attr.";
             // 
             // lbl_move_selected
@@ -6094,7 +6227,7 @@
             this.lbl_move_selected.Location = new System.Drawing.Point(45, 42);
             this.lbl_move_selected.Name = "lbl_move_selected";
             this.lbl_move_selected.Size = new System.Drawing.Size(26, 13);
-            this.lbl_move_selected.TabIndex = 2;
+            this.lbl_move_selected.TabIndex = 99999;
             this.lbl_move_selected.Text = "Use";
             // 
             // lbl_move_pp
@@ -6103,7 +6236,7 @@
             this.lbl_move_pp.Location = new System.Drawing.Point(300, 42);
             this.lbl_move_pp.Name = "lbl_move_pp";
             this.lbl_move_pp.Size = new System.Drawing.Size(21, 13);
-            this.lbl_move_pp.TabIndex = 69;
+            this.lbl_move_pp.TabIndex = 99999;
             this.lbl_move_pp.Text = "PP";
             // 
             // lbl_move_lv
@@ -6112,7 +6245,7 @@
             this.lbl_move_lv.Location = new System.Drawing.Point(85, 42);
             this.lbl_move_lv.Name = "lbl_move_lv";
             this.lbl_move_lv.Size = new System.Drawing.Size(20, 13);
-            this.lbl_move_lv.TabIndex = 1;
+            this.lbl_move_lv.TabIndex = 99999;
             this.lbl_move_lv.Text = "LV";
             // 
             // lbl_moves_char_type1
@@ -6121,7 +6254,7 @@
             this.lbl_moves_char_type1.Location = new System.Drawing.Point(146, 1);
             this.lbl_moves_char_type1.Name = "lbl_moves_char_type1";
             this.lbl_moves_char_type1.Size = new System.Drawing.Size(40, 13);
-            this.lbl_moves_char_type1.TabIndex = 70;
+            this.lbl_moves_char_type1.TabIndex = 99999;
             this.lbl_moves_char_type1.Text = "Type 1";
             // 
             // cmb_moves_char_type1
@@ -6132,7 +6265,7 @@
             this.cmb_moves_char_type1.MaxDropDownItems = 19;
             this.cmb_moves_char_type1.Name = "cmb_moves_char_type1";
             this.cmb_moves_char_type1.Size = new System.Drawing.Size(63, 21);
-            this.cmb_moves_char_type1.TabIndex = 71;
+            this.cmb_moves_char_type1.TabIndex = 99999;
             this.cmb_moves_char_type1.Text = "Normal";
             // 
             // lbl_moves_char_species
@@ -6141,7 +6274,7 @@
             this.lbl_moves_char_species.Location = new System.Drawing.Point(13, 1);
             this.lbl_moves_char_species.Name = "lbl_moves_char_species";
             this.lbl_moves_char_species.Size = new System.Drawing.Size(45, 13);
-            this.lbl_moves_char_species.TabIndex = 76;
+            this.lbl_moves_char_species.TabIndex = 99999;
             this.lbl_moves_char_species.Text = "Species";
             // 
             // lbl_moves_char_type2
@@ -6150,7 +6283,7 @@
             this.lbl_moves_char_type2.Location = new System.Drawing.Point(216, 1);
             this.lbl_moves_char_type2.Name = "lbl_moves_char_type2";
             this.lbl_moves_char_type2.Size = new System.Drawing.Size(40, 13);
-            this.lbl_moves_char_type2.TabIndex = 72;
+            this.lbl_moves_char_type2.TabIndex = 99999;
             this.lbl_moves_char_type2.Text = "Type 2";
             // 
             // txt_moves_char_species
@@ -6159,7 +6292,7 @@
             this.txt_moves_char_species.Name = "txt_moves_char_species";
             this.txt_moves_char_species.ReadOnly = true;
             this.txt_moves_char_species.Size = new System.Drawing.Size(121, 20);
-            this.txt_moves_char_species.TabIndex = 77;
+            this.txt_moves_char_species.TabIndex = 99999;
             // 
             // cmb_moves_char_type2
             // 
@@ -6169,7 +6302,7 @@
             this.cmb_moves_char_type2.MaxDropDownItems = 19;
             this.cmb_moves_char_type2.Name = "cmb_moves_char_type2";
             this.cmb_moves_char_type2.Size = new System.Drawing.Size(63, 21);
-            this.cmb_moves_char_type2.TabIndex = 73;
+            this.cmb_moves_char_type2.TabIndex = 99999;
             this.cmb_moves_char_type2.Text = "---";
             // 
             // txt_combat_move_prev_atr
@@ -6178,7 +6311,7 @@
             this.txt_combat_move_prev_atr.Name = "txt_combat_move_prev_atr";
             this.txt_combat_move_prev_atr.ReadOnly = true;
             this.txt_combat_move_prev_atr.Size = new System.Drawing.Size(73, 20);
-            this.txt_combat_move_prev_atr.TabIndex = 75;
+            this.txt_combat_move_prev_atr.TabIndex = 99999;
             this.txt_combat_move_prev_atr.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txt_combat_move_prev_atr.TextChanged += new System.EventHandler(this.txt_combat_move_prev_atr_TextChanged);
             // 
@@ -6189,7 +6322,7 @@
             this.pic_combat_move_prev_atr.Name = "pic_combat_move_prev_atr";
             this.pic_combat_move_prev_atr.Size = new System.Drawing.Size(26, 26);
             this.pic_combat_move_prev_atr.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pic_combat_move_prev_atr.TabIndex = 61;
+            this.pic_combat_move_prev_atr.TabIndex = 99999;
             this.pic_combat_move_prev_atr.TabStop = false;
             // 
             // txt_combat_move_prev_effect
@@ -6199,7 +6332,7 @@
             this.txt_combat_move_prev_effect.Name = "txt_combat_move_prev_effect";
             this.txt_combat_move_prev_effect.ReadOnly = true;
             this.txt_combat_move_prev_effect.Size = new System.Drawing.Size(242, 46);
-            this.txt_combat_move_prev_effect.TabIndex = 74;
+            this.txt_combat_move_prev_effect.TabIndex = 99999;
             this.txt_combat_move_prev_effect.Text = "Mouse over a move to preview its description!";
             this.txt_combat_move_prev_effect.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -6209,7 +6342,7 @@
             this.lbl_combat_move_prev_pow.Location = new System.Drawing.Point(75, 516);
             this.lbl_combat_move_prev_pow.Name = "lbl_combat_move_prev_pow";
             this.lbl_combat_move_prev_pow.Size = new System.Drawing.Size(37, 13);
-            this.lbl_combat_move_prev_pow.TabIndex = 73;
+            this.lbl_combat_move_prev_pow.TabIndex = 99999;
             this.lbl_combat_move_prev_pow.Text = "Power";
             // 
             // txt_combat_move_prev_pow
@@ -6218,7 +6351,7 @@
             this.txt_combat_move_prev_pow.Name = "txt_combat_move_prev_pow";
             this.txt_combat_move_prev_pow.ReadOnly = true;
             this.txt_combat_move_prev_pow.Size = new System.Drawing.Size(35, 20);
-            this.txt_combat_move_prev_pow.TabIndex = 72;
+            this.txt_combat_move_prev_pow.TabIndex = 99999;
             this.txt_combat_move_prev_pow.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // lbl_combat_move_prev_acc
@@ -6227,7 +6360,7 @@
             this.lbl_combat_move_prev_acc.Location = new System.Drawing.Point(145, 477);
             this.lbl_combat_move_prev_acc.Name = "lbl_combat_move_prev_acc";
             this.lbl_combat_move_prev_acc.Size = new System.Drawing.Size(52, 13);
-            this.lbl_combat_move_prev_acc.TabIndex = 71;
+            this.lbl_combat_move_prev_acc.TabIndex = 99999;
             this.lbl_combat_move_prev_acc.Text = "Accuracy";
             // 
             // lbl_combat_move_prev_pp
@@ -6236,7 +6369,7 @@
             this.lbl_combat_move_prev_pp.Location = new System.Drawing.Point(114, 477);
             this.lbl_combat_move_prev_pp.Name = "lbl_combat_move_prev_pp";
             this.lbl_combat_move_prev_pp.Size = new System.Drawing.Size(21, 13);
-            this.lbl_combat_move_prev_pp.TabIndex = 69;
+            this.lbl_combat_move_prev_pp.TabIndex = 99999;
             this.lbl_combat_move_prev_pp.Text = "PP";
             // 
             // lbl_combat_move_prev_name
@@ -6245,7 +6378,7 @@
             this.lbl_combat_move_prev_name.Location = new System.Drawing.Point(6, 477);
             this.lbl_combat_move_prev_name.Name = "lbl_combat_move_prev_name";
             this.lbl_combat_move_prev_name.Size = new System.Drawing.Size(65, 13);
-            this.lbl_combat_move_prev_name.TabIndex = 68;
+            this.lbl_combat_move_prev_name.TabIndex = 99999;
             this.lbl_combat_move_prev_name.Text = "Move Name";
             // 
             // lbl_combat_move_prev_type
@@ -6254,7 +6387,7 @@
             this.lbl_combat_move_prev_type.Location = new System.Drawing.Point(5, 516);
             this.lbl_combat_move_prev_type.Name = "lbl_combat_move_prev_type";
             this.lbl_combat_move_prev_type.Size = new System.Drawing.Size(61, 13);
-            this.lbl_combat_move_prev_type.TabIndex = 66;
+            this.lbl_combat_move_prev_type.TabIndex = 99999;
             this.lbl_combat_move_prev_type.Text = "Move Type";
             // 
             // cmb_combat_move_prev_type
@@ -6265,7 +6398,7 @@
             this.cmb_combat_move_prev_type.MaxDropDownItems = 19;
             this.cmb_combat_move_prev_type.Name = "cmb_combat_move_prev_type";
             this.cmb_combat_move_prev_type.Size = new System.Drawing.Size(63, 21);
-            this.cmb_combat_move_prev_type.TabIndex = 67;
+            this.cmb_combat_move_prev_type.TabIndex = 99999;
             this.cmb_combat_move_prev_type.Text = "Normal";
             // 
             // txt_combat_move_prev_acc
@@ -6274,7 +6407,7 @@
             this.txt_combat_move_prev_acc.Name = "txt_combat_move_prev_acc";
             this.txt_combat_move_prev_acc.ReadOnly = true;
             this.txt_combat_move_prev_acc.Size = new System.Drawing.Size(214, 20);
-            this.txt_combat_move_prev_acc.TabIndex = 65;
+            this.txt_combat_move_prev_acc.TabIndex = 99999;
             // 
             // txt_combat_move_prev_pp
             // 
@@ -6282,7 +6415,7 @@
             this.txt_combat_move_prev_pp.Name = "txt_combat_move_prev_pp";
             this.txt_combat_move_prev_pp.ReadOnly = true;
             this.txt_combat_move_prev_pp.Size = new System.Drawing.Size(25, 20);
-            this.txt_combat_move_prev_pp.TabIndex = 63;
+            this.txt_combat_move_prev_pp.TabIndex = 99999;
             this.txt_combat_move_prev_pp.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // txt_combat_move_prev_name
@@ -6291,7 +6424,7 @@
             this.txt_combat_move_prev_name.Name = "txt_combat_move_prev_name";
             this.txt_combat_move_prev_name.ReadOnly = true;
             this.txt_combat_move_prev_name.Size = new System.Drawing.Size(103, 20);
-            this.txt_combat_move_prev_name.TabIndex = 62;
+            this.txt_combat_move_prev_name.TabIndex = 99999;
             // 
             // pnl_move_list
             // 
@@ -6299,7 +6432,7 @@
             this.pnl_move_list.Location = new System.Drawing.Point(3, 59);
             this.pnl_move_list.Name = "pnl_move_list";
             this.pnl_move_list.Size = new System.Drawing.Size(357, 407);
-            this.pnl_move_list.TabIndex = 0;
+            this.pnl_move_list.TabIndex = 99999;
             // 
             // pnl_pg_4_journal
             // 
@@ -6321,7 +6454,7 @@
             this.pnl_pg_4_journal.Location = new System.Drawing.Point(7, 26);
             this.pnl_pg_4_journal.Name = "pnl_pg_4_journal";
             this.pnl_pg_4_journal.Size = new System.Drawing.Size(734, 634);
-            this.pnl_pg_4_journal.TabIndex = 35;
+            this.pnl_pg_4_journal.TabIndex = 99999;
             this.pnl_pg_4_journal.Visible = false;
             // 
             // pic_flavor_appearance
@@ -6332,7 +6465,7 @@
             this.pic_flavor_appearance.Name = "pic_flavor_appearance";
             this.pic_flavor_appearance.Size = new System.Drawing.Size(242, 374);
             this.pic_flavor_appearance.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pic_flavor_appearance.TabIndex = 27;
+            this.pic_flavor_appearance.TabIndex = 99999;
             this.pic_flavor_appearance.TabStop = false;
             this.pic_flavor_appearance.Click += new System.EventHandler(this.pic_flavor_appearance_Click);
             // 
@@ -6342,7 +6475,7 @@
             this.txt_flavor_flaws.Multiline = true;
             this.txt_flavor_flaws.Name = "txt_flavor_flaws";
             this.txt_flavor_flaws.Size = new System.Drawing.Size(236, 101);
-            this.txt_flavor_flaws.TabIndex = 25;
+            this.txt_flavor_flaws.TabIndex = 230;
             // 
             // txt_flavor_ideals
             // 
@@ -6350,7 +6483,7 @@
             this.txt_flavor_ideals.Multiline = true;
             this.txt_flavor_ideals.Name = "txt_flavor_ideals";
             this.txt_flavor_ideals.Size = new System.Drawing.Size(236, 99);
-            this.txt_flavor_ideals.TabIndex = 26;
+            this.txt_flavor_ideals.TabIndex = 229;
             // 
             // txt_flavor_personality
             // 
@@ -6358,7 +6491,7 @@
             this.txt_flavor_personality.Multiline = true;
             this.txt_flavor_personality.Name = "txt_flavor_personality";
             this.txt_flavor_personality.Size = new System.Drawing.Size(242, 147);
-            this.txt_flavor_personality.TabIndex = 23;
+            this.txt_flavor_personality.TabIndex = 227;
             // 
             // txt_flavor_relationships
             // 
@@ -6366,14 +6499,14 @@
             this.txt_flavor_relationships.Multiline = true;
             this.txt_flavor_relationships.Name = "txt_flavor_relationships";
             this.txt_flavor_relationships.Size = new System.Drawing.Size(236, 217);
-            this.txt_flavor_relationships.TabIndex = 24;
+            this.txt_flavor_relationships.TabIndex = 228;
             // 
             // lbl_flavor_flaws
             // 
             this.lbl_flavor_flaws.Location = new System.Drawing.Point(490, 118);
             this.lbl_flavor_flaws.Name = "lbl_flavor_flaws";
             this.lbl_flavor_flaws.Size = new System.Drawing.Size(236, 18);
-            this.lbl_flavor_flaws.TabIndex = 19;
+            this.lbl_flavor_flaws.TabIndex = 99999;
             this.lbl_flavor_flaws.Text = "Flaws";
             this.lbl_flavor_flaws.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
@@ -6382,7 +6515,7 @@
             this.lbl_flavor_ideals.Location = new System.Drawing.Point(490, 0);
             this.lbl_flavor_ideals.Name = "lbl_flavor_ideals";
             this.lbl_flavor_ideals.Size = new System.Drawing.Size(236, 13);
-            this.lbl_flavor_ideals.TabIndex = 20;
+            this.lbl_flavor_ideals.TabIndex = 99999;
             this.lbl_flavor_ideals.Text = "Ideals";
             this.lbl_flavor_ideals.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
@@ -6391,7 +6524,7 @@
             this.lbl_flavor_personality.Location = new System.Drawing.Point(1, 69);
             this.lbl_flavor_personality.Name = "lbl_flavor_personality";
             this.lbl_flavor_personality.Size = new System.Drawing.Size(236, 14);
-            this.lbl_flavor_personality.TabIndex = 21;
+            this.lbl_flavor_personality.TabIndex = 99999;
             this.lbl_flavor_personality.Text = "Personality";
             this.lbl_flavor_personality.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
@@ -6400,7 +6533,7 @@
             this.lbl_flavor_relationships.Location = new System.Drawing.Point(251, 0);
             this.lbl_flavor_relationships.Name = "lbl_flavor_relationships";
             this.lbl_flavor_relationships.Size = new System.Drawing.Size(236, 13);
-            this.lbl_flavor_relationships.TabIndex = 22;
+            this.lbl_flavor_relationships.TabIndex = 99999;
             this.lbl_flavor_relationships.Text = "Affliations / Relationships";
             this.lbl_flavor_relationships.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
@@ -6410,14 +6543,14 @@
             this.txt_flavor_journal.Multiline = true;
             this.txt_flavor_journal.Name = "txt_flavor_journal";
             this.txt_flavor_journal.Size = new System.Drawing.Size(478, 374);
-            this.txt_flavor_journal.TabIndex = 18;
+            this.txt_flavor_journal.TabIndex = 231;
             // 
             // lbl_flavor_appearance
             // 
             this.lbl_flavor_appearance.Location = new System.Drawing.Point(-2, 236);
             this.lbl_flavor_appearance.Name = "lbl_flavor_appearance";
             this.lbl_flavor_appearance.Size = new System.Drawing.Size(245, 13);
-            this.lbl_flavor_appearance.TabIndex = 16;
+            this.lbl_flavor_appearance.TabIndex = 99999;
             this.lbl_flavor_appearance.Text = "Appearance";
             this.lbl_flavor_appearance.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
@@ -6426,7 +6559,7 @@
             this.lbl_flavor_journal.Location = new System.Drawing.Point(251, 236);
             this.lbl_flavor_journal.Name = "lbl_flavor_journal";
             this.lbl_flavor_journal.Size = new System.Drawing.Size(478, 13);
-            this.lbl_flavor_journal.TabIndex = 17;
+            this.lbl_flavor_journal.TabIndex = 99999;
             this.lbl_flavor_journal.Text = "Biography / Journal";
             this.lbl_flavor_journal.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
@@ -6436,7 +6569,7 @@
             this.cmb_nature_name.Location = new System.Drawing.Point(46, 2);
             this.cmb_nature_name.Name = "cmb_nature_name";
             this.cmb_nature_name.Size = new System.Drawing.Size(67, 21);
-            this.cmb_nature_name.TabIndex = 15;
+            this.cmb_nature_name.TabIndex = 226;
             this.cmb_nature_name.SelectedIndexChanged += new System.EventHandler(this.loadNaturesParams);
             // 
             // lbl_nature_name
@@ -6445,7 +6578,7 @@
             this.lbl_nature_name.Location = new System.Drawing.Point(1, 5);
             this.lbl_nature_name.Name = "lbl_nature_name";
             this.lbl_nature_name.Size = new System.Drawing.Size(39, 13);
-            this.lbl_nature_name.TabIndex = 14;
+            this.lbl_nature_name.TabIndex = 99999;
             this.lbl_nature_name.Text = "Nature";
             // 
             // txt_nature_desc
@@ -6455,7 +6588,8 @@
             this.txt_nature_desc.Name = "txt_nature_desc";
             this.txt_nature_desc.ReadOnly = true;
             this.txt_nature_desc.Size = new System.Drawing.Size(242, 38);
-            this.txt_nature_desc.TabIndex = 13;
+            this.txt_nature_desc.TabIndex = 99999;
+            this.txt_nature_desc.TabStop = false;
             this.txt_nature_desc.Text = "\"I follow my own path, nothing can change my mind once I\'m settled on something!\"" +
     "";
             // 
@@ -6470,9 +6604,11 @@
             this.Controls.Add(this.pnl_pg_2_moves);
             this.Controls.Add(this.pnl_pg_3_inv);
             this.Controls.Add(this.pnl_pg_4_journal);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
             this.Name = "Form_Main";
             this.Text = "PMDnD Character Sheet";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form_Main_FormClosing);
             this.Load += new System.EventHandler(this.Form_Main_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form_Main_KeyDown);
             this.toolStrip1.ResumeLayout(false);
@@ -7132,5 +7268,10 @@
         private System.Windows.Forms.Label lbl_move_lv;
         private System.Windows.Forms.Label lbl_move_attr;
         private System.Windows.Forms.ToolStripMenuItem ts_file_recentfiles_btn;
+        private System.Windows.Forms.ToolStripMenuItem ts_file_recentfiles_1_btn;
+        private System.Windows.Forms.ToolStripMenuItem ts_file_recentfiles_2_btn;
+        private System.Windows.Forms.ToolStripMenuItem ts_file_recentfiles_3_btn;
+        private System.Windows.Forms.ToolStripMenuItem ts_file_recentfiles_4_btn;
+        private System.Windows.Forms.ToolStripButton ts_ddb_dmgcalc;
     }
 }

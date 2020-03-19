@@ -303,6 +303,7 @@
             this.lbl_damage.TabIndex = 100033;
             this.lbl_damage.Text = "___";
             this.lbl_damage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbl_damage.Click += new System.EventHandler(this.lbl_damage_Click);
             // 
             // lbl_damage_title
             // 

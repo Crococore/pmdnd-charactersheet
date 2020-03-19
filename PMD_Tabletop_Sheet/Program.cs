@@ -13,11 +13,11 @@ namespace PMD_Tabletop_Sheet
         /// </summary>
         /// 
         [STAThread]
-        static void Main()
+        static void Main(string[] args)
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form_Main());
+            Application.Run(new Form_Main(args));
         }
     }
 }
