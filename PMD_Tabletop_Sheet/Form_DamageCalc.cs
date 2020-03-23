@@ -34,6 +34,8 @@ namespace PMD_Tabletop_Sheet
         {
             cmb_atkr_move_attr.Items.Add("Physical");
             cmb_atkr_move_attr.Items.Add("Special");
+            cmb_atkr_move_attr.Items.Add("S-Physical");
+            cmb_atkr_move_attr.Items.Add("S-Special");
         }
 
         private void Form_DamageCalc_FormClosing(object sender, FormClosingEventArgs e)
@@ -87,10 +89,10 @@ namespace PMD_Tabletop_Sheet
             bool userAtkIsNumeric = int.TryParse(txt_stat_atk_user.Text, out int j);
             bool lvDefIsNumeric = int.TryParse(txt_def_lv.Text, out int k);
             bool userDefIsNumeric = int.TryParse(txt_stat_def_user.Text, out int l);
-            if (lvAtkrIsNumeric && userAtkIsNumeric && cmb_atkr_move_attr.Text == "Physical") { txt_stat_atk_eff.Text = calculateEffStat(1, int.Parse(txt_stat_atk_user.Text), ctr_stat_atk_stage.Value).ToString(); }
-            else if (lvAtkrIsNumeric && userAtkIsNumeric && cmb_atkr_move_attr.Text == "Special") { txt_stat_atk_eff.Text = calculateEffStat(3, int.Parse(txt_stat_atk_user.Text), ctr_stat_atk_stage.Value).ToString(); }
-            if (lvDefIsNumeric && userDefIsNumeric && cmb_atkr_move_attr.Text == "Physical") { txt_stat_def_eff.Text = calculateEffStat(2, int.Parse(txt_stat_def_user.Text), ctr_stat_def_stage.Value).ToString(); }
-            else if (lvDefIsNumeric && userDefIsNumeric && cmb_atkr_move_attr.Text == "Special") { txt_stat_def_eff.Text = calculateEffStat(4, int.Parse(txt_stat_def_user.Text), ctr_stat_def_stage.Value).ToString(); }
+            if (lvAtkrIsNumeric && userAtkIsNumeric && (cmb_atkr_move_attr.Text == "Physical" || cmb_atkr_move_attr.Text == "S-Physical")) { txt_stat_atk_eff.Text = calculateEffStat(1, int.Parse(txt_stat_atk_user.Text), ctr_stat_atk_stage.Value).ToString(); }
+            else if (lvAtkrIsNumeric && userAtkIsNumeric && (cmb_atkr_move_attr.Text == "Special" || cmb_atkr_move_attr.Text == "S-Special")) { txt_stat_atk_eff.Text = calculateEffStat(3, int.Parse(txt_stat_atk_user.Text), ctr_stat_atk_stage.Value).ToString(); }
+            if (lvDefIsNumeric && userDefIsNumeric && (cmb_atkr_move_attr.Text == "Physical" || cmb_atkr_move_attr.Text == "S-Physical")) { txt_stat_def_eff.Text = calculateEffStat(2, int.Parse(txt_stat_def_user.Text), ctr_stat_def_stage.Value).ToString(); }
+            else if (lvDefIsNumeric && userDefIsNumeric && (cmb_atkr_move_attr.Text == "Special" || cmb_atkr_move_attr.Text == "S-Special")) { txt_stat_def_eff.Text = calculateEffStat(4, int.Parse(txt_stat_def_user.Text), ctr_stat_def_stage.Value).ToString(); }
         }
 
         private void calculateMaxStats()
@@ -98,10 +100,10 @@ namespace PMD_Tabletop_Sheet
             bool lvAtkrIsNumeric = int.TryParse(txt_atkr_lv.Text, out int i);
             bool lvDefIsNumeric = int.TryParse(txt_def_lv.Text, out int j);
 
-            if (lvAtkrIsNumeric && cmb_atkr_move_attr.Text == "Physical") { txt_stat_atk_max.Text = calculateMaxStat(1, atkr_atk, int.Parse(txt_atkr_lv.Text)).ToString(); }
-            else if (lvAtkrIsNumeric && cmb_atkr_move_attr.Text == "Special") { txt_stat_atk_max.Text = calculateMaxStat(3, atkr_satk, int.Parse(txt_atkr_lv.Text)).ToString(); }
-            if (lvDefIsNumeric && cmb_atkr_move_attr.Text == "Physical") { txt_stat_def_max.Text = calculateMaxStat(2, def_def, int.Parse(txt_def_lv.Text)).ToString(); }
-            else if (lvDefIsNumeric && cmb_atkr_move_attr.Text == "Special") { txt_stat_def_max.Text = calculateMaxStat(4, def_sdef, int.Parse(txt_def_lv.Text)).ToString(); }
+            if (lvAtkrIsNumeric && (cmb_atkr_move_attr.Text == "Physical" || cmb_atkr_move_attr.Text == "S-Physical")) { txt_stat_atk_max.Text = calculateMaxStat(1, atkr_atk, int.Parse(txt_atkr_lv.Text)).ToString(); }
+            else if (lvAtkrIsNumeric && (cmb_atkr_move_attr.Text == "Special" || cmb_atkr_move_attr.Text == "S-Special")) { txt_stat_atk_max.Text = calculateMaxStat(3, atkr_satk, int.Parse(txt_atkr_lv.Text)).ToString(); }
+            if (lvDefIsNumeric && (cmb_atkr_move_attr.Text == "Physical" || cmb_atkr_move_attr.Text == "S-Physical")) { txt_stat_def_max.Text = calculateMaxStat(2, def_def, int.Parse(txt_def_lv.Text)).ToString(); }
+            else if (lvDefIsNumeric && (cmb_atkr_move_attr.Text == "Special" || cmb_atkr_move_attr.Text == "S-Special")) { txt_stat_def_max.Text = calculateMaxStat(4, def_sdef, int.Parse(txt_def_lv.Text)).ToString(); }
 
             txt_stat_atk_user.Text = txt_stat_atk_max.Text;
             txt_stat_def_user.Text = txt_stat_def_max.Text;
@@ -189,12 +191,12 @@ namespace PMD_Tabletop_Sheet
 
         private void cmb_atkr_move_attr_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cmb_atkr_move_attr.Text == "Physical")
+            if (cmb_atkr_move_attr.Text == "Physical" || cmb_atkr_move_attr.Text == "S-Physical")
             {
                 lbl_stat_atk.Text = "ATK";
                 lbl_stat_def.Text = "DEF";
             }
-            else if (cmb_atkr_move_attr.Text == "Special")
+            else if (cmb_atkr_move_attr.Text == "Special" || cmb_atkr_move_attr.Text == "S-Special")
             {
                 lbl_stat_atk.Text = "S-ATK";
                 lbl_stat_def.Text = "S-DEF";

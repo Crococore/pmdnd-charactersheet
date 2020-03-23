@@ -2148,7 +2148,7 @@ namespace PMD_Tabletop_Sheet
                         if (!sqlite_datareader.IsDBNull(5)) { txt_combat_move_5_pp_max.Text = sqlite_datareader.GetInt32(5).ToString(); }
                         if (!sqlite_datareader.IsDBNull(7)) { txt_combat_move_5_acc.Text = sqlite_datareader.GetString(7); }
                         if (!sqlite_datareader.IsDBNull(4)) { txt_combat_move_5_pow.Text = sqlite_datareader.GetInt32(4).ToString(); }
-                        if (!sqlite_datareader.IsDBNull(6) && !sqlite_datareader.IsDBNull(8)) { txt_combat_move_5_effect.Text = sqlite_datareader.GetString(8) + "; " + sqlite_datareader.GetString(6); }
+                        if (!sqlite_datareader.IsDBNull(6) && !sqlite_datareader.IsDBNull(8)) { txt_combat_move_5_effect.Text = sqlite_datareader.GetString(6) + Environment.NewLine + Environment.NewLine + sqlite_datareader.GetString(8); }
                         else if (sqlite_datareader.IsDBNull(6) && !sqlite_datareader.IsDBNull(8)) { txt_combat_move_5_effect.Text = sqlite_datareader.GetString(8) + "; Deals damage."; }
                         else { txt_combat_move_5_effect.Text = ""; }
                         if (!sqlite_datareader.IsDBNull(3)) { txt_combat_move_5_atr.Text = sqlite_datareader.GetString(3); }
